@@ -32,9 +32,9 @@ export class HomeComponent implements OnInit {
 
   getCryptoMarketInfo() {
     this.http
-    .get('http://localhost:3000').subscribe((result) => {
-      this.cryptoInfos = result.json() as CoinsSummary;
-      console.log(this.cryptoInfos);
+    .get('http://localhost:8081').subscribe((result) => {
+      //this.cryptoInfos = result.json() as CoinsSummary;
+      console.log(result.json());
       this.isUpdating = false;
     });
   }
