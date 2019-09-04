@@ -23,15 +23,10 @@ export class LoginComponent implements OnInit {
   }
 
   login() {
-    const headers = new Headers({ 'Content-Type': 'application/json' });
-    let user = this.user;
-    this.http.post('http://localhost:3002/login', user, null).subscribe((result) => {
-        const response = result.json();
-        if (response.success) {
-          this.router.navigateByUrl('/home');
-        }
-      });
+    this.http
+    .get('http://localhost:8082/auth').subscribe((result) => {
+      console.log(result.json());
+    });
   }
-
 
 }

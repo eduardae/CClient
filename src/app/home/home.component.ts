@@ -3,6 +3,7 @@ import { Http } from '@angular/http';
 import { CoinsSummary } from '../models/coins-summary';
 import { CoinMarketInfo } from '../models/coin-market-info';
 import { from } from 'rxjs';
+import { _ } from 'underscore';
 
 @Component({
   selector: 'app-home',
@@ -27,24 +28,41 @@ export class HomeComponent implements OnInit {
   refreshInfo() {
     this.isUpdating = true;
     this.getCryptoMarketInfo();
-    this.getUsers();
   }
 
   getCryptoMarketInfo() {
     this.http
     .get('http://localhost:8081').subscribe((result) => {
-      //this.cryptoInfos = result.json() as CoinsSummary;
-      console.log(result.json());
+      const response = result.json();
+      if(response.success) {
+        const extracted = response.data;
+        const btc  = _.findWhere(extracted, {id : 'bitcoin'});
+        const ether  = _.findWhere(extracted, {id : 'ethereum'});
+        const chainlink  = _.findWhere(extracted, {id : 'chainlink'});
+        const cardano  = _.findWhere(extracted, {id : 'cardano'});
+        const tezos  = _.findWhere(extracted, {id : 'tezos'});
+        const litecoin  = _.findWhere(extracted, {id : 'litecoin'});
+        const xrp  = _.findWhere(extracted, {id : 'ripple'});
+        const tether  = _.findWhere(extracted, {id : 'tether'});
+
+        this.cryptoInfos.btc = this.getCoinMarketInfo(btc);
+        this.cryptoInfos.ether = this.getCoinMarketInfo(ether);
+        this.cryptoInfos.chainlink = this.getCoinMarketInfo(chainlink);
+        this.cryptoInfos.cardano = this.getCoinMarketInfo(cardano);
+        this.cryptoInfos.tezos = this.getCoinMarketInfo(tezos);
+        this.cryptoInfos.litecoin = this.getCoinMarketInfo(ether);
+        this.cryptoInfos.xrp = this.getCoinMarketInfo(xrp);
+        this.cryptoInfos.tether = this.getCoinMarketInfo(tether);
+      }
       this.isUpdating = false;
     });
   }
 
-  getUsers() {
-    this.http
-    .get('http://localhost:3001/users/').subscribe((result) => {
-      let users = result.json();
-      console.log(users);
-    });
+  getCoinMarketInfo(coin) {
+    const result = new CoinMarketInfo();
+    result.eurPrice = coin.market_data.current_price.eur;
+    result.name = coin.id;
+    return result;
   }
 
 }
