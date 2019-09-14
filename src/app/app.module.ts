@@ -4,6 +4,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { HttpModule } from '@angular/http';
 import { RouterModule, Routes } from '@angular/router';
 import { FormsModule } from '@angular/forms';
+import { StorageServiceModule } from 'angular-webstorage-service';
 import { AppComponent } from './app.component';
 import { HomeComponent } from './home/home.component';
 import { RegisterComponent } from './register/register.component';
@@ -27,7 +28,7 @@ const appRoutes: Routes = [
     AppComponent,
     HomeComponent,
     RegisterComponent,
-    LoginComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule,
@@ -35,7 +36,8 @@ const appRoutes: Routes = [
     RouterModule.forRoot(appRoutes),
     FormsModule,
     HttpModule,
-    BsDropdownModule.forRoot()
+    BsDropdownModule.forRoot(),
+    StorageServiceModule
   ],
   exports: [RouterModule],
   providers: [{provide: APP_BASE_HREF, useValue: '/' }],

@@ -22,11 +22,20 @@
         <div class="btn-group float-right" dropdown>
           <button type="button" dropdownToggle class="btn btn-primary dropdown-toggle">
             <span class="fa fa-user"></span>
+            <span class="pl-1" *ngIf="this.user">{{this.user.username}}</span>
           </button>
-          <ul *dropdownMenu class="dropdown-menu dropdown-menu-right" role="menu">
-            <li role="menuitem"><a class="dropdown-item" [routerLink] = "['/login']">Login</a></li>
-            <li role="menuitem"><a class="dropdown-item" [routerLink] = "['/register']">Register</a></li>
-          </ul>
+          <div *ngIf="!this.user">
+              <ul *dropdownMenu class="dropdown-menu dropdown-menu-right" role="menu">
+                  <li role="menuitem"><a class="dropdown-item" [routerLink] = "['/login']">Login</a></li>
+                  <li role="menuitem"><a class="dropdown-item" [routerLink] = "['/register']">Register</a></li>
+                </ul>
+          </div>
+          <div *ngIf="this.user">
+            <ul *dropdownMenu class="dropdown-menu dropdown-menu-right" role="menu">
+                <li role="menuitem"><a class="dropdown-item" [routerLink] = "['/settings']">Settings</a></li>
+                <li role="menuitem"><a class="dropdown-item" (click)="logout()">Logout</a></li>
+            </ul>
+          </div>
         </div>
      </nav>
     </div>
