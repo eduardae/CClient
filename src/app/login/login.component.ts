@@ -24,8 +24,11 @@ export class LoginComponent implements OnInit {
 
   login() {
     this.http
-    .get('http://localhost:8082/auth').subscribe((result) => {
-      console.log(result.json());
+    .post('http://localhost:8082/auth', {username: this.user.username, password: this.user.password})
+    .subscribe(result => {
+      console.log(result);
+    }, err => {
+
     });
   }
 
