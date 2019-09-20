@@ -10,7 +10,7 @@ import { HomeComponent } from './home/home.component';
 import { RegisterComponent } from './register/register.component';
 import { Http } from '@angular/http';
 import { APP_BASE_HREF } from '@angular/common';
-import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
+import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import { LoginComponent } from './login/login.component';
 
 const appRoutes: Routes = [
@@ -36,8 +36,8 @@ const appRoutes: Routes = [
     RouterModule.forRoot(appRoutes),
     FormsModule,
     HttpModule,
-    BsDropdownModule.forRoot(),
-    StorageServiceModule
+    StorageServiceModule,
+    NgbModule
   ],
   exports: [RouterModule],
   providers: [{provide: APP_BASE_HREF, useValue: '/' }],
