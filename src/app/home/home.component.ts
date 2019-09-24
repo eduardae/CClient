@@ -23,6 +23,7 @@ export class HomeComponent implements OnInit {
   ngOnInit() {
     this.getCryptoMarketInfo();
     this.currency = 'EUR';
+    this.getNews();
   }
 
   refreshInfo() {
@@ -55,6 +56,14 @@ export class HomeComponent implements OnInit {
         this.cryptoInfos.tether = this.getCoinMarketInfo(tether);
       }
       this.isUpdating = false;
+    });
+  }
+
+  getNews() {
+    this.http
+    .get('http://localhost:8083').subscribe((result) => {
+      const response = result.json();
+      console.log(response);
     });
   }
 

@@ -3,7 +3,9 @@
   "version": "0.0.0",
   "scripts": {
     "crypto-info": "node ./services/crypto-info.js",
-    "db": "node ./db/auth.js"
+    "news": "node ./services/news.js",
+    "db": "node ./db/auth.js",
+    "all-services": "npm-run-all crypto-info db"
   },
   "dependencies": {
     "body-parser": "^1.19.0",
@@ -13,6 +15,7 @@
     "express": "^4.17.1",
     "mongodb": "^3.3.2",
     "multer": "^1.4.2",
+    "newsapi": "^2.4.0",
     "npm-run-all": "^4.1.5",
     "underscore": "^1.9.1"
   },

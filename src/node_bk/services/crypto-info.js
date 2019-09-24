@@ -7,9 +7,10 @@ const CoinGecko = require('coingecko-api');
 //2. Initiate the CoinGecko API Client
 const CoinGeckoClient = new CoinGecko();
 
-app.get('/', async function (req, res) {
-  let data = await CoinGeckoClient.coins.all();
-  res.json(data);
+app.get('/', function (req, res) {
+  getAllData().then(function(data){
+    res.json(data);
+  });
 })
 
 app.all('/*', function(req, res, next) {
@@ -23,4 +24,9 @@ var server = app.listen(8081, function () {
    var port = server.address().port
 
    console.log("Example app listening at http://%s:%s", host, port)
-})
+});
+
+var getAllData = async function() {
+  let data = await CoinGeckoClient.coins.all();
+  return data;
+}
