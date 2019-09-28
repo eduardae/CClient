@@ -12,9 +12,9 @@
             <button class="btn btn-outline-primary" id="dropdownBasic1" ngbDropdownToggle>CMonitor</button>
             <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
               <button ngbDropdownItem><a class="dropdown-item"  [routerLink] = "['/home']">Home</a></button>
-              <button ngbDropdownItem><a class="dropdown-item" href="#">News</a></button>
+              <button ngbDropdownItem><a class="dropdown-item" [routerLink] = "['/news']">Prices</a></button>
+              <button ngbDropdownItem><a class="dropdown-item" [routerLink] = "['/news']">News</a></button>
               <button ngbDropdownItem><a class="dropdown-item" href="#">Academy</a></button>
-              <button ngbDropdownItem><a class="dropdown-item" href="#">About</a></button>
             </div>
           </div>
           <!--<ul *dropdownMenu class="dropdown-menu" role="menu">

@@ -12,6 +12,7 @@ import { Http } from '@angular/http';
 import { APP_BASE_HREF } from '@angular/common';
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import { LoginComponent } from './login/login.component';
+import { NewsComponent } from './news/news.component';
 
 const appRoutes: Routes = [
   { path: '',
@@ -20,7 +21,8 @@ const appRoutes: Routes = [
   },
   { path: 'home', component: HomeComponent},
   { path: 'register', component: RegisterComponent },
-  { path: 'login', component: LoginComponent }
+  { path: 'login', component: LoginComponent },
+  { path: 'news', component: NewsComponent }
 ];
 
 @NgModule({
@@ -28,6 +30,7 @@ const appRoutes: Routes = [
     AppComponent,
     HomeComponent,
     RegisterComponent,
+    NewsComponent,
     LoginComponent
   ],
   imports: [

@@ -5,7 +5,8 @@
     "crypto-info": "node ./services/crypto-info.js",
     "news": "node ./services/news.js",
     "db": "node ./db/auth.js",
-    "all-services": "npm-run-all crypto-info db"
+    "base": "npm-run-all --parallel crypto-info db",
+    "all": "npm-run-all --parallel crypto-info db news"
   },
   "dependencies": {
     "body-parser": "^1.19.0",

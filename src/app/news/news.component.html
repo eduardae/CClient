@@ -1,0 +1,23 @@
+<div class="container-fluid text-center">
+  <h2>Latest news on crypto</h2>
+  <div class="row pt-3 pb-5">
+      <div class="col-sm-6 offset-sm-3 text-center">
+          <button class="btn btn-default btn-primary" (click)="refreshInfo()">
+            <span>Refresh</span>
+            <span>
+              <span style="display: inline-block; margin-left: 8px;" *ngIf="isUpdating" class="fa fa-refresh fa-spin white"></span>
+            </span>
+          </button>
+        </div>
+  </div>
+  <div class="row">
+    <div class="col-12 col-md-6 col-lg-4" *ngFor="let article of articles">
+      <div class="text-center" style="width: 90%; height: 450px; padding-top: 24px; padding-bottom: 24px; margin: auto;">
+          <h6>{{article.title}}</h6>
+          <a href="{{article.url}}" target="_blank">
+            <div [ngStyle]="{'background-image': 'url(' + article.urlToImage + ')'}" style="padding: 8px; height: 380px; background-repeat: no-repeat; background-size: contain; background-position: center;"></div>
+          </a>
+      </div>
+    </div>
+  </div>
+</div>

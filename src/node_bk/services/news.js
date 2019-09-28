@@ -28,10 +28,12 @@ var server = app.listen(8083, function () {
 
 var getBtcNews = async function() {
   let data  = await newsapi.v2.everything({
-    q: 'bitcoin',
+    q: 'cryptocurrency',
+    domains: 'forbes.com,reuters.com',
     language: 'en',
-    sortBy: 'relevancy',
-    page: 2
+    from: '2019-08-28',
+    to: '2019-28-28',
+    sortBy: 'relevancy'
   });
   return data;
 }
