@@ -13,6 +13,7 @@ import { APP_BASE_HREF } from '@angular/common';
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import { LoginComponent } from './login/login.component';
 import { NewsComponent } from './news/news.component';
+import { PricesComponent } from './prices/prices.component';
 
 const appRoutes: Routes = [
   { path: '',
@@ -22,7 +23,8 @@ const appRoutes: Routes = [
   { path: 'home', component: HomeComponent},
   { path: 'register', component: RegisterComponent },
   { path: 'login', component: LoginComponent },
-  { path: 'news', component: NewsComponent }
+  { path: 'news', component: NewsComponent },
+  { path: 'prices', component: PricesComponent }
 ];
 
 @NgModule({
@@ -31,7 +33,8 @@ const appRoutes: Routes = [
     HomeComponent,
     RegisterComponent,
     NewsComponent,
-    LoginComponent
+    LoginComponent,
+    PricesComponent
   ],
   imports: [
     BrowserModule,

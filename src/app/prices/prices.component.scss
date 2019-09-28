@@ -52,7 +52,7 @@ body {
 }
 
 .bc-cover {
-  max-width: 75%;
+  max-width: 65%;
   margin-bottom: 32px;
   margin-top: 32px;
   margin-right: auto;
@@ -73,7 +73,7 @@ body {
 /* Supporting marketing content */
 .marketing {
   text-align: center;
-  margin: 24px 0;
+  margin: 40px 0;
 
   .fab {
     color: #791E94;
@@ -82,56 +82,6 @@ body {
 
   p + h4 {
     margin-top: 28px;
-  }
-}
-
-.icon-container {
-    margin-bottom: 16px;
-    margin-top: 16px;
-  .coin-icon {
-
-    display: block;
-    width: 100%;
-    height: 32px;
-    background-repeat: no-repeat;
-    background-position: center;
-
-    &.btc {
-      background-image: url('../../../node_modules/cryptocurrency-icons/svg/color/btc.svg');
-    }
-    &.eth {
-      background-image: url('../../../node_modules/cryptocurrency-icons/svg/color/eth.svg');
-    }
-    &.cardano {
-      background-image: url('../../../node_modules/cryptocurrency-icons/svg/color/ada.svg');
-    }
-    &.tezos {
-      background-image: url('../../../node_modules/cryptocurrency-icons/svg/color/xtz.svg');
-    }
-    &.tether {
-      background-image: url('../../../node_modules/cryptocurrency-icons/svg/color/usdt.svg');
-    }
-    &.chainlink {
-      background-image: url('../../../node_modules/cryptocurrency-icons/svg/color/link.svg');
-    }
-    &.ripple {
-      background-image: url('../../../node_modules/cryptocurrency-icons/svg/color/xrp.svg');
-    }
-    &.litecoin {
-      background-image: url('../../../node_modules/cryptocurrency-icons/svg/color/ltc.svg');
-    }
-  }
-
-}
-
-@media screen and (max-width: 576px) {
-  .bc-cover {
-    width: 100%;
-    max-width: 100%;
-  }
-
-  .marketing {
-    margin: 16px 0;
   }
 }
 

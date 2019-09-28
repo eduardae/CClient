@@ -12,7 +12,7 @@
             <button class="btn btn-outline-primary" id="dropdownBasic1" ngbDropdownToggle>CMonitor</button>
             <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
               <button ngbDropdownItem><a class="dropdown-item"  [routerLink] = "['/home']">Home</a></button>
-              <button ngbDropdownItem><a class="dropdown-item" [routerLink] = "['/news']">Prices</a></button>
+              <button ngbDropdownItem><a class="dropdown-item" [routerLink] = "['/prices']">Prices</a></button>
               <button ngbDropdownItem><a class="dropdown-item" [routerLink] = "['/news']">News</a></button>
               <button ngbDropdownItem><a class="dropdown-item" href="#">Academy</a></button>
             </div>
@@ -60,7 +60,7 @@
      </nav>
     </div>
   <div class="container-fluid d-flex h-100">
-    <router-outlet (loginEvent)="loginCallback($event)"></router-outlet>
+    <router-outlet></router-outlet>
   </div>
 
 

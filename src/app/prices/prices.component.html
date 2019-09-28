@@ -10,12 +10,12 @@
           </button>
         </div>
   </div>
-  <div class="row articles">
+  <div class="row">
     <div class="col-12 col-md-6 col-lg-4" *ngFor="let article of articles">
-      <div class="article text-center">
-          <h6 class="article-title">{{article.title}}</h6>
+      <div class="text-center" style="width: 90%; height: 450px; padding-top: 24px; padding-bottom: 24px; margin: auto;">
+          <h6>{{article.title}}</h6>
           <a href="{{article.url}}" target="_blank">
-            <div class="article-img" [ngStyle]="{'background-image': 'url(' + article.urlToImage + ')'}" ></div>
+            <div [ngStyle]="{'background-image': 'url(' + article.urlToImage + ')'}" style="padding: 8px; height: 380px; background-repeat: no-repeat; background-size: contain; background-position: center;"></div>
           </a>
       </div>
     </div>

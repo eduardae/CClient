@@ -14,16 +14,17 @@ export class HomeComponent implements OnInit {
 
   @Input() cryptoInfos: CoinsSummary;
   isUpdating: boolean;
+  contentLoaded: boolean;
   currency: string;
 
   constructor(private http:Http) {
     this.cryptoInfos = new CoinsSummary();
+    this.contentLoaded = false;
   }
 
   ngOnInit() {
     this.getCryptoMarketInfo();
     this.currency = 'EUR';
-    this.getNews();
   }
 
   refreshInfo() {
@@ -51,19 +52,12 @@ export class HomeComponent implements OnInit {
         this.cryptoInfos.chainlink = this.getCoinMarketInfo(chainlink);
         this.cryptoInfos.cardano = this.getCoinMarketInfo(cardano);
         this.cryptoInfos.tezos = this.getCoinMarketInfo(tezos);
-        this.cryptoInfos.litecoin = this.getCoinMarketInfo(ether);
+        this.cryptoInfos.litecoin = this.getCoinMarketInfo(litecoin);
         this.cryptoInfos.xrp = this.getCoinMarketInfo(xrp);
         this.cryptoInfos.tether = this.getCoinMarketInfo(tether);
       }
       this.isUpdating = false;
-    });
-  }
-
-  getNews() {
-    this.http
-    .get('http://localhost:8083').subscribe((result) => {
-      const response = result.json();
-      console.log(response);
+      this.contentLoaded = true;
     });
   }
 
