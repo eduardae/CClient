@@ -1,6 +1,7 @@
 var express = require('express');
 var _ = require('underscore');
 var cors = require('cors');
+var moment = require('moment');
 var app = express();
 app.use(cors());
 const NewsAPI = require('newsapi');
@@ -27,12 +28,14 @@ var server = app.listen(8083, function () {
 });
 
 var getBtcNews = async function() {
+  let current_date = moment().format("yyyy-MM-dd");
+  let interval_date = moment().subtract(1, 'd').format("yyyy-MM-dd");
   let data  = await newsapi.v2.everything({
     q: 'cryptocurrency',
     domains: 'forbes.com,reuters.com',
     language: 'en',
-    from: '2019-08-28',
-    to: '2019-28-28',
+    from: interval_date,
+    to: current_date,
     sortBy: 'relevancy'
   });
   return data;
