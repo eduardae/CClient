@@ -1,7 +1,7 @@
 import { Component, OnInit, Input, Inject, ViewChild, EventEmitter, Output } from '@angular/core';
 import { Http, RequestOptions } from '@angular/http';
 import { CoinsSummary } from '../models/coins-summary';
-import { CoinMarketInfo } from '../models/coin-market-info';
+import { CoinInfo } from '../models/coin-info';
 import { from } from 'rxjs';
 import {Router} from '@angular/router';
 import { User } from '../models/user';

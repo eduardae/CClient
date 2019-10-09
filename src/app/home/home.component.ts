@@ -1,7 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Http } from '@angular/http';
 import { CoinsSummary } from '../models/coins-summary';
-import { CoinMarketInfo } from '../models/coin-market-info';
+import { CoinInfo } from '../models/coin-info';
 import { from } from 'rxjs';
 import { _ } from 'underscore';
 
@@ -62,7 +62,7 @@ export class HomeComponent implements OnInit {
   }
 
   getCoinMarketInfo(coin) {
-    const result = new CoinMarketInfo();
+    const result = new CoinInfo();
     result.eurPrice = coin.market_data.current_price.eur;
     result.name = coin.id;
     return result;

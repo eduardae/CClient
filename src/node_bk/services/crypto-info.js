@@ -27,9 +27,20 @@ app.post('/coininfo', function (req, res) {
   }
 });
 
+app.post('/coininfo/history', function (req, res) {
+  const reqQuery = req.body;
+  if(reqQuery.coin_name) {
+    getCoinHistory(reqQuery.coin_name, reqQuery.vs_currency).then(function(data){
+      res.json(data);
+    });
+  } else {
+    res.status(400);
+  }
+});
+
 app.get('/coinslist', function (req, res) {
   let obj;
-  fs.readFile('./src/node_bk/config/coins/list.json', 'utf8', function (err, data) {
+  fs.readFile('./config/coins/list.json', 'utf8', function (err, data) {
     if (err) throw err;
     obj = JSON.parse(data);
     if(obj) {
@@ -48,8 +59,8 @@ app.all('/*', function(req, res, next) {
 });
 
 var server = app.listen(8081, function () {
-   var host = server.address().address
-   var port = server.address().port
+   var host = server.address().address;
+   var port = server.address().port;
 
    console.log("Example app listening at http://%s:%s", host, port)
 });
@@ -61,5 +72,10 @@ var getAllData = async function() {
 
 var getCoinData = async function(coin_name) {
   let data = await CoinGeckoClient.coins.fetch(coin_name, {});
+  return data;
+}
+
+var getCoinHistory = async function(coin_name, currency) {
+  let data = await CoinGeckoClient.coins.fetchMarketChart(coin_name, {vs_currency: currency ? currency: 'usd'});
   return data;
 }

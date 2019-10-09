@@ -1,6 +1,5 @@
-import { OnInit } from '@angular/core';
 
-export class CoinMarketInfo implements OnInit {
+export class CoinInfo {
   eurPrice: number;
   name: string;
   queryId: string;
@@ -10,9 +9,5 @@ export class CoinMarketInfo implements OnInit {
     this.name = '';
     this.queryId = '';
    }
-
-  ngOnInit() {
-
-  }
 
 }

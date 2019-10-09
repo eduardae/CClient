@@ -5,6 +5,7 @@ import { HttpModule } from '@angular/http';
 import { RouterModule, Routes } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { StorageServiceModule } from 'angular-webstorage-service';
+import { ChartsModule } from 'ng2-charts';
 import { AppComponent } from './app.component';
 import { HomeComponent } from './home/home.component';
 import { RegisterComponent } from './register/register.component';
@@ -14,6 +15,7 @@ import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import { LoginComponent } from './login/login.component';
 import { NewsComponent } from './news/news.component';
 import { PricesComponent } from './prices/prices.component';
+
 
 const appRoutes: Routes = [
   { path: '',
@@ -34,7 +36,7 @@ const appRoutes: Routes = [
     RegisterComponent,
     NewsComponent,
     LoginComponent,
-    PricesComponent
+    PricesComponent,
   ],
   imports: [
     BrowserModule,
@@ -42,6 +44,7 @@ const appRoutes: Routes = [
     RouterModule.forRoot(appRoutes),
     FormsModule,
     HttpModule,
+    ChartsModule,
     StorageServiceModule,
     NgbModule
   ],

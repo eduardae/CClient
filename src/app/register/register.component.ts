@@ -1,7 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Http } from '@angular/http';
 import { CoinsSummary } from '../models/coins-summary';
-import { CoinMarketInfo } from '../models/coin-market-info';
+import { CoinInfo } from '../models/coin-info';
 import { from } from 'rxjs';
 
 @Component({

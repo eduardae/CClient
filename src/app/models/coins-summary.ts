@@ -1,25 +1,25 @@
 import { OnInit } from '@angular/core';
-import { CoinMarketInfo } from './coin-market-info';
+import { CoinInfo } from './coin-info';
 
 export class CoinsSummary implements OnInit {
-  btc: CoinMarketInfo;
-  ether: CoinMarketInfo;
-  cardano: CoinMarketInfo;
-  litecoin: CoinMarketInfo;
-  chainlink: CoinMarketInfo;
-  xrp: CoinMarketInfo;
-  tether: CoinMarketInfo;
-  tezos: CoinMarketInfo;
+  btc: CoinInfo;
+  ether: CoinInfo;
+  cardano: CoinInfo;
+  litecoin: CoinInfo;
+  chainlink: CoinInfo;
+  xrp: CoinInfo;
+  tether: CoinInfo;
+  tezos: CoinInfo;
 
   constructor() {
-    this.btc = new CoinMarketInfo();
-    this.ether = new CoinMarketInfo();
-    this.cardano = new CoinMarketInfo();
-    this.litecoin = new CoinMarketInfo();
-    this.chainlink = new CoinMarketInfo();
-    this.xrp = new CoinMarketInfo();
-    this.tether = new CoinMarketInfo();
-    this.tezos = new CoinMarketInfo();
+    this.btc = new CoinInfo();
+    this.ether = new CoinInfo();
+    this.cardano = new CoinInfo();
+    this.litecoin = new CoinInfo();
+    this.chainlink = new CoinInfo();
+    this.xrp = new CoinInfo();
+    this.tether = new CoinInfo();
+    this.tezos = new CoinInfo();
   }
 
   ngOnInit() {
