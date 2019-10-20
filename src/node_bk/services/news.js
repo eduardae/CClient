@@ -32,11 +32,11 @@ var getBtcNews = async function() {
   let interval_date = moment().subtract(1, 'd').format("yyyy-MM-dd");
   let data  = await newsapi.v2.everything({
     q: 'cryptocurrency',
-    domains: 'forbes.com,reuters.com',
+    domains: 'decrypt.co,coindesk.com,forbes.com',
     language: 'en',
     from: interval_date,
     to: current_date,
-    sortBy: 'relevancy'
+    sortBy: 'date'
   });
   return data;
 }

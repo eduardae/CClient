@@ -27,6 +27,17 @@ app.post('/coininfo', function (req, res) {
   }
 });
 
+app.post('/coininfo/marketchart', function (req, res) {
+  const reqQuery = req.body;
+  if(reqQuery.coin_name) {
+    getCoinMarketChart(reqQuery.coin_name, reqQuery.days, reqQuery.vs_currency).then(function(data){
+      res.json(data);
+    });
+  } else {
+    res.status(400);
+  }
+});
+
 app.post('/coininfo/history', function (req, res) {
   const reqQuery = req.body;
   if(reqQuery.coin_name) {
@@ -40,6 +51,7 @@ app.post('/coininfo/history', function (req, res) {
 
 app.get('/coinslist', function (req, res) {
   let obj;
+  //./src/node_bk/config/coins/list.json
   fs.readFile('./config/coins/list.json', 'utf8', function (err, data) {
     if (err) throw err;
     obj = JSON.parse(data);
@@ -75,7 +87,12 @@ var getCoinData = async function(coin_name) {
   return data;
 }
 
+var getCoinMarketChart = async function(coin_name, in_days, currency) {
+  let data = await CoinGeckoClient.coins.fetchMarketChart(coin_name, {days: in_days, vs_currency: currency});
+  return data;
+}
+
 var getCoinHistory = async function(coin_name, currency) {
-  let data = await CoinGeckoClient.coins.fetchMarketChart(coin_name, {vs_currency: currency ? currency: 'usd'});
+  let data = await CoinGeckoClient.coins.fetchHistory(coin_name, {vs_currency: currency ? currency: 'usd'});
   return data;
 }

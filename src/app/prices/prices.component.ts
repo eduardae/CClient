@@ -4,7 +4,7 @@ import {_} from 'underscore';
 import { Moment } from 'moment';
 import { Article } from '../models/article';
 import { CoinInfo } from '../models/coin-info';
-import { HistoricalMarketData } from '../models/historical-market-data';
+import { MarketData } from '../models/historical-market-data';
 import { Tick } from '../models/tick';
 import * as moment from 'moment';
 import { Label, BaseChartDirective } from 'ng2-charts';
@@ -19,7 +19,8 @@ export class PricesComponent implements OnInit {
 
   coins: CoinInfo[];
   selectedCoin: CoinInfo;
-  historicalMarketData: HistoricalMarketData;
+  historicalMarketData: MarketData;
+  marketData: MarketData;
   isUpdating: boolean;
   response: string;
   currency: string;
@@ -41,16 +42,20 @@ export class PricesComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.getCoinList();
-    this.currency = 'EUR';
-    this.selectedCoin = new CoinInfo();
-    this.historicalMarketData = new HistoricalMarketData();
-    this.labels = [];
-    this.prices = [];
-    this.lineChartOptions = {
-      responsive: true,
-    };
-    this.onCoinSelect('bitcoin');
+    this.getCoinList().then((result) => {
+      this.coins = result;
+      this.currency = 'EUR';
+      this.historicalMarketData = new MarketData();
+      this.marketData = new MarketData();
+
+      this.labels = [];
+      this.prices = [];
+      this.lineChartOptions = {
+        responsive: true,
+      };
+      this.selectedCoin = this.coins[0];
+      this.onCoinSelect(this.selectedCoin);
+    });
   }
 
   refreshInfo() {
@@ -58,18 +63,14 @@ export class PricesComponent implements OnInit {
   }
 
   onCoinSelect(coin) {
-    this.getCoinInfo(coin);
-    this.getCoinHistory(coin, this.currency);
+    this.getCoinInfo(coin.queryId);
+    this.getCoinMarketChart(coin.queryId, this.currency, 7);
   }
 
-  getCoinList() {
-    this.http
-    .get('http://localhost:8081/coinslist').subscribe((result) => {
-      const response = result.json();
-      console.log(response);
-      this.coins = response.coins;
-      this.isUpdating = false;
-    });
+  async getCoinList(): Promise<CoinInfo[]> {
+    let result = await this.http.get('http://localhost:8081/coinslist').toPromise();
+    const response = result.json();
+    return response.coins;
   }
 
   getCoinInfo(coinName) {
@@ -84,7 +85,6 @@ export class PricesComponent implements OnInit {
     this.http
     .post('http://localhost:8081/coininfo/history', {coin_name: coinName, vs_currency: currency}).subscribe((result) => {
       const response = result.json();
-      console.log(response);
       if (response.data) {
         this.labels = [];
         this.prices = [];
@@ -105,6 +105,32 @@ export class PricesComponent implements OnInit {
     });
   }
 
+  getCoinMarketChart(coinName, currency, daysPar) {
+    this.http
+    .post('http://localhost:8081/coininfo/marketchart',
+     {coin_name: coinName, vs_currency: currency, days: daysPar ? daysPar : 7}).subscribe((result) => {
+      const response = result.json();
+      if (response.data) {
+        this.labels = [];
+        this.prices = [];
+        this.marketData.prices = [];
+        for (let i = 0; i < response.data.prices.length; i += 10) {
+          this.marketData.prices[i] = new Tick();
+          this.marketData.prices[i].utcTimestamp = response.data.prices[i][0];
+          const date = moment.utc(response.data.prices[i][0]).toDate();
+          this.marketData.prices[i].date_repr = date;
+          this.labels.push(moment(date).format('DD-MM-YYYY h:mm'));
+          const price = response.data.prices[i][1];
+          this.marketData.prices[i].price = price;
+          this.prices.push(price);
+        }
+        this.initChartOpts();
+        this.updateChart();
+      }
+    });
+  }
+
+
   initChartOpts() {
     this.type = 'line';
     this.lineChartData[0].data = this.prices;
@@ -116,6 +142,10 @@ export class PricesComponent implements OnInit {
 
   updateChart() {
     this.chart.chart.update(); // This re-renders the canvas element.
-}
+  }
+
+  compareCoins(c1: any, c2:any): boolean {
+    return c1 === c2;
+  }
 
 }

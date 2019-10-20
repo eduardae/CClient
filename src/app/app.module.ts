@@ -15,6 +15,7 @@ import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import { LoginComponent } from './login/login.component';
 import { NewsComponent } from './news/news.component';
 import { PricesComponent } from './prices/prices.component';
+import { PriceComponent } from './common/price/price.component';
 
 
 const appRoutes: Routes = [
@@ -37,6 +38,7 @@ const appRoutes: Routes = [
     NewsComponent,
     LoginComponent,
     PricesComponent,
+    PriceComponent
   ],
   imports: [
     BrowserModule,

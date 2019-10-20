@@ -5,16 +5,10 @@
         <div class="row">
             <div class="col-sm-8 offset-sm-2 text-center">
               <select id="coin-select"  [ngModel]="selectedCoin" (ngModelChange)="onCoinSelect($event)">
-                <option *ngFor="let coin of coins" [ngValue]="coin.queryId" [selected]="selectedCoin.name == coin.name">
+                <option  [selected]="selectedCoin.name === coin.name" *ngFor="let coin of coins" [ngValue]="coin">
                   {{coin.name}}
                 </option>
               </select>
-              <button class="btn btn-default btn-primary ml-5" (click)="refreshInfo()">
-                <span>Load</span>
-                <span>
-                  <span style="display: inline-block; margin-left: 8px;" *ngIf="isUpdating" class="fa fa-refresh fa-spin white"></span>
-                </span>
-              </button>
             </div>
         </div>
 
@@ -22,12 +16,16 @@
   </div>
   <div class="row mt-5">
     <div class="col-12 col-md-4 col-lg-4">
-      <div class="row">
-        <div class="col-12">
-            <p class="text-justify">
+      <div *ngIf="selectedCoin && prices && prices.length != 0">
+          <div class="row">
+              <div class="col-12">
+                <div>
+                    <h6>Current price</h6>
+                    <price [currency]="currency" [precision]="2" [price]="prices[prices.length - 1]"></price>
+                </div>
 
-            </p>
-        </div>
+              </div>
+            </div>
       </div>
     </div>
     <div class="col-12 col-sm-8 col-md-8 col-lg-8">

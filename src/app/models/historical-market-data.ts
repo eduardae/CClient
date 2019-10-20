@@ -1,6 +1,6 @@
 import { Tick } from './tick';
 
-export class HistoricalMarketData {
+export class MarketData {
 
   marketCaps: Tick[];
   prices: Tick[];
