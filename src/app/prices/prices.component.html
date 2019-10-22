@@ -1,45 +1,109 @@
 <div class="container-fluid text-center">
   <h2>Coin Market Info</h2>
   <div class="row pt-3 pb-5">
-      <div class="col-sm-8 offset-sm-2 text-center">
-        <div class="row">
-            <div class="col-sm-8 offset-sm-2 text-center">
-              <select id="coin-select"  [ngModel]="selectedCoin" (ngModelChange)="onCoinSelect($event)">
-                <option  [selected]="selectedCoin.name === coin.name" *ngFor="let coin of coins" [ngValue]="coin">
-                  {{coin.name}}
-                </option>
-              </select>
-            </div>
+    <div class="col-sm-8 offset-sm-2 text-center">
+      <div class="row">
+        <div class="col-sm-12 text-center">
+          <label>Coin</label>
+          <select
+            class="ml-2"
+            id="coin-select"
+            [ngModel]="selectedCoin"
+            (ngModelChange)="onCoinSelect($event)"
+          >
+            <option
+              [selected]="selectedCoin.name === coin.name"
+              *ngFor="let coin of coins"
+              [ngValue]="coin"
+            >
+              {{ coin.name }}
+            </option>
+          </select>
+          <label class="pl-5">Timeframe</label>
+          <select
+            class="ml-2"
+            id="timeframe-select"
+            [ngModel]="timeFrame"
+            (ngModelChange)="onTimeFrameChange($event)"
+          >
+            <option
+              [selected]="timeFrame.days === time.days"
+              *ngFor="let time of timeFrameSelectOptions"
+              [ngValue]="time"
+            >
+              {{ time.label }}
+            </option>
+          </select>
         </div>
-
       </div>
+    </div>
   </div>
-  <div class="row mt-5">
+  <div class="row mt-3">
     <div class="col-12 col-md-4 col-lg-4">
       <div *ngIf="selectedCoin && prices && prices.length != 0">
-          <div class="row">
-              <div class="col-12">
-                <div>
-                    <h6>Current price</h6>
-                    <price [currency]="currency" [precision]="2" [price]="prices[prices.length - 1]"></price>
-                </div>
-
-              </div>
+        <div class="row">
+          <div class="col-12">
+            <div>
+              <h6>Current price</h6>
+              <price
+                [currency]="currency"
+                [precision]="3"
+                [price]="selectedCoin.eurPrice"
+              ></price>
             </div>
+          </div>
+        </div>
+        <div class="row mt-3">
+          <div class="col-12">
+            <div>
+              <h6>Market cap</h6>
+              <price
+                [currency]="currency"
+                [precision]="0"
+                [price]="selectedCoin.eurMarketCap"
+              ></price>
+            </div>
+          </div>
+        </div>
+        <div class="row mt-3">
+          <div class="col-12">
+            <div>
+              <h6>Market cap rank</h6>
+              <span>#{{ selectedCoin.marketCapRank }}</span>
+            </div>
+          </div>
+        </div>
+        <div class="row mt-3">
+          <div class="col-12">
+            <div>
+              <h6>ATH (All Time High)</h6>
+              <price
+                [currency]="currency"
+                [precision]="0"
+                [price]="selectedCoin.eurATH"
+              ></price>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
     <div class="col-12 col-sm-8 col-md-8 col-lg-8">
-        <div class="flex">
-            <div class="flex-item">
-              <div class="col-12">
-                  <canvas baseChart width="400" height="200"
-                  [datasets]="lineChartData"
-                  [labels]="labels"
-                  [options]="lineChartOptions"
-                  [legend]="lineChartLegend"
-                  [chartType]="lineChartType">
-                </canvas>
-            </div>
+      <div class="flex">
+        <div class="flex-item">
+          <div class="col-12">
+            <canvas
+              baseChart
+              width="400"
+              height="200"
+              [datasets]="lineChartData"
+              [labels]="labels"
+              [options]="lineChartOptions"
+              [chartType]="lineChartType"
+            >
+            </canvas>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </div>
