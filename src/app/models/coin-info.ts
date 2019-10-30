@@ -1,6 +1,7 @@
 export class CoinInfo {
   eurPrice: number;
   eurMarketCap: number;
+  volume24H: number;
   eurATH: number;
   marketCapRank: number;
   name: string;

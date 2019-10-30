@@ -76,6 +76,18 @@
         <div class="row mt-3">
           <div class="col-12">
             <div>
+              <h6>Total Volume</h6>
+              <price
+                [currency]="currency"
+                [precision]="0"
+                [price]="selectedCoin.volume24H"
+              ></price>
+            </div>
+          </div>
+        </div>
+        <div class="row mt-3">
+          <div class="col-12">
+            <div>
               <h6>ATH (All Time High)</h6>
               <price
                 [currency]="currency"
@@ -90,7 +102,10 @@
     <div class="col-12 col-sm-8 col-md-8 col-lg-8">
       <div class="flex">
         <div class="flex-item">
-          <div class="col-12">
+          <div
+            class="col-12"
+            *ngIf="lineChartData[0].data && lineChartData[0].data.length != 0"
+          >
             <canvas
               baseChart
               width="400"

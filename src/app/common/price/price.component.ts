@@ -1,19 +1,22 @@
 import { Component, Input, OnInit, OnChanges } from "@angular/core";
 import { Http } from "@angular/http";
 import { from } from "rxjs";
+import { CurrencyPipe } from "@angular/common";
+import { CurrencyInfo } from "src/app/models/currency-info";
 
 @Component({
   selector: "price",
   templateUrl: "./price.component.html",
-  styleUrls: ["./price.component.scss"]
+  styleUrls: ["./price.component.scss"],
+  providers: [CurrencyPipe]
 })
 export class PriceComponent implements OnInit, OnChanges {
   @Input() price: number;
-  @Input() currency: string;
+  @Input() currency: CurrencyInfo;
   @Input() precision: number;
   displayedPrice: string;
 
-  constructor() {}
+  constructor(private currencyPipe: CurrencyPipe) {}
 
   ngOnInit() {
     this.displayPrice();
@@ -25,12 +28,24 @@ export class PriceComponent implements OnInit, OnChanges {
 
   displayPrice() {
     let displayedCurrency;
-    switch (this.currency) {
-      case "EUR":
+    switch (this.currency.value) {
+      case "eur":
         displayedCurrency = "&euro;";
         break;
     }
-    const priceOut = this.price.toFixed(this.precision);
-    this.displayedPrice = `${displayedCurrency} ${priceOut}`;
+
+    this.displayedPrice = this.currencyPipe.transform(
+      this.price,
+      this.currency.label,
+      "symbol"
+    );
+    //const priceOut =  this.price.toFixed(this.precision);
+    //this.displayedPrice = `${displayedCurrency} ${priceOut}`;
+    /*if (this.price && this.precision) {
+      const priceOut = this.price.toFixed(this.precision);
+      this.displayedPrice = `${displayedCurrency} ${priceOut}`;
+    } else {
+      this.displayedPrice = "";
+    }*/
   }
 }

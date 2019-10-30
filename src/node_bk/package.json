@@ -16,6 +16,7 @@
     "cors": "^2.8.5",
     "crypto-news-api": "^2.2.2",
     "express": "^4.17.1",
+    "finance": "^4.4.4",
     "moment": "^2.24.0",
     "mongodb": "^3.3.2",
     "multer": "^1.4.2",

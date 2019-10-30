@@ -10,6 +10,7 @@ import * as moment from "moment";
 import { Label, BaseChartDirective } from "ng2-charts";
 import { ChartDataSets, ChartOptions } from "chart.js";
 import { SelectedDateOption } from "../models/utils/select-date-option";
+import { CurrencyInfo } from "../models/currency-info";
 
 @Component({
   selector: "app-prices",
@@ -23,7 +24,7 @@ export class PricesComponent implements OnInit {
   marketData: MarketData;
   isUpdating: boolean;
   response: string;
-  currency: string;
+  currency: CurrencyInfo;
   type: string;
   data: object;
   options: object;
@@ -43,14 +44,17 @@ export class PricesComponent implements OnInit {
   ngOnInit() {
     this.getCoinList().then(result => {
       this.coins = result;
-      this.currency = "EUR";
+      this.currency = { label: "EUR", value: "eur" };
       this.historicalMarketData = new MarketData();
       this.marketData = new MarketData();
 
       this.labels = [];
       this.prices = [];
       this.lineChartOptions = {
-        responsive: true
+        responsive: true,
+        legend: {
+          labels: { fontColor: "white" }
+        }
       };
       this.selectedCoin = this.coins[0];
       this.onCoinSelect(this.selectedCoin);
@@ -75,7 +79,7 @@ export class PricesComponent implements OnInit {
     this.getCoinInfo(coin);
     this.getCoinMarketChart(
       coin.queryId,
-      this.currency,
+      this.currency.label,
       this.timeFrame ? this.timeFrame.days : null
     );
   }
@@ -84,7 +88,7 @@ export class PricesComponent implements OnInit {
     this.timeFrame = timeFrame;
     this.getCoinMarketChart(
       this.selectedCoin.queryId,
-      this.currency,
+      this.currency.label,
       timeFrame.days
     );
   }
@@ -110,6 +114,8 @@ export class PricesComponent implements OnInit {
         this.selectedCoin.eurATH = response.data.market_data.ath.eur;
         this.selectedCoin.marketCapRank =
           response.data.market_data.market_cap_rank;
+        this.selectedCoin.volume24H =
+          response.data.market_data.total_volume.eur;
       });
   }
 
@@ -181,6 +187,8 @@ export class PricesComponent implements OnInit {
   }
 
   updateChart() {
-    this.chart.chart.update(); // This re-renders the canvas element.
+    if (this.chart && this.chart.chart) {
+      this.chart.chart.update(); // This re-renders the canvas element.
+    }
   }
 }
