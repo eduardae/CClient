@@ -15,23 +15,5 @@ export class AcademyComponent implements OnInit {
 
   constructor(private http: Http) {}
 
-  ngOnInit() {
-    this.getNews();
-  }
-
-  refreshInfo() {
-    this.isUpdating = true;
-    this.getNews();
-  }
-
-  getNews() {
-    this.http.get("http://localhost:8083").subscribe(result => {
-      const response = result.json();
-      console.log(response);
-      this.articles = _.sortBy(response.articles, article => {
-        return new Date(article.publishedAt);
-      }).reverse();
-      this.isUpdating = false;
-    });
-  }
+  ngOnInit() {}
 }

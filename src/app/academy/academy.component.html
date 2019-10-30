@@ -1,22 +1,124 @@
 <div class="container-fluid text-center">
-  <h2>Latest news on crypto</h2>
-  <div class="row pt-3 pb-5">
-      <div class="col-sm-6 offset-sm-3 text-center">
-          <button class="btn btn-default btn-primary" (click)="refreshInfo()">
-            <span>Refresh</span>
-            <span>
-              <span style="display: inline-block; margin-left: 8px;" *ngIf="isUpdating" class="fa fa-refresh fa-spin white"></span>
-            </span>
-          </button>
-        </div>
-  </div>
-  <div class="row articles">
-    <div class="col-12 col-md-6 col-lg-4" *ngFor="let article of articles">
-      <div class="article text-center">
-          <h6 class="article-title">{{article.title}}</h6>
-          <a href="{{article.url}}" target="_blank">
-            <div class="article-img" [ngStyle]="{'background-image': 'url(' + article.urlToImage + ')'}" ></div>
-          </a>
+  <h2>Learn more about crypto</h2>
+  <div class="container p-3">
+    <div class="row mt-5">
+      <div class="col-12 col-md-6 text-left">
+        <h5>Technical</h5>
+        <ul>
+          <li>
+            <a
+              target="_blank"
+              href="https://hackernoon.com/wtf-is-the-blockchain-1da89ba19348"
+            >
+              A blockchain introduction
+            </a>
+          </li>
+          <li>
+            <a
+              target="_blank"
+              href="https://hackernoon.com/what-is-bitcoin-part-1-1755b81984e8"
+            >
+              A Bitcoin introduction
+            </a>
+          </li>
+          <li>
+            <a
+              target="_blank"
+              href="https://hackernoon.com/dows-explores-different-perspectives-on-blockchain-and-cryptocurrencies-a63i363j"
+            >
+              Different Perspectives on Blockchain and Cryptocurrencies
+            </a>
+          </li>
+        </ul>
+      </div>
+      <div class="col-12 col-md-6 text-left">
+        <h5>Financial</h5>
+        <ul>
+          <li>
+            <a
+              target="_blank"
+              href="https://www.financemagnates.com/cryptocurrency/education-centre/five-smart-ways-of-shorting-bitcoin/"
+            >
+              Shorting Bitcoin
+            </a>
+          </li>
+          <li>
+            <a
+              target="_blank"
+              href="https://www.financemagnates.com/cryptocurrency/education-centre/what-is-an-ico-and-should-i-participate-in-one-a-guide/"
+            >
+              Investing in an ICO
+            </a>
+          </li>
+          <li>
+            <a
+              target="_blank"
+              href="https://www.financemagnates.com/cryptocurrency/education-centre/bitcoin-and-taxation/"
+            >
+              Taxation
+            </a>
+          </li>
+          <li>
+            <a
+              target="_blank"
+              href="https://www.financemagnates.com/cryptocurrency/education-centre/what-is-bitcoin-mining/"
+            >
+              Mining
+            </a>
+          </li>
+          <li>
+            <a target="_blank" href="https://cryptoindex.com/">
+              CryptoIndex (AI based)
+            </a>
+          </li>
+        </ul>
+      </div>
+    </div>
+    <div class="row mt-5">
+      <div class="col-12 col-md-6 text-left">
+        <h5>How to</h5>
+        <ul>
+          <li>
+            <a
+              target="_blank"
+              href="https://blockgeeks.com/guides/cryptocurrency-wallet-guide/"
+            >
+              Set up a wallet
+            </a>
+          </li>
+          <li>
+            <a
+              target="_blank"
+              href="https://blockgeeks.com/guides/how-to-invest-in-cryptocurrencies/"
+            >
+              Invest in crypto
+            </a>
+          </li>
+          <li>
+            <a
+              target="_blank"
+              href="https://cryptonews.com/guides/how-to-choose-an-exchange.htm"
+            >
+              Choose an exchange
+            </a>
+          </li>
+        </ul>
+      </div>
+      <div class="col-12 col-md-6 text-left">
+        <h5>Live Projects</h5>
+        <ul>
+          <li>
+            <a target="_blank" href="https://www.stateofthedapps.com/">
+              State of the Dapps (ETH based decentralized applications)
+            </a>
+          </li>
+          <li>
+            <a target="_blank" href="https://makerdao.com/en/">MakerDAO</a>
+          </li>
+          <li>
+            <a target="_blank" href="https://chain.link/">Chainlink (Oracle)</a>
+          </li>
+        </ul>
       </div>
     </div>
   </div>

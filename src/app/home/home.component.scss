@@ -52,7 +52,7 @@ body {
 }
 
 .bc-cover {
-  max-width: 75%;
+  max-width: 50%;
   margin-bottom: 32px;
   margin-top: 32px;
   margin-right: auto;
@@ -76,7 +76,7 @@ body {
   margin: 24px 0;
 
   .fab {
-    color: #791E94;
+    color: #791e94;
     font-size: 44px;
   }
 
@@ -86,10 +86,9 @@ body {
 }
 
 .icon-container {
-    margin-bottom: 16px;
-    margin-top: 16px;
+  margin-bottom: 16px;
+  margin-top: 16px;
   .coin-icon {
-
     display: block;
     width: 100%;
     height: 32px;
@@ -97,31 +96,30 @@ body {
     background-position: center;
 
     &.btc {
-      background-image: url('../../../node_modules/cryptocurrency-icons/svg/color/btc.svg');
+      background-image: url("../../../node_modules/cryptocurrency-icons/svg/color/btc.svg");
     }
     &.eth {
-      background-image: url('../../../node_modules/cryptocurrency-icons/svg/color/eth.svg');
+      background-image: url("../../../node_modules/cryptocurrency-icons/svg/color/eth.svg");
     }
     &.cardano {
-      background-image: url('../../../node_modules/cryptocurrency-icons/svg/color/ada.svg');
+      background-image: url("../../../node_modules/cryptocurrency-icons/svg/color/ada.svg");
     }
     &.tezos {
-      background-image: url('../../../node_modules/cryptocurrency-icons/svg/color/xtz.svg');
+      background-image: url("../../../node_modules/cryptocurrency-icons/svg/color/xtz.svg");
     }
     &.tether {
-      background-image: url('../../../node_modules/cryptocurrency-icons/svg/color/usdt.svg');
+      background-image: url("../../../node_modules/cryptocurrency-icons/svg/color/usdt.svg");
     }
     &.chainlink {
-      background-image: url('../../../node_modules/cryptocurrency-icons/svg/color/link.svg');
+      background-image: url("../../../node_modules/cryptocurrency-icons/svg/color/link.svg");
     }
     &.ripple {
-      background-image: url('../../../node_modules/cryptocurrency-icons/svg/color/xrp.svg');
+      background-image: url("../../../node_modules/cryptocurrency-icons/svg/color/xrp.svg");
     }
     &.litecoin {
-      background-image: url('../../../node_modules/cryptocurrency-icons/svg/color/ltc.svg');
+      background-image: url("../../../node_modules/cryptocurrency-icons/svg/color/ltc.svg");
     }
   }
-
 }
 
 @media screen and (max-width: 576px) {

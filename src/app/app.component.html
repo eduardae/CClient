@@ -1,23 +1,39 @@
+<!--[if lte IE 8]>
+  <p class="browsehappy">
+    You are using an <strong>outdated</strong> browser. Please
+    <a href="http://browsehappy.com/">upgrade your browser</a> to improve your
+    experience.
+  </p>
+<![endif]-->
 
-  <!--[if lte IE 8]>
-    <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
-  <![endif]-->
-
-  <!-- Add your site or application content here -->
-  <div class="header">
-      <nav class="navbar navbar-fixed-top navbar-dark bg-inverse">
-        <div class="btn-group" dropdown>
-
-          <div ngbDropdown class="d-inline-block">
-            <button class="btn btn-outline-primary" id="dropdownBasic1" ngbDropdownToggle>CMonitor</button>
-            <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
-              <button ngbDropdownItem><a class="dropdown-item"  [routerLink] = "['/home']">Home</a></button>
-              <button ngbDropdownItem><a class="dropdown-item" [routerLink] = "['/prices']">Prices</a></button>
-              <button ngbDropdownItem><a class="dropdown-item" [routerLink] = "['/news']">News</a></button>
-              <button ngbDropdownItem><a class="dropdown-item" href="#">Academy</a></button>
-            </div>
-          </div>
-          <!--<ul *dropdownMenu class="dropdown-menu" role="menu">
+<!-- Add your site or application content here -->
+<div class="header">
+  <nav class="navbar navbar-fixed-top navbar-dark bg-inverse">
+    <div class="btn-group" dropdown>
+      <div ngbDropdown class="d-inline-block">
+        <button
+          class="btn btn-outline-primary"
+          id="dropdownBasic1"
+          ngbDropdownToggle
+        >
+          CMonitor
+        </button>
+        <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
+          <button ngbDropdownItem>
+            <a class="dropdown-item" [routerLink]="['/home']">Home</a>
+          </button>
+          <button ngbDropdownItem>
+            <a class="dropdown-item" [routerLink]="['/prices']">Prices</a>
+          </button>
+          <button ngbDropdownItem>
+            <a class="dropdown-item" [routerLink]="['/news']">News</a>
+          </button>
+          <button ngbDropdownItem>
+            <a class="dropdown-item" [routerLink]="['/academy']">Academy</a>
+          </button>
+        </div>
+      </div>
+      <!--<ul *dropdownMenu class="dropdown-menu" role="menu">
             <li role="menuitem"><a class="dropdown-item"  [routerLink] = "['/home']">Home</a></li>
             <li role="menuitem"><a class="dropdown-item" href="#">News</a></li>
             <li role="menuitem"><a class="dropdown-item" href="#">Academy</a></li>
@@ -25,25 +41,44 @@
             <li role="menuitem"><a class="dropdown-item" href="#">About</a>
             </li>
           </ul>-->
+    </div>
+    <div class="btn-group float-right">
+      <div ngbDropdown class="d-inline-block" display="dynamic">
+        <button
+          class="btn btn-outline-primary"
+          id="dropdownBasic1"
+          ngbDropdownToggle
+        >
+          <span class="fa fa-user"></span>
+          <span class="pl-1" *ngIf="this.user">{{ this.user.username }}</span>
+        </button>
+        <div
+          *ngIf="!this.user"
+          ngbDropdownMenu
+          aria-labelledby="dropdownBasic1"
+        >
+          <button ngbDropdownItem>
+            <a class="dropdown-item" [routerLink]="['/login']">Login</a>
+          </button>
+          <button ngbDropdownItem>
+            <a class="dropdown-item" [routerLink]="['/register']">Register</a>
+          </button>
         </div>
-        <div class="btn-group float-right" >
+        <div
+          *ngIf="this.user && this.user.username != null"
+          ngbDropdownMenu
+          aria-labelledby="dropdownBasic1"
+        >
+          <button ngbDropdownItem>
+            <a class="dropdown-item" [routerLink]="['/settings']">Settings</a>
+          </button>
+          <button ngbDropdownItem>
+            <a class="dropdown-item" (click)="logout()">Logout</a>
+          </button>
+        </div>
+      </div>
 
-          <div ngbDropdown class="d-inline-block" display="dynamic">
-            <button class="btn btn-outline-primary" id="dropdownBasic1" ngbDropdownToggle>
-                <span class="fa fa-user"></span>
-                <span class="pl-1" *ngIf="this.user">{{this.user.username}}</span>
-            </button>
-            <div *ngIf="!this.user" ngbDropdownMenu aria-labelledby="dropdownBasic1">
-              <button ngbDropdownItem><a class="dropdown-item" [routerLink] = "['/login']">Login</a></button>
-              <button ngbDropdownItem><a class="dropdown-item" [routerLink] = "['/register']">Register</a></button>
-            </div>
-            <div *ngIf="this.user && this.user.username != null" ngbDropdownMenu aria-labelledby="dropdownBasic1">
-              <button ngbDropdownItem><a class="dropdown-item" [routerLink] = "['/settings']">Settings</a></button>
-              <button ngbDropdownItem><a class="dropdown-item" (click)="logout()">Logout</a></button>
-            </div>
-          </div>
-
-          <!--
+      <!--
           <div *ngIf="!this.user">
               <ul *dropdownMenu class="dropdown-menu dropdown-menu-right" role="menu">
                   <li role="menuitem"><a class="dropdown-item" [routerLink] = "['/login']">Login</a></li>
@@ -56,11 +91,9 @@
                 <li role="menuitem"><a class="dropdown-item" (click)="logout()">Logout</a></li>
             </ul>
           </div>-->
-        </div>
-     </nav>
     </div>
-  <div class="container-fluid d-flex h-100">
-    <router-outlet></router-outlet>
-  </div>
-
-
+  </nav>
+</div>
+<div class="container-fluid d-flex h-100">
+  <router-outlet></router-outlet>
+</div>
