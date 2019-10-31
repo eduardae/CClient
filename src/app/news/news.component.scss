@@ -5,9 +5,8 @@
 
 .articles {
   .article {
-
     width: 90%;
-    height: 430px;
+    height: 380px;
     padding-top: 24px;
     padding-bottom: 24px;
     margin: auto;
@@ -17,37 +16,43 @@
     }
 
     .article-img {
-     padding: 8px;
-     height: 200px;
-     background-repeat: no-repeat;
-     background-size: contain;
-     background-position: center;
+      padding: 8px;
+      height: 200px;
+      background-repeat: no-repeat;
+      background-size: contain;
+      background-position: center;
+    }
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .articles {
+    .article {
+      height: 320px;
     }
   }
 }
 
 @media screen and (max-width: 576px) {
+  .articles {
+    .article {
+      width: 95%;
+      height: 240px;
+      padding-top: 16px;
+      margin: auto;
+      margin-bottom: 32px;
 
-.articles {
-  .article {
+      .article-title {
+        height: 50px;
+      }
 
-    width: 95%;
-    height: 240px;
-    padding-top: 16px;
-    margin: auto;
-    margin-bottom: 32px;
-
-    .article-title {
-      height: 40px;
-    }
-
-    .article-img {
-     padding: 8px;
-     height: 180px;
-     background-repeat: no-repeat;
-     background-size: contain;
-     background-position: center;
+      .article-img {
+        padding: 8px;
+        height: 180px;
+        background-repeat: no-repeat;
+        background-size: contain;
+        background-position: center;
+      }
     }
   }
-}
 }

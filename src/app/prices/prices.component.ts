@@ -36,6 +36,7 @@ export class PricesComponent implements OnInit {
   lineChartOptions: ChartOptions;
   lineChartLegend = true;
   lineChartType = "line";
+  isMdOrLess: boolean;
 
   @ViewChild(BaseChartDirective, { static: false }) chart: BaseChartDirective;
 
@@ -54,7 +55,8 @@ export class PricesComponent implements OnInit {
         responsive: true,
         legend: {
           labels: { fontColor: "white" }
-        }
+        },
+        maintainAspectRatio: false
       };
       this.selectedCoin = this.coins[0];
       this.onCoinSelect(this.selectedCoin);

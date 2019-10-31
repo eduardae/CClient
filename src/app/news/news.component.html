@@ -1,22 +1,17 @@
 <div class="container-fluid text-center">
-  <h2>Latest news on crypto</h2>
-  <div class="row pt-3 pb-5">
-      <div class="col-sm-6 offset-sm-3 text-center">
-          <button class="btn btn-default btn-primary" (click)="refreshInfo()">
-            <span>Refresh</span>
-            <span>
-              <span style="display: inline-block; margin-left: 8px;" *ngIf="isUpdating" class="fa fa-refresh fa-spin white"></span>
-            </span>
-          </button>
-        </div>
-  </div>
+  <h2 class="pb-5">Latest news on crypto</h2>
   <div class="row articles">
     <div class="col-12 col-md-6 col-lg-4" *ngFor="let article of articles">
       <div class="article text-center">
-          <h6 class="article-title">{{article.title}}</h6>
-          <a href="{{article.url}}" target="_blank">
-            <div class="article-img" [ngStyle]="{'background-image': 'url(' + article.urlToImage + ')'}" ></div>
-          </a>
+        <h6 class="article-title">{{ article.title }}</h6>
+        <a href="{{ article.url }}" target="_blank">
+          <div
+            class="article-img"
+            [ngStyle]="{
+              'background-image': 'url(' + article.urlToImage + ')'
+            }"
+          ></div>
+        </a>
       </div>
     </div>
   </div>
