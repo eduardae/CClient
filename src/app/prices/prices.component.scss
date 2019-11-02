@@ -12,11 +12,28 @@
   #price-chart {
     height: 328px !important;
   }
+
+  .indicators {
+    margin-top: 16px;
+  }
 }
 
 @media (max-width: 425px) {
   #price-chart {
     height: 228px !important;
     margin-top: 32px;
+  }
+
+  .filters {
+    .selector {
+      text-align: left;
+      padding-left: 20%;
+      label {
+        width: 94px;
+      }
+      select {
+        width: 106px;
+      }
+    }
   }
 }

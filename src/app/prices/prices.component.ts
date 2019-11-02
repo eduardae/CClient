@@ -36,7 +36,7 @@ export class PricesComponent implements OnInit {
   lineChartOptions: ChartOptions;
   lineChartLegend = true;
   lineChartType = "line";
-  isMdOrLess: boolean;
+  showAdditionalInfo: boolean;
 
   @ViewChild(BaseChartDirective, { static: false }) chart: BaseChartDirective;
 
@@ -93,6 +93,10 @@ export class PricesComponent implements OnInit {
       this.currency.label,
       timeFrame.days
     );
+  }
+
+  triggerAdditionalInfo() {
+    this.showAdditionalInfo = !this.showAdditionalInfo;
   }
 
   async getCoinList(): Promise<CoinInfo[]> {
