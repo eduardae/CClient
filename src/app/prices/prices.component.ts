@@ -11,6 +11,8 @@ import { Label, BaseChartDirective } from "ng2-charts";
 import { ChartDataSets, ChartOptions } from "chart.js";
 import { SelectedDateOption } from "../models/utils/select-date-option";
 import { CurrencyInfo } from "../models/currency-info";
+import { CommunityData } from "../models/community-data";
+import { DevelopmentData } from "../models/development-data";
 
 @Component({
   selector: "app-prices",
@@ -122,6 +124,39 @@ export class PricesComponent implements OnInit {
           response.data.market_data.market_cap_rank;
         this.selectedCoin.volume24H =
           response.data.market_data.total_volume.eur;
+        this.selectedCoin.liquidityScore = response.data.liquidity_score;
+
+        // community data
+        if (!this.selectedCoin.communityData) {
+          this.selectedCoin.communityData = new CommunityData();
+        }
+        this.selectedCoin.communityData.communityScore =
+          response.data.community_score;
+        this.selectedCoin.communityData.publicInterestScore =
+          response.data.public_interest_score;
+        this.selectedCoin.communityData.facebookLikes =
+          response.data.community_data.facebook_likes;
+        this.selectedCoin.communityData.redditSubscribers =
+          response.data.community_data.reddit_subscribers;
+        this.selectedCoin.communityData.twitterFollowers =
+          response.data.community_data.twitter_followers;
+        this.selectedCoin.communityData.sentimentVotesUpPercentage =
+          response.data.sentiment_votes_up_percentage;
+        this.selectedCoin.communityData.sentimentVotesDownPercentage =
+          response.data.sentiment_votes_down_percentage;
+
+        // development data
+        if (!this.selectedCoin.developmentData) {
+          this.selectedCoin.developmentData = new DevelopmentData();
+        }
+        this.selectedCoin.developmentData.developerScore =
+          response.data.developer_score;
+        this.selectedCoin.developmentData.stars =
+          response.data.developer_data.stars;
+        this.selectedCoin.developmentData.pullRequestContributors =
+          response.data.developer_data.pull_request_contributors;
+        this.selectedCoin.developmentData.lastFourWeeksCommits =
+          response.data.developer_data.commit_count_4_weeks;
       });
   }
 

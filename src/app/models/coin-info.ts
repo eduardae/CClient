@@ -1,3 +1,6 @@
+import { CommunityData } from "./community-data";
+import { DevelopmentData } from "./development-data";
+
 export class CoinInfo {
   eurPrice: number;
   eurMarketCap: number;
@@ -6,11 +9,16 @@ export class CoinInfo {
   marketCapRank: number;
   name: string;
   queryId: string;
+  liquidityScore: number;
+  communityData: CommunityData;
+  developmentData: DevelopmentData;
 
   constructor() {
     this.eurPrice = 0;
     this.eurMarketCap = 0;
     this.name = "";
     this.queryId = "";
+    this.communityData = new CommunityData();
+    this.developmentData = new DevelopmentData();
   }
 }

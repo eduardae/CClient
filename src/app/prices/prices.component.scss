@@ -8,13 +8,23 @@
   height: 520px !important;
 }
 
+.indicators {
+  margin-top: 32px;
+}
 @media (max-width: 1024px) {
   #price-chart {
     height: 328px !important;
+    margin-top: 48px;
   }
 
   .indicators {
     margin-top: 16px;
+  }
+}
+
+@media (max-width: 768px) {
+  .indicators {
+    margin-top: 24px;
   }
 }
 

@@ -48,7 +48,8 @@
     <div class="row mt-3">
       <div class="indicators col-12 col-md-4 col-lg-4">
         <div *ngIf="selectedCoin && prices && prices.length != 0">
-          <div class="row">
+          <h5 class="purple">Financial Data</h5>
+          <div class="row pt-4">
             <div class="col-12">
               <div>
                 <h6>Current price</h6>
@@ -154,10 +155,85 @@
       id="additional-info"
       [ngbCollapse]="!showAdditionalInfo"
     >
-      <div class="card card-body">
-        Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus
-        terry richardson ad squid. Nihil anim keffiyeh helvetica, craft beer
-        labore wes anderson cred nesciunt sapiente ea proident.
+      <div class="container">
+        <div class="card card-body">
+          <div class="row">
+            <div class="col-6 text-left" *ngIf="selectedCoin.communityData">
+              <h5 class="purple">Community Data</h5>
+              <div class="row">
+                <div class="col-12">
+                  <span class="font-weight-bold">Community Score: </span>
+                  <span>{{ selectedCoin.communityData.communityScore }}</span>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-12">
+                  <span class="font-weight-bold">Public Interest Score: </span>
+                  <span>{{
+                    selectedCoin.communityData.publicInterestScore
+                  }}</span>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-12">
+                  <span class="font-weight-bold"
+                    >Sentiment Votes-Up Percentage :
+                  </span>
+                  <span
+                    >{{
+                      selectedCoin.communityData.sentimentVotesUpPercentage
+                    }}%</span
+                  >
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-12">
+                  <span class="font-weight-bold"
+                    >Sentiment Votes-Down Percentage :
+                  </span>
+                  <span
+                    >{{
+                      selectedCoin.communityData.sentimentVotesDownPercentage
+                    }}%</span
+                  >
+                </div>
+              </div>
+            </div>
+            <div class="col-6 text-left" *ngIf="selectedCoin.developmentData">
+              <h5 class="purple">Development Data</h5>
+              <div class="row">
+                <div class="col-12">
+                  <span class="font-weight-bold">Developer score: </span>
+                  <span>{{ selectedCoin.developmentData.developerScore }}</span>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-12">
+                  <span class="font-weight-bold">Stars: </span>
+                  <span>{{ selectedCoin.developmentData.stars }}</span>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-12">
+                  <span class="font-weight-bold"
+                    >Pull request contributors:
+                  </span>
+                  <span>{{
+                    selectedCoin.developmentData.pullRequestContributors
+                  }}</span>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-12">
+                  <span class="font-weight-bold">Last 4 weeks commits: </span>
+                  <span>{{
+                    selectedCoin.developmentData.lastFourWeeksCommits
+                  }}</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </div>
