@@ -1,20 +1,17 @@
-import { OnInit } from '@angular/core';
+import { OnInit } from "@angular/core";
 
 export class Article implements OnInit {
   title: string;
   description: string;
   url: string;
-  urlToImage: string;
+  originalImageUrl: string;
 
   constructor() {
-    this.title = '';
-    this.description = '';
-    this.url = '';
-    this.urlToImage = '';
-   }
-
-  ngOnInit() {
-
+    this.title = "";
+    this.description = "";
+    this.url = "";
+    this.originalImageUrl = "";
   }
 
+  ngOnInit() {}
 }
