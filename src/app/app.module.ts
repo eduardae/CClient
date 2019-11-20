@@ -17,6 +17,7 @@ import { NewsComponent } from "./news/news.component";
 import { PricesComponent } from "./prices/prices.component";
 import { PriceComponent } from "./common/price/price.component";
 import { AcademyComponent } from "./academy/academy.component";
+import { TermsComponent } from "./terms/terms.component";
 
 const appRoutes: Routes = [
   { path: "", redirectTo: "home", pathMatch: "full" },
@@ -25,7 +26,8 @@ const appRoutes: Routes = [
   { path: "login", component: LoginComponent },
   { path: "news", component: NewsComponent },
   { path: "prices", component: PricesComponent },
-  { path: "academy", component: AcademyComponent }
+  { path: "academy", component: AcademyComponent },
+  { path: "terms", component: TermsComponent }
 ];
 
 @NgModule({
@@ -37,7 +39,8 @@ const appRoutes: Routes = [
     AcademyComponent,
     LoginComponent,
     PricesComponent,
-    PriceComponent
+    PriceComponent,
+    TermsComponent
   ],
   imports: [
     BrowserModule,

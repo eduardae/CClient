@@ -1,25 +1,54 @@
-import { Component, OnInit, Input } from '@angular/core';
-import { Http } from '@angular/http';
-import { CoinsSummary } from '../models/coins-summary';
-import { CoinInfo } from '../models/coin-info';
-import { from } from 'rxjs';
+import { Component, OnInit, Input, Inject } from "@angular/core";
+import { Http } from "@angular/http";
+import { CoinsSummary } from "../models/coins-summary";
+import { CoinInfo } from "../models/coin-info";
+import { from } from "rxjs";
+import { User } from "../models/user";
+import { LOCAL_STORAGE, WebStorageService } from "angular-webstorage-service";
+import { Router } from "@angular/router";
+import { UserInfoService } from "../user.info.service";
 
 @Component({
-  selector: 'app-register',
-  templateUrl: './register.component.html',
-  styleUrls: ['./register.component.scss'],
+  selector: "app-register",
+  templateUrl: "./register.component.html",
+  styleUrls: ["./register.component.scss"]
 })
 export class RegisterComponent implements OnInit {
+  user: User;
+  passwordConfirmation: string;
+  termsAccepted: boolean;
 
-  constructor() {
-
+  // tslint:disable-next-line: max-line-length
+  constructor(
+    private http: Http,
+    private router: Router,
+    @Inject(LOCAL_STORAGE) private storage: WebStorageService,
+    private userService: UserInfoService
+  ) {
+    this.user = new User();
   }
 
-  ngOnInit() {
+  ngOnInit() {}
+
+  register() {
+    this.http
+      .post("http://localhost:8082/register", {
+        username: this.user.username,
+        password: this.user.password,
+        email: this.user.email
+      })
+      .subscribe(
+        result => {
+          localStorage.setItem(
+            "currentUser",
+            JSON.stringify({ user: this.user })
+          );
+          this.userService.loginEvent(this.user);
+          this.router.navigateByUrl("/");
+        },
+        err => {
+          console.log(err);
+        }
+      );
   }
-
-  refreshInfo() {
-  }
-
-
 }

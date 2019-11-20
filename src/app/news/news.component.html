@@ -2,7 +2,7 @@
   <h2 class="pb-5">Latest news on crypto</h2>
   <div class="row articles">
     <div class="col-12 col-md-6 col-lg-4" *ngFor="let article of articles">
-      <div *ngIf="article.originalImageUrl" class="article text-center">
+      <div class="article text-center">
         <h6 class="article-title">{{ article.title }}</h6>
         <a href="{{ article.url }}" target="_blank">
           <img

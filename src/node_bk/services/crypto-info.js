@@ -53,7 +53,7 @@ app.post('/coininfo/history', function (req, res) {
 app.get('/coinslist', function (req, res) {
   let obj;
   //./src/node_bk/config/coins/list.json
-  fs.readFile('./src/node_bk/config/coins/list.json', 'utf8', function (err, data) {
+  fs.readFile('../node_bk/config/coins/list.json', 'utf8', function (err, data) {
     if (err) throw err;
     obj = JSON.parse(data);
     if (obj) {

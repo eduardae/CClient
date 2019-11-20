@@ -8,7 +8,8 @@
     "base": "npm-run-all --parallel crypto-info db",
     "all": "npm-run-all --parallel crypto-info db news",
     "no-market": "npm-run-all --parallel db news",
-    "no-news": "npm-run-all crypto-info --parallel db"
+    "no-news": "npm-run-all --parallel crypto-info db",
+    "no-auth": "npm-run-all --parallel crypto-info news "
   },
   "dependencies": {
     "body-parser": "^1.19.0",
