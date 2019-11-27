@@ -13,22 +13,23 @@ app.use(cors());
 app.post('/register', function (req, res) {
   // Make a connection to MongoDB Service
   MongoClient.connect(url, function (connerr, client) {
-    if (connerr) res.status(500).send(connerr);
+    if (connerr) res.status(500).end(connerr);
     console.log("Connected to MongoDB!");
     const db = client.db('local');
     let reqQuery = req.body;
     crypto.scrypt(reqQuery.password, 'cm', 64, (err, derivedKey) => {
       if (err) throw err;
       reqQuery.password_hash = derivedKey;
+      delete reqQuery.password;
       db.collection("users").insertOne(reqQuery, function (dberr, dbres) {
         if (dberr) {
           res.status(500).send(dberr);
         } else {
-          res.status(200);
+          res.status(200).end('User registered');
           client.close();
         }
       }, function (err) {
-        res.status(500).send(err);
+        res.status(500).end(err);
       });
     });
 
@@ -49,7 +50,7 @@ app.post('/auth', function (req, res) {
         if (docs && docs.length != 0) {
           crypto.scrypt(reqQuery.password, 'cm', 64, (err, derivedKey) => {
             if (err) throw err;
-            if (docs[0].password_hash === derivedKey.toString('hex')) {
+            if (docs[0].password_hash.toString('hex') === derivedKey.toString('hex')) {
               res.json(docs[0]);
             }
           });

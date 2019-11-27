@@ -1,4 +1,6 @@
 import { BrowserModule } from "@angular/platform-browser";
+import { ToasterModule, ToasterService } from "angular2-toaster";
+import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 import { NgModule } from "@angular/core";
 import { HttpClientModule } from "@angular/common/http";
 import { HttpModule } from "@angular/http";
@@ -43,6 +45,8 @@ const appRoutes: Routes = [
     TermsComponent
   ],
   imports: [
+    BrowserAnimationsModule,
+    ToasterModule.forRoot(),
     BrowserModule,
     HttpClientModule,
     RouterModule.forRoot(appRoutes),
