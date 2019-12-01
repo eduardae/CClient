@@ -5,7 +5,7 @@ import { User } from "./models/user";
 import { LOCAL_STORAGE, WebStorageService } from "angular-webstorage-service";
 import { UserInfoService } from "./user.info.service";
 import { Subscription } from "rxjs";
-import { ToasterService } from "angular2-toaster";
+import { ToastService } from "./toast/toast-service";
 
 @Component({
   selector: "app-root",
@@ -18,12 +18,12 @@ export class AppComponent {
   user: User;
   storageCopy: WebStorageService;
   subscription: Subscription;
-
   constructor(
     private http: Http,
     private router: Router,
     @Inject(LOCAL_STORAGE) private storage: WebStorageService,
-    private userService: UserInfoService
+    private userService: UserInfoService,
+    private toastService: ToastService
   ) {
     this.storageCopy = storage;
     if (storage.get("currentUser")) {
@@ -38,6 +38,10 @@ export class AppComponent {
   logout() {
     this.storage.set("currentUser", null);
     this.user = null;
+    this.toastService.show("Logged out", {
+      classname: "bg-success text-light",
+      delay: 2000
+    });
   }
 
   ngOnInit() {

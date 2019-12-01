@@ -1,5 +1,4 @@
 import { BrowserModule } from "@angular/platform-browser";
-import { ToasterModule, ToasterService } from "angular2-toaster";
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 import { NgModule } from "@angular/core";
 import { HttpClientModule } from "@angular/common/http";
@@ -20,6 +19,8 @@ import { PricesComponent } from "./prices/prices.component";
 import { PriceComponent } from "./common/price/price.component";
 import { AcademyComponent } from "./academy/academy.component";
 import { TermsComponent } from "./terms/terms.component";
+import { NgbdToastGlobal } from "./toast/toast-global.component";
+import { ToastsContainer } from "./toast/toasts-container.component";
 
 const appRoutes: Routes = [
   { path: "", redirectTo: "home", pathMatch: "full" },
@@ -35,6 +36,8 @@ const appRoutes: Routes = [
 @NgModule({
   declarations: [
     AppComponent,
+    ToastsContainer,
+    NgbdToastGlobal,
     HomeComponent,
     RegisterComponent,
     NewsComponent,
@@ -46,7 +49,6 @@ const appRoutes: Routes = [
   ],
   imports: [
     BrowserAnimationsModule,
-    ToasterModule.forRoot(),
     BrowserModule,
     HttpClientModule,
     RouterModule.forRoot(appRoutes),

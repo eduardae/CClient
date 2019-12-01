@@ -6,8 +6,6 @@
   </p>
 <![endif]-->
 
-<toaster-container></toaster-container>
-
 <!-- Add your site or application content here -->
 <div class="header">
   <nav class="navbar navbar-fixed-top navbar-dark bg-inverse">
@@ -79,6 +77,8 @@
           </button>
         </div>
       </div>
+
+      <app-toasts aria-live="polite" aria-atomic="true"></app-toasts>
 
       <!--
           <div *ngIf="!this.user">

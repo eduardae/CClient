@@ -3,3 +3,7 @@
   height: 100%;
   margin-bottom: 112px;
 }
+
+app-toasts {
+  top: 76px;
+}

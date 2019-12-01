@@ -1,112 +1,169 @@
 <div class="home text-center">
-  <h2>Welcome to your Crypto Monitor </h2>
+  <h2>Welcome to your Crypto Monitor</h2>
   <div class="col-sm-8  offset-sm-2">
-    <img class="bc-cover" src="assets/images/blockchain.png">
+    <img class="bc-cover" src="assets/images/blockchain.png" />
   </div>
   <div class="col-sm-6 offset-sm-3 text-center">
     <button class="btn btn-default btn-primary" (click)="refreshInfo()">
       <span>Refresh</span>
       <span>
-        <span style="display: inline-block; margin-left: 8px;" *ngIf="isUpdating"
-          class="fa fa-refresh fa-spin white"></span>
+        <span
+          style="display: inline-block; margin-left: 8px;"
+          *ngIf="isUpdating"
+          class="fa fa-refresh fa-spin white"
+        ></span>
       </span>
     </button>
-
   </div>
 </div>
 
 <div class="marketing">
-    <div class="row icons" *ngIf="contentLoaded">
-        <div class="col-6 col-md-3 icon-container">
-          <div class="col-sm-12">
-            <div class="coin-icon btc"></div>
-          </div>
-          <span>{{cryptoInfos.btc.name}}</span>
-          <div class="row">
-            <div class="col-sm-12" *ngIf="cryptoInfos.btc && cryptoInfos.btc.eurPrice != 0">
-                <price [currency]="currency" [precision]="2" [price]="cryptoInfos.btc.eurPrice"></price>
-            </div>
-          </div>
-        </div>
-        <div class="col-6 col-md-3 icon-container">
-          <div class="col-sm-12">
-            <div class="coin-icon eth"></div>
-          </div>
-          <span>{{cryptoInfos.ether.name}}</span>
-          <div class="row">
-            <div class="col-sm-12" *ngIf="cryptoInfos.ether && cryptoInfos.ether.eurPrice != 0">
-                <price [currency]="currency" [precision]="2" [price]="cryptoInfos.ether.eurPrice"></price>
-            </div>
-          </div>
-        </div>
-        <div class="col-6 col-md-3 icon-container">
-          <div class="col-sm-12">
-            <div class="coin-icon cardano"></div>
-          </div>
-          <span>{{cryptoInfos.cardano.name}}</span>
-          <div class="row">
-            <div class="col-sm-12" *ngIf="cryptoInfos.cardano && cryptoInfos.cardano.eurPrice != 0">
-                <price [currency]="currency" [precision]="4" [price]="cryptoInfos.cardano.eurPrice"></price>
-            </div>
-          </div>
-        </div>
-        <div class="col-6 col-md-3 icon-container">
-          <div class="col-sm-12">
-            <div class="coin-icon litecoin"></div>
-          </div>
-          <span>{{cryptoInfos.litecoin.name}}</span>
-          <div class="row">
-            <div class="col-sm-12" *ngIf="cryptoInfos.litecoin && cryptoInfos.litecoin.eurPrice != 0">
-                <price [currency]="currency" [precision]="2" [price]="cryptoInfos.litecoin.eurPrice"></price>
-            </div>
-          </div>
+  <div class="row icons" *ngIf="contentLoaded">
+    <div class="col-6 col-md-3 icon-container">
+      <div class="col-sm-12">
+        <div class="coin-icon btc"></div>
+      </div>
+      <span>{{ cryptoInfos.btc.name }}</span>
+      <div class="row">
+        <div
+          class="col-sm-12"
+          *ngIf="cryptoInfos.btc && cryptoInfos.btc.eurPrice != 0"
+        >
+          <price
+            [currency]="currency"
+            [precision]="2"
+            [price]="cryptoInfos.btc.eurPrice"
+          ></price>
         </div>
       </div>
-      <div class="row" *ngIf="contentLoaded">
-        <div class="col-6 col-md-3 icon-container">
-          <div class="col-sm-12">
-            <div class="coin-icon chainlink"></div>
-          </div>
-          <span>{{cryptoInfos.chainlink.name}}</span>
-          <div class="row">
-            <div class="col-sm-12" *ngIf="cryptoInfos.chainlink && cryptoInfos.chainlink.eurPrice != 0">
-                <price [currency]="currency" [precision]="2" [price]="cryptoInfos.chainlink.eurPrice"></price>
-            </div>
-          </div>
-        </div>
-        <div class="col-6 col-md-3 icon-container">
-          <div class="col-sm-12">
-            <div class="coin-icon tether"></div>
-          </div>
-          <span>{{cryptoInfos.tether.name}}</span>
-          <div class="row">
-            <div class="col-sm-12" *ngIf="cryptoInfos.tether && cryptoInfos.tether.eurPrice != 0">
-              <price [currency]="currency" [precision]="4" [price]="cryptoInfos.tether.eurPrice"></price>
-            </div>
-          </div>
-        </div>
-        <div class="col-6 col-md-3 icon-container">
-          <div class="col-sm-12">
-            <div class="coin-icon tezos"></div>
-          </div>
-          <span>{{cryptoInfos.tezos.name}}</span>
-          <div class="row">
-            <div class="col-sm-12" *ngIf="cryptoInfos.tezos && cryptoInfos.tezos.eurPrice != 0">
-              <price [currency]="currency" [precision]="4" [price]="cryptoInfos.tezos.eurPrice"></price>
-            </div>
-          </div>
-        </div>
-        <div class="col-6 col-md-3 icon-container">
-          <div class="col-sm-12">
-            <div class="coin-icon ripple"></div>
-          </div>
-          <span>{{cryptoInfos.xrp.name}}</span>
-          <div class="row">
-            <div class="col-sm-12" *ngIf="cryptoInfos.xrp && cryptoInfos.xrp.eurPrice != 0">
-                <price [currency]="currency" [precision]="3" [price]="cryptoInfos.xrp.eurPrice"></price>
-            </div>
-          </div>
+    </div>
+    <div class="col-6 col-md-3 icon-container">
+      <div class="col-sm-12">
+        <div class="coin-icon eth"></div>
+      </div>
+      <span>{{ cryptoInfos.ether.name }}</span>
+      <div class="row">
+        <div
+          class="col-sm-12"
+          *ngIf="cryptoInfos.ether && cryptoInfos.ether.eurPrice != 0"
+        >
+          <price
+            [currency]="currency"
+            [precision]="2"
+            [price]="cryptoInfos.ether.eurPrice"
+          ></price>
         </div>
       </div>
+    </div>
+    <div class="col-6 col-md-3 icon-container">
+      <div class="col-sm-12">
+        <div class="coin-icon cardano"></div>
+      </div>
+      <span>{{ cryptoInfos.cardano.name }}</span>
+      <div class="row">
+        <div
+          class="col-sm-12"
+          *ngIf="cryptoInfos.cardano && cryptoInfos.cardano.eurPrice != 0"
+        >
+          <price
+            [currency]="currency"
+            [precision]="4"
+            [price]="cryptoInfos.cardano.eurPrice"
+          ></price>
+        </div>
+      </div>
+    </div>
+    <div class="col-6 col-md-3 icon-container">
+      <div class="col-sm-12">
+        <div class="coin-icon litecoin"></div>
+      </div>
+      <span>{{ cryptoInfos.litecoin.name }}</span>
+      <div class="row">
+        <div
+          class="col-sm-12"
+          *ngIf="cryptoInfos.litecoin && cryptoInfos.litecoin.eurPrice != 0"
+        >
+          <price
+            [currency]="currency"
+            [precision]="2"
+            [price]="cryptoInfos.litecoin.eurPrice"
+          ></price>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row" *ngIf="contentLoaded">
+    <div class="col-6 col-md-3 icon-container">
+      <div class="col-sm-12">
+        <div class="coin-icon chainlink"></div>
+      </div>
+      <span>{{ cryptoInfos.chainlink.name }}</span>
+      <div class="row">
+        <div
+          class="col-sm-12"
+          *ngIf="cryptoInfos.chainlink && cryptoInfos.chainlink.eurPrice != 0"
+        >
+          <price
+            [currency]="currency"
+            [precision]="2"
+            [price]="cryptoInfos.chainlink.eurPrice"
+          ></price>
+        </div>
+      </div>
+    </div>
+    <div class="col-6 col-md-3 icon-container">
+      <div class="col-sm-12">
+        <div class="coin-icon tether"></div>
+      </div>
+      <span>{{ cryptoInfos.tether.name }}</span>
+      <div class="row">
+        <div
+          class="col-sm-12"
+          *ngIf="cryptoInfos.tether && cryptoInfos.tether.eurPrice != 0"
+        >
+          <price
+            [currency]="currency"
+            [precision]="4"
+            [price]="cryptoInfos.tether.eurPrice"
+          ></price>
+        </div>
+      </div>
+    </div>
+    <div class="col-6 col-md-3 icon-container">
+      <div class="col-sm-12">
+        <div class="coin-icon tezos"></div>
+      </div>
+      <span>{{ cryptoInfos.tezos.name }}</span>
+      <div class="row">
+        <div
+          class="col-sm-12"
+          *ngIf="cryptoInfos.tezos && cryptoInfos.tezos.eurPrice != 0"
+        >
+          <price
+            [currency]="currency"
+            [precision]="4"
+            [price]="cryptoInfos.tezos.eurPrice"
+          ></price>
+        </div>
+      </div>
+    </div>
+    <div class="col-6 col-md-3 icon-container">
+      <div class="col-sm-12">
+        <div class="coin-icon ripple"></div>
+      </div>
+      <span>{{ cryptoInfos.xrp.name }}</span>
+      <div class="row">
+        <div
+          class="col-sm-12"
+          *ngIf="cryptoInfos.xrp && cryptoInfos.xrp.eurPrice != 0"
+        >
+          <price
+            [currency]="currency"
+            [precision]="3"
+            [price]="cryptoInfos.xrp.eurPrice"
+          ></price>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
-

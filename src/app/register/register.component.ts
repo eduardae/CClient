@@ -7,7 +7,7 @@ import { User } from "../models/user";
 import { LOCAL_STORAGE, WebStorageService } from "angular-webstorage-service";
 import { Router } from "@angular/router";
 import { UserInfoService } from "../user.info.service";
-import { ToasterService } from "angular2-toaster";
+import { ToastService } from "../toast/toast-service";
 
 @Component({
   selector: "app-register",
@@ -18,7 +18,6 @@ export class RegisterComponent implements OnInit {
   user: User;
   passwordConfirmation: string;
   termsAccepted: boolean;
-  toasterService: ToasterService;
 
   // tslint:disable-next-line: max-line-length
   constructor(
@@ -26,10 +25,9 @@ export class RegisterComponent implements OnInit {
     private router: Router,
     @Inject(LOCAL_STORAGE) private storage: WebStorageService,
     private userService: UserInfoService,
-    toasterService: ToasterService
+    private toastService: ToastService
   ) {
     this.user = new User();
-    this.toasterService = toasterService;
   }
 
   ngOnInit() {}
@@ -43,11 +41,10 @@ export class RegisterComponent implements OnInit {
       })
       .subscribe(
         result => {
-          this.toasterService.pop(
-            "success",
-            "User created!",
-            "You can now login"
-          );
+          this.toastService.show("User uccessfully registered", {
+            classname: "bg-success text-light",
+            delay: 2000
+          });
           localStorage.setItem(
             "currentUser",
             JSON.stringify({ user: this.user })
@@ -57,7 +54,6 @@ export class RegisterComponent implements OnInit {
         },
         err => {
           console.log(err);
-          this.toasterService.pop("success", "Error!", err);
         }
       );
   }
