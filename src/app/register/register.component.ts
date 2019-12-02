@@ -53,7 +53,10 @@ export class RegisterComponent implements OnInit {
           this.router.navigateByUrl("/");
         },
         err => {
-          console.log(err);
+          this.toastService.show(err._body, {
+            classname: "bg-danger text-light",
+            delay: 5000
+          });
         }
       );
   }

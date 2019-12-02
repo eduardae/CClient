@@ -17,20 +17,34 @@ app.post('/register', function (req, res) {
     console.log("Connected to MongoDB!");
     const db = client.db('local');
     let reqQuery = req.body;
-    crypto.scrypt(reqQuery.password, 'cm', 64, (err, derivedKey) => {
-      if (err) throw err;
-      reqQuery.password_hash = derivedKey;
-      delete reqQuery.password;
-      db.collection("users").insertOne(reqQuery, function (dberr, dbres) {
-        if (dberr) {
-          res.status(500).send(dberr);
+
+    db.collection("users").find({ username: reqQuery.username }).toArray(function (dberr, docs) {
+      if (dberr) {
+        res.status(500).end(dberr);
+      } else {
+        if (docs && docs.length != 0) {
+          res.status(500).end('Username already in use');
         } else {
-          res.status(200).end('User registered');
-          client.close();
+          crypto.scrypt(reqQuery.password, 'cm', 64, (err, derivedKey) => {
+            if (err) throw err;
+            reqQuery.password_hash = derivedKey;
+            delete reqQuery.password;
+            db.collection("users").insertOne(reqQuery, function (dberr, dbres) {
+              if (dberr) {
+                res.status(500).send(dberr);
+              } else {
+                res.status(200).end('User registered');
+                client.close();
+              }
+            }, function (err) {
+              res.status(500).end(err);
+            });
+          });
         }
-      }, function (err) {
-        res.status(500).end(err);
-      });
+        client.close();
+      }
+    }, function (err) {
+      // done or error
     });
 
   });
@@ -39,23 +53,25 @@ app.post('/register', function (req, res) {
 app.post('/auth', function (req, res) {
   // Make a connection to MongoDB Service
   MongoClient.connect(url, function (connerr, client) {
-    if (connerr) res.status(500).send(connerr);
+    if (connerr) res.status(500).end(connerr);
     console.log("Connected to MongoDB!");
     const db = client.db('local');
     const reqQuery = req.body;
     db.collection("users").find({ username: reqQuery.username }).toArray(function (dberr, docs) {
       if (dberr) {
-        res.status(500).send(dberr);
+        res.status(500).end(dberr);
       } else {
         if (docs && docs.length != 0) {
           crypto.scrypt(reqQuery.password, 'cm', 64, (err, derivedKey) => {
             if (err) throw err;
             if (docs[0].password_hash.toString('hex') === derivedKey.toString('hex')) {
               res.json(docs[0]);
+            } else {
+              res.status(500).end('Wrong password!');
             }
           });
         } else {
-          res.status(404).send('User not found');
+          res.status(404).end('User not found');
         }
         client.close();
       }

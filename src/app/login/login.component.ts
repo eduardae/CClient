@@ -59,7 +59,12 @@ export class LoginComponent implements OnInit {
           this.userService.loginEvent(this.user);
           this.router.navigateByUrl("/");
         },
-        err => {}
+        err => {
+          this.toastService.show(err._body, {
+            classname: "bg-danger text-light",
+            delay: 3500
+          });
+        }
       );
   }
 }
