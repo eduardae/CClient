@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, ViewChild } from "@angular/core";
+import { Component, OnInit, Input, ViewChild, ElementRef } from "@angular/core";
 import { Http } from "@angular/http";
 import { _ } from "underscore";
 import { Moment } from "moment";
@@ -13,6 +13,7 @@ import { SelectedDateOption } from "../models/utils/select-date-option";
 import { CurrencyInfo } from "../models/currency-info";
 import { CommunityData } from "../models/community-data";
 import { DevelopmentData } from "../models/development-data";
+import { isBuffer } from "util";
 
 @Component({
   selector: "app-prices",
@@ -39,6 +40,7 @@ export class PricesComponent implements OnInit {
   lineChartLegend = true;
   lineChartType = "line";
   showAdditionalInfo: boolean;
+  @ViewChild("scrollRef", { static: false }) scrollRef: ElementRef;
 
   @ViewChild(BaseChartDirective, { static: false }) chart: BaseChartDirective;
 
@@ -99,6 +101,15 @@ export class PricesComponent implements OnInit {
 
   triggerAdditionalInfo() {
     this.showAdditionalInfo = !this.showAdditionalInfo;
+    if (this.showAdditionalInfo) {
+      setTimeout(() => {
+        window.scrollTo(
+          0,
+          this.scrollRef.nativeElement.offsetTop +
+            (this.scrollRef.nativeElement.offsetHeight + 50)
+        );
+      }, 20);
+    }
   }
 
   async getCoinList(): Promise<CoinInfo[]> {

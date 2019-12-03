@@ -156,7 +156,7 @@
       [ngbCollapse]="!showAdditionalInfo"
     >
       <div class="container">
-        <div class="card card-body">
+        <div class="card card-body" #scrollRef>
           <div class="row">
             <div class="col-6 text-left" *ngIf="selectedCoin.communityData">
               <h5 class="purple">Community Data</h5>
