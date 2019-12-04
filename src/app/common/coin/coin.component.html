@@ -1,0 +1,15 @@
+<div>
+  <div>
+    <div class="coin-icon" [ngClass]="iconId"></div>
+  </div>
+  <span>{{ name }}</span>
+  <div class="row">
+    <div class="col-sm-12" *ngIf="price != 0">
+      <price
+        [currency]="currency"
+        [precision]="precision"
+        [price]="price"
+      ></price>
+    </div>
+  </div>
+</div>

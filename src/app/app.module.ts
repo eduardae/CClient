@@ -21,6 +21,7 @@ import { AcademyComponent } from "./academy/academy.component";
 import { TermsComponent } from "./terms/terms.component";
 import { NgbdToastGlobal } from "./toast/toast-global.component";
 import { ToastsContainer } from "./toast/toasts-container.component";
+import { CoinComponent } from "./common/coin/coin.component";
 
 const appRoutes: Routes = [
   { path: "", redirectTo: "home", pathMatch: "full" },
@@ -44,8 +45,9 @@ const appRoutes: Routes = [
     AcademyComponent,
     LoginComponent,
     PricesComponent,
+    TermsComponent,
     PriceComponent,
-    TermsComponent
+    CoinComponent
   ],
   imports: [
     BrowserAnimationsModule,
