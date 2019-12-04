@@ -234,7 +234,13 @@ export class PricesComponent implements OnInit {
     this.lineChartData[0].data = this.prices;
     this.options = {
       responsive: true,
-      maintainAspectRatio: false
+      maintainAspectRatio: false,
+      legend: {
+        display: true,
+        labels: {
+          text: "Price"
+        }
+      }
     };
   }
 

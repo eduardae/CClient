@@ -121,7 +121,8 @@
                 height="200"
                 [datasets]="lineChartData"
                 [labels]="labels"
-                [options]="lineChartOptions"
+                [legend]="lineChartLegend"
+                [options]="options"
                 [chartType]="lineChartType"
               >
               </canvas>
@@ -134,7 +135,7 @@
   <div class="row pt-5">
     <div class="col-12 text-center">
       <button
-        class="btn btn-default btn-primary"
+        class="btn btn-default btn-primary font-weight-bold"
         (click)="triggerAdditionalInfo()"
         type="button"
         role="button"
