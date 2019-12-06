@@ -22,12 +22,14 @@ import { TermsComponent } from "./terms/terms.component";
 import { NgbdToastGlobal } from "./toast/toast-global.component";
 import { ToastsContainer } from "./toast/toasts-container.component";
 import { CoinComponent } from "./common/coin/coin.component";
+import { SettingsComponent } from "./settings/settings.component";
 
 const appRoutes: Routes = [
   { path: "", redirectTo: "home", pathMatch: "full" },
   { path: "home", component: HomeComponent },
   { path: "register", component: RegisterComponent },
   { path: "login", component: LoginComponent },
+  { path: "settings", component: SettingsComponent },
   { path: "news", component: NewsComponent },
   { path: "prices", component: PricesComponent },
   { path: "academy", component: AcademyComponent },
@@ -41,6 +43,7 @@ const appRoutes: Routes = [
     NgbdToastGlobal,
     HomeComponent,
     RegisterComponent,
+    SettingsComponent,
     NewsComponent,
     AcademyComponent,
     LoginComponent,

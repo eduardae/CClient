@@ -4,11 +4,11 @@
   "scripts": {
     "crypto-info": "node ./services/crypto-info.js",
     "news": "node ./services/news.js",
-    "db": "node ./db/auth.js",
-    "base": "npm-run-all --parallel crypto-info db",
-    "all": "npm-run-all --parallel crypto-info db news",
-    "no-market": "npm-run-all --parallel db news",
-    "no-news": "npm-run-all --parallel crypto-info db",
+    "user": "node ./user/auth.js",
+    "base": "npm-run-all --parallel crypto-info user",
+    "all": "npm-run-all --parallel crypto-info user news",
+    "no-market": "npm-run-all --parallel user news",
+    "no-news": "npm-run-all --parallel crypto-info user",
     "no-auth": "npm-run-all --parallel crypto-info news "
   },
   "dependencies": {
