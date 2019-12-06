@@ -108,7 +108,7 @@
         </div>
       </div>
       <div class="col-12 col-sm-8 col-md-8 col-lg-8">
-        <div class="flex">
+        <div class="mt-3 flex">
           <div class="flex-item">
             <div
               class="col-12"
@@ -159,7 +159,10 @@
       <div class="container">
         <div class="card card-body" #scrollRef>
           <div class="row">
-            <div class="col-6 text-left" *ngIf="selectedCoin.communityData">
+            <div
+              class="col-6 text-left"
+              *ngIf="selectedCoin && selectedCoin.communityData"
+            >
               <h5 class="purple">Community Data</h5>
               <div class="row">
                 <div class="col-12">
@@ -200,7 +203,10 @@
                 </div>
               </div>
             </div>
-            <div class="col-6 text-left" *ngIf="selectedCoin.developmentData">
+            <div
+              class="col-6 text-left"
+              *ngIf="selectedCoin && selectedCoin.developmentData"
+            >
               <h5 class="purple">Development Data</h5>
               <div class="row">
                 <div class="col-12">

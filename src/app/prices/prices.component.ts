@@ -213,7 +213,7 @@ export class PricesComponent implements OnInit {
           this.labels = [];
           this.prices = [];
           this.marketData.prices = [];
-          for (let i = 0; i < response.data.prices.length; i += 4) {
+          for (let i = 0; i < response.data.prices.length; i += 2) {
             this.marketData.prices[i] = new Tick();
             this.marketData.prices[i].utcTimestamp = response.data.prices[i][0];
             const date = moment.utc(response.data.prices[i][0]).toDate();
