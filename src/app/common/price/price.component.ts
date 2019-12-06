@@ -37,7 +37,8 @@ export class PriceComponent implements OnInit, OnChanges {
     this.displayedPrice = this.currencyPipe.transform(
       this.price,
       this.currency.label,
-      "symbol"
+      "symbol",
+      `1.${this.precision}-${this.precision}`
     );
     //const priceOut =  this.price.toFixed(this.precision);
     //this.displayedPrice = `${displayedCurrency} ${priceOut}`;

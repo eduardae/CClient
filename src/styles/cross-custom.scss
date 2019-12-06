@@ -47,3 +47,11 @@ select option {
   font-weight: normal;
   color: #000;
 }
+
+::-webkit-input-placeholder {
+  text-align: left;
+}
+/* mozilla solution */
+input:-moz-placeholder {
+  text-align: left;
+}
