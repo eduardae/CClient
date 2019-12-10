@@ -48,7 +48,7 @@ app.post('/register', function (req, res) {
     });
 
   });
-})
+});
 
 app.post('/auth', function (req, res) {
   // Make a connection to MongoDB Service
@@ -81,7 +81,39 @@ app.post('/auth', function (req, res) {
 
 
   });
-})
+});
+
+app.post('/update/settings', function (req, res) {
+  MongoClient.connect(url, function (connerr, client) {
+    if (connerr) res.status(500).end(connerr);
+    console.log("Connected to MongoDB!");
+    const db = client.db('local');
+    const reqQuery = req.body;
+    db.collection("users").find({ username: reqQuery.username }).toArray(function (dberr, docs) {
+      if (dberr) {
+        res.status(500).end(dberr);
+      } else {
+        if (docs && docs.length != 0) {
+          db.collection("users").updateOne({ username: reqQuery.username }, {
+            $set:
+              { name: reqQuery.name, surname: reqQuery.surname, email: reqQuery.email }
+          }, function (err, insertRes) {
+            if (err) throw err;
+            res.status(200).end('User settings updated');
+            client.close();
+          });
+        } else {
+          res.status(404).end('User not found');
+          client.close();
+        }
+      }
+    }, function (err) {
+      // done or error
+    });
+
+
+  });
+});
 
 app.all('/*', function (req, res, next) {
   res.header("Access-Control-Allow-Origin", "*");

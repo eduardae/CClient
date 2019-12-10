@@ -38,26 +38,21 @@ export class SettingsComponent implements OnInit {
     this.toastService = toastService;
   }
 
-  ngOnInit() {}
+  ngOnInit() {
+    if (this.storage.get("currentUser")) {
+      this.user = this.storage.get("currentUser").user;
+    }
+  }
 
-  login() {
+  update() {
     this.http
-      .post("http://localhost:8082/auth", {
-        username: this.user.username,
-        password: this.user.password
-      })
+      .post("http://localhost:8082/update/settings", this.user)
       .subscribe(
         result => {
-          this.toastService.show("Successfully logged", {
+          this.toastService.show("User settings updated", {
             classname: "bg-success text-light",
             delay: 2000
           });
-          localStorage.setItem(
-            "currentUser",
-            JSON.stringify({ user: this.user })
-          );
-          this.userService.loginEvent(this.user);
-          this.router.navigateByUrl("/");
         },
         err => {
           this.toastService.show(err._body, {

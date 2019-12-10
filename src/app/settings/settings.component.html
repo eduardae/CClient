@@ -11,7 +11,7 @@
           <span class="font-weight-bold">Username</span>
           <input
             type="text"
-            class="form-control text-center"
+            class="form-control"
             [(ngModel)]="user.username"
             placeholder="Username"
           />
@@ -22,20 +22,50 @@
           <span class="font-weight-bold">Name</span>
           <input
             type="text"
-            class="form-control text-center"
+            class="form-control"
             [(ngModel)]="user.name"
             placeholder="Name"
           />
         </div>
       </div>
       <div class="row align-items-center mt-4">
+        <div class="col-12">
+          <span class="font-weight-bold">Surname</span>
+          <input
+            type="text"
+            class="form-control"
+            [(ngModel)]="user.surname"
+            placeholder="Surname"
+          />
+        </div>
+      </div>
+      <div class="row align-items-center mt-4">
+        <div class="col-12">
+          <span class="font-weight-bold">Email</span>
+          <input
+            type="email"
+            class="form-control"
+            [(ngModel)]="user.email"
+            placeholder="email"
+          />
+        </div>
+      </div>
+      <div class="row align-items-center mt-4">
         <div class="col">
           <span class="font-weight-bold">Followed coins</span>
+          <div>
+            <span>
+              <i class="fas fa-plus-circle"></i>
+            </span>
+          </div>
         </div>
       </div>
       <div class="row justify-content-start mt-4">
         <div class="col-sm-6 offset-sm-3">
-          <button class="btn col btn-primary mt-4" (click)="login()">
+          <button
+            class="btn col btn-primary mt-4 font-weight-bold"
+            (click)="update()"
+          >
             Change
           </button>
         </div>

@@ -30,7 +30,7 @@ var server = app.listen(8083, function () {
 
 var getBtcNews = async function () {
   let current_date = moment().format("yyyy-MM-dd");
-  let interval_date = moment().subtract(1, 'd').format("yyyy-MM-dd");
+  let interval_date = moment().subtract(2, 'd').format("yyyy-MM-dd");
   let data = await newsapi.v2.everything({
     q: 'cryptocurrency',
     domains: 'decrypt.co,coindesk.com,forbes.com',

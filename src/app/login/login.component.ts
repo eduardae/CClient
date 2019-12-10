@@ -52,11 +52,12 @@ export class LoginComponent implements OnInit {
             classname: "bg-success text-light",
             delay: 2000
           });
+          const userFromDb = result.json();
           localStorage.setItem(
             "currentUser",
-            JSON.stringify({ user: this.user })
+            JSON.stringify({ user: userFromDb })
           );
-          this.userService.loginEvent(this.user);
+          this.userService.loginEvent(userFromDb);
           this.router.navigateByUrl("/");
         },
         err => {
