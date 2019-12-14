@@ -53,6 +53,10 @@ export class SettingsComponent implements OnInit {
             classname: "bg-success text-light",
             delay: 2000
           });
+          localStorage.setItem(
+            "currentUser",
+            JSON.stringify({ user: this.user })
+          );
         },
         err => {
           this.toastService.show(err._body, {

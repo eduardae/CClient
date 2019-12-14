@@ -53,10 +53,25 @@
       <div class="row align-items-center mt-4">
         <div class="col">
           <span class="font-weight-bold">Followed coins</span>
-          <div>
-            <span>
-              <i class="fas fa-plus-circle"></i>
-            </span>
+          <div class="row mt-2">
+            <div
+              class="col-12 col-sm-6"
+              *ngIf="
+                user.bookmarked_coins && user.bookmarked_coins.length !== 0
+              "
+            >
+              <span *ngFor="let coinId of user.bookmarked_coins">
+                <coin iconId="{{ coinId }}"></coin>
+              </span>
+            </div>
+            <div class="col-12 col-sm-6">
+              <button class="btn btn-default btn-primary float-right">
+                <span>Add coin</span>
+                <span class="add-coin-btn">
+                  <i class="fas fa-plus-circle"></i>
+                </span>
+              </button>
+            </div>
           </div>
         </div>
       </div>

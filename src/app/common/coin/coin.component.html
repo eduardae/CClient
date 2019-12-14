@@ -6,6 +6,7 @@
   <div class="row">
     <div class="col-sm-12" *ngIf="price != 0">
       <price
+        *ngIf="price"
         [currency]="currency"
         [precision]="precision"
         [price]="price"
