@@ -17,6 +17,7 @@ import { LOCAL_STORAGE, WebStorageService } from "angular-webstorage-service";
 import { ElementRef, Renderer2 } from "@angular/core";
 import { UserInfoService } from "../user.info.service";
 import { ToastService } from "../toast/toast-service";
+import { NgbModal, ModalDismissReasons } from "@ng-bootstrap/ng-bootstrap";
 
 @Component({
   selector: "app-settings",
@@ -32,7 +33,8 @@ export class SettingsComponent implements OnInit {
     private router: Router,
     @Inject(LOCAL_STORAGE) private storage: WebStorageService,
     private userService: UserInfoService,
-    public toastService: ToastService
+    public toastService: ToastService,
+    private modalService: NgbModal
   ) {
     this.user = new User();
     this.toastService = toastService;

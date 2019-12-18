@@ -1,3 +1,4 @@
+<div id="add-coin-modal-container"></div>
 <div class="container-fluid">
   <div class="row justify-content-center align-items-center">
     <div class="col-10 col-md-6 col-xl-4">
@@ -65,12 +66,7 @@
               </span>
             </div>
             <div class="col-12 col-sm-6">
-              <button class="btn btn-default btn-primary float-right">
-                <span>Add coin</span>
-                <span class="add-coin-btn">
-                  <i class="fas fa-plus-circle"></i>
-                </span>
-              </button>
+              <add-coin-modal></add-coin-modal>
             </div>
           </div>
         </div>
@@ -81,7 +77,7 @@
             class="btn col btn-primary mt-4 font-weight-bold"
             (click)="update()"
           >
-            Change
+            Update
           </button>
         </div>
       </div>
