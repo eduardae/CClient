@@ -23,7 +23,10 @@ import { NgbdToastGlobal } from "./toast/toast-global.component";
 import { ToastsContainer } from "./toast/toasts-container.component";
 import { CoinComponent } from "./common/coin/coin.component";
 import { SettingsComponent } from "./settings/settings.component";
-import { AddCoinModal } from "./settings/add-coin-modal/add-coin-modal";
+import {
+  AddCoinModal,
+  AddCoinModalContent
+} from "./settings/add-coin-modal/add-coin-modal";
 
 const appRoutes: Routes = [
   { path: "", redirectTo: "home", pathMatch: "full" },
@@ -52,7 +55,8 @@ const appRoutes: Routes = [
     TermsComponent,
     PriceComponent,
     CoinComponent,
-    AddCoinModal
+    AddCoinModal,
+    AddCoinModalContent
   ],
   imports: [
     BrowserAnimationsModule,
@@ -65,7 +69,7 @@ const appRoutes: Routes = [
     StorageServiceModule,
     NgbModule
   ],
-  entryComponents: [AddCoinModal],
+  entryComponents: [AddCoinModal, AddCoinModalContent, CoinComponent],
   exports: [RouterModule],
   providers: [{ provide: APP_BASE_HREF, useValue: "/" }],
   bootstrap: [AppComponent]

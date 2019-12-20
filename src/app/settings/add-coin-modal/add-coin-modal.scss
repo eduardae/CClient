@@ -17,4 +17,16 @@
   .modal-dialog {
     margin: 7rem auto auto auto;
   }
+
+  .coin-container {
+    align-content: center;
+    align-items: center;
+    justify-content: center;
+    display: flex;
+    min-height: 84px;
+  }
+
+  button.close {
+    outline: none;
+  }
 }
