@@ -12,6 +12,7 @@ export class CoinInfo {
   liquidityScore: number;
   communityData: CommunityData;
   developmentData: DevelopmentData;
+  selected: boolean;
 
   constructor() {
     this.eurPrice = 0;

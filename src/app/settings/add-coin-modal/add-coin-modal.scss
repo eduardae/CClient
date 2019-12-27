@@ -24,6 +24,18 @@
     justify-content: center;
     display: flex;
     min-height: 84px;
+    margin: 8px;
+    cursor: pointer;
+
+    &:hover {
+      border: 1px solid #eee;
+      border-radius: 4px;
+    }
+
+    &.selected {
+      border: 1px solid;
+      border-radius: 4px;
+    }
   }
 
   button.close {

@@ -15,6 +15,9 @@ import {
   NgbModalRef
 } from "@ng-bootstrap/ng-bootstrap";
 import { CoinInfo } from "src/app/models/coin-info";
+import { _ } from "underscore";
+import { User } from "src/app/models/user";
+import { ToastService } from "src/app/toast/toast-service";
 
 @Component({
   selector: "add-coin-modal-content",
@@ -35,7 +38,11 @@ import { CoinInfo } from "src/app/models/coin-info";
         <div class="form-group">
           <div class="row">
             <div class="col-6 col-sm-3" *ngFor="let coin of coins">
-              <span class="coin-container">
+              <span
+                class="coin-container"
+                [ngClass]="{ selected: coin.selected }"
+                (click)="toggleCoinSelection(coin)"
+              >
                 <coin name="{{ coin.name }}" iconId="{{ coin.queryId }}"></coin>
               </span>
             </div>
@@ -47,17 +54,79 @@ import { CoinInfo } from "src/app/models/coin-info";
       <button
         type="button"
         class="btn btn-outline-dark"
-        (click)="modal.close('Save click')"
+        (click)="saveBookmarks()"
       >
         Save
       </button>
     </div>
   `
 })
-export class AddCoinModalContent {
+export class AddCoinModalContent implements OnInit {
   coins: CoinInfo[];
   selectedCoins: CoinInfo[];
-  constructor(public modal: NgbActiveModal) {}
+  user: User;
+
+  constructor(
+    public modal: NgbActiveModal,
+    private http: Http,
+    public toastService: ToastService
+  ) {}
+
+  ngOnInit() {
+    this.selectedCoins = [];
+    for (let coinId of this.user.bookmarked_coins) {
+      for (let coin of this.coins) {
+        if (coinId === coin.queryId) {
+          this.selectedCoins.push(coin);
+          coin.selected = true;
+        }
+      }
+    }
+  }
+
+  toggleCoinSelection(coin) {
+    coin.selected = !coin.selected;
+    let selectedCoin = _.findWhere(this.selectedCoins, {
+      queryId: coin.queryId
+    });
+    if (!selectedCoin) {
+      let coinToAdd = _.findWhere(this.coins, {
+        queryId: coin.queryId
+      });
+      this.selectedCoins.push(coinToAdd);
+    } else {
+      _.pull(this.selectedCoins, selectedCoin);
+    }
+  }
+
+  saveBookmarks() {
+    let newBookmarks = [];
+    for (let coin of this.selectedCoins) {
+      newBookmarks.push(coin.queryId);
+    }
+    this.user.bookmarked_coins = newBookmarks;
+    this.http
+      .post("http://localhost:8084/user/update/coins", this.user)
+      .subscribe(
+        result => {
+          this.toastService.show("User bookmarks successfully updated", {
+            classname: "bg-success text-light",
+            delay: 2000
+          });
+          const userFromDb = result.json();
+          localStorage.setItem(
+            "currentUser",
+            JSON.stringify({ user: userFromDb })
+          );
+        },
+        err => {
+          this.toastService.show(err._body, {
+            classname: "bg-danger text-light",
+            delay: 3500
+          });
+        }
+      );
+  }
 }
 
 @Component({
@@ -69,17 +138,21 @@ export class AddCoinModalContent {
 export class AddCoinModal implements OnInit {
   closeResult: string;
   coins: CoinInfo[];
+  @Input() user: User;
   modal: NgbModalRef;
   MODALS = {
     content: AddCoinModalContent
   };
 
-  constructor(private modalService: NgbModal, private http: Http) {}
+  constructor(
+    private modalService: NgbModal,
+    public toastService: ToastService,
+    private http: Http
+  ) {}
 
   ngOnInit(): void {
     this.getCoinList().then(result => {
       this.coins = result;
-      console.log(result);
     });
   }
 
@@ -96,6 +169,7 @@ export class AddCoinModal implements OnInit {
       }
     );
     this.modal.componentInstance.coins = this.coins;
+    this.modal.componentInstance.user = this.user;
   }
 
   private getDismissReason(reason: any): string {
