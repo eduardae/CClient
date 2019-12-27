@@ -95,7 +95,12 @@ export class AddCoinModalContent implements OnInit {
       });
       this.selectedCoins.push(coinToAdd);
     } else {
-      _.pull(this.selectedCoins, selectedCoin);
+      this.selectedCoins = _.without(
+        this.selectedCoins,
+        _.findWhere(this.selectedCoins, {
+          queryId: coin.queryId
+        })
+      );
     }
   }
 
