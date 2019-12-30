@@ -8,16 +8,16 @@ import {
   Output
 } from "@angular/core";
 import { Http, RequestOptions } from "@angular/http";
-import { CoinsSummary } from "../models/coins-summary";
-import { CoinInfo } from "../models/coin-info";
+import { CoinsSummary } from "../../models/coins-summary";
+import { CoinInfo } from "../../models/coin-info";
 import { from } from "rxjs";
 import { Router } from "@angular/router";
-import { User } from "../models/user";
+import { User } from "../../models/user";
 import { LOCAL_STORAGE, WebStorageService } from "angular-webstorage-service";
 import { ElementRef, Renderer2 } from "@angular/core";
-import { UserInfoService } from "../user.info.service";
-import { ToastService } from "../toast/toast-service";
 import { NgbModal, ModalDismissReasons } from "@ng-bootstrap/ng-bootstrap";
+import { UserInfoService } from "src/app/services/user.info.service";
+import { ToastService } from "../../services/toast-service";
 
 @Component({
   selector: "app-settings",

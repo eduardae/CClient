@@ -17,7 +17,7 @@ import {
 import { CoinInfo } from "src/app/models/coin-info";
 import { _ } from "underscore";
 import { User } from "src/app/models/user";
-import { ToastService } from "src/app/toast/toast-service";
+import { ToastService } from "../../../services/toast-service";
 
 @Component({
   selector: "add-coin-modal-content",

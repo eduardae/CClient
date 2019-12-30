@@ -1,0 +1,36 @@
+:host {
+  display: inline-block;
+  min-width: 32px;
+}
+
+.coin-icon {
+  display: block;
+  height: 32px;
+  background-repeat: no-repeat;
+  background-position: center;
+
+  &.bitcoin {
+    background-image: url("node_modules/cryptocurrency-icons/svg/color/btc.svg");
+  }
+  &.ethereum {
+    background-image: url("node_modules/cryptocurrency-icons/svg/color/eth.svg");
+  }
+  &.cardano {
+    background-image: url("node_modules/cryptocurrency-icons/svg/color/ada.svg");
+  }
+  &.tezos {
+    background-image: url("node_modules/cryptocurrency-icons/svg/color/xtz.svg");
+  }
+  &.tether {
+    background-image: url("node_modules/cryptocurrency-icons/svg/color/usdt.svg");
+  }
+  &.chainlink {
+    background-image: url("node_modules/cryptocurrency-icons/svg/color/link.svg");
+  }
+  &.ripple {
+    background-image: url("node_modules/cryptocurrency-icons/svg/color/xrp.svg");
+  }
+  &.litecoin {
+    background-image: url("node_modules/cryptocurrency-icons/svg/color/ltc.svg");
+  }
+}

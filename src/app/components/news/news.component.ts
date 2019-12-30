@@ -1,7 +1,7 @@
 import { Component, OnInit, Input } from "@angular/core";
 import { Http } from "@angular/http";
 import { _ } from "underscore";
-import { Article } from "../models/article";
+import { Article } from "../../models/article";
 
 @Component({
   selector: "app-news",

@@ -3,9 +3,9 @@ import { Router } from "@angular/router";
 import { Http } from "@angular/http";
 import { User } from "./models/user";
 import { LOCAL_STORAGE, WebStorageService } from "angular-webstorage-service";
-import { UserInfoService } from "./user.info.service";
+import { UserInfoService } from "./services/user.info.service";
 import { Subscription } from "rxjs";
-import { ToastService } from "./toast/toast-service";
+import { ToastService } from "./services/toast-service";
 
 @Component({
   selector: "app-root",

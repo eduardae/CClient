@@ -8,25 +8,25 @@ import { FormsModule } from "@angular/forms";
 import { StorageServiceModule } from "angular-webstorage-service";
 import { ChartsModule } from "ng2-charts";
 import { AppComponent } from "./app.component";
-import { HomeComponent } from "./home/home.component";
-import { RegisterComponent } from "./register/register.component";
+import { HomeComponent } from "./components/home/home.component";
+import { RegisterComponent } from "./components/register/register.component";
 import { Http } from "@angular/http";
 import { APP_BASE_HREF } from "@angular/common";
 import { NgbModule } from "@ng-bootstrap/ng-bootstrap";
-import { LoginComponent } from "./login/login.component";
-import { NewsComponent } from "./news/news.component";
-import { PricesComponent } from "./prices/prices.component";
-import { PriceComponent } from "./common/price/price.component";
-import { AcademyComponent } from "./academy/academy.component";
-import { TermsComponent } from "./terms/terms.component";
-import { NgbdToastGlobal } from "./toast/toast-global.component";
-import { ToastsContainer } from "./toast/toasts-container.component";
-import { CoinComponent } from "./common/coin/coin.component";
-import { SettingsComponent } from "./settings/settings.component";
+import { LoginComponent } from "./components/login/login.component";
+import { NewsComponent } from "./components/news/news.component";
+import { PricesComponent } from "./components/prices/prices.component";
+import { PriceComponent } from "./components/common/price/price.component";
+import { AcademyComponent } from "./components/academy/academy.component";
+import { TermsComponent } from "./components/terms/terms.component";
+import { NgbdToastGlobal } from "./components/common/toast/toast-global.component";
+import { ToastsContainer } from "./components/common/toast/toasts-container.component";
+import { CoinComponent } from "./components/common/coin/coin.component";
 import {
   AddCoinModal,
   AddCoinModalContent
-} from "./settings/add-coin-modal/add-coin-modal";
+} from "./components/settings/add-coin-modal/add-coin-modal";
+import { SettingsComponent } from "./components/settings/settings.component";
 
 const appRoutes: Routes = [
   { path: "", redirectTo: "home", pathMatch: "full" },

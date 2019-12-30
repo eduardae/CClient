@@ -2,17 +2,17 @@ import { Component, OnInit, Input, ViewChild, ElementRef } from "@angular/core";
 import { Http } from "@angular/http";
 import { _ } from "underscore";
 import { Moment } from "moment";
-import { Article } from "../models/article";
-import { CoinInfo } from "../models/coin-info";
-import { MarketData } from "../models/historical-market-data";
-import { Tick } from "../models/tick";
+import { Article } from "../../models/article";
+import { CoinInfo } from "../../models/coin-info";
+import { MarketData } from "../../models/historical-market-data";
+import { Tick } from "../../models/tick";
 import * as moment from "moment";
 import { Label, BaseChartDirective } from "ng2-charts";
 import { ChartDataSets, ChartOptions } from "chart.js";
-import { SelectedDateOption } from "../models/utils/select-date-option";
-import { CurrencyInfo } from "../models/currency-info";
-import { CommunityData } from "../models/community-data";
-import { DevelopmentData } from "../models/development-data";
+import { SelectedDateOption } from "../../models/utils/select-date-option";
+import { CurrencyInfo } from "../../models/currency-info";
+import { CommunityData } from "../../models/community-data";
+import { DevelopmentData } from "../../models/development-data";
 import { isBuffer } from "util";
 
 @Component({

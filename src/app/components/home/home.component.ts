@@ -1,10 +1,10 @@
 import { Component, OnInit, Input } from "@angular/core";
 import { Http } from "@angular/http";
-import { CoinsSummary } from "../models/coins-summary";
-import { CoinInfo } from "../models/coin-info";
+import { CoinsSummary } from "../../models/coins-summary";
+import { CoinInfo } from "../../models/coin-info";
 import { from } from "rxjs";
 import { _ } from "underscore";
-import { CurrencyInfo } from "../models/currency-info";
+import { CurrencyInfo } from "../../models/currency-info";
 
 @Component({
   selector: "app-home",
