@@ -6,21 +6,68 @@
 .articles {
   .article {
     width: 90%;
-    height: 380px;
-    margin-top: 24px;
-    margin-bottom: 32px;
+    height: 460px;
     margin: auto;
 
     .article-title {
-      height: 70px;
+      display: inline-block;
+      height: 108px;
+      font-weight: bold;
+      vertical-align: middle;
+      font-size: 1.2em;
+      line-height: 108px;
+
+      span {
+        line-height: 1.1em;
+        display: inline-block;
+        vertical-align: middle;
+      }
+    }
+
+    .img-container {
+      display: flex;
+      height: 340px;
+      align-items: center;
+      align-content: center;
+
+      a {
+        width: 100%;
+      }
     }
 
     .article-img {
-      padding: 8px;
+      box-shadow: 5px 5px 5px 5px #16425b;
       min-height: 146px;
-      max-height: 60%;
+      max-height: 280px;
       margin: auto;
-      max-width: 100%;
+      max-width: 90%;
+    }
+
+    &:hover {
+      .article-title {
+        color: #4f0147;
+      }
+
+      .article-img {
+        transform: scale(1.05);
+        transition-duration: 0.2s;
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 1024px) {
+  .articles {
+    .article {
+      height: 360px;
+
+      .img-container {
+        height: 200px;
+      }
+
+      .article-img {
+        max-height: 140px;
+      }
     }
   }
 }
@@ -29,6 +76,10 @@
   .articles {
     .article {
       height: 320px;
+
+      .article-img {
+        max-height: 174px;
+      }
     }
   }
 }
@@ -37,13 +88,14 @@
   .articles {
     .article {
       width: 95%;
-      height: 240px;
+      height: 280px;
       padding-top: 16px;
       margin: auto;
       margin-bottom: 32px;
 
       .article-title {
-        height: 50px;
+        height: 104px;
+        font-size: 1em;
       }
 
       .article-img {

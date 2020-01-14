@@ -61,7 +61,10 @@
                 user.bookmarked_coins && user.bookmarked_coins.length !== 0
               "
             >
-              <span *ngFor="let coinId of user.bookmarked_coins">
+              <span
+                class="followed-coin"
+                *ngFor="let coinId of user.bookmarked_coins"
+              >
                 <coin iconId="{{ coinId }}"></coin>
               </span>
             </div>

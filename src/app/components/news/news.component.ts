@@ -31,6 +31,9 @@ export class NewsComponent implements OnInit {
       this.articles = _.sortBy(response, article => {
         return new Date(article.publishedAt);
       }).reverse();
+      /*this.articles.forEach(element => {
+        element.title = element.title.substring(0, 100);
+      });*/
       this.isUpdating = false;
     });
   }

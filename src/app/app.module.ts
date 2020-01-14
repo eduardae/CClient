@@ -27,6 +27,7 @@ import {
   AddCoinModalContent
 } from "./components/settings/add-coin-modal/add-coin-modal";
 import { SettingsComponent } from "./components/settings/settings.component";
+import { HorizontalLoader } from "./components/common/horizontal-loader/horizontal-loader.component";
 
 const appRoutes: Routes = [
   { path: "", redirectTo: "home", pathMatch: "full" },
@@ -44,6 +45,7 @@ const appRoutes: Routes = [
   declarations: [
     AppComponent,
     ToastsContainer,
+    HorizontalLoader,
     NgbdToastGlobal,
     HomeComponent,
     RegisterComponent,

@@ -18,6 +18,10 @@
 </div>
 
 <div class="marketing">
+  <div *ngIf="!contentLoaded" class="pt-5">
+    <horizontal-loader></horizontal-loader>
+  </div>
+
   <div class="row icons" *ngIf="contentLoaded">
     <div class="col-6 col-md-3 icon-container">
       <coin
