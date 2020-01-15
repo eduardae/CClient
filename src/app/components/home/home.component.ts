@@ -24,7 +24,7 @@ export class HomeComponent implements OnInit {
 
   ngOnInit() {
     this.getCryptoMarketInfo();
-    this.currency = { label: "EUR", value: "eur" };
+    this.currency = { label: "EUR", value: "eur", symbol: "&euro;" };
   }
 
   refreshInfo() {

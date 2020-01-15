@@ -32,6 +32,16 @@
             <a class="dropdown-item" [routerLink]="['/academy']">Learn</a>
           </button>
         </div>
+        <select
+          class="ml-3"
+          id="currency-select"
+          [ngModel]="currency"
+          (ngModelChange)="currencyChange($event)"
+        >
+          <option *ngFor="let c of supportedCurrencies" [ngValue]="c">
+            {{ c.label }}
+          </option>
+        </select>
       </div>
     </div>
     <div class="btn-group float-right">
@@ -42,7 +52,9 @@
           ngbDropdownToggle
         >
           <span class="fa fa-user"></span>
-          <span class="pl-1" *ngIf="this.user">{{ this.user.username }}</span>
+          <span id="username" class="pl-1" *ngIf="this.user">{{
+            this.user.username
+          }}</span>
         </button>
         <div
           *ngIf="!this.user"

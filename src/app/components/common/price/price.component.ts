@@ -27,12 +27,7 @@ export class PriceComponent implements OnInit, OnChanges {
   }
 
   displayPrice() {
-    let displayedCurrency;
-    switch (this.currency.value) {
-      case "eur":
-        displayedCurrency = "&euro;";
-        break;
-    }
+    let displayedCurrency = this.currency.symbol;
 
     this.displayedPrice = this.currencyPipe.transform(
       this.price,

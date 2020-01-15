@@ -7,3 +7,24 @@
 app-toasts {
   top: 76px;
 }
+
+#currency-select {
+  border-color: #007bff;
+  color: #007bff;
+  font-weight: normal;
+  top: 2px;
+  position: relative;
+  height: 38px;
+  background-position: calc(100% - 21px) calc(0.85em + 2px),
+    calc(100% - 16px) calc(0.85em + 2px), 100%;
+}
+
+@media (max-width: 425px) {
+  #currency-select {
+    min-width: 96px;
+  }
+
+  #username {
+    display: none;
+  }
+}

@@ -14,6 +14,8 @@ import { CurrencyInfo } from "../../models/currency-info";
 import { CommunityData } from "../../models/community-data";
 import { DevelopmentData } from "../../models/development-data";
 import { isBuffer } from "util";
+import { AppSettingsService } from "src/app/services/app.settings.service";
+import { Subscription } from "rxjs";
 
 @Component({
   selector: "app-prices",
@@ -28,6 +30,7 @@ export class PricesComponent implements OnInit {
   isUpdating: boolean;
   response: string;
   currency: CurrencyInfo;
+  currencyChangeSubscription: Subscription;
   type: string;
   data: object;
   options: object;
@@ -44,12 +47,26 @@ export class PricesComponent implements OnInit {
 
   @ViewChild(BaseChartDirective, { static: false }) chart: BaseChartDirective;
 
-  constructor(private http: Http) {}
+  constructor(
+    private http: Http,
+    private appSettingsService: AppSettingsService
+  ) {
+    this.currencyChangeSubscription = appSettingsService.currencyChange$.subscribe(
+      currency => {
+        this.currency = currency;
+        localStorage.setItem(
+          "selectedCurrency",
+          JSON.stringify({ user: this.currency })
+        );
+        this.onCoinSelect(this.selectedCoin);
+      }
+    );
+  }
 
   ngOnInit() {
     this.getCoinList().then(result => {
       this.coins = result;
-      this.currency = { label: "EUR", value: "eur" };
+      this.currency = { label: "EUR", value: "eur", symbol: "&euro;" };
       this.historicalMarketData = new MarketData();
       this.marketData = new MarketData();
 
