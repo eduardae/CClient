@@ -2,9 +2,21 @@
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 8.2.0.
 
-## Development server
+## Development server - Angular
 
 Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+
+## Development server - NodeJS
+
+Run `npm run all` for the backend server.
+
+## MongoDB
+
+My local MongoDB version is mongodb@3.5.0
+
+The only necessary collection is users.
+
+In /src/assets/mockups there's a users.json mockup, a collection importable in mongodb
 
 ## Code scaffolding
 
