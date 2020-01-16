@@ -54,10 +54,6 @@ export class PricesComponent implements OnInit {
     this.currencyChangeSubscription = appSettingsService.currencyChange$.subscribe(
       currency => {
         this.currency = currency;
-        localStorage.setItem(
-          "selectedCurrency",
-          JSON.stringify({ user: this.currency })
-        );
         this.onCoinSelect(this.selectedCoin);
       }
     );
@@ -66,7 +62,14 @@ export class PricesComponent implements OnInit {
   ngOnInit() {
     this.getCoinList().then(result => {
       this.coins = result;
-      this.currency = { label: "EUR", value: "eur", symbol: "&euro;" };
+      if (localStorage.getItem("selectedCurrency")) {
+        this.currency = JSON.parse(localStorage.getItem("selectedCurrency"))[
+          "currency"
+        ];
+      } else {
+        this.currency = { label: "EUR", value: "eur", symbol: "&euro;" };
+      }
+
       this.historicalMarketData = new MarketData();
       this.marketData = new MarketData();
 
@@ -143,15 +146,16 @@ export class PricesComponent implements OnInit {
       .subscribe(result => {
         const response = result.json();
         this.selectedCoin = coin;
-        this.selectedCoin.eurPrice =
-          response.data.market_data.current_price.eur;
-        this.selectedCoin.eurMarketCap =
-          response.data.market_data.market_cap.eur;
-        this.selectedCoin.eurATH = response.data.market_data.ath.eur;
+        this.selectedCoin.price =
+          response.data.market_data.current_price[this.currency.value];
+        this.selectedCoin.marketCap =
+          response.data.market_data.market_cap[this.currency.value];
+        this.selectedCoin.ATH =
+          response.data.market_data.ath[this.currency.value];
         this.selectedCoin.marketCapRank =
           response.data.market_data.market_cap_rank;
         this.selectedCoin.volume24H =
-          response.data.market_data.total_volume.eur;
+          response.data.market_data.total_volume[this.currency.value];
         this.selectedCoin.liquidityScore = response.data.liquidity_score;
 
         // community data

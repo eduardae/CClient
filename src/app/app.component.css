@@ -19,6 +19,10 @@ app-toasts {
     calc(100% - 16px) calc(0.85em + 2px), 100%;
 }
 
+#currency-select:focus {
+  box-shadow: none;
+}
+
 @media (max-width: 425px) {
   #currency-select {
     min-width: 96px;

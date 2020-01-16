@@ -34,18 +34,34 @@ export class AppComponent {
     if (storage.get("currentUser")) {
       this.user = storage.get("currentUser").user;
     }
-    this.currency = { label: "EUR", value: "eur", symbol: "&euro;" };
-    this.supportedCurrencies.push(this.currency);
+    let eur = { label: "EUR", value: "eur", symbol: "&euro;" };
+    this.supportedCurrencies.push(eur);
     let usd = { label: "USD", value: "usd", symbol: "&euro;" };
     this.supportedCurrencies.push(usd);
+    if (localStorage.getItem("selectedCurrency")) {
+      let selected = JSON.parse(localStorage.getItem("selectedCurrency"))[
+        "currency"
+      ];
+      this.supportedCurrencies.forEach(currency => {
+        if (selected.label === currency.label) {
+          this.currency = currency;
+        }
+      });
+    } else {
+      this.currency = eur;
+    }
     this.subscription = userService.userLogged$.subscribe(user => {
       this.user = user;
       localStorage.setItem("currentUser", JSON.stringify({ user: this.user }));
     });
   }
 
-  currencyChange(currency) {
-    this.appSettingsService.currencyChange(currency);
+  currencyChange(currencyVal) {
+    localStorage.setItem(
+      "selectedCurrency",
+      JSON.stringify({ currency: currencyVal })
+    );
+    this.appSettingsService.currencyChange(currencyVal);
   }
 
   logout() {

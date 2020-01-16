@@ -25,7 +25,7 @@
   <div class="row icons" *ngIf="contentLoaded">
     <div class="col-6 col-md-3 icon-container">
       <coin
-        [price]="cryptoInfos.btc.eurPrice"
+        [price]="cryptoInfos.btc.price"
         [precision]="2"
         [currency]="currency"
         [name]="'bitcoin'"
@@ -34,7 +34,7 @@
     </div>
     <div class="col-6 col-md-3 icon-container">
       <coin
-        [price]="cryptoInfos.ether.eurPrice"
+        [price]="cryptoInfos.ether.price"
         [precision]="2"
         [currency]="currency"
         [name]="'ethereum'"
@@ -43,7 +43,7 @@
     </div>
     <div class="col-6 col-md-3 icon-container">
       <coin
-        [price]="cryptoInfos.cardano.eurPrice"
+        [price]="cryptoInfos.cardano.price"
         [precision]="3"
         [currency]="currency"
         [name]="'cardano'"
@@ -52,7 +52,7 @@
     </div>
     <div class="col-6 col-md-3 icon-container">
       <coin
-        [price]="cryptoInfos.litecoin.eurPrice"
+        [price]="cryptoInfos.litecoin.price"
         [precision]="2"
         [currency]="currency"
         [name]="'litecoin'"
@@ -63,7 +63,7 @@
   <div class="row" *ngIf="contentLoaded">
     <div class="col-6 col-md-3 icon-container">
       <coin
-        [price]="cryptoInfos.chainlink.eurPrice"
+        [price]="cryptoInfos.chainlink.price"
         [precision]="2"
         [currency]="currency"
         [name]="'chainlink'"
@@ -72,7 +72,7 @@
     </div>
     <div class="col-6 col-md-3 icon-container">
       <coin
-        [price]="cryptoInfos.tether.eurPrice"
+        [price]="cryptoInfos.tether.price"
         [precision]="2"
         [currency]="currency"
         [name]="'tether'"
@@ -81,7 +81,7 @@
     </div>
     <div class="col-6 col-md-3 icon-container">
       <coin
-        [price]="cryptoInfos.tezos.eurPrice"
+        [price]="cryptoInfos.tezos.price"
         [precision]="2"
         [currency]="currency"
         [name]="'tezos'"
@@ -90,7 +90,7 @@
     </div>
     <div class="col-6 col-md-3 icon-container">
       <coin
-        [price]="cryptoInfos.xrp.eurPrice"
+        [price]="cryptoInfos.xrp.price"
         [precision]="3"
         [currency]="currency"
         [name]="'ripple'"

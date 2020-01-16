@@ -2,9 +2,10 @@ import { Component, OnInit, Input } from "@angular/core";
 import { Http } from "@angular/http";
 import { CoinsSummary } from "../../models/coins-summary";
 import { CoinInfo } from "../../models/coin-info";
-import { from } from "rxjs";
+import { from, Subscription } from "rxjs";
 import { _ } from "underscore";
 import { CurrencyInfo } from "../../models/currency-info";
+import { AppSettingsService } from "src/app/services/app.settings.service";
 
 @Component({
   selector: "app-home",
@@ -16,15 +17,31 @@ export class HomeComponent implements OnInit {
   isUpdating: boolean;
   contentLoaded: boolean;
   currency: CurrencyInfo;
+  currencyChangeSubscription: Subscription;
 
-  constructor(private http: Http) {
+  constructor(
+    private http: Http,
+    private appSettingsService: AppSettingsService
+  ) {
     this.cryptoInfos = new CoinsSummary();
     this.contentLoaded = false;
+    this.currencyChangeSubscription = appSettingsService.currencyChange$.subscribe(
+      currency => {
+        this.currency = currency;
+        this.refreshInfo();
+      }
+    );
   }
 
   ngOnInit() {
     this.getCryptoMarketInfo();
-    this.currency = { label: "EUR", value: "eur", symbol: "&euro;" };
+    if (localStorage.getItem("selectedCurrency")) {
+      this.currency = JSON.parse(localStorage.getItem("selectedCurrency"))[
+        "currency"
+      ];
+    } else {
+      this.currency = { label: "EUR", value: "eur", symbol: "&euro;" };
+    }
   }
 
   refreshInfo() {
@@ -62,7 +79,7 @@ export class HomeComponent implements OnInit {
 
   getCoinMarketInfo(coin) {
     const result = new CoinInfo();
-    result.eurPrice = coin.market_data.current_price.eur;
+    result.price = coin.market_data.current_price[this.currency.value];
     result.name = coin.id;
     return result;
   }
