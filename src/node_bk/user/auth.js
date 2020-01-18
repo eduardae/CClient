@@ -3,12 +3,15 @@ const url = "mongodb://admin:admin@localhost:27017";
 const MongoClient = require('mongodb').MongoClient;
 const express = require('express');
 const bodyParser = require('body-parser');
+const jwt = require('jsonwebtoken');
+const expressJwt = require('express-jwt');
 const _ = require('underscore');
 var crypto = require('crypto');
 const cors = require('cors');
 const app = express();
 app.use(bodyParser.json());
 app.use(cors());
+app.use("/", expressJwt({ secret: 'todo-app-super-shared-secret' }).unless({ path: ['/register', '/login'] }));
 
 app.post('/register', function (req, res) {
   // Make a connection to MongoDB Service
@@ -50,7 +53,7 @@ app.post('/register', function (req, res) {
   });
 });
 
-app.post('/auth', function (req, res) {
+app.post('/login', function (req, res) {
   // Make a connection to MongoDB Service
   MongoClient.connect(url, function (connerr, client) {
     if (connerr) res.status(500).end(connerr);
@@ -65,6 +68,8 @@ app.post('/auth', function (req, res) {
           crypto.scrypt(reqQuery.password, 'cm', 64, (err, derivedKey) => {
             if (err) throw err;
             if (docs[0].password_hash.toString('hex') === derivedKey.toString('hex')) {
+              var token = jwt.sign({ userID: docs[0]._id }, 'todo-app-super-shared-secret', { expiresIn: '2h' });
+              docs[0].token = token;
               res.json(docs[0]);
             } else {
               res.status(500).end('Wrong password!');

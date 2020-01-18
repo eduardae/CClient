@@ -55,12 +55,12 @@
         <div class="col">
           <span class="font-weight-bold">Followed coins</span>
           <div class="row mt-2">
-            <div
-              class="col-12 col-sm-6"
-              *ngIf="
-                user.bookmarked_coins && user.bookmarked_coins.length !== 0
-              "
-            >
+            <div class="col-12 col-sm-6">
+              <div
+                *ngIf="
+                  user.bookmarked_coins && user.bookmarked_coins.length !== 0
+                "
+              ></div>
               <span
                 class="followed-coin"
                 *ngFor="let coinId of user.bookmarked_coins"

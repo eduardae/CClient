@@ -13,7 +13,11 @@ import { CoinInfo } from "../../models/coin-info";
 import { from } from "rxjs";
 import { Router } from "@angular/router";
 import { User } from "../../models/user";
-import { LOCAL_STORAGE, WebStorageService } from "angular-webstorage-service";
+import {
+  LOCAL_STORAGE,
+  WebStorageService,
+  SESSION_STORAGE
+} from "angular-webstorage-service";
 import { ElementRef, Renderer2 } from "@angular/core";
 import { NgbModal, ModalDismissReasons } from "@ng-bootstrap/ng-bootstrap";
 import { UserInfoService } from "src/app/services/user.info.service";
@@ -31,18 +35,20 @@ export class SettingsComponent implements OnInit {
   constructor(
     private http: Http,
     private router: Router,
-    @Inject(LOCAL_STORAGE) private storage: WebStorageService,
+    @Inject(SESSION_STORAGE) private storage: WebStorageService,
     private userService: UserInfoService,
     public toastService: ToastService,
     private modalService: NgbModal
   ) {
-    this.user = new User();
     this.toastService = toastService;
   }
 
   ngOnInit() {
     if (this.storage.get("currentUser")) {
-      this.user = this.storage.get("currentUser").user;
+      this.user = JSON.parse(this.storage.get("currentUser")).user;
+    }
+    if (!this.user) {
+      this.router.navigateByUrl("/");
     }
   }
 
@@ -55,10 +61,7 @@ export class SettingsComponent implements OnInit {
             classname: "bg-success text-light",
             delay: 2000
           });
-          localStorage.setItem(
-            "currentUser",
-            JSON.stringify({ user: this.user })
-          );
+          this.storage.set("currentUser", JSON.stringify({ user: this.user }));
         },
         err => {
           this.toastService.show(err._body, {

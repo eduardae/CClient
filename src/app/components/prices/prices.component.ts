@@ -1,4 +1,11 @@
-import { Component, OnInit, Input, ViewChild, ElementRef } from "@angular/core";
+import {
+  Component,
+  OnInit,
+  Input,
+  ViewChild,
+  ElementRef,
+  Inject
+} from "@angular/core";
 import { Http } from "@angular/http";
 import { _ } from "underscore";
 import { Moment } from "moment";
@@ -16,6 +23,7 @@ import { DevelopmentData } from "../../models/development-data";
 import { isBuffer } from "util";
 import { AppSettingsService } from "src/app/services/app.settings.service";
 import { Subscription } from "rxjs";
+import { SESSION_STORAGE, WebStorageService } from "angular-webstorage-service";
 
 @Component({
   selector: "app-prices",
@@ -49,7 +57,8 @@ export class PricesComponent implements OnInit {
 
   constructor(
     private http: Http,
-    private appSettingsService: AppSettingsService
+    private appSettingsService: AppSettingsService,
+    @Inject(SESSION_STORAGE) private sessionStorage: WebStorageService
   ) {
     this.currencyChangeSubscription = appSettingsService.currencyChange$.subscribe(
       currency => {
@@ -62,8 +71,8 @@ export class PricesComponent implements OnInit {
   ngOnInit() {
     this.getCoinList().then(result => {
       this.coins = result;
-      if (localStorage.getItem("selectedCurrency")) {
-        this.currency = JSON.parse(localStorage.getItem("selectedCurrency"))[
+      if (this.sessionStorage.get("selectedCurrency")) {
+        this.currency = JSON.parse(this.sessionStorage.get("selectedCurrency"))[
           "currency"
         ];
       } else {

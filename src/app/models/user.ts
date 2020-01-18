@@ -6,6 +6,7 @@ export class User implements OnInit {
   name: string;
   surname: string;
   password: string;
+  token: string;
   // tslint:disable-next-line: variable-name
   bookmarked_coins: string[];
 
@@ -14,6 +15,7 @@ export class User implements OnInit {
     this.email = "";
     this.password = "";
     this.bookmarked_coins = [];
+    this.token = "";
   }
 
   ngOnInit() {}

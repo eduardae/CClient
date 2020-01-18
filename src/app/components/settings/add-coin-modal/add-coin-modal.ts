@@ -5,7 +5,8 @@ import {
   ViewChild,
   ElementRef,
   NgModule,
-  OnInit
+  OnInit,
+  Inject
 } from "@angular/core";
 import { Http } from "@angular/http";
 import {
@@ -18,6 +19,7 @@ import { CoinInfo } from "src/app/models/coin-info";
 import { _ } from "underscore";
 import { User } from "src/app/models/user";
 import { ToastService } from "../../../services/toast-service";
+import { SESSION_STORAGE, WebStorageService } from "angular-webstorage-service";
 
 @Component({
   selector: "add-coin-modal-content",
@@ -69,7 +71,8 @@ export class AddCoinModalContent implements OnInit {
   constructor(
     public modal: NgbActiveModal,
     private http: Http,
-    public toastService: ToastService
+    public toastService: ToastService,
+    @Inject(SESSION_STORAGE) private sessionStorage: WebStorageService
   ) {}
 
   ngOnInit() {
@@ -119,7 +122,7 @@ export class AddCoinModalContent implements OnInit {
             delay: 2000
           });
           const userFromDb = result.json();
-          localStorage.setItem(
+          this.sessionStorage.set(
             "currentUser",
             JSON.stringify({ user: userFromDb })
           );

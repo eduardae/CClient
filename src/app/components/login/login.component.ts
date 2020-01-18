@@ -10,7 +10,11 @@ import {
 import { Http, RequestOptions } from "@angular/http";
 import { from } from "rxjs";
 import { Router } from "@angular/router";
-import { LOCAL_STORAGE, WebStorageService } from "angular-webstorage-service";
+import {
+  LOCAL_STORAGE,
+  WebStorageService,
+  SESSION_STORAGE
+} from "angular-webstorage-service";
 import { ElementRef, Renderer2 } from "@angular/core";
 import { User } from "src/app/models/user";
 import { UserInfoService } from "src/app/services/user.info.service";
@@ -28,7 +32,7 @@ export class LoginComponent implements OnInit {
   constructor(
     private http: Http,
     private router: Router,
-    @Inject(LOCAL_STORAGE) private storage: WebStorageService,
+    @Inject(SESSION_STORAGE) private storage: WebStorageService,
     private userService: UserInfoService,
     public toastService: ToastService
   ) {
@@ -40,7 +44,7 @@ export class LoginComponent implements OnInit {
 
   login() {
     this.http
-      .post("http://localhost:8082/auth", {
+      .post("http://localhost:8082/login", {
         username: this.user.username,
         password: this.user.password
       })
@@ -51,10 +55,7 @@ export class LoginComponent implements OnInit {
             delay: 2000
           });
           const userFromDb = result.json();
-          localStorage.setItem(
-            "currentUser",
-            JSON.stringify({ user: userFromDb })
-          );
+          this.storage.set("currentUser", JSON.stringify({ user: userFromDb }));
           this.userService.loginEvent(userFromDb);
           this.router.navigateByUrl("/");
         },

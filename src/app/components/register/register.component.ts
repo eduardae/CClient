@@ -4,7 +4,11 @@ import { CoinsSummary } from "../../models/coins-summary";
 import { CoinInfo } from "../../models/coin-info";
 import { from } from "rxjs";
 import { User } from "../../models/user";
-import { LOCAL_STORAGE, WebStorageService } from "angular-webstorage-service";
+import {
+  LOCAL_STORAGE,
+  WebStorageService,
+  SESSION_STORAGE
+} from "angular-webstorage-service";
 import { Router } from "@angular/router";
 import { UserInfoService } from "../../services/user.info.service";
 import { ToastService } from "../../services/toast-service";
@@ -23,7 +27,7 @@ export class RegisterComponent implements OnInit {
   constructor(
     private http: Http,
     private router: Router,
-    @Inject(LOCAL_STORAGE) private storage: WebStorageService,
+    @Inject(SESSION_STORAGE) private sessionStorage: WebStorageService,
     private userService: UserInfoService,
     private toastService: ToastService
   ) {
@@ -45,7 +49,7 @@ export class RegisterComponent implements OnInit {
             classname: "bg-success text-light",
             delay: 2000
           });
-          localStorage.setItem(
+          this.sessionStorage.set(
             "currentUser",
             JSON.stringify({ user: this.user })
           );

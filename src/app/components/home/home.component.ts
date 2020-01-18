@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from "@angular/core";
+import { Component, OnInit, Input, Inject } from "@angular/core";
 import { Http } from "@angular/http";
 import { CoinsSummary } from "../../models/coins-summary";
 import { CoinInfo } from "../../models/coin-info";
@@ -6,6 +6,7 @@ import { from, Subscription } from "rxjs";
 import { _ } from "underscore";
 import { CurrencyInfo } from "../../models/currency-info";
 import { AppSettingsService } from "src/app/services/app.settings.service";
+import { SESSION_STORAGE, WebStorageService } from "angular-webstorage-service";
 
 @Component({
   selector: "app-home",
@@ -21,7 +22,8 @@ export class HomeComponent implements OnInit {
 
   constructor(
     private http: Http,
-    private appSettingsService: AppSettingsService
+    private appSettingsService: AppSettingsService,
+    @Inject(SESSION_STORAGE) private sessionStorage: WebStorageService
   ) {
     this.cryptoInfos = new CoinsSummary();
     this.contentLoaded = false;
@@ -35,8 +37,8 @@ export class HomeComponent implements OnInit {
 
   ngOnInit() {
     this.getCryptoMarketInfo();
-    if (localStorage.getItem("selectedCurrency")) {
-      this.currency = JSON.parse(localStorage.getItem("selectedCurrency"))[
+    if (this.sessionStorage.get("selectedCurrency")) {
+      this.currency = JSON.parse(this.sessionStorage.get("selectedCurrency"))[
         "currency"
       ];
     } else {
