@@ -1,7 +1,7 @@
 import { BrowserModule } from "@angular/platform-browser";
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 import { NgModule } from "@angular/core";
-import { HttpClientModule } from "@angular/common/http";
+import { HttpClientModule, HTTP_INTERCEPTORS } from "@angular/common/http";
 import { HttpModule } from "@angular/http";
 import { RouterModule, Routes } from "@angular/router";
 import { FormsModule } from "@angular/forms";
@@ -28,6 +28,7 @@ import {
 } from "./components/settings/add-coin-modal/add-coin-modal";
 import { SettingsComponent } from "./components/settings/settings.component";
 import { HorizontalLoader } from "./components/common/horizontal-loader/horizontal-loader.component";
+import { JWTInterceptor } from "./interceptors/jwt.interceptor";
 
 const appRoutes: Routes = [
   { path: "", redirectTo: "home", pathMatch: "full" },
@@ -73,7 +74,10 @@ const appRoutes: Routes = [
   ],
   entryComponents: [AddCoinModal, AddCoinModalContent, CoinComponent],
   exports: [RouterModule],
-  providers: [{ provide: APP_BASE_HREF, useValue: "/" }],
+  providers: [
+    { provide: APP_BASE_HREF, useValue: "/" },
+    { provide: HTTP_INTERCEPTORS, useClass: JWTInterceptor, multi: true }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule {}

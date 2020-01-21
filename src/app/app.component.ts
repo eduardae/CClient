@@ -12,7 +12,6 @@ import { Subscription } from "rxjs";
 import { ToastService } from "./services/toast-service";
 import { AppSettingsService } from "./services/app.settings.service";
 import { CurrencyInfo } from "./models/currency-info";
-import { timingSafeEqual } from "crypto";
 
 @Component({
   selector: "app-root",

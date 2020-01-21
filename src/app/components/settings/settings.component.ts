@@ -13,16 +13,11 @@ import { CoinInfo } from "../../models/coin-info";
 import { from } from "rxjs";
 import { Router } from "@angular/router";
 import { User } from "../../models/user";
-import {
-  LOCAL_STORAGE,
-  WebStorageService,
-  SESSION_STORAGE
-} from "angular-webstorage-service";
-import { ElementRef, Renderer2 } from "@angular/core";
-import { NgbModal, ModalDismissReasons } from "@ng-bootstrap/ng-bootstrap";
+import { WebStorageService, SESSION_STORAGE } from "angular-webstorage-service";
+import { NgbModal } from "@ng-bootstrap/ng-bootstrap";
 import { UserInfoService } from "src/app/services/user.info.service";
 import { ToastService } from "../../services/toast-service";
-
+import { HttpClient } from "@angular/common/http";
 @Component({
   selector: "app-settings",
   templateUrl: "./settings.component.html",
@@ -33,7 +28,7 @@ export class SettingsComponent implements OnInit {
 
   // tslint:disable-next-line: max-line-length
   constructor(
-    private http: Http,
+    private http: HttpClient,
     private router: Router,
     @Inject(SESSION_STORAGE) private storage: WebStorageService,
     private userService: UserInfoService,
@@ -47,9 +42,9 @@ export class SettingsComponent implements OnInit {
     if (this.storage.get("currentUser")) {
       this.user = JSON.parse(this.storage.get("currentUser")).user;
     }
-    if (!this.user) {
+    /*if (!this.user) {
       this.router.navigateByUrl("/");
-    }
+    }*/
   }
 
   update() {
