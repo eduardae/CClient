@@ -29,6 +29,7 @@ import {
 import { SettingsComponent } from "./components/settings/settings.component";
 import { HorizontalLoader } from "./components/common/horizontal-loader/horizontal-loader.component";
 import { JWTInterceptor } from "./interceptors/jwt.interceptor";
+import { CoinPageComponent } from "./components/coinpage/coin-page.component";
 
 const appRoutes: Routes = [
   { path: "", redirectTo: "home", pathMatch: "full" },
@@ -38,6 +39,7 @@ const appRoutes: Routes = [
   { path: "settings", component: SettingsComponent },
   { path: "news", component: NewsComponent },
   { path: "prices", component: PricesComponent },
+  { path: "coinpage/:coinId", component: CoinPageComponent },
   { path: "academy", component: AcademyComponent },
   { path: "terms", component: TermsComponent }
 ];
@@ -57,6 +59,7 @@ const appRoutes: Routes = [
     PricesComponent,
     TermsComponent,
     PriceComponent,
+    CoinPageComponent,
     CoinComponent,
     AddCoinModal,
     AddCoinModalContent

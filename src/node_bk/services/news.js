@@ -15,6 +15,12 @@ app.get('/', function (req, res) {
   });
 })
 
+app.get('/bycoin/:id', function (req, res) {
+  getNewsByCoin(req.params.id).then(function (data) {
+    res.json(data);
+  });
+})
+
 app.all('/*', function (req, res, next) {
   res.header("Access-Control-Allow-Origin", "*");
   res.header("Access-Control-Allow-Headers", "X-Requested-With");
@@ -47,6 +53,13 @@ var getNews = async function () {
   const Api = new CryptoNewsAPI('75dd43125e51eefa036d1ce38fba8507');
   let articles = await Api.getTopNews();
 
+  return articles;
+}
+
+var getNewsByCoin = async function (coinName) {
+  // Connect to the CryptoControl API
+  const Api = new CryptoNewsAPI('75dd43125e51eefa036d1ce38fba8507');
+  let articles = Api.getLatestNewsByCoin(coinName);
   return articles;
 }
 /* USAGE EXAMPLES

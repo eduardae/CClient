@@ -1,0 +1,159 @@
+:host {
+  width: 100%;
+  height: 100%;
+}
+
+#price-chart {
+  width: 100% !important;
+  height: 520px !important;
+}
+
+.indicators {
+  margin-top: 32px;
+}
+
+.articles {
+  .article {
+    width: 90%;
+    height: 460px;
+    margin: auto;
+
+    .article-title {
+      display: inline-block;
+      height: 108px;
+      font-weight: bold;
+      vertical-align: middle;
+      font-size: 1.2em;
+      line-height: 108px;
+
+      span {
+        line-height: 1.1em;
+        display: inline-block;
+        vertical-align: middle;
+      }
+    }
+
+    .img-container {
+      display: flex;
+      height: 340px;
+      align-items: center;
+      align-content: center;
+
+      a {
+        width: 100%;
+      }
+    }
+
+    .article-img {
+      box-shadow: 5px 5px 5px 5px #16425b;
+      min-height: 146px;
+      max-height: 280px;
+      margin: auto;
+      max-width: 90%;
+    }
+
+    &:hover {
+      .article-title {
+        color: #4f0147;
+      }
+
+      .article-img {
+        transform: scale(1.05);
+        transition-duration: 0.2s;
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 1024px) {
+  .articles {
+    .article {
+      height: 360px;
+
+      .img-container {
+        height: 200px;
+      }
+
+      .article-img {
+        max-height: 140px;
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .articles {
+    .article {
+      height: 320px;
+
+      .article-img {
+        max-height: 174px;
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 576px) {
+  .articles {
+    .article {
+      width: 95%;
+      height: 280px;
+      padding-top: 16px;
+      margin: auto;
+      margin-bottom: 32px;
+
+      .article-title {
+        height: 104px;
+        font-size: 1em;
+      }
+
+      .article-img {
+        padding: 8px;
+        height: 180px;
+        background-repeat: no-repeat;
+        background-size: contain;
+        background-position: center;
+      }
+    }
+  }
+}
+
+@media (max-width: 1024px) {
+  #price-chart {
+    height: 328px !important;
+    margin-top: 48px;
+  }
+
+  .indicators {
+    margin-top: 16px;
+  }
+}
+
+@media (max-width: 768px) {
+  .indicators {
+    margin-top: 24px;
+  }
+  label {
+    width: 100%;
+  }
+}
+
+@media (max-width: 425px) {
+  #price-chart {
+    height: 228px !important;
+    margin-top: 32px;
+  }
+
+  .filters {
+    .selector {
+      text-align: left;
+      padding-left: 20%;
+      label {
+        width: 94px;
+      }
+      select {
+        width: 106px;
+      }
+    }
+  }
+}
