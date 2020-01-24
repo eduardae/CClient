@@ -46,11 +46,11 @@ export class AppComponent {
           this.currency = currency;
         }
       });
-      if (this.sessionStorage.get("currentUser")) {
-        this.user = JSON.parse(this.sessionStorage.get("currentUser")).user;
-      }
     } else {
       this.currency = eur;
+    }
+    if (this.sessionStorage.get("currentUser")) {
+      this.user = JSON.parse(this.sessionStorage.get("currentUser")).user;
     }
     this.subscription = userService.userLogged$.subscribe(user => {
       this.user = user;
