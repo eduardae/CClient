@@ -65,6 +65,14 @@
   }
 }
 
+.nav-tabs {
+  .nav-link {
+    &.active {
+      font-weight: bold;
+    }
+  }
+}
+
 @media screen and (max-width: 1024px) {
   .articles {
     .article {

@@ -1,15 +1,15 @@
 import { Component, OnInit, Input } from "@angular/core";
 import { Http } from "@angular/http";
 import { _ } from "underscore";
-import { Article } from "../../models/article";
+import { Article } from "../../../models/article";
 
 @Component({
-  selector: "news",
-  templateUrl: "./news.component.html",
-  styleUrls: ["./news.component.scss"]
+  selector: "app-news",
+  templateUrl: "./news-page.component.html",
+  styleUrls: ["./news-page.component.scss"]
 })
-export class NewsComponent implements OnInit {
-  @Input() articles: Article[];
+export class NewsPageComponent implements OnInit {
+  articles: Article[];
   isUpdating: boolean;
   response: string;
 
@@ -31,6 +31,9 @@ export class NewsComponent implements OnInit {
       this.articles = _.sortBy(response, article => {
         return new Date(article.publishedAt);
       }).reverse();
+      /*this.articles.forEach(element => {
+        element.title = element.title.substring(0, 100);
+      });*/
       this.isUpdating = false;
     });
   }
