@@ -15,9 +15,7 @@ export class NewsComponent implements OnInit {
 
   constructor(private http: Http) {}
 
-  ngOnInit() {
-    this.getNews();
-  }
+  ngOnInit() {}
 
   refreshInfo() {
     this.isUpdating = true;

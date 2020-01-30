@@ -1,7 +1,14 @@
 <div class="container-fluid text-center">
   <div>
     <h2>
-      {{ selectedCoin ? "Coin Info - " + selectedCoin.name : "Coin Info" }}
+      <span>{{
+        selectedCoin ? "Coin Info - " + selectedCoin.name : "Coin Info"
+      }}</span>
+      <coin
+        *ngIf="selectedCoin"
+        id="coinpage-icon"
+        iconId="{{ selectedCoin.queryId }}"
+      ></coin>
     </h2>
     <div class="mt-4">
       <ngb-tabset [destroyOnHide]="false">
@@ -242,7 +249,7 @@
         </ngb-tab>
         <ngb-tab title="News Mentions">
           <ng-template ngbTabContent>
-            <div *ngIf="!articles">
+            <div id="news-loader-container" *ngIf="!articles">
               <horizontal-loader></horizontal-loader>
             </div>
             <div class="mt-4">

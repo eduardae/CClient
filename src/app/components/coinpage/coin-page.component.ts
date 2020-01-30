@@ -85,7 +85,7 @@ export class CoinPageComponent implements OnInit {
         if (element.queryId === coinIdPar) {
           this.selectedCoin = element;
           this.onCoinSelect(this.selectedCoin);
-          this.getNews();
+          this.getNews(this.selectedCoin);
         }
       });
       this.historicalMarketData = new MarketData();
@@ -143,9 +143,9 @@ export class CoinPageComponent implements OnInit {
     return response.coins;
   }
 
-  getNews() {
+  getNews(coin: CoinInfo) {
     this.http
-      .get(`http://localhost:8083/bycoin/${this.selectedCoin.queryId}`)
+      .get(`http://localhost:8083/bycoin/${coin.queryId}`)
       .subscribe(result => {
         const response = result.json();
         console.log(response);

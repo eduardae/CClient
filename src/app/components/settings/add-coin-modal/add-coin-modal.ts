@@ -121,10 +121,9 @@ export class AddCoinModalContent implements OnInit {
             classname: "bg-success text-light",
             delay: 2000
           });
-          const userFromDb = result.json();
           this.sessionStorage.set(
             "currentUser",
-            JSON.stringify({ user: userFromDb })
+            JSON.stringify({ user: this.user })
           );
         },
         err => {
