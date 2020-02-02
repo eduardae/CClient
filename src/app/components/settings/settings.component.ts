@@ -45,6 +45,6 @@ export class SettingsComponent implements OnInit {
   }
 
   update() {
-    this.userService.update(this.user);
+    this.userService.updateSettings(this.user);
   }
 }

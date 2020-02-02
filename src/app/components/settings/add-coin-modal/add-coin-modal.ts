@@ -20,9 +20,11 @@ import { _ } from "underscore";
 import { User } from "src/app/models/user";
 import { ToastService } from "../../../services/toast-service";
 import { SESSION_STORAGE, WebStorageService } from "angular-webstorage-service";
+import { UserInfoService } from "src/app/services/user.info.service";
 
 @Component({
   selector: "add-coin-modal-content",
+  providers: [UserInfoService],
   template: `
     <div class="modal-header">
       <h4 class="modal-title" id="modal-basic-title">Add Coins</h4>
@@ -72,6 +74,7 @@ export class AddCoinModalContent implements OnInit {
     public modal: NgbActiveModal,
     private http: Http,
     public toastService: ToastService,
+    private userService: UserInfoService,
     @Inject(SESSION_STORAGE) private sessionStorage: WebStorageService
   ) {}
 

@@ -1,6 +1,6 @@
-import { OnInit } from "@angular/core";
+import { Link } from "./Link";
 
-export class User implements OnInit {
+export class User {
   email: string;
   username: string;
   name: string;
@@ -9,7 +9,7 @@ export class User implements OnInit {
   token: string;
   // tslint:disable-next-line: variable-name
   bookmarked_coins: string[];
-  saved_links: string[];
+  saved_links: Link[];
 
   constructor() {
     this.username = "";
@@ -19,6 +19,4 @@ export class User implements OnInit {
     this.saved_links = [];
     this.token = "";
   }
-
-  ngOnInit() {}
 }
