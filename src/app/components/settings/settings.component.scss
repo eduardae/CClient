@@ -9,3 +9,9 @@
   margin-right: 8px;
   cursor: pointer;
 }
+
+@media (max-width: 450px) {
+  ::ng-deep .add-coin-btn {
+    width: 100%;
+  }
+}

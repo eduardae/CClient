@@ -1,91 +1,149 @@
 <div id="add-coin-modal-container"></div>
 <div id="settings-page" class="container-fluid">
   <div class="row justify-content-center align-items-center">
-    <div class="col-10 col-md-6 col-xl-4">
+    <div class="col-10">
       <div class="row">
         <div class="col text-center">
-          <h1>Settings</h1>
+          <h1>User Area</h1>
         </div>
       </div>
-      <div class="row align-items-center mt-4">
-        <div class="col-12">
-          <span class="font-weight-bold">Username</span>
-          <input
-            type="text"
-            class="form-control"
-            [(ngModel)]="user.username"
-            placeholder="Username"
-          />
-        </div>
-      </div>
-      <div class="row align-items-center mt-4">
-        <div class="col-12">
-          <span class="font-weight-bold">Name</span>
-          <input
-            type="text"
-            class="form-control"
-            [(ngModel)]="user.name"
-            placeholder="Name"
-          />
-        </div>
-      </div>
-      <div class="row align-items-center mt-4">
-        <div class="col-12">
-          <span class="font-weight-bold">Surname</span>
-          <input
-            type="text"
-            class="form-control"
-            [(ngModel)]="user.surname"
-            placeholder="Surname"
-          />
-        </div>
-      </div>
-      <div class="row align-items-center mt-4">
-        <div class="col-12">
-          <span class="font-weight-bold">Email</span>
-          <input
-            type="email"
-            class="form-control"
-            [(ngModel)]="user.email"
-            placeholder="email"
-          />
-        </div>
-      </div>
-      <div class="row align-items-center mt-4">
-        <div class="col">
-          <span class="font-weight-bold">Followed coins</span>
-          <div class="row mt-2">
-            <div class="col-12 col-sm-6">
-              <div
-                *ngIf="
-                  user.bookmarked_coins && user.bookmarked_coins.length !== 0
-                "
-              ></div>
-              <span
-                class="followed-coin"
-                *ngFor="let coinId of user.bookmarked_coins"
-                [routerLink]="['/coinpage', coinId]"
-              >
-                <coin iconId="{{ coinId }}"></coin>
-              </span>
+      <div class="row">
+        <div class="col-12 col-sm-6 col-md-4 page-section">
+          <div class="row align-items-center mt-4">
+            <div class="col-12">
+              <h5 class="font-weight-bold">Username</h5>
+              <input
+                type="text"
+                class="form-control"
+                [(ngModel)]="user.username"
+                placeholder="Username"
+              />
             </div>
-            <div class="col-12 col-sm-6">
-              <add-coin-modal [user]="user"></add-coin-modal>
+          </div>
+          <div class="row align-items-center mt-4">
+            <div class="col-12">
+              <h5 class="font-weight-bold">Name</h5>
+              <input
+                type="text"
+                class="form-control"
+                [(ngModel)]="user.name"
+                placeholder="Name"
+              />
+            </div>
+          </div>
+          <div class="row align-items-center mt-4">
+            <div class="col-12">
+              <h5 class="font-weight-bold">Surname</h5>
+              <input
+                type="text"
+                class="form-control"
+                [(ngModel)]="user.surname"
+                placeholder="Surname"
+              />
+            </div>
+          </div>
+          <div class="row align-items-center mt-4">
+            <div class="col-12">
+              <h5 class="font-weight-bold">Email</h5>
+              <input
+                type="email"
+                class="form-control"
+                [(ngModel)]="user.email"
+                placeholder="email"
+              />
+            </div>
+          </div>
+          <div class="row justify-content-start mt-4">
+            <div class="col-12 col-lg-6 offset-lg-3">
+              <button
+                class="btn col btn-primary mt-4 font-weight-bold"
+                (click)="update()"
+              >
+                Update
+              </button>
+            </div>
+          </div>
+        </div>
+        <div class="col-12 col-sm-6 col-md-4 page-section">
+          <div class="row align-items-center mt-4">
+            <div class="col">
+              <div class="row">
+                <div class="col-12 col-sm-10 offset-sm-1">
+                  <h5 class="font-weight-bold">Followed coins</h5>
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="col-12 col-sm-10 offset-sm-1  mt-3 mb-3">
+                  <div
+                    *ngIf="
+                      user.bookmarked_coins &&
+                      user.bookmarked_coins.length !== 0
+                    "
+                  ></div>
+                  <span
+                    class="followed-coin"
+                    *ngFor="let coinId of user.bookmarked_coins"
+                    [routerLink]="['/coinpage', coinId]"
+                  >
+                    <coin iconId="{{ coinId }}"></coin>
+                  </span>
+                </div>
+
+                <div class="col-12 col-sm-10 offset-sm-1 pt-3">
+                  <div class="row">
+                    <div class="float-left col-12 col-xs-6">
+                      <add-coin-modal [user]="user"></add-coin-modal>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-12 col-sm-6 col-md-4 page-section">
+          <div class="row align-items-center mt-4">
+            <div class="col">
+              <div class="row">
+                <div class="col-12 col-sm-10 offset-sm-1">
+                  <h5 class="font-weight-bold">Saved Links</h5>
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="col-12 col-sm-10 offset-sm-1  mt-3 mb-3">
+                  <div
+                    *ngIf="user.saved_links && user.saved_links.length !== 0"
+                  >
+                    <a
+                      href="{{ articleUrl }}"
+                      *ngFor="let articleUrl of user.saved_links"
+                    >
+                    </a>
+                  </div>
+                  <div
+                    *ngIf="
+                      user.saved_links ? user.saved_links.length == 0 : true
+                    "
+                  >
+                    <p>You have no saved links.</p>
+                    <p>
+                      Head to the general <b>News</b> section or to a specific
+                      coin's page to learn about latest developments and save
+                      what interests you.
+                    </p>
+                    <p>
+                      Also, take a look at the <b>Learn</b> section to seek out
+                      some useful info.
+                    </p>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
         </div>
       </div>
-      <div class="row justify-content-start mt-4">
-        <div class="col-sm-6 offset-sm-3">
-          <button
-            class="btn col btn-primary mt-4 font-weight-bold"
-            (click)="update()"
-          >
-            Update
-          </button>
-        </div>
-      </div>
     </div>
+    <app-toasts aria-live="polite" aria-atomic="true"></app-toasts>
   </div>
-  <app-toasts aria-live="polite" aria-atomic="true"></app-toasts>
 </div>

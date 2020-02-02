@@ -55,3 +55,19 @@ select option {
 input:-moz-placeholder {
   text-align: left;
 }
+
+.flex-center-hv-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.flex-center-v-container {
+  display: flex;
+  align-items: center;
+}
+
+.flex-center-h.container {
+  display: flex;
+  justify-content: center;
+}
