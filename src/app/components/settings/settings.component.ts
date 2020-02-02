@@ -28,12 +28,9 @@ export class SettingsComponent implements OnInit {
 
   // tslint:disable-next-line: max-line-length
   constructor(
-    private http: HttpClient,
-    private router: Router,
     @Inject(SESSION_STORAGE) private storage: WebStorageService,
     private userService: UserInfoService,
-    public toastService: ToastService,
-    private modalService: NgbModal
+    public toastService: ToastService
   ) {
     this.toastService = toastService;
   }
@@ -48,22 +45,6 @@ export class SettingsComponent implements OnInit {
   }
 
   update() {
-    this.http
-      .post("http://localhost:8082/update/settings", this.user)
-      .subscribe(
-        result => {
-          this.toastService.show("User settings updated", {
-            classname: "bg-success text-light",
-            delay: 2000
-          });
-          this.storage.set("currentUser", JSON.stringify({ user: this.user }));
-        },
-        err => {
-          this.toastService.show(err._body, {
-            classname: "bg-danger text-light",
-            delay: 3500
-          });
-        }
-      );
+    this.userService.update(this.user);
   }
 }

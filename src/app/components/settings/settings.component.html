@@ -13,6 +13,7 @@
             <div class="col-12">
               <h5 class="font-weight-bold">Username</h5>
               <input
+                disabled
                 type="text"
                 class="form-control"
                 [(ngModel)]="user.username"
@@ -54,7 +55,7 @@
             </div>
           </div>
           <div class="row justify-content-start mt-4">
-            <div class="col-12 col-lg-6 offset-lg-3">
+            <div class="col-12 col-lg-8 offset-lg-2">
               <button
                 class="btn col btn-primary mt-4 font-weight-bold"
                 (click)="update()"
@@ -128,13 +129,15 @@
                   >
                     <p>You have no saved links.</p>
                     <p>
-                      Head to the general <b>News</b> section or to a specific
-                      coin's page to learn about latest developments and save
-                      what interests you.
+                      Head to the general
+                      <a class="clickable" [routerLink]="'/news'">News</a>
+                      section or to a specific coin's page to learn about latest
+                      developments and save what interests you.
                     </p>
                     <p>
-                      Also, take a look at the <b>Learn</b> section to seek out
-                      some useful info.
+                      Also, take a look at the
+                      <a class="clickable" [routerLink]="'/academy'">Academy</a>
+                      section to seek out some useful info.
                     </p>
                   </div>
                 </div>
