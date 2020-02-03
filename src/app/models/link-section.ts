@@ -1,4 +1,4 @@
-enum LinkSection {
+export enum LinkSection {
   NEWS,
   ACADEMY,
   BLOG

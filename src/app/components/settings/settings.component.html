@@ -116,11 +116,13 @@
                   <div
                     *ngIf="user.saved_links && user.saved_links.length !== 0"
                   >
-                    <a
-                      href="{{ articleUrl }}"
-                      *ngFor="let articleUrl of user.saved_links"
-                    >
-                    </a>
+                    <ul>
+                      <li *ngFor="let link of user.saved_links">
+                        <a href="{{ link.url }}" target="_blank">
+                          {{ link.title }}
+                        </a>
+                      </li>
+                    </ul>
                   </div>
                   <div
                     *ngIf="

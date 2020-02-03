@@ -17,10 +17,16 @@
       font-size: 1.2em;
       line-height: 108px;
 
-      span {
-        line-height: 1.1em;
+      .title-txt {
+        line-height: 1.3em;
         display: inline-block;
         vertical-align: middle;
+      }
+
+      .fa-bookmark {
+        display: inline-block;
+        margin-left: 8px;
+        cursor: pointer;
       }
     }
 

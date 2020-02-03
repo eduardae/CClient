@@ -6,6 +6,10 @@ import { ToastService } from "./toast-service";
 import { SESSION_STORAGE, WebStorageService } from "angular-webstorage-service";
 import { HttpClient } from "@angular/common/http";
 import { CoinInfo } from "../models/coin-info";
+import { Article } from "../models/article";
+import { Link } from "../models/Link";
+import { LinkSection } from "../models/link-section";
+import { _ } from "underscore";
 
 @Injectable()
 export class UserInfoService {
@@ -65,5 +69,50 @@ export class UserInfoService {
         });
       }
     );
+  }
+
+  addArticleToLinks(article: Article, user: User) {
+    let link = new Link();
+    link.title = article.title;
+    link.section = LinkSection.NEWS;
+    link.url = article.url;
+    if (!user.saved_links) {
+      user.saved_links = [];
+      user.saved_links.push(link);
+    } else {
+      const alreadySavedLinks = _.filter(user.saved_links, function(value) {
+        if (value.url === link.url) {
+          return value;
+        }
+      });
+
+      if (alreadySavedLinks.length === 0) {
+        this.http
+          .post("http://localhost:8084/user/update/links", user)
+          .subscribe(
+            result => {
+              this.toastService.show("Saved links successfully updated", {
+                classname: "bg-success text-light",
+                delay: 2000
+              });
+              this.sessionStorage.set(
+                "currentUser",
+                JSON.stringify({ user: user })
+              );
+            },
+            err => {
+              this.toastService.show(err._body, {
+                classname: "bg-danger text-light",
+                delay: 3500
+              });
+            }
+          );
+      } else {
+        this.toastService.show("Link already bookmarked", {
+          classname: "bg-warning text-light",
+          delay: 3500
+        });
+      }
+    }
   }
 }

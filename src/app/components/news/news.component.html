@@ -3,7 +3,14 @@
     <div class="col-12 col-md-6 col-lg-4" *ngFor="let article of articles">
       <div class="article text-center">
         <span class="article-title">
-          <span>{{ article.title }}</span>
+          <span class="title-txt">
+            {{ article.title }}
+            <span
+              class="fa fa-bookmark"
+              *ngIf="user && user.username"
+              (click)="addArticleToSavedLinks(article)"
+            ></span>
+          </span>
         </span>
         <div class="img-container">
           <a href="{{ article.url }}" target="_blank">

@@ -1,7 +1,10 @@
-import { Component, OnInit, Input } from "@angular/core";
+import { Component, OnInit, Input, Inject } from "@angular/core";
 import { Http } from "@angular/http";
 import { _ } from "underscore";
 import { Article } from "../../models/article";
+import { User } from "src/app/models/user";
+import { SESSION_STORAGE, WebStorageService } from "angular-webstorage-service";
+import { UserInfoService } from "src/app/services/user.info.service";
 
 @Component({
   selector: "news",
@@ -12,10 +15,19 @@ export class NewsComponent implements OnInit {
   @Input() articles: Article[];
   isUpdating: boolean;
   response: string;
+  user: User;
 
-  constructor(private http: Http) {}
+  constructor(
+    private http: Http,
+    @Inject(SESSION_STORAGE) private storage: WebStorageService,
+    private userService: UserInfoService
+  ) {}
 
-  ngOnInit() {}
+  ngOnInit() {
+    if (this.storage.get("currentUser")) {
+      this.user = JSON.parse(this.storage.get("currentUser")).user;
+    }
+  }
 
   refreshInfo() {
     this.isUpdating = true;
@@ -38,5 +50,9 @@ export class NewsComponent implements OnInit {
       return article === articleIn;
     });
     art.originalImageUrl = "./assets/images/newspaper.png";
+  }
+
+  addArticleToSavedLinks(article: Article) {
+    this.userService.addArticleToLinks(article, this.user);
   }
 }
