@@ -27,7 +27,9 @@ import { UserInfoService } from "src/app/services/user.info.service";
   providers: [UserInfoService],
   template: `
     <div class="modal-header">
-      <h4 class="modal-title" id="modal-basic-title">Add Coins</h4>
+      <h4 class="modal-title" id="modal-basic-title">
+        Manage bookmarked coins
+      </h4>
       <button
         type="button"
         class="close"

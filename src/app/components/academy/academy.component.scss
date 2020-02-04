@@ -18,6 +18,13 @@
     border: 1px solid #007bff;
     border-radius: 2px;
     top: -2px;
+
+    .fa-bookmark {
+      display: inline-block;
+      margin-left: 4px;
+      color: mediumvioletred;
+      cursor: pointer;
+    }
   }
 }
 

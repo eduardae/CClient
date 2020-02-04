@@ -83,6 +83,12 @@
     .article {
       height: 320px;
 
+      .article-title {
+        max-height: 98px;
+        line-height: 98px;
+        overflow: hidden;
+      }
+
       .article-img {
         max-height: 174px;
       }

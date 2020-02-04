@@ -87,6 +87,7 @@ export class UserInfoService {
       });
 
       if (alreadySavedLinks.length === 0) {
+        user.saved_links.push(link);
         this.http
           .post("http://localhost:8084/user/update/links", user)
           .subscribe(
