@@ -11,7 +11,7 @@ const cors = require('cors');
 const app = express();
 app.use(bodyParser.json());
 app.use(cors());
-app.use("/", expressJwt({ secret: 'todo-app-super-shared-secret' }).unless({ path: ['/register', '/login'] }));
+app.use("/", expressJwt({ secret: 'todo-app-super-shared-secret' }).unless({ path: ['/register', '/login', '/get_token'] }));
 
 app.post('/register', function (req, res) {
   // Make a connection to MongoDB Service
@@ -27,6 +27,7 @@ app.post('/register', function (req, res) {
       } else {
         if (docs && docs.length != 0) {
           res.status(500).end('Username already in use');
+          client.close();
         } else {
           crypto.scrypt(reqQuery.password, 'cm', 64, (err, derivedKey) => {
             if (err) throw err;
@@ -44,7 +45,7 @@ app.post('/register', function (req, res) {
             });
           });
         }
-        client.close();
+
       }
     }, function (err) {
       // done or error
