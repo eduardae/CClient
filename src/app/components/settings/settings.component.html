@@ -8,7 +8,7 @@
         </div>
       </div>
       <div class="row">
-        <div class="col-12 col-md-4 page-section">
+        <div class="col-12 col-md-3 col-lg-4 page-section">
           <div class="row align-items-center mt-4">
             <div class="col-12">
               <h5 class="font-weight-bold">Username</h5>
@@ -65,11 +65,131 @@
             </div>
           </div>
         </div>
-        <div class="col-12 col-md-4 page-section coin-bookmarks-section">
+
+        <div class="col-12 col-md-6 col-lg-5 page-section">
           <div class="row align-items-center mt-4">
             <div class="col">
               <div class="row">
                 <div class="col-12 col-sm-10 offset-sm-1">
+                  <h5 class="font-weight-bold">Saved Links</h5>
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="col-12 col-sm-10 offset-sm-1  mt-3 mb-3">
+                  <div
+                    *ngIf="user.saved_links && user.saved_links.length !== 0"
+                  >
+                    <div class="link-section">
+                      <ngb-tabset [destroyOnHide]="false">
+                        <ngb-tab title="News">
+                          <ng-template ngbTabContent>
+                            <ul class="link-section-list">
+                              <p
+                                *ngIf="
+                                  newsArticles
+                                    ? newsArticles.length === 0
+                                    : true
+                                "
+                              >
+                                You have no saved news links.
+                              </p>
+                              <li
+                                *ngFor="let link of newsArticles; let i = index"
+                              >
+                                <div class="link-container">
+                                  <div class="row">
+                                    <div class="col-8 col-lg-9">
+                                      <a href="{{ link.url }}" target="_blank">
+                                        {{ link.title }}
+                                      </a>
+                                    </div>
+                                    <div class="col-3">
+                                      <button
+                                        class="btn btn-default btn-primary float-right"
+                                        (click)="removeLink(link)"
+                                      >
+                                        <span class="fa fa-times"></span>
+                                      </button>
+                                    </div>
+                                  </div>
+                                </div>
+
+                                <hr *ngIf="i !== newsArticles.length - 1" />
+                              </li>
+                            </ul>
+                          </ng-template>
+                        </ngb-tab>
+                        <ngb-tab title="Academy">
+                          <ng-template ngbTabContent>
+                            <ul class="link-section-list">
+                              <p
+                                *ngIf="
+                                  academyLinks
+                                    ? academyLinks.length === 0
+                                    : true
+                                "
+                              >
+                                You have no saved academy links.
+                              </p>
+                              <li
+                                *ngFor="let link of academyLinks; let i = index"
+                              >
+                                <div class="link-container">
+                                  <div class="row">
+                                    <div class="col-8 col-lg-9">
+                                      <a href="{{ link.url }}" target="_blank">
+                                        {{ link.title }}
+                                      </a>
+                                    </div>
+                                    <div class="col-3">
+                                      <button
+                                        class="btn btn-default btn-primary float-right"
+                                        (click)="removeLink(link)"
+                                      >
+                                        <span class="fa fa-times"></span>
+                                      </button>
+                                    </div>
+                                  </div>
+                                </div>
+
+                                <hr *ngIf="i !== academyLinks.length - 1" />
+                              </li>
+                            </ul>
+                          </ng-template>
+                        </ngb-tab>
+                      </ngb-tabset>
+                    </div>
+                  </div>
+                  <div
+                    *ngIf="
+                      user.saved_links ? user.saved_links.length == 0 : true
+                    "
+                  >
+                    <p>You have no saved links.</p>
+                    <p>
+                      Head to the general
+                      <a class="clickable" [routerLink]="'/news'">News</a>
+                      section or to a specific coin's page to learn about latest
+                      developments and save what interests you.
+                    </p>
+                    <p>
+                      Also, take a look at the
+                      <a class="clickable" [routerLink]="'/academy'">Academy</a>
+                      section to seek out some useful info.
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-12 col-md-3 page-section coin-bookmarks-section">
+          <div class="row mt-4">
+            <div class="col">
+              <div class="row">
+                <div class="col-12">
                   <h5 class="font-weight-bold">Followed coins</h5>
                 </div>
               </div>
@@ -96,51 +216,6 @@
                     <div class="float-left col-12 col-xs-6">
                       <add-coin-modal [user]="user"></add-coin-modal>
                     </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="col-12 col-md-4 page-section">
-          <div class="row align-items-center mt-4">
-            <div class="col">
-              <div class="row">
-                <div class="col-12 col-sm-10 offset-sm-1">
-                  <h5 class="font-weight-bold">Saved Links</h5>
-                </div>
-              </div>
-
-              <div class="row">
-                <div class="col-12 col-sm-10 offset-sm-1  mt-3 mb-3">
-                  <div
-                    *ngIf="user.saved_links && user.saved_links.length !== 0"
-                  >
-                    <ul>
-                      <li *ngFor="let link of user.saved_links">
-                        <a href="{{ link.url }}" target="_blank">
-                          {{ link.title }}
-                        </a>
-                      </li>
-                    </ul>
-                  </div>
-                  <div
-                    *ngIf="
-                      user.saved_links ? user.saved_links.length == 0 : true
-                    "
-                  >
-                    <p>You have no saved links.</p>
-                    <p>
-                      Head to the general
-                      <a class="clickable" [routerLink]="'/news'">News</a>
-                      section or to a specific coin's page to learn about latest
-                      developments and save what interests you.
-                    </p>
-                    <p>
-                      Also, take a look at the
-                      <a class="clickable" [routerLink]="'/academy'">Academy</a>
-                      section to seek out some useful info.
-                    </p>
                   </div>
                 </div>
               </div>

@@ -5,6 +5,7 @@ import { Article } from "../../models/article";
 import { SESSION_STORAGE, WebStorageService } from "angular-webstorage-service";
 import { User } from "src/app/models/user";
 import { UserInfoService } from "src/app/services/user.info.service";
+import { LinkSection } from "src/app/models/link-section";
 
 @Component({
   selector: "app-academy",
@@ -40,7 +41,7 @@ export class AcademyComponent implements OnInit {
     const article = new Article();
     article.title = title;
     article.url = url;
-    this.userService.addArticleToLinks(article, this.user);
+    this.userService.addArticleToLinks(article, this.user, LinkSection.ACADEMY);
   }
 
   triggerTechnicalTabCollapse() {

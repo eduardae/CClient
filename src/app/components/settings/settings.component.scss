@@ -10,13 +10,43 @@
   cursor: pointer;
 }
 
-.coin-bookmarks-section {
-  text-align: center;
+.link-section {
+  .link-section-list {
+    list-style: none;
+    padding-left: 8px;
+    border: 1px solid #dee2e6;
+    border-top: 0;
+    padding: 16px;
+    height: 320px;
+    overflow-y: auto;
+    -ms-overflow-style: none;
+
+    &::-webkit-scrollbar {
+      display: none;
+    }
+
+    a {
+      font-size: 16px;
+    }
+
+    button {
+      font-size: 14px;
+    }
+  }
 }
 
-@media (max-width: 767px) {
+@media (max-width: 768px) {
   .page-section {
     padding-top: 2em;
+  }
+
+  .link-section {
+    .link-section-list {
+      button {
+        position: relative;
+        right: -16px;
+      }
+    }
   }
 }
 

@@ -5,6 +5,7 @@ import { Article } from "../../models/article";
 import { User } from "src/app/models/user";
 import { SESSION_STORAGE, WebStorageService } from "angular-webstorage-service";
 import { UserInfoService } from "src/app/services/user.info.service";
+import { LinkSection } from "src/app/models/link-section";
 
 @Component({
   selector: "news",
@@ -53,6 +54,6 @@ export class NewsComponent implements OnInit {
   }
 
   addArticleToSavedLinks(article: Article) {
-    this.userService.addArticleToLinks(article, this.user);
+    this.userService.addArticleToLinks(article, this.user, LinkSection.NEWS);
   }
 }

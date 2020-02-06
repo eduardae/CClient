@@ -18,6 +18,9 @@ import { NgbModal } from "@ng-bootstrap/ng-bootstrap";
 import { UserInfoService } from "src/app/services/user.info.service";
 import { ToastService } from "../../services/toast-service";
 import { HttpClient } from "@angular/common/http";
+import { Link } from "src/app/models/Link";
+import { LinkSection } from "src/app/models/link-section";
+import { _ } from "underscore";
 @Component({
   selector: "app-settings",
   templateUrl: "./settings.component.html",
@@ -25,6 +28,8 @@ import { HttpClient } from "@angular/common/http";
 })
 export class SettingsComponent implements OnInit {
   user: User;
+  newsArticles: Link[];
+  academyLinks: Link[];
 
   // tslint:disable-next-line: max-line-length
   constructor(
@@ -33,15 +38,40 @@ export class SettingsComponent implements OnInit {
     public toastService: ToastService
   ) {
     this.toastService = toastService;
+    this.academyLinks = [];
+    this.newsArticles = [];
   }
 
   ngOnInit() {
     if (this.storage.get("currentUser")) {
       this.user = JSON.parse(this.storage.get("currentUser")).user;
+      const savedLinks = this.user.saved_links;
+      savedLinks.forEach(link => {
+        if (link.section === LinkSection.NEWS) {
+          this.newsArticles.push(link);
+        }
+        if (link.section === LinkSection.ACADEMY) {
+          this.academyLinks.push(link);
+        }
+      });
     }
-    /*if (!this.user) {
-      this.router.navigateByUrl("/");
-    }*/
+  }
+
+  removeLink(link: Link) {
+    if (link.section === LinkSection.NEWS) {
+      this.newsArticles = _.filter(this.user.saved_links, savedLink => {
+        return link.url !== savedLink.url;
+      });
+    }
+    if (link.section === LinkSection.ACADEMY) {
+      this.academyLinks = _.filter(this.user.saved_links, savedLink => {
+        return link.url !== savedLink.url;
+      });
+    }
+    this.user.saved_links = _.filter(this.user.saved_links, savedLink => {
+      return link.url !== savedLink.url;
+    });
+    this.userService.updateLinks(this.user);
   }
 
   update() {

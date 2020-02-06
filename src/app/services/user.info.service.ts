@@ -71,10 +71,10 @@ export class UserInfoService {
     );
   }
 
-  addArticleToLinks(article: Article, user: User) {
+  addArticleToLinks(article: Article, user: User, section: LinkSection) {
     let link = new Link();
     link.title = article.title;
-    link.section = LinkSection.NEWS;
+    link.section = section;
     link.url = article.url;
     if (!user.saved_links) {
       user.saved_links = [];
@@ -115,5 +115,19 @@ export class UserInfoService {
         });
       }
     }
+  }
+
+  updateLinks(user: User) {
+    this.http.post("http://localhost:8084/user/update/links", user).subscribe(
+      result => {
+        this.sessionStorage.set("currentUser", JSON.stringify({ user: user }));
+      },
+      err => {
+        this.toastService.show(err._body, {
+          classname: "bg-danger text-light",
+          delay: 3500
+        });
+      }
+    );
   }
 }
