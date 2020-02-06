@@ -7,6 +7,7 @@ import { _ } from "underscore";
 import { CurrencyInfo } from "../../models/currency-info";
 import { AppSettingsService } from "src/app/services/app.settings.service";
 import { SESSION_STORAGE, WebStorageService } from "angular-webstorage-service";
+import { environment } from "../../../environments/environment";
 
 @Component({
   selector: "app-home",
@@ -52,7 +53,7 @@ export class HomeComponent implements OnInit {
   }
 
   getCryptoMarketInfo() {
-    this.http.get("http://localhost:8081").subscribe(result => {
+    this.http.get(`${environment.baseUrl}:8081`).subscribe(result => {
       const response = result.json();
       if (response.success) {
         const extracted = response.data;

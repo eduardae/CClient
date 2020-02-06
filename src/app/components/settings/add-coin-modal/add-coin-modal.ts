@@ -21,6 +21,7 @@ import { User } from "src/app/models/user";
 import { ToastService } from "../../../services/toast-service";
 import { SESSION_STORAGE, WebStorageService } from "angular-webstorage-service";
 import { UserInfoService } from "src/app/services/user.info.service";
+import { environment } from "src/environments/environment";
 
 @Component({
   selector: "add-coin-modal-content",
@@ -119,7 +120,7 @@ export class AddCoinModalContent implements OnInit {
     }
     this.user.bookmarked_coins = newBookmarks;
     this.http
-      .post("http://localhost:8084/user/update/coins", this.user)
+      .post(`${environment.baseUrl}:8084/user/update/coins`, this.user)
       .subscribe(
         result => {
           this.toastService.show("User bookmarks successfully updated", {
@@ -196,7 +197,7 @@ export class AddCoinModal implements OnInit {
 
   async getCoinList(): Promise<CoinInfo[]> {
     let result = await this.http
-      .get("http://localhost:8081/coinslist")
+      .get(`${environment.baseUrl}:8081/coinslist`)
       .toPromise();
     const response = result.json();
     return response.coins;

@@ -10,6 +10,7 @@ import { Article } from "../models/article";
 import { Link } from "../models/Link";
 import { LinkSection } from "../models/link-section";
 import { _ } from "underscore";
+import { environment } from "src/environments/environment";
 
 @Injectable()
 export class UserInfoService {
@@ -31,21 +32,26 @@ export class UserInfoService {
   ) {}
 
   updateSettings(user: User) {
-    this.http.post("http://localhost:8082/update/settings", user).subscribe(
-      result => {
-        this.toastService.show("User settings updated", {
-          classname: "bg-success text-light",
-          delay: 2000
-        });
-        this.sessionStorage.set("currentUser", JSON.stringify({ user: user }));
-      },
-      err => {
-        this.toastService.show(err._body, {
-          classname: "bg-danger text-light",
-          delay: 3500
-        });
-      }
-    );
+    this.http
+      .post(`${environment.baseUrl}:8082/update/settings`, user)
+      .subscribe(
+        result => {
+          this.toastService.show("User settings updated", {
+            classname: "bg-success text-light",
+            delay: 2000
+          });
+          this.sessionStorage.set(
+            "currentUser",
+            JSON.stringify({ user: user })
+          );
+        },
+        err => {
+          this.toastService.show(err._body, {
+            classname: "bg-danger text-light",
+            delay: 3500
+          });
+        }
+      );
   }
 
   updateCoins(selectedCoins: CoinInfo[], user: User) {
@@ -54,21 +60,26 @@ export class UserInfoService {
       newBookmarks.push(coin.queryId);
     }
     user.bookmarked_coins = newBookmarks;
-    this.http.post("http://localhost:8084/user/update/coins", user).subscribe(
-      result => {
-        this.toastService.show("User bookmarks successfully updated", {
-          classname: "bg-success text-light",
-          delay: 2000
-        });
-        this.sessionStorage.set("currentUser", JSON.stringify({ user: user }));
-      },
-      err => {
-        this.toastService.show(err._body, {
-          classname: "bg-danger text-light",
-          delay: 3500
-        });
-      }
-    );
+    this.http
+      .post(`${environment.baseUrl}:8084/user/update/coins`, user)
+      .subscribe(
+        result => {
+          this.toastService.show("User bookmarks successfully updated", {
+            classname: "bg-success text-light",
+            delay: 2000
+          });
+          this.sessionStorage.set(
+            "currentUser",
+            JSON.stringify({ user: user })
+          );
+        },
+        err => {
+          this.toastService.show(err._body, {
+            classname: "bg-danger text-light",
+            delay: 3500
+          });
+        }
+      );
   }
 
   addArticleToLinks(article: Article, user: User, section: LinkSection) {
@@ -89,7 +100,7 @@ export class UserInfoService {
       if (alreadySavedLinks.length === 0) {
         user.saved_links.push(link);
         this.http
-          .post("http://localhost:8084/user/update/links", user)
+          .post(`${environment.baseUrl}:8084/user/update/links`, user)
           .subscribe(
             result => {
               this.toastService.show("Saved links successfully updated", {
@@ -118,16 +129,21 @@ export class UserInfoService {
   }
 
   updateLinks(user: User) {
-    this.http.post("http://localhost:8084/user/update/links", user).subscribe(
-      result => {
-        this.sessionStorage.set("currentUser", JSON.stringify({ user: user }));
-      },
-      err => {
-        this.toastService.show(err._body, {
-          classname: "bg-danger text-light",
-          delay: 3500
-        });
-      }
-    );
+    this.http
+      .post(`${environment.baseUrl}:8084/user/update/links`, user)
+      .subscribe(
+        result => {
+          this.sessionStorage.set(
+            "currentUser",
+            JSON.stringify({ user: user })
+          );
+        },
+        err => {
+          this.toastService.show(err._body, {
+            classname: "bg-danger text-light",
+            delay: 3500
+          });
+        }
+      );
   }
 }

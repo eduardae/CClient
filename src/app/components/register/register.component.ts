@@ -12,6 +12,7 @@ import {
 import { Router } from "@angular/router";
 import { UserInfoService } from "../../services/user.info.service";
 import { ToastService } from "../../services/toast-service";
+import { environment } from "src/environments/environment";
 
 @Component({
   selector: "app-register",
@@ -38,7 +39,7 @@ export class RegisterComponent implements OnInit {
 
   register() {
     this.http
-      .post("http://localhost:8082/register", {
+      .post(`${environment.baseUrl}:8082/register`, {
         username: this.user.username,
         password: this.user.password,
         email: this.user.email

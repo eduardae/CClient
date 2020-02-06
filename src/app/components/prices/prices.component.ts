@@ -24,6 +24,7 @@ import { isBuffer } from "util";
 import { AppSettingsService } from "src/app/services/app.settings.service";
 import { Subscription } from "rxjs";
 import { SESSION_STORAGE, WebStorageService } from "angular-webstorage-service";
+import { environment } from "src/environments/environment";
 
 @Component({
   selector: "app-prices",
@@ -143,7 +144,7 @@ export class PricesComponent implements OnInit {
 
   async getCoinList(): Promise<CoinInfo[]> {
     let result = await this.http
-      .get("http://localhost:8081/coinslist")
+      .get(`${environment.baseUrl}:8081/coinslist`)
       .toPromise();
     const response = result.json();
     return response.coins;
@@ -151,7 +152,7 @@ export class PricesComponent implements OnInit {
 
   getCoinInfo(coin) {
     this.http
-      .post("http://localhost:8081/coininfo", { coin_name: coin.queryId })
+      .post(`${environment.baseUrl}:8081/coininfo`, { coin_name: coin.queryId })
       .subscribe(result => {
         const response = result.json();
         this.selectedCoin = coin;
@@ -203,7 +204,7 @@ export class PricesComponent implements OnInit {
 
   getCoinHistory(coinName, currency) {
     this.http
-      .post("http://localhost:8081/coininfo/history", {
+      .post(`${environment.baseUrl}:8081/coininfo/history`, {
         coin_name: coinName,
         vs_currency: currency
       })
@@ -232,7 +233,7 @@ export class PricesComponent implements OnInit {
 
   getCoinMarketChart(coinName, currency, daysPar) {
     this.http
-      .post("http://localhost:8081/coininfo/marketchart", {
+      .post(`${environment.baseUrl}:8081/coininfo/marketchart`, {
         coin_name: coinName,
         vs_currency: currency,
         days: daysPar ? daysPar : 7

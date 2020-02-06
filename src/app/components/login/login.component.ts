@@ -19,6 +19,7 @@ import { ElementRef, Renderer2 } from "@angular/core";
 import { User } from "src/app/models/user";
 import { UserInfoService } from "src/app/services/user.info.service";
 import { ToastService } from "../../services/toast-service";
+import { environment } from "../../../environments/environment";
 
 @Component({
   selector: "app-login",
@@ -44,7 +45,7 @@ export class LoginComponent implements OnInit {
 
   login() {
     this.http
-      .post("http://localhost:8082/login", {
+      .post(`${environment.baseUrl}:8082/login`, {
         username: this.user.username,
         password: this.user.password
       })

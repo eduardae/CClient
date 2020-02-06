@@ -2,6 +2,7 @@ import { Component, OnInit, Input } from "@angular/core";
 import { Http } from "@angular/http";
 import { _ } from "underscore";
 import { Article } from "../../../models/article";
+import { environment } from "src/environments/environment";
 
 @Component({
   selector: "app-news",
@@ -25,7 +26,7 @@ export class NewsPageComponent implements OnInit {
   }
 
   getNews() {
-    this.http.get("http://localhost:8083").subscribe(result => {
+    this.http.get(`${environment.baseUrl}:8083`).subscribe(result => {
       const response = result.json();
       console.log(response);
       this.articles = _.sortBy(response, article => {

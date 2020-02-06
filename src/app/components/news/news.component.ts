@@ -6,6 +6,7 @@ import { User } from "src/app/models/user";
 import { SESSION_STORAGE, WebStorageService } from "angular-webstorage-service";
 import { UserInfoService } from "src/app/services/user.info.service";
 import { LinkSection } from "src/app/models/link-section";
+import { environment } from "src/environments/environment";
 
 @Component({
   selector: "news",
@@ -36,7 +37,7 @@ export class NewsComponent implements OnInit {
   }
 
   getNews() {
-    this.http.get("http://localhost:8083").subscribe(result => {
+    this.http.get(`${environment.baseUrl}:8083`).subscribe(result => {
       const response = result.json();
       console.log(response);
       this.articles = _.sortBy(response, article => {
