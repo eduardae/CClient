@@ -20,6 +20,7 @@ export class HomeComponent implements OnInit {
   contentLoaded: boolean;
   currency: CurrencyInfo;
   currencyChangeSubscription: Subscription;
+  carouselImages: string[];
 
   constructor(
     private http: Http,
@@ -34,6 +35,11 @@ export class HomeComponent implements OnInit {
         this.refreshInfo();
       }
     );
+    this.carouselImages = [
+      "assets/images/carousel/btc_ether.jpg",
+      "assets/images/carousel/blockchain_flow.jpg",
+      "assets/images/carousel/bitcoin.jpg"
+    ];
   }
 
   ngOnInit() {

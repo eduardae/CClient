@@ -1,11 +1,44 @@
 <div class="home text-center">
-  <h2>Welcome to your Crypto Monitor</h2>
-  <div class="col-sm-8  offset-sm-2">
-    <img class="bc-cover" src="assets/images/blockchain.png" />
+  <div class="row">
+    <div class="col-12 no-ht-padding">
+      <ngb-carousel id="home-carousel" *ngIf="carouselImages">
+        <ng-template ngbSlide>
+          <div class="picsum-img-wrapper">
+            <img [src]="carouselImages[0]" alt="Random first slide" />
+          </div>
+          <div class="carousel-caption">
+            <h3>News</h3>
+            <p>Follow latest developments</p>
+          </div>
+        </ng-template>
+        <ng-template ngbSlide>
+          <div class="picsum-img-wrapper">
+            <img [src]="carouselImages[1]" alt="Random second slide" />
+          </div>
+          <div class="carousel-caption">
+            <h3>Academy</h3>
+            <p>
+              Take advantage of a collection of section-divided material
+            </p>
+          </div>
+        </ng-template>
+        <ng-template ngbSlide>
+          <div class="picsum-img-wrapper">
+            <img [src]="carouselImages[2]" alt="Random third slide" />
+          </div>
+          <div class="carousel-caption">
+            <h3>Prices</h3>
+            <p>Monitor prices and other financial data</p>
+          </div>
+        </ng-template>
+      </ngb-carousel>
+      <!--<img class="bc-cover" src="assets/images/blockchain.png" />-->
+    </div>
   </div>
+
   <div class="col-sm-6 offset-sm-3 text-center">
     <button class="btn btn-default btn-primary" (click)="refreshInfo()">
-      <span>Refresh</span>
+      <span>Refresh Prices</span>
       <span>
         <span
           style="display: inline-block; margin-left: 8px;"
