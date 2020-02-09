@@ -36,7 +36,7 @@ export class UserInfoService {
       .post(`${environment.baseUrl}:8082/update/settings`, user)
       .subscribe(
         result => {
-          this.toastService.show("User settings updated", {
+          this.toastService.show("User info updated", {
             classname: "bg-success text-light",
             delay: 2000
           });

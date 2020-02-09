@@ -1,7 +1,8 @@
 /* You can add global styles to this file, and also import other style files */
 // bower:scss
 // endbower
+
+@import "./_colors.scss";
 @import "./index.scss";
-@import "./colors.scss";
 @import "./cross-custom.scss";
 @import "./spacing.scss";

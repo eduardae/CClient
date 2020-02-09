@@ -7,6 +7,12 @@
 
 body {
   padding: 0;
+  overflow-y: auto;
+  -ms-overflow-style: none;
+}
+
+body::-webkit-scrollbar {
+  display: none;
 }
 
 /* Custom page header */

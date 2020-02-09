@@ -1,13 +1,38 @@
 :host {
   display: inline-block;
-  min-width: 32px;
+  min-width: 36px;
+}
+
+$basicSize: 36px;
+
+.coin-name {
+  display: inline-block;
+  margin: 4px;
+  text-transform: capitalize;
 }
 
 .coin-icon {
   display: block;
-  height: 32px;
+  margin: auto;
+  height: $basicSize;
   background-repeat: no-repeat;
   background-position: center;
+  background-size: contain;
+
+  &.x1_5 {
+    height: $basicSize * 1.5;
+    width: $basicSize * 1.5;
+  }
+
+  &.x2 {
+    height: $basicSize * 2;
+    width: $basicSize * 2;
+  }
+
+  &.x3 {
+    height: $basicSize * 3;
+    width: $basicSize * 3;
+  }
 
   &.bitcoin {
     background-image: url("node_modules/cryptocurrency-icons/svg/color/btc.svg");

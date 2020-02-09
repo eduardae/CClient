@@ -4,8 +4,18 @@
   margin-bottom: 112px;
 }
 
+:host::-webkit-scrollbar {
+  display: none;
+  -ms-overflow-style: none;
+}
+
 app-toasts {
   top: 76px;
+  right: 8px;
+}
+
+.navbar .dropdown-menu {
+  z-index: 9999999;
 }
 
 #username {

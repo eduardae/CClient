@@ -7,7 +7,7 @@
             <img [src]="carouselImages[0]" alt="Random first slide" />
           </div>
           <div class="carousel-caption">
-            <h3>News</h3>
+            <h2>News</h2>
             <p>Follow latest developments</p>
           </div>
         </ng-template>
@@ -16,7 +16,7 @@
             <img [src]="carouselImages[1]" alt="Random second slide" />
           </div>
           <div class="carousel-caption">
-            <h3>Academy</h3>
+            <h2>Academy</h2>
             <p>
               Take advantage of a collection of section-divided material
             </p>
@@ -27,7 +27,7 @@
             <img [src]="carouselImages[2]" alt="Random third slide" />
           </div>
           <div class="carousel-caption">
-            <h3>Prices</h3>
+            <h2>Prices</h2>
             <p>Monitor prices and other financial data</p>
           </div>
         </ng-template>
@@ -56,79 +56,105 @@
   </div>
 
   <div class="row icons" *ngIf="contentLoaded">
-    <div class="col-6 col-md-3 icon-container">
-      <coin
-        [price]="cryptoInfos.btc.price"
-        [precision]="2"
-        [currency]="currency"
-        [name]="'bitcoin'"
-        [iconId]="'bitcoin'"
-      ></coin>
+    <div class="col-6 col-md-3">
+      <div class="icon-container">
+        <coin
+          [price]="cryptoInfos.btc.price"
+          [precision]="2"
+          [currency]="currency"
+          [name]="'bitcoin'"
+          [iconId]="'bitcoin'"
+          [nameWeight]="500"
+          [iconSizeMultiplier]="3"
+        ></coin>
+      </div>
     </div>
-    <div class="col-6 col-md-3 icon-container">
-      <coin
-        [price]="cryptoInfos.ether.price"
-        [precision]="2"
-        [currency]="currency"
-        [name]="'ethereum'"
-        [iconId]="'ethereum'"
-      ></coin>
+    <div class="col-6 col-md-3">
+      <div class="icon-container">
+        <coin
+          [price]="cryptoInfos.ether.price"
+          [precision]="2"
+          [currency]="currency"
+          [name]="'ethereum'"
+          [iconId]="'ethereum'"
+          [nameWeight]="500"
+          [iconSizeMultiplier]="3"
+        ></coin>
+      </div>
     </div>
-    <div class="col-6 col-md-3 icon-container">
-      <coin
-        [price]="cryptoInfos.cardano.price"
-        [precision]="3"
-        [currency]="currency"
-        [name]="'cardano'"
-        [iconId]="'cardano'"
-      ></coin>
+    <div class="col-6 col-md-3">
+      <div class="icon-container">
+        <coin
+          [price]="cryptoInfos.cardano.price"
+          [precision]="3"
+          [currency]="currency"
+          [name]="'cardano'"
+          [iconId]="'cardano'"
+          [nameWeight]="500"
+        ></coin>
+      </div>
     </div>
-    <div class="col-6 col-md-3 icon-container">
-      <coin
-        [price]="cryptoInfos.litecoin.price"
-        [precision]="2"
-        [currency]="currency"
-        [name]="'litecoin'"
-        [iconId]="'litecoin'"
-      ></coin>
+    <div class="col-6 col-md-3">
+      <div class="icon-container">
+        <coin
+          [price]="cryptoInfos.litecoin.price"
+          [precision]="2"
+          [currency]="currency"
+          [name]="'litecoin'"
+          [iconId]="'litecoin'"
+          [nameWeight]="500"
+        ></coin>
+      </div>
     </div>
   </div>
   <div class="row" *ngIf="contentLoaded">
-    <div class="col-6 col-md-3 icon-container">
-      <coin
-        [price]="cryptoInfos.chainlink.price"
-        [precision]="2"
-        [currency]="currency"
-        [name]="'chainlink'"
-        [iconId]="'chainlink'"
-      ></coin>
+    <div class="col-6 col-md-3">
+      <div class="icon-container">
+        <coin
+          [price]="cryptoInfos.chainlink.price"
+          [precision]="2"
+          [currency]="currency"
+          [name]="'chainlink'"
+          [iconId]="'chainlink'"
+          [nameWeight]="500"
+        ></coin>
+      </div>
     </div>
-    <div class="col-6 col-md-3 icon-container">
-      <coin
-        [price]="cryptoInfos.tether.price"
-        [precision]="2"
-        [currency]="currency"
-        [name]="'tether'"
-        [iconId]="'tether'"
-      ></coin>
+    <div class="col-6 col-md-3">
+      <div class="icon-container">
+        <coin
+          [price]="cryptoInfos.tether.price"
+          [precision]="2"
+          [currency]="currency"
+          [name]="'tether'"
+          [iconId]="'tether'"
+          [nameWeight]="500"
+        ></coin>
+      </div>
     </div>
-    <div class="col-6 col-md-3 icon-container">
-      <coin
-        [price]="cryptoInfos.tezos.price"
-        [precision]="2"
-        [currency]="currency"
-        [name]="'tezos'"
-        [iconId]="'tezos'"
-      ></coin>
+    <div class="col-6 col-md-3 ">
+      <div class="icon-container">
+        <coin
+          [price]="cryptoInfos.tezos.price"
+          [precision]="2"
+          [currency]="currency"
+          [name]="'tezos'"
+          [iconId]="'tezos'"
+          [nameWeight]="500"
+        ></coin>
+      </div>
     </div>
-    <div class="col-6 col-md-3 icon-container">
-      <coin
-        [price]="cryptoInfos.xrp.price"
-        [precision]="3"
-        [currency]="currency"
-        [name]="'ripple'"
-        [iconId]="'ripple'"
-      ></coin>
+    <div class="col-6 col-md-3">
+      <div class="icon-container">
+        <coin
+          [price]="cryptoInfos.xrp.price"
+          [precision]="3"
+          [currency]="currency"
+          [name]="'ripple'"
+          [iconId]="'ripple'"
+          [nameWeight]="500"
+        ></coin>
+      </div>
     </div>
   </div>
 </div>

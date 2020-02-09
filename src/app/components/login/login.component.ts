@@ -51,14 +51,10 @@ export class LoginComponent implements OnInit {
       })
       .subscribe(
         result => {
-          this.toastService.show("Successfully logged", {
-            classname: "bg-success text-light",
-            delay: 2000
-          });
           const userFromDb = result.json();
           this.storage.set("currentUser", JSON.stringify({ user: userFromDb }));
           this.userService.loginEvent(userFromDb);
-          this.router.navigateByUrl("/");
+          this.router.navigateByUrl("/settings");
         },
         err => {
           this.toastService.show(err._body, {

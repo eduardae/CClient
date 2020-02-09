@@ -132,6 +132,16 @@
             </div>
           </ng-template>
         </ngb-tab>
+        <ngb-tab title="News Mentions">
+          <ng-template ngbTabContent>
+            <div id="news-loader-container" *ngIf="!articles">
+              <horizontal-loader></horizontal-loader>
+            </div>
+            <div class="mt-4">
+              <news [articles]="this.articles"></news>
+            </div>
+          </ng-template>
+        </ngb-tab>
         <ngb-tab title="Development and Engagement">
           <ng-template ngbTabContent>
             <div class="row">
@@ -244,16 +254,6 @@
                   </div>
                 </div>
               </div>
-            </div>
-          </ng-template>
-        </ngb-tab>
-        <ngb-tab title="News Mentions">
-          <ng-template ngbTabContent>
-            <div id="news-loader-container" *ngIf="!articles">
-              <horizontal-loader></horizontal-loader>
-            </div>
-            <div class="mt-4">
-              <news [articles]="this.articles"></news>
             </div>
           </ng-template>
         </ngb-tab>

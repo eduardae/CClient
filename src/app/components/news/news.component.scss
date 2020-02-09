@@ -21,6 +21,8 @@
         line-height: 1.3em;
         display: inline-block;
         vertical-align: middle;
+        overflow: hidden;
+        text-overflow: ellipsis;
       }
 
       .fa-bookmark {
@@ -32,7 +34,6 @@
 
     .img-container {
       display: flex;
-      height: 340px;
       align-items: center;
       align-content: center;
 
@@ -82,11 +83,16 @@
   .articles {
     .article {
       height: 320px;
+      margin-bottom: 32px;
 
       .article-title {
-        max-height: 98px;
-        line-height: 98px;
+        max-height: 106px;
+        line-height: 106px;
         overflow: hidden;
+
+        .title-txt {
+          line-height: 1.1em;
+        }
       }
 
       .article-img {

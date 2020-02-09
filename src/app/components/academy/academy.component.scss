@@ -1,6 +1,9 @@
 :host {
   width: 100%;
   height: 100%;
+  &::-webkit-scrollbar {
+    display: none;
+  }
 }
 
 #academy {
@@ -22,7 +25,7 @@
     .fa-bookmark {
       display: inline-block;
       margin-left: 4px;
-      color: mediumvioletred;
+      color: #131112;
       cursor: pointer;
     }
   }

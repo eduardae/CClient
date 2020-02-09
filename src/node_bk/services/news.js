@@ -34,24 +34,10 @@ var server = app.listen(8083, function () {
   console.log("Example app listening at http://%s:%s", host, port);
 });
 
-var getBtcNews = async function () {
-  let current_date = moment().format("yyyy-MM-dd");
-  let interval_date = moment().subtract(2, 'd').format("yyyy-MM-dd");
-  let data = await newsapi.v2.everything({
-    q: 'cryptocurrency',
-    domains: 'decrypt.co,coindesk.com,forbes.com',
-    language: 'en',
-    from: interval_date,
-    to: current_date,
-    sortBy: 'date'
-  });
-  return data;
-}
-
 var getNews = async function () {
   // Connect to the CryptoControl API
   const Api = new CryptoNewsAPI('75dd43125e51eefa036d1ce38fba8507');
-  let articles = await Api.getTopNews();
+  let articles = await Api.getLatestNews();
 
   return articles;
 }

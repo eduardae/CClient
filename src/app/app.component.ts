@@ -72,10 +72,6 @@ export class AppComponent {
   logout() {
     this.sessionStorage.set("currentUser", null);
     this.user = null;
-    this.toastService.show("Logged out", {
-      classname: "bg-success text-light",
-      delay: 2000
-    });
     this.router.navigateByUrl("/");
   }
 
