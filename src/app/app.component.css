@@ -9,6 +9,10 @@
   -ms-overflow-style: none;
 }
 
+.app-container {
+  max-width: 1980px;
+}
+
 app-toasts {
   top: 76px;
   right: 8px;
@@ -24,8 +28,8 @@ app-toasts {
 }
 
 #currency-select {
-  border-color: #007bff;
-  color: #007bff;
+  border-color: #22aed1;
+  color: #22aed1;
   font-weight: normal;
   top: 2px;
   position: relative;

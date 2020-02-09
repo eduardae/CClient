@@ -18,23 +18,22 @@
   }
 
   .links-container {
-    border: 1px solid #007bff;
+    border: 1px solid #22aed1;
     border-radius: 2px;
     top: -2px;
+    overflow-y: auto;
+    height: 236px;
+    -ms-overflow-style: hidden;
+
+    &::-webkit-scrollbar {
+      display: none;
+    }
 
     .fa-bookmark {
       display: inline-block;
       margin-left: 4px;
       color: #131112;
       cursor: pointer;
-    }
-  }
-}
-
-@media (min-width: 1024px) {
-  #academy {
-    .links-container {
-      min-height: 250px;
     }
   }
 }

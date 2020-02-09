@@ -11,14 +11,14 @@
 
     .article-title {
       display: inline-block;
-      height: 108px;
+      height: 96px;
       font-weight: bold;
       vertical-align: middle;
-      font-size: 1.2em;
-      line-height: 108px;
+      font-size: 1.1em;
+      line-height: 96px;
 
       .title-txt {
-        line-height: 1.3em;
+        line-height: 1.2em;
         display: inline-block;
         vertical-align: middle;
         overflow: hidden;
@@ -36,9 +36,11 @@
       display: flex;
       align-items: center;
       align-content: center;
+      height: 300px;
 
       a {
         width: 100%;
+        display: inherit;
       }
     }
 
@@ -68,6 +70,12 @@
     .article {
       height: 360px;
 
+      .article-title {
+        .title-txt {
+          line-height: 1.1em;
+        }
+      }
+
       .img-container {
         height: 200px;
       }
@@ -89,10 +97,6 @@
         max-height: 106px;
         line-height: 106px;
         overflow: hidden;
-
-        .title-txt {
-          line-height: 1.1em;
-        }
       }
 
       .article-img {

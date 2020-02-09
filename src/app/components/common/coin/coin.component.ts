@@ -12,6 +12,7 @@ import { CurrencyInfo } from "src/app/models/currency-info";
 })
 export class CoinComponent implements OnInit, OnChanges {
   @Input() name: string;
+  @Input() tooltipTxt: string;
   @Input() iconId: string;
   @Input() price: number;
   @Input() currency: CurrencyInfo;

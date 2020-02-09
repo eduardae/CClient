@@ -98,7 +98,7 @@ body {
   ::ng-deep .coin-name {
     margin: 8px;
     font-size: 1.1em;
-    color: #007bff;
+    color: #3a015c;
   }
 }
 
@@ -117,28 +117,17 @@ body {
     margin-bottom: 32px;
     z-index: 0;
   }
-}
-
-@media (max-width: 1280x) {
-  #home-carousel {
-    img {
-      height: 680px;
-    }
+  .carousel-indicators {
+    z-index: 0;
   }
 }
 
-@media screen and (max-width: 1024px) {
-  #home-carousel {
-    img {
-      height: 440px;
-    }
-  }
-}
-
-@media screen and (max-width: 1024px) {
-  #home-carousel {
-    img {
-      height: 440px;
+@media (max-width: 2560px) {
+  @media (max-height: 768px) {
+    #home-carousel {
+      img {
+        height: 692px;
+      }
     }
   }
 }
@@ -146,7 +135,7 @@ body {
 @media screen and (max-width: 768px) {
   #home-carousel {
     img {
-      height: 320px;
+      height: 368px;
     }
   }
 }

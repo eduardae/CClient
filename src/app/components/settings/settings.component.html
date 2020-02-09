@@ -212,7 +212,13 @@
                     *ngFor="let coinId of user.bookmarked_coins"
                     [routerLink]="['/coinpage', coinId]"
                   >
-                    <coin iconId="{{ coinId }}"></coin>
+                    <coin
+                      tooltipTxt="{{
+                        coinId[0].toUpperCase() +
+                          coinId.substring(1, coinId.length)
+                      }}"
+                      iconId="{{ coinId }}"
+                    ></coin>
                   </span>
                 </div>
 
