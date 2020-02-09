@@ -1,25 +1,69 @@
 <div class="container-fluid text-center">
-  <div class="row articles">
-    <div class="col-12 col-md-6 col-lg-4" *ngFor="let article of articles">
-      <div class="article text-center">
-        <span class="article-title">
-          <span class="title-txt">
-            {{ article.title }}
-            <span
-              class="fa fa-bookmark"
-              *ngIf="user && user.username"
-              (click)="addArticleToSavedLinks(article)"
-            ></span>
+  <div class="articles">
+    <div class="row articles-grid" *ngIf="listMode === false">
+      <div class="col-12 col-sm-6 col-xl-4" *ngFor="let article of articles">
+        <div class="article text-center">
+          <span class="article-title">
+            <span class="title-txt">
+              {{ article.title }}
+              <span
+                class="fa fa-bookmark"
+                *ngIf="user && user.username"
+                (click)="addArticleToSavedLinks(article)"
+              ></span>
+            </span>
           </span>
-        </span>
-        <div class="img-container">
-          <a href="{{ article.url }}" target="_blank">
-            <img
-              class="article-img"
-              [src]="article.originalImageUrl"
-              (error)="updateArticleUrl(article)"
-            />
-          </a>
+          <div class="img-container">
+            <a href="{{ article.url }}" target="_blank">
+              <img
+                class="article-img"
+                [src]="article.originalImageUrl"
+                (error)="updateArticleUrl(article)"
+              />
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row" *ngIf="listMode === true">
+      <div class="col-12" *ngFor="let article of articles">
+        <div class="news-list-item-container">
+          <div class="row article">
+            <div class="col-6">
+              <div class="text-center">
+                <div class="img-container">
+                  <div>
+                    <a href="{{ article.url }}" target="_blank">
+                      <img
+                        class="article-img"
+                        [src]="article.originalImageUrl"
+                        (error)="updateArticleUrl(article)"
+                      />
+                    </a>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-6 text-left">
+              <div>
+                <div class="article-title">
+                  <h5 class="title-txt">{{ article.title }}</h5>
+                </div>
+                <p class="mt-4 text-justify article-description">
+                  {{ article.description }}
+                </p>
+              </div>
+              <div class="article-buttons">
+                <button
+                  class="btn btn-default btn-primary"
+                  *ngIf="user && user.username"
+                  (click)="addArticleToSavedLinks(article)"
+                >
+                  Save article
+                </button>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </div>

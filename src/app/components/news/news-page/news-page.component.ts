@@ -13,6 +13,7 @@ export class NewsPageComponent implements OnInit {
   articles: Article[];
   isUpdating: boolean;
   response: string;
+  listMode: boolean = false;
 
   constructor(private http: Http) {}
 
@@ -44,5 +45,9 @@ export class NewsPageComponent implements OnInit {
       return article === articleIn;
     });
     art.originalImageUrl = "./assets/images/newspaper.png";
+  }
+
+  toggleListMode(listMode: boolean) {
+    this.listMode = listMode;
   }
 }

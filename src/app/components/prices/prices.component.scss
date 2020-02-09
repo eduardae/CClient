@@ -11,6 +11,7 @@
 .indicators {
   margin-top: 32px;
 }
+
 @media (max-width: 1024px) {
   #price-chart {
     height: 328px !important;
@@ -19,6 +20,12 @@
 
   .indicators {
     margin-top: 16px;
+  }
+
+  @media (max-height: 768px) {
+    #price-chart {
+      height: 420px !important;
+    }
   }
 }
 

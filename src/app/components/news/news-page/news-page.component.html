@@ -1,4 +1,21 @@
 <div class="container-fluid text-center">
-  <h2 class="pt-5 pb-5">Latest news on crypto</h2>
-  <news [articles]="this.articles"></news>
+  <div>
+    <h2 class="pt-5 pb-2">Latest news on crypto</h2>
+    <div id="view-mode-selector">
+      <div>
+        <span
+          class="fa fa-list"
+          [ngClass]="{ active: listMode }"
+          (click)="toggleListMode(true)"
+        ></span>
+        <span
+          class="fa fa-th"
+          [ngClass]="{ active: listMode }"
+          (click)="toggleListMode(false)"
+        ></span>
+      </div>
+    </div>
+  </div>
+
+  <news [listMode]="listMode" [articles]="this.articles"></news>
 </div>
