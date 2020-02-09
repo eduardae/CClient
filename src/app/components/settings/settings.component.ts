@@ -58,19 +58,19 @@ export class SettingsComponent implements OnInit {
   }
 
   removeLink(link: Link) {
+    this.user.saved_links = _.filter(this.user.saved_links, savedLink => {
+      return link.url !== savedLink.url;
+    });
     if (link.section === LinkSection.NEWS) {
-      this.newsArticles = _.filter(this.user.saved_links, savedLink => {
+      this.newsArticles = _.filter(this.newsArticles, savedLink => {
         return link.url !== savedLink.url;
       });
     }
     if (link.section === LinkSection.ACADEMY) {
-      this.academyLinks = _.filter(this.user.saved_links, savedLink => {
+      this.academyLinks = _.filter(this.academyLinks, savedLink => {
         return link.url !== savedLink.url;
       });
     }
-    this.user.saved_links = _.filter(this.user.saved_links, savedLink => {
-      return link.url !== savedLink.url;
-    });
     this.userService.updateLinks(this.user);
   }
 
