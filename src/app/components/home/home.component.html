@@ -57,7 +57,7 @@
 
   <div class="row icons" *ngIf="contentLoaded">
     <div class="col-6 col-md-3">
-      <div class="icon-container">
+      <div class="icon-container" [routerLink]="'/coinpage/bitcoin'">
         <coin
           [price]="cryptoInfos.btc.price"
           [precision]="2"
@@ -70,7 +70,7 @@
       </div>
     </div>
     <div class="col-6 col-md-3">
-      <div class="icon-container">
+      <div class="icon-container" [routerLink]="'/coinpage/ethereum'">
         <coin
           [price]="cryptoInfos.ether.price"
           [precision]="2"
@@ -83,7 +83,7 @@
       </div>
     </div>
     <div class="col-6 col-md-3">
-      <div class="icon-container">
+      <div class="icon-container" [routerLink]="'/coinpage/cardano'">
         <coin
           [price]="cryptoInfos.cardano.price"
           [precision]="3"
@@ -95,7 +95,7 @@
       </div>
     </div>
     <div class="col-6 col-md-3">
-      <div class="icon-container">
+      <div class="icon-container" [routerLink]="'/coinpage/litecoin'">
         <coin
           [price]="cryptoInfos.litecoin.price"
           [precision]="2"
@@ -109,7 +109,7 @@
   </div>
   <div class="row" *ngIf="contentLoaded">
     <div class="col-6 col-md-3">
-      <div class="icon-container">
+      <div class="icon-container" [routerLink]="'/coinpage/chainlink'">
         <coin
           [price]="cryptoInfos.chainlink.price"
           [precision]="2"
@@ -121,7 +121,7 @@
       </div>
     </div>
     <div class="col-6 col-md-3">
-      <div class="icon-container">
+      <div class="icon-container" [routerLink]="'/coinpage/tether'">
         <coin
           [price]="cryptoInfos.tether.price"
           [precision]="2"
@@ -133,7 +133,7 @@
       </div>
     </div>
     <div class="col-6 col-md-3 ">
-      <div class="icon-container">
+      <div class="icon-container" [routerLink]="'/coinpage/tezos'">
         <coin
           [price]="cryptoInfos.tezos.price"
           [precision]="2"
@@ -145,7 +145,7 @@
       </div>
     </div>
     <div class="col-6 col-md-3">
-      <div class="icon-container">
+      <div class="icon-container" [routerLink]="'/coinpage/ripple'">
         <coin
           [price]="cryptoInfos.xrp.price"
           [precision]="3"

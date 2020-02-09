@@ -148,6 +148,21 @@
   }
 }
 
+@media (max-width: 1024px) {
+  .articles {
+    .news-list-item-container {
+      height: 256px;
+      .article {
+        .article-img {
+          max-height: 196px;
+        }
+      }
+    }
+
+    max-height: 196px;
+  }
+}
+
 @media screen and (max-width: 768px) {
   .articles {
     .articles-grid {
@@ -168,9 +183,13 @@
     }
 
     .news-list-item-container {
-      height: 320px;
+      height: 200px;
+      width: 100%;
 
       .article {
+        .article-title {
+          -webkit-line-clamp: 2;
+        }
         .article-description {
           -webkit-line-clamp: 3;
         }
