@@ -26,6 +26,13 @@ import { Portfolio } from "src/app/models/portfolio";
 import { HttpClient } from "@angular/common/http";
 import { CoinInfoService } from "src/app/services/coin.info.service";
 import { Price } from "src/app/models/price";
+import {
+  debounceTime,
+  distinctUntilChanged,
+  map,
+  filter
+} from "rxjs/operators";
+import { Observable } from "rxjs/internal/Observable";
 
 @Component({
   selector: "select-coin-modal-content",
@@ -47,7 +54,7 @@ import { Price } from "src/app/models/price";
     <div class="modal-body">
       <form>
         <div class="form-group">
-          <div class="row">
+          <!--<div class="row">
             <div class="col-6 col-sm-3" *ngFor="let coin of coins">
               <span
                 class="coin-container"
@@ -56,6 +63,52 @@ import { Price } from "src/app/models/price";
               >
                 <coin name="{{ coin.name }}" iconId="{{ coin.queryId }}"></coin>
               </span>
+            </div>
+          </div>-->
+
+          <div class="container-fluid mt-3">
+            <div class="row">
+              <div class="col-12 col-sm-4">
+                <label class="font-weight-bold" for="selected-coin"
+                  >Coin id</label
+                >
+              </div>
+              <div class="col-12 col-sm-8">
+                <input
+                  name="selected-coin"
+                  id="typeahead-prevent-manual-entry"
+                  type="text"
+                  class="form-control"
+                  [(ngModel)]="currentlySelectedCoin"
+                  [ngbTypeahead]="search"
+                  [inputFormatter]="formatter"
+                  [resultFormatter]="formatter"
+                  [editable]="false"
+                />
+              </div>
+            </div>
+            <div class="row mt-3">
+              <div class="col-12 col-sm-4">
+                <label for="coin-units" class="font-weight-bold"
+                  >Quantity</label
+                >
+              </div>
+              <div class="col-12 col-sm-8">
+                <input
+                  class="form-control"
+                  type="number"
+                  name="coin-units"
+                  placeholder="Coin units"
+                  [(ngModel)]="coinQuantity"
+                />
+              </div>
+            </div>
+            <div class="row mt-3">
+              <div class="col-12">
+                <button class="btn btn-default btn-primary">
+                  <span>Add To Portfolio</span>
+                </button>
+              </div>
             </div>
           </div>
         </div>
@@ -75,8 +128,25 @@ import { Price } from "src/app/models/price";
 export class SelectCoinModalContent implements OnInit {
   coins: CoinInfo[];
   selectedCoins: CoinInfo[];
+  currentlySelectedCoin: CoinInfo;
+  coinQuantity: number;
   user: User;
   portfolio: Portfolio;
+
+  formatter = (coin: CoinInfo) => coin.queryId;
+
+  search = (text$: Observable<string>) =>
+    text$.pipe(
+      debounceTime(200),
+      distinctUntilChanged(),
+      map(term =>
+        term.length < 2
+          ? []
+          : this.coins
+              .filter(v => v.queryId.indexOf(term.toLowerCase()) > -1)
+              .slice(0, 10)
+      )
+    );
 
   constructor(
     public modal: NgbActiveModal,
@@ -121,16 +191,6 @@ export class SelectCoinModalContent implements OnInit {
   }
 
   createPortfolio() {
-    /*for (let coin of this.selectedCoins) {
-      this.coinInfoService.getCoinInfo(coin.queryId).subscribe(
-        result => {
-          this.portfolio.startingCoinValues[coin.queryId] = result.price;
-        },
-        err => {
-          console.log(err._body);
-        }
-      );
-    }*/
     this.coinInfoService.getMultipleCoinsInfo(this.selectedCoins).subscribe(
       responseList => {
         for (let response of responseList) {
