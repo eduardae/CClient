@@ -48,6 +48,7 @@ export class SettingsComponent implements OnInit {
     if (this.storage.get("currentUser")) {
       this.user = JSON.parse(this.storage.get("currentUser")).user;
       const savedLinks = this.user.saved_links;
+      this.getPortfolios();
       savedLinks.forEach(link => {
         if (link.section === LinkSection.NEWS) {
           this.newsArticles.push(link);
@@ -80,5 +81,17 @@ export class SettingsComponent implements OnInit {
     this.userService.updateSettings(this.user);
   }
 
-  addPortfolio() {}
+  getPortfolios() {
+    this.userService.getPortfolios(this.user).subscribe(
+      result => {
+        this.portfolios = result;
+      },
+      err => {
+        this.toastService.show(err._body, {
+          classname: "bg-danger text-light",
+          delay: 3500
+        });
+      }
+    );
+  }
 }

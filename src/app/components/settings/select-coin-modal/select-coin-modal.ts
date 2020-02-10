@@ -24,10 +24,12 @@ import { UserInfoService } from "src/app/services/user.info.service";
 import { environment } from "src/environments/environment";
 import { Portfolio } from "src/app/models/portfolio";
 import { HttpClient } from "@angular/common/http";
+import { CoinInfoService } from "src/app/services/coin.info.service";
+import { Price } from "src/app/models/price";
 
 @Component({
   selector: "select-coin-modal-content",
-  providers: [UserInfoService],
+  providers: [UserInfoService, CoinInfoService],
   template: `
     <div class="modal-header">
       <h4 class="modal-title" id="modal-basic-title">
@@ -81,6 +83,7 @@ export class SelectCoinModalContent implements OnInit {
     private http: HttpClient,
     public toastService: ToastService,
     private userService: UserInfoService,
+    private coinInfoService: CoinInfoService,
     @Inject(SESSION_STORAGE) private sessionStorage: WebStorageService
   ) {}
 
@@ -118,27 +121,52 @@ export class SelectCoinModalContent implements OnInit {
   }
 
   createPortfolio() {
-    for (let coin of this.selectedCoins) {
-      this.portfolio.startingCoinValues[coin.queryId] = coin.price;
-    }
-    this.portfolio.userId = this.user._id;
-
-    this.http
-      .post(`${environment.baseUrl}:8085/create_portfolio`, this.portfolio)
-      .subscribe(
+    /*for (let coin of this.selectedCoins) {
+      this.coinInfoService.getCoinInfo(coin.queryId).subscribe(
         result => {
-          this.toastService.show("Portfolio created", {
-            classname: "bg-success text-light",
-            delay: 2000
-          });
+          this.portfolio.startingCoinValues[coin.queryId] = result.price;
         },
         err => {
-          this.toastService.show(err._body, {
-            classname: "bg-danger text-light",
-            delay: 3500
-          });
+          console.log(err._body);
         }
       );
+    }*/
+    this.coinInfoService.getMultipleCoinsInfo(this.selectedCoins).subscribe(
+      responseList => {
+        for (let response of responseList) {
+          const coinData = response.data;
+          const marketData = coinData.market_data.current_price;
+          const coinPrice = new Price();
+          coinPrice.eur = marketData.eur;
+          coinPrice.usd = marketData.usd;
+          coinPrice.gbp = marketData.gbp;
+          coinPrice.cny = marketData.cny;
+          this.portfolio.startingCoinValues[coinData.id] = coinPrice;
+        }
+        this.portfolio.userId = this.user._id;
+        this.portfolio.startDate = new Date();
+
+        this.http
+          .post(`${environment.baseUrl}:8085/create_portfolio`, this.portfolio)
+          .subscribe(
+            result => {
+              this.toastService.show("Portfolio created", {
+                classname: "bg-success text-light",
+                delay: 2000
+              });
+            },
+            err => {
+              this.toastService.show(err._body, {
+                classname: "bg-danger text-light",
+                delay: 3500
+              });
+            }
+          );
+      },
+      err => {
+        console.log(err._body);
+      }
+    );
   }
 }
 

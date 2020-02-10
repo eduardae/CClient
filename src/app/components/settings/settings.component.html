@@ -239,20 +239,23 @@
                   <h5 class="font-weight-bold">Simulated Portfolios</h5>
                 </div>
               </div>
-              <div class="row mt-3">
-                <div
-                  class="col-12"
-                  *ngIf="portfolios ? portfolios.length === 0 : true"
-                >
+              <div
+                class="row mt-3"
+                *ngIf="portfolios ? portfolios.length === 0 : true"
+              >
+                <div class="col-12">
                   <p>You haven't created a portfolio yet.</p>
                 </div>
-                <div *ngIf="portfolios && portfolios.length !== 0">
-                  <div
-                    class="col-12 col-xs-6 col-sm-4"
-                    *ngFor="let portfolio of portfolios"
-                  >
-                    <div>Portfolio {{ portfolio.userId }}</div>
-                  </div>
+              </div>
+              <div
+                class="row mt-3"
+                *ngIf="portfolios && portfolios.length !== 0"
+              >
+                <div
+                  class="col-12 col-sm-6"
+                  *ngFor="let portfolio of portfolios"
+                >
+                  <div>Portfolio {{ portfolio.userId }}</div>
                 </div>
               </div>
               <div class="row mt-5">

@@ -1,5 +1,5 @@
 import { Injectable, Inject } from "@angular/core";
-import { Subject } from "rxjs";
+import { Subject, Observable } from "rxjs";
 import { User } from "../models/user";
 import { Http } from "@angular/http";
 import { ToastService } from "./toast-service";
@@ -165,5 +165,12 @@ export class UserInfoService {
           });
         }
       );
+  }
+
+  getPortfolios(user: User): Observable<Portfolio[]> {
+    return this.http.post<Portfolio[]>(
+      `${environment.baseUrl}:8085/get_portfolios_by_user`,
+      user
+    );
   }
 }

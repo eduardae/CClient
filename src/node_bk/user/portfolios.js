@@ -41,7 +41,7 @@ app.post('/get_portfolio', function (req, res) {
     console.log("Connected to MongoDB!");
     const db = client.db('local');
     const reqQuery = req.body;
-    db.collection("portfolios").find({ userId: reqQuery._id }).toArray(function (dberr, docs) {
+    db.collection("portfolios").find({ _id: reqQuery._id }).toArray(function (dberr, docs) {
       if (dberr) {
         res.status(500).end(dberr);
       } else {
@@ -55,8 +55,30 @@ app.post('/get_portfolio', function (req, res) {
     }, function (err) {
       // done or error
     });
+  });
+});
 
-
+app.post('/get_portfolios_by_user', function (req, res) {
+  // Make a connection to MongoDB Service
+  MongoClient.connect(url, function (connerr, client) {
+    if (connerr) res.status(500).end(connerr);
+    console.log("Connected to MongoDB!");
+    const db = client.db('local');
+    const reqQuery = req.body;
+    db.collection("portfolios").find({ userId: reqQuery._id }).toArray(function (dberr, docs) {
+      if (dberr) {
+        res.status(500).end(dberr);
+      } else {
+        if (docs && docs.length != 0) {
+          res.json(docs);
+        } else {
+          res.status(404).end('No portfolio found');
+        }
+        client.close();
+      }
+    }, function (err) {
+      // done or error
+    });
   });
 });
 
