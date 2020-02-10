@@ -37,7 +37,7 @@ app.post('/register', function (req, res) {
               if (dberr) {
                 res.status(500).send(dberr);
               } else {
-                res.status(200).end('User registered');
+                res.status(200).json('User registered');
                 client.close();
               }
             }, function (err) {

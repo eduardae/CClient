@@ -1,0 +1,45 @@
+.add-coin-btn {
+  font-weight: bold;
+  min-width: 60%;
+  span {
+    vertical-align: middle;
+  }
+  i {
+    display: inline-block;
+    margin-top: -1px;
+    margin-left: 8px;
+    text-align: center;
+    vertical-align: text-bottom;
+    font-size: 1.3em;
+  }
+}
+
+.add-coin-modal {
+  .modal-dialog {
+    margin: 7rem auto auto auto;
+  }
+
+  .coin-container {
+    align-content: center;
+    align-items: center;
+    justify-content: center;
+    display: flex;
+    min-height: 84px;
+    margin: 8px;
+    cursor: pointer;
+
+    &:hover {
+      border: 1px solid #eee;
+      border-radius: 4px;
+    }
+
+    &.selected {
+      border: 1px solid;
+      border-radius: 4px;
+    }
+  }
+
+  button.close {
+    outline: none;
+  }
+}

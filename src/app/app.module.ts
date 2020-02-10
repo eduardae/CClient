@@ -31,6 +31,10 @@ import { HorizontalLoader } from "./components/common/horizontal-loader/horizont
 import { JWTInterceptor } from "./interceptors/jwt.interceptor";
 import { CoinPageComponent } from "./components/coinpage/coin-page.component";
 import { NewsPageComponent } from "./components/news/news-page/news-page.component";
+import {
+  SelectCoinModal,
+  SelectCoinModalContent
+} from "./components/settings/select-coin-modal/select-coin-modal";
 
 const appRoutes: Routes = [
   { path: "", redirectTo: "home", pathMatch: "full" },
@@ -64,7 +68,9 @@ const appRoutes: Routes = [
     CoinPageComponent,
     CoinComponent,
     AddCoinModal,
-    AddCoinModalContent
+    AddCoinModalContent,
+    SelectCoinModal,
+    SelectCoinModalContent
   ],
   imports: [
     BrowserAnimationsModule,
@@ -77,7 +83,13 @@ const appRoutes: Routes = [
     StorageServiceModule,
     NgbModule
   ],
-  entryComponents: [AddCoinModal, AddCoinModalContent, CoinComponent],
+  entryComponents: [
+    AddCoinModal,
+    AddCoinModalContent,
+    SelectCoinModal,
+    SelectCoinModalContent,
+    CoinComponent
+  ],
   exports: [RouterModule],
   providers: [
     { provide: APP_BASE_HREF, useValue: "/" },

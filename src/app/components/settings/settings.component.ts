@@ -21,6 +21,7 @@ import { HttpClient } from "@angular/common/http";
 import { Link } from "src/app/models/Link";
 import { LinkSection } from "src/app/models/link-section";
 import { _ } from "underscore";
+import { Portfolio } from "src/app/models/portfolio";
 @Component({
   selector: "app-settings",
   templateUrl: "./settings.component.html",
@@ -30,6 +31,7 @@ export class SettingsComponent implements OnInit {
   user: User;
   newsArticles: Link[];
   academyLinks: Link[];
+  portfolios: Portfolio[];
 
   // tslint:disable-next-line: max-line-length
   constructor(
@@ -77,4 +79,6 @@ export class SettingsComponent implements OnInit {
   update() {
     this.userService.updateSettings(this.user);
   }
+
+  addPortfolio() {}
 }

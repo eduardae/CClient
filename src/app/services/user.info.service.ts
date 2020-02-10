@@ -11,6 +11,7 @@ import { Link } from "../models/Link";
 import { LinkSection } from "../models/link-section";
 import { _ } from "underscore";
 import { environment } from "src/environments/environment";
+import { Portfolio } from "../models/portfolio";
 
 @Injectable()
 export class UserInfoService {
@@ -137,6 +138,25 @@ export class UserInfoService {
             "currentUser",
             JSON.stringify({ user: user })
           );
+        },
+        err => {
+          this.toastService.show(err._body, {
+            classname: "bg-danger text-light",
+            delay: 3500
+          });
+        }
+      );
+  }
+
+  addPortfolio(user: User, portfolio: Portfolio) {
+    this.http
+      .post(`${environment.baseUrl}:8085/create_portfolio`, user)
+      .subscribe(
+        result => {
+          this.toastService.show("Portfolio created correctly", {
+            classname: "bg-danger text-light",
+            delay: 3500
+          });
         },
         err => {
           this.toastService.show(err._body, {

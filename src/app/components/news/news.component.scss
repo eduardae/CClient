@@ -67,9 +67,9 @@
 
 .news-list-item-container {
   height: 348px;
-  width: 80%;
+  width: 70%;
   margin: 24px auto 24px auto;
-  padding: 32px 64px 46px 16px;
+  padding: 36px 64px 46px 16px;
   border: 2px solid;
   border-radius: 8px;
   box-shadow: 2px 5px 5px 2px #16425b;
@@ -109,7 +109,6 @@
     .article-description {
       overflow: hidden;
       display: -webkit-box;
-      -webkit-line-clamp: 8;
       -webkit-box-orient: vertical;
       font-size: 1.1em;
     }
@@ -127,22 +126,22 @@
             line-height: 1.1em;
           }
         }
-
-        .img-container {
-          height: 200px;
-        }
-
-        .article-img {
-          max-height: 180px;
-        }
       }
     }
   }
 
   .news-list-item-container {
+    padding: 24px 64px 46px 16px;
     .article {
       .article-description {
         -webkit-line-clamp: 4;
+      }
+      .img-container {
+        height: 200px;
+
+        .article-img {
+          max-height: 206px;
+        }
       }
     }
   }
@@ -152,11 +151,6 @@
   .articles {
     .news-list-item-container {
       height: 256px;
-      .article {
-        .article-img {
-          max-height: 196px;
-        }
-      }
     }
 
     max-height: 196px;

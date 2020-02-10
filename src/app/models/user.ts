@@ -1,6 +1,7 @@
 import { Link } from "./Link";
 
 export class User {
+  _id: string;
   email: string;
   username: string;
   name: string;
@@ -12,6 +13,7 @@ export class User {
   saved_links: Link[];
 
   constructor() {
+    this._id = null;
     this.username = "";
     this.email = "";
     this.password = "";
