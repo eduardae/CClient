@@ -33,10 +33,16 @@ import {
   filter
 } from "rxjs/operators";
 import { Observable } from "rxjs/internal/Observable";
+import { Purchase } from "src/app/models/purchase";
+import { CurrencyInfo } from "src/app/models/currency-info";
+import { Subscription } from "rxjs/internal/Subscription";
+import { AppSettingsService } from "src/app/services/app.settings.service";
+import { stringify } from "querystring";
+import { MarketData } from "src/app/models/historical-market-data";
 
 @Component({
   selector: "select-coin-modal-content",
-  providers: [UserInfoService, CoinInfoService],
+  providers: [UserInfoService, CoinInfoService, AppSettingsService],
   template: `
     <div class="modal-header">
       <h4 class="modal-title" id="modal-basic-title">
@@ -54,17 +60,21 @@ import { Observable } from "rxjs/internal/Observable";
     <div class="modal-body">
       <form>
         <div class="form-group">
-          <!--<div class="row">
-            <div class="col-6 col-sm-3" *ngFor="let coin of coins">
-              <span
-                class="coin-container"
-                [ngClass]="{ selected: coin.selected }"
-                (click)="toggleCoinSelection(coin)"
+          <div
+            class="container-fluid mt-2 mb-5"
+            *ngIf="selectedCoins && selectedCoins.length !== 0"
+          >
+            <div class="row text-center">
+              <div
+                class="col-6 col-sm-3 col-md-2"
+                *ngFor="let coin of selectedCoins"
               >
-                <coin name="{{ coin.name }}" iconId="{{ coin.queryId }}"></coin>
-              </span>
+                <span>
+                  <coin iconId="{{ coin.queryId }}"></coin>
+                </span>
+              </div>
             </div>
-          </div>-->
+          </div>
 
           <div class="container-fluid mt-3">
             <div class="row">
@@ -79,7 +89,9 @@ import { Observable } from "rxjs/internal/Observable";
                   id="typeahead-prevent-manual-entry"
                   type="text"
                   class="form-control"
+                  placeholder="Example: bitcoin"
                   [(ngModel)]="currentlySelectedCoin"
+                  (ngModelChange)="coinSelected($event)"
                   [ngbTypeahead]="search"
                   [inputFormatter]="formatter"
                   [resultFormatter]="formatter"
@@ -87,6 +99,23 @@ import { Observable } from "rxjs/internal/Observable";
                 />
               </div>
             </div>
+
+            <div class="row mt-3">
+              <div class="col-12 col-sm-4">
+                <label for="coin-units" class="font-weight-bold">Money</label>
+              </div>
+              <div class="col-12 col-sm-8">
+                <input
+                  class="form-control"
+                  type="number"
+                  name="coin-purchase-val"
+                  placeholder="{{ currency.label }}"
+                  [(ngModel)]="purchaseVal"
+                  (change)="updateQuantity(purchaseVal)"
+                />
+              </div>
+            </div>
+
             <div class="row mt-3">
               <div class="col-12 col-sm-4">
                 <label for="coin-units" class="font-weight-bold"
@@ -100,12 +129,14 @@ import { Observable } from "rxjs/internal/Observable";
                   name="coin-units"
                   placeholder="Coin units"
                   [(ngModel)]="coinQuantity"
+                  (change)="updateMonetaryVal(coinQuantity)"
                 />
               </div>
             </div>
-            <div class="row mt-3">
-              <div class="col-12">
-                <button class="btn btn-default btn-primary">
+
+            <div class="row mt-5">
+              <div class="col-12 text-center">
+                <button class="btn btn-default btn-primary" (click)="addCoin()">
                   <span>Add To Portfolio</span>
                 </button>
               </div>
@@ -120,18 +151,22 @@ import { Observable } from "rxjs/internal/Observable";
         class="btn btn-outline-dark"
         (click)="createPortfolio()"
       >
-        Confirm
+        Create Portfolio
       </button>
     </div>
   `
 })
 export class SelectCoinModalContent implements OnInit {
+  currencyChangeSubscription: Subscription;
   coins: CoinInfo[];
   selectedCoins: CoinInfo[];
   currentlySelectedCoin: CoinInfo;
+  currentlySelectedMarketData: MarketData;
   coinQuantity: number;
+  purchaseVal: number;
   user: User;
   portfolio: Portfolio;
+  currency: CurrencyInfo;
 
   formatter = (coin: CoinInfo) => coin.queryId;
 
@@ -154,40 +189,76 @@ export class SelectCoinModalContent implements OnInit {
     public toastService: ToastService,
     private userService: UserInfoService,
     private coinInfoService: CoinInfoService,
+    private appSettingsService: AppSettingsService,
     @Inject(SESSION_STORAGE) private sessionStorage: WebStorageService
-  ) {}
+  ) {
+    this.currency = this.appSettingsService.getCurrency();
+  }
 
   ngOnInit() {
     this.selectedCoins = [];
     this.portfolio = new Portfolio();
-    for (let coinId of this.user.bookmarked_coins) {
-      for (let coin of this.coins) {
-        if (coinId === coin.queryId) {
-          this.selectedCoins.push(coin);
-          coin.selected = true;
-        }
+    this.currencyChangeSubscription = this.appSettingsService.currencyChange$.subscribe(
+      currency => {
+        this.currency = currency;
       }
+    );
+    this.currency = this.appSettingsService.getCurrency();
+  }
+
+  coinSelected(coin: CoinInfo) {
+    if (coin) {
+      this.coinInfoService.getCoinInfo(coin.queryId).subscribe(
+        result => {
+          const marketData = result.data.market_data;
+          coin.price = marketData.current_price[this.currency.value];
+          if (this.purchaseVal) {
+            this.updateQuantity(this.coinQuantity);
+          }
+          if (this.coinQuantity) {
+            this.updateMonetaryVal(this.coinQuantity);
+          }
+        },
+        err => {}
+      );
     }
   }
 
-  toggleCoinSelection(coin) {
-    coin.selected = !coin.selected;
-    let selectedCoin = _.findWhere(this.selectedCoins, {
-      queryId: coin.queryId
-    });
-    if (!selectedCoin) {
-      let coinToAdd = _.findWhere(this.coins, {
-        queryId: coin.queryId
-      });
-      this.selectedCoins.push(coinToAdd);
-    } else {
-      this.selectedCoins = _.without(
-        this.selectedCoins,
-        _.findWhere(this.selectedCoins, {
-          queryId: coin.queryId
-        })
+  addCoin() {
+    const purchase = new Purchase();
+    const coinId = this.currentlySelectedCoin.queryId;
+    purchase.quantity = this.coinQuantity;
+    purchase.currency = this.currency.value;
+    purchase.price = new Price();
+    purchase.price[this.currency.value] = this.currentlySelectedCoin.price;
+    this.portfolio.startingCoinValues[coinId] = purchase;
+    this.selectedCoins.push(this.currentlySelectedCoin);
+  }
+
+  updateQuantity(monetaryVal: number) {
+    if (this.currentlySelectedCoin && this.currentlySelectedCoin.queryId) {
+      this.coinQuantity = this.monetaryValToQuantity(
+        monetaryVal,
+        this.currentlySelectedCoin
       );
     }
+  }
+
+  updateMonetaryVal(quantity: number) {
+    if (this.currentlySelectedCoin && this.currentlySelectedCoin.queryId) {
+      this.purchaseVal = this.quantityToMonetaryVal(
+        quantity,
+        this.currentlySelectedCoin
+      );
+    }
+  }
+
+  quantityToMonetaryVal(quantity: number, coinInfo: CoinInfo) {
+    return coinInfo.price * quantity;
+  }
+
+  monetaryValToQuantity(val: number, coinInfo: CoinInfo) {
+    return val / coinInfo.price;
   }
 
   createPortfolio() {
@@ -201,7 +272,7 @@ export class SelectCoinModalContent implements OnInit {
           coinPrice.usd = marketData.usd;
           coinPrice.gbp = marketData.gbp;
           coinPrice.cny = marketData.cny;
-          this.portfolio.startingCoinValues[coinData.id] = coinPrice;
+          this.portfolio.startingCoinValues[coinData.id].price = coinPrice;
         }
         this.portfolio.userId = this.user._id;
         this.portfolio.startDate = new Date();

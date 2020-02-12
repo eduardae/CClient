@@ -25,7 +25,7 @@ app.post('/create_portfolio', function (req, res) {
       if (dberr) {
         res.status(500).send(dberr);
       } else {
-        res.status(200).json('Portfolio created correctly');
+        res.status(200).json(reqQuery);
         client.close();
       }
     }, function (err) {

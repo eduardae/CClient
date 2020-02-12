@@ -1,9 +1,24 @@
-import { Injectable } from "@angular/core";
+import { Injectable, Inject } from "@angular/core";
 import { Subject } from "rxjs";
 import { CurrencyInfo } from "../models/currency-info";
+import { WebStorageService, SESSION_STORAGE } from "angular-webstorage-service";
 
 @Injectable()
 export class AppSettingsService {
+  currency: CurrencyInfo;
+
+  constructor(
+    @Inject(SESSION_STORAGE) private sessionStorage: WebStorageService
+  ) {
+    if (this.sessionStorage.get("selectedCurrency")) {
+      this.currency = JSON.parse(this.sessionStorage.get("selectedCurrency"))[
+        "currency"
+      ];
+    } else {
+      this.currency = { label: "EUR", value: "eur", symbol: "&euro;" };
+    }
+  }
+
   // Observable string sources
   private currencyChangeSource = new Subject<CurrencyInfo>();
 
@@ -13,5 +28,10 @@ export class AppSettingsService {
   // Service message commands
   currencyChange(currency: CurrencyInfo) {
     this.currencyChangeSource.next(currency);
+    this.currency = currency;
+  }
+
+  getCurrency(): CurrencyInfo {
+    return this.currency;
   }
 }

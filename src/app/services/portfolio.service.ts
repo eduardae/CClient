@@ -1,5 +1,5 @@
 import { Injectable, Inject } from "@angular/core";
-import { Subject, Observable, forkJoin } from "rxjs";
+import { Subject, Observable } from "rxjs";
 import { User } from "../models/user";
 import { Http } from "@angular/http";
 import { ToastService } from "./toast-service";
@@ -12,29 +12,30 @@ import { LinkSection } from "../models/link-section";
 import { _ } from "underscore";
 import { environment } from "src/environments/environment";
 import { Portfolio } from "../models/portfolio";
+import { Purchase } from "../models/purchase";
+import { PortfolioCoinData } from "../models/portfolio-coin-data";
 
 @Injectable()
-export class CoinInfoService {
+export class PortfolioService {
   constructor(
     private http: HttpClient,
+    public toastService: ToastService,
     @Inject(SESSION_STORAGE) private sessionStorage: WebStorageService
   ) {}
 
-  getCoinInfo(coinId: string): Observable<any> {
-    return this.http.post<CoinInfo>(`${environment.baseUrl}:8081/coininfo`, {
-      coin_name: coinId
-    });
-  }
+  refreshPortfolioCurrentValues() {}
 
-  getMultipleCoinsInfo(coins: CoinInfo[]): Observable<any> {
-    let calls = [];
-    for (const coin of coins) {
-      calls.push(
-        this.http.post<CoinInfo>(`${environment.baseUrl}:8081/coininfo`, {
-          coin_name: coin.queryId
-        })
-      );
+  getAccruedValue(portfolio: Portfolio, currency: string): number {
+    let tot = 0;
+    let coinKeys = Object.keys(portfolio.startingCoinValues);
+    if (portfolio.currentCoinValues) {
+      for (let coin of coinKeys) {
+        if (portfolio.currentCoinValues[coin]) {
+          tot += portfolio.currentCoinValues[coin].price[currency];
+        }
+      }
     }
-    return forkJoin(calls);
+
+    return tot;
   }
 }
