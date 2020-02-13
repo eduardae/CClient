@@ -38,6 +38,10 @@
 @media (max-width: 768px) {
   .page-section {
     padding-top: 2em;
+
+    &.coin-bookmarks-section {
+      text-align: center;
+    }
   }
 
   .link-section {

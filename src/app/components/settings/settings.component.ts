@@ -5,7 +5,8 @@ import {
   Inject,
   ViewChild,
   EventEmitter,
-  Output
+  Output,
+  ChangeDetectorRef
 } from "@angular/core";
 import { Http, RequestOptions } from "@angular/http";
 import { CoinsSummary } from "../../models/coins-summary";
@@ -46,11 +47,13 @@ export class SettingsComponent implements OnInit {
     public toastService: ToastService,
     private portfolioService: PortfolioService,
     private appSettingsService: AppSettingsService,
+    public cdr: ChangeDetectorRef,
     private http: HttpClient
   ) {
     this.toastService = toastService;
     this.academyLinks = [];
     this.newsArticles = [];
+    this.portfolios = [];
     this.currencyChangeSubscription = appSettingsService.currencyChange$.subscribe(
       currency => {
         this.currency = currency;
@@ -95,6 +98,15 @@ export class SettingsComponent implements OnInit {
   update() {
     this.userService.updateSettings(this.user);
   }
+
+  portfolioCreateCb = (newPortfolio: Portfolio) => {
+    if (!this.portfolios) {
+      this.portfolios = [];
+    }
+    this.portfolios.push(newPortfolio);
+    this.portfolios = [].concat(this.portfolios);
+    this.cdr.detectChanges();
+  };
 
   getPortfolios() {
     this.userService.getPortfolios(this.user).subscribe(

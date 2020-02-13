@@ -1,13 +1,11 @@
 import { Price } from "./price";
+import { PortfolioCoinItem } from "./portfolio-coin-item";
 
-export class PortfolioCoinData {
-  price: Price;
-  quantity: number;
+export class PortfolioCoinData extends PortfolioCoinItem {
   growth: number;
 
   constructor() {
-    this.price = new Price();
-    this.quantity = 0;
+    super();
     this.growth = 0;
   }
 }

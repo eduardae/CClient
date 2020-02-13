@@ -61,7 +61,7 @@
               </div>
               <div
                 class="row mt-3"
-                *ngIf="portfolios ? portfolios.length === 0 : true"
+                [hidden]="portfolios && portfolios.length !== 0"
               >
                 <div class="col-12">
                   <p>You haven't created a portfolio yet.</p>
@@ -73,14 +73,17 @@
               >
                 <div
                   class="col-12 col-sm-6"
-                  *ngFor="let portfolio of portfolios"
+                  *ngFor="let portfolio of portfolios; trackBy: portfolio?._id"
                 >
                   <div>Portfolio {{ portfolio.userId }}</div>
                 </div>
               </div>
               <div class="row mt-5">
                 <div class="float-left col-12 col-xs-6">
-                  <select-coin-modal [user]="user"></select-coin-modal>
+                  <select-coin-modal
+                    [user]="user"
+                    [portfolioCreationCallback]="portfolioCreateCb"
+                  ></select-coin-modal>
                 </div>
               </div>
             </div>

@@ -61,7 +61,7 @@ import { MarketData } from "src/app/models/historical-market-data";
       <form>
         <div class="form-group">
           <div
-            class="container-fluid mt-2 mb-5"
+            class="container-fluid mt-2 mb-3"
             *ngIf="selectedCoins && selectedCoins.length !== 0"
           >
             <div class="row text-center">
@@ -167,6 +167,7 @@ export class SelectCoinModalContent implements OnInit {
   user: User;
   portfolio: Portfolio;
   currency: CurrencyInfo;
+  portfolioCreationCallback: (Portfolio) => void;
 
   formatter = (coin: CoinInfo) => coin.queryId;
 
@@ -212,12 +213,8 @@ export class SelectCoinModalContent implements OnInit {
         result => {
           const marketData = result.data.market_data;
           coin.price = marketData.current_price[this.currency.value];
-          if (this.purchaseVal) {
-            this.updateQuantity(this.coinQuantity);
-          }
-          if (this.coinQuantity) {
-            this.updateMonetaryVal(this.coinQuantity);
-          }
+          this.coinQuantity = null;
+          this.purchaseVal = null;
         },
         err => {}
       );
@@ -272,7 +269,17 @@ export class SelectCoinModalContent implements OnInit {
           coinPrice.usd = marketData.usd;
           coinPrice.gbp = marketData.gbp;
           coinPrice.cny = marketData.cny;
-          this.portfolio.startingCoinValues[coinData.id].price = coinPrice;
+          for (const key in marketData) {
+            if (
+              marketData.hasOwnProperty(key) &&
+              this.portfolio.startingCoinValues[
+                coinData.id
+              ].price.hasOwnProperty(key)
+            ) {
+              this.portfolio.startingCoinValues[coinData.id].price[key] =
+                marketData[key];
+            }
+          }
         }
         this.portfolio.userId = this.user._id;
         this.portfolio.startDate = new Date();
@@ -285,6 +292,9 @@ export class SelectCoinModalContent implements OnInit {
                 classname: "bg-success text-light",
                 delay: 2000
               });
+              if (this.portfolioCreationCallback) {
+                this.portfolioCreationCallback(result);
+              }
             },
             err => {
               this.toastService.show(err._body, {
@@ -315,6 +325,7 @@ export class SelectCoinModal implements OnInit {
   MODALS = {
     content: SelectCoinModalContent
   };
+  @Input() portfolioCreationCallback: (Portfolio) => void;
 
   constructor(
     private modalService: NgbModal,
@@ -342,6 +353,7 @@ export class SelectCoinModal implements OnInit {
     );
     this.modal.componentInstance.coins = this.coins;
     this.modal.componentInstance.user = this.user;
+    this.modal.componentInstance.portfolioCreationCallback = this.portfolioCreationCallback;
   }
 
   private getDismissReason(reason: any): string {

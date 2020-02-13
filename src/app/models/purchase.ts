@@ -1,12 +1,10 @@
 import { Price } from "./price";
+import { PortfolioCoinItem } from "./portfolio-coin-item";
 
-export class Purchase {
-  price: Price;
-  quantity: number;
+export class Purchase extends PortfolioCoinItem {
   currency: string;
 
   constructor() {
-    this.price = new Price();
-    this.quantity = 0;
+    super();
   }
 }
