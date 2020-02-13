@@ -11,7 +11,7 @@ import { Link } from "../models/Link";
 import { LinkSection } from "../models/link-section";
 import { _ } from "underscore";
 import { environment } from "src/environments/environment";
-import { Portfolio } from "../models/portfolio";
+import { Portfolio } from "../models/portfolio/portfolio";
 
 @Injectable()
 export class UserInfoService {

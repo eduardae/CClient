@@ -3,6 +3,8 @@
     color: #16425b;
   }
 
+  $dark-blue: #16425b;
+
   .dark-blue-bg {
     background-color: #16425b;
     color: #fff;
@@ -11,6 +13,22 @@
   .bootstrap-blue {
     color: #22aed1;
   }
+
+  $acquamarine: #22aed1;
+
+  .red {
+    color: red;
+  }
+
+  .green {
+    color: green;
+  }
+
+  .purple {
+    color: #4f0147;
+  }
+
+  /* Bootstrap customizations */
 
   .btn-primary {
     background-color: #22aed1 !important;
@@ -45,10 +63,6 @@
   .btn-outline-primary:not(:disabled):not(.disabled):active:focus,
   .show > .btn-outline-primary.dropdown-toggle:focus {
     box-shadow: 0 0 0 0rem #22aed1;
-  }
-
-  .purple {
-    color: #4f0147;
   }
 
   .dropdown-item.active,

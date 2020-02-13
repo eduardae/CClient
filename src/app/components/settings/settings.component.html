@@ -15,6 +15,57 @@
             <div class="col">
               <div class="row">
                 <div class="col-12">
+                  <h5 class="font-weight-bold">Simulated Portfolios</h5>
+                </div>
+              </div>
+              <div
+                class="row mt-3"
+                [hidden]="portfolios && portfolios.length !== 0"
+              >
+                <div class="col-12">
+                  <p>You haven't created a portfolio yet.</p>
+                </div>
+              </div>
+              <div
+                class="row mt-3"
+                *ngIf="portfolios && portfolios.length !== 0"
+              >
+                <div
+                  class="col-12 col-sm-5 mb-4"
+                  *ngFor="let portfolio of portfolios; trackBy: portfolio?._id"
+                >
+                  <div class="portfolio-list-item">
+                    <div class="portfolio-header">
+                      {{ portfolio.startDate | date: "yyyy-MM-dd" }}
+                    </div>
+                    <div class="portfolio-body" *ngIf="portfolio.summary">
+                      <span
+                        [ngClass]="{
+                          green: portfolio.summary.groupedGrowth >= 0,
+                          red: portfolio.summary.groupedGrowth < 0
+                        }"
+                        >{{
+                          portfolio.summary.groupedGrowth | percent: "1.4"
+                        }}</span
+                      >
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="row mt-3 mb-4">
+                <div class="float-left col-12 col-xs-6">
+                  <select-coin-modal
+                    [user]="user"
+                    [portfolioCreationCallback]="portfolioCreateCb"
+                  ></select-coin-modal>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="row mt-5">
+            <div class="col">
+              <div class="row">
+                <div class="col-12">
                   <h5 class="font-weight-bold">Followed coins</h5>
                 </div>
               </div>
@@ -48,42 +99,6 @@
                       <add-coin-modal [user]="user"></add-coin-modal>
                     </div>
                   </div>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="row mt-5">
-            <div class="col">
-              <div class="row">
-                <div class="col-12">
-                  <h5 class="font-weight-bold">Simulated Portfolios</h5>
-                </div>
-              </div>
-              <div
-                class="row mt-3"
-                [hidden]="portfolios && portfolios.length !== 0"
-              >
-                <div class="col-12">
-                  <p>You haven't created a portfolio yet.</p>
-                </div>
-              </div>
-              <div
-                class="row mt-3"
-                *ngIf="portfolios && portfolios.length !== 0"
-              >
-                <div
-                  class="col-12 col-sm-6"
-                  *ngFor="let portfolio of portfolios; trackBy: portfolio?._id"
-                >
-                  <div>Portfolio {{ portfolio.userId }}</div>
-                </div>
-              </div>
-              <div class="row mt-5">
-                <div class="float-left col-12 col-xs-6">
-                  <select-coin-modal
-                    [user]="user"
-                    [portfolioCreationCallback]="portfolioCreateCb"
-                  ></select-coin-modal>
                 </div>
               </div>
             </div>

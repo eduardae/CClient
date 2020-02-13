@@ -1,4 +1,4 @@
-import { Price } from "./price";
+import { Price } from "../price";
 import { PortfolioCoinItem } from "./portfolio-coin-item";
 
 export class PortfolioCoinData extends PortfolioCoinItem {

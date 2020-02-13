@@ -22,7 +22,7 @@ import { ToastService } from "../../../services/toast-service";
 import { SESSION_STORAGE, WebStorageService } from "angular-webstorage-service";
 import { UserInfoService } from "src/app/services/user.info.service";
 import { environment } from "src/environments/environment";
-import { Portfolio } from "src/app/models/portfolio";
+import { Portfolio } from "src/app/models/portfolio/portfolio";
 import { HttpClient } from "@angular/common/http";
 import { CoinInfoService } from "src/app/services/coin.info.service";
 import { Price } from "src/app/models/price";

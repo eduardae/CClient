@@ -11,9 +11,13 @@ import { Link } from "../models/Link";
 import { LinkSection } from "../models/link-section";
 import { _ } from "underscore";
 import { environment } from "src/environments/environment";
-import { Portfolio } from "../models/portfolio";
+import { Portfolio } from "../models/portfolio/portfolio";
 
-@Injectable()
+@Injectable({
+  // we declare that this service should be created
+  // by the root application injector.
+  providedIn: "root"
+})
 export class CoinInfoService {
   constructor(
     private http: HttpClient,
@@ -32,6 +36,18 @@ export class CoinInfoService {
       calls.push(
         this.http.post<CoinInfo>(`${environment.baseUrl}:8081/coininfo`, {
           coin_name: coin.queryId
+        })
+      );
+    }
+    return forkJoin(calls);
+  }
+
+  getMultipleCoinsInfoByIds(coins: string[]): Observable<any> {
+    let calls = [];
+    for (const coin of coins) {
+      calls.push(
+        this.http.post<CoinInfo>(`${environment.baseUrl}:8081/coininfo`, {
+          coin_name: coin
         })
       );
     }

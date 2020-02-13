@@ -22,7 +22,7 @@ import { HttpClient } from "@angular/common/http";
 import { Link } from "src/app/models/Link";
 import { LinkSection } from "src/app/models/link-section";
 import { _ } from "underscore";
-import { Portfolio } from "src/app/models/portfolio";
+import { Portfolio } from "src/app/models/portfolio/portfolio";
 import { PortfolioService } from "src/app/services/portfolio.service";
 import { CurrencyInfo } from "src/app/models/currency-info";
 import { AppSettingsService } from "src/app/services/app.settings.service";
@@ -113,12 +113,11 @@ export class SettingsComponent implements OnInit {
       result => {
         this.portfolios = result;
         for (let i = 0; i < this.portfolios.length; i++) {
-          this.portfolios[
-            i
-          ].accruedValue = this.portfolioService.getAccruedValue(
-            this.portfolios[i],
-            this.currency.value
-          );
+          this.portfolioService
+            .getSummary(this.portfolios[i], this.currency.value)
+            .then(result => {
+              this.portfolios[i].summary = result;
+            });
         }
       },
       err => {
