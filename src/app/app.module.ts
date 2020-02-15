@@ -35,6 +35,7 @@ import {
   SelectCoinModal,
   SelectCoinModalContent
 } from "./components/settings/select-coin-modal/select-coin-modal";
+import { PortfolioPageComponent } from "./components/portfolio-page/portfolio.page.component";
 
 const appRoutes: Routes = [
   { path: "", redirectTo: "home", pathMatch: "full" },
@@ -45,6 +46,7 @@ const appRoutes: Routes = [
   { path: "news", component: NewsPageComponent },
   { path: "prices", component: PricesComponent },
   { path: "coinpage/:coinId", component: CoinPageComponent },
+  { path: "portfolio/:id", component: PortfolioPageComponent },
   { path: "academy", component: AcademyComponent },
   { path: "terms", component: TermsComponent }
 ];
@@ -66,6 +68,7 @@ const appRoutes: Routes = [
     TermsComponent,
     PriceComponent,
     CoinPageComponent,
+    PortfolioPageComponent,
     CoinComponent,
     AddCoinModal,
     AddCoinModalContent,

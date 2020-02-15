@@ -17,6 +17,10 @@
 .add-coin-modal {
   .modal-dialog {
     margin: 7rem auto auto auto;
+
+    label {
+      line-height: 34px;
+    }
   }
 
   .coin-container {

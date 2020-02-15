@@ -1,0 +1,247 @@
+<div class="container-fluid text-center">
+  <div>
+    <h2 class="pt-5">Coin Market Data</h2>
+    <div class="row pt-3 pb-1">
+      <div class="col-12 col-md-8 offset-md-2 text-center">
+        <div class="row">
+          <div class="col-12 text-center filters">
+            <div class="row">
+              <span class="col-12 col-sm-6 selector">
+                <label>Coin</label>
+                <select
+                  class="ml-2"
+                  id="coin-select"
+                  [ngModel]="selectedCoin"
+                  (ngModelChange)="onCoinSelect($event)"
+                >
+                  <option
+                    [selected]="selectedCoin.name === coin.name"
+                    *ngFor="let coin of coins"
+                    [ngValue]="coin"
+                  >
+                    {{ coin.name }}
+                  </option>
+                </select>
+              </span>
+              <span class="col-12 col-sm-6 selector">
+                <label>Timeframe</label>
+                <select
+                  class="ml-2"
+                  id="timeframe-select"
+                  [ngModel]="timeFrame"
+                  (ngModelChange)="onTimeFrameChange($event)"
+                >
+                  <option
+                    [selected]="timeFrame.days === time.days"
+                    *ngFor="let time of timeFrameSelectOptions"
+                    [ngValue]="time"
+                  >
+                    {{ time.label }}
+                  </option>
+                </select>
+              </span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row mt-3">
+      <div class="indicators col-12 col-md-4 col-lg-4">
+        <div *ngIf="selectedCoin && prices && prices.length != 0">
+          <h5 class="purple">Financial Data</h5>
+          <div class="row pt-4">
+            <div class="col-12">
+              <div>
+                <h6>Current price</h6>
+                <price
+                  [currency]="currency"
+                  [precision]="3"
+                  [price]="selectedCoin.price"
+                ></price>
+              </div>
+            </div>
+          </div>
+          <div class="row mt-3">
+            <div class="col-12">
+              <div>
+                <h6>Market cap</h6>
+                <price
+                  [currency]="currency"
+                  [precision]="0"
+                  [price]="selectedCoin.marketCap"
+                ></price>
+              </div>
+            </div>
+          </div>
+          <div class="row mt-3">
+            <div class="col-12">
+              <div>
+                <h6>Market cap rank</h6>
+                <span>#{{ selectedCoin.marketCapRank }}</span>
+              </div>
+            </div>
+          </div>
+          <div class="row mt-3">
+            <div class="col-12">
+              <div>
+                <h6>Total Volume</h6>
+                <price
+                  [currency]="currency"
+                  [precision]="0"
+                  [price]="selectedCoin.volume24H"
+                ></price>
+              </div>
+            </div>
+          </div>
+          <div class="row mt-3">
+            <div class="col-12">
+              <div>
+                <h6>ATH (All Time High)</h6>
+                <price
+                  [currency]="currency"
+                  [precision]="0"
+                  [price]="selectedCoin.ATH"
+                ></price>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-12 col-sm-12 col-md-8 col-lg-8">
+        <div class="mt-3 flex">
+          <div class="flex-item">
+            <div
+              class="col-12"
+              *ngIf="lineChartData[0].data && lineChartData[0].data.length != 0"
+            >
+              <canvas
+                id="price-chart"
+                baseChart
+                width="400"
+                height="200"
+                [datasets]="lineChartData"
+                [labels]="labels"
+                [legend]="lineChartLegend"
+                [options]="options"
+                [chartType]="lineChartType"
+              >
+              </canvas>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row pt-5">
+    <div class="col-12 text-center">
+      <button
+        class="btn btn-default btn-primary font-weight-bold"
+        (click)="triggerAdditionalInfo()"
+        type="button"
+        role="button"
+        [attr.aria-expanded]="!showAdditionalInfo"
+        aria-controls="additional-info"
+      >
+        <span>Additional Info</span>
+        <span class="pl-2">
+          <span class="fa fa-angle-down" *ngIf="!showAdditionalInfo"></span>
+          <span class="fa fa-angle-up" *ngIf="showAdditionalInfo"></span>
+        </span>
+      </button>
+    </div>
+  </div>
+  <div class="row">
+    <div
+      class="collapse pt-5 col-12"
+      id="additional-info"
+      [ngbCollapse]="!showAdditionalInfo"
+    >
+      <div class="container">
+        <div class="card card-body" #scrollRef>
+          <div class="row">
+            <div
+              class="col-6 text-left"
+              *ngIf="selectedCoin && selectedCoin.communityData"
+            >
+              <h5 class="purple">Community Data</h5>
+              <div class="row">
+                <div class="col-12">
+                  <span class="font-weight-bold">Community Score: </span>
+                  <span>{{ selectedCoin.communityData.communityScore }}</span>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-12">
+                  <span class="font-weight-bold">Public Interest Score: </span>
+                  <span>{{
+                    selectedCoin.communityData.publicInterestScore
+                  }}</span>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-12">
+                  <span class="font-weight-bold"
+                    >Sentiment Votes-Up Percentage :
+                  </span>
+                  <span
+                    >{{
+                      selectedCoin.communityData.sentimentVotesUpPercentage
+                    }}%</span
+                  >
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-12">
+                  <span class="font-weight-bold"
+                    >Sentiment Votes-Down Percentage :
+                  </span>
+                  <span
+                    >{{
+                      selectedCoin.communityData.sentimentVotesDownPercentage
+                    }}%</span
+                  >
+                </div>
+              </div>
+            </div>
+            <div
+              class="col-6 text-left"
+              *ngIf="selectedCoin && selectedCoin.developmentData"
+            >
+              <h5 class="purple">Development Data</h5>
+              <div class="row">
+                <div class="col-12">
+                  <span class="font-weight-bold">Developer score: </span>
+                  <span>{{ selectedCoin.developmentData.developerScore }}</span>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-12">
+                  <span class="font-weight-bold">Stars: </span>
+                  <span>{{ selectedCoin.developmentData.stars }}</span>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-12">
+                  <span class="font-weight-bold"
+                    >Pull request contributors:
+                  </span>
+                  <span>{{
+                    selectedCoin.developmentData.pullRequestContributors
+                  }}</span>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-12">
+                  <span class="font-weight-bold">Last 4 weeks commits: </span>
+                  <span>{{
+                    selectedCoin.developmentData.lastFourWeeksCommits
+                  }}</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

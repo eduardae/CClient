@@ -46,7 +46,7 @@ import { MarketData } from "src/app/models/historical-market-data";
   template: `
     <div class="modal-header">
       <h4 class="modal-title" id="modal-basic-title">
-        Select coins
+        Portfolio Info
       </h4>
       <button
         type="button"
@@ -60,11 +60,28 @@ import { MarketData } from "src/app/models/historical-market-data";
     <div class="modal-body">
       <form>
         <div class="form-group">
-          <div
-            class="container-fluid mt-2 mb-3"
-            *ngIf="selectedCoins && selectedCoins.length !== 0"
-          >
-            <div class="row text-center">
+          <div class="container-fluid mt-2 mb-3">
+            <div class="row mt-2">
+              <div class="col-12 col-sm-4">
+                <label for="coin-units" class="font-weight-bold"
+                  >Portfolio Name</label
+                >
+              </div>
+              <div class="col-12 col-sm-8">
+                <input
+                  class="form-control"
+                  type="text"
+                  name="portfolio-name"
+                  placeholder="Name"
+                  [(ngModel)]="portfolio.label"
+                />
+              </div>
+            </div>
+            <hr />
+            <div
+              class="row text-center"
+              *ngIf="selectedCoins && selectedCoins.length !== 0"
+            >
               <div
                 class="col-6 col-sm-3 col-md-2"
                 *ngFor="let coin of selectedCoins"
@@ -76,7 +93,7 @@ import { MarketData } from "src/app/models/historical-market-data";
             </div>
           </div>
 
-          <div class="container-fluid mt-3">
+          <div class="container-fluid mt-4">
             <div class="row">
               <div class="col-12 col-sm-4">
                 <label class="font-weight-bold" for="selected-coin"
@@ -137,7 +154,7 @@ import { MarketData } from "src/app/models/historical-market-data";
             <div class="row mt-5">
               <div class="col-12 text-center">
                 <button class="btn btn-default btn-primary" (click)="addCoin()">
-                  <span>Add To Portfolio</span>
+                  <span class="font-weight-bold">Add To Portfolio</span>
                 </button>
               </div>
             </div>

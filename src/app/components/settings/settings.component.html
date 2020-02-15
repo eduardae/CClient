@@ -33,10 +33,14 @@
                 <div
                   class="col-12 col-sm-5 mb-4"
                   *ngFor="let portfolio of portfolios; trackBy: portfolio?._id"
+                  [routerLink]="['/portfolio', portfolio._id]"
                 >
                   <div class="portfolio-list-item">
                     <div class="portfolio-header">
-                      {{ portfolio.startDate | date: "yyyy-MM-dd" }}
+                      <span *ngIf="portfolio.label">{{ portfolio.label }}</span>
+                      <span *ngIf="!portfolio.label">{{
+                        portfolio.startDate | date: "yyyy-MM-dd"
+                      }}</span>
                     </div>
                     <div class="portfolio-body" *ngIf="portfolio.summary">
                       <span
@@ -45,7 +49,7 @@
                           red: portfolio.summary.groupedGrowth < 0
                         }"
                         >{{
-                          portfolio.summary.groupedGrowth | percent: "1.4"
+                          portfolio.summary.groupedGrowth | percent: "1.3"
                         }}</span
                       >
                     </div>
