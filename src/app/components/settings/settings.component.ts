@@ -26,11 +26,12 @@ import { Portfolio } from "src/app/models/portfolio/portfolio";
 import { PortfolioService } from "src/app/services/portfolio.service";
 import { CurrencyInfo } from "src/app/models/currency-info";
 import { AppSettingsService } from "src/app/services/app.settings.service";
+import { Route } from "@angular/compiler/src/core";
 @Component({
   selector: "app-settings",
   templateUrl: "./settings.component.html",
   styleUrls: ["./settings.component.scss"],
-  providers: [PortfolioService]
+  providers: []
 })
 export class SettingsComponent implements OnInit {
   user: User;
@@ -48,6 +49,7 @@ export class SettingsComponent implements OnInit {
     private portfolioService: PortfolioService,
     private appSettingsService: AppSettingsService,
     public cdr: ChangeDetectorRef,
+    private router: Router,
     private http: HttpClient
   ) {
     this.toastService = toastService;
@@ -97,6 +99,11 @@ export class SettingsComponent implements OnInit {
 
   update() {
     this.userService.updateSettings(this.user);
+  }
+
+  goToPortfolioPage(portfolio: Portfolio) {
+    this.portfolioService.selectPortfolio(portfolio);
+    this.router.navigate(["portfolio", portfolio._id]);
   }
 
   portfolioCreateCb = (newPortfolio: Portfolio) => {

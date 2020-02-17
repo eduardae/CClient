@@ -33,7 +33,7 @@
                 <div
                   class="col-12 col-sm-5 mb-4"
                   *ngFor="let portfolio of portfolios; trackBy: portfolio?._id"
-                  [routerLink]="['/portfolio', portfolio._id]"
+                  (click)="goToPortfolioPage(portfolio)"
                 >
                   <div class="portfolio-list-item">
                     <div class="portfolio-header">

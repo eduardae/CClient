@@ -3,6 +3,9 @@ import { PortfolioCoinItem } from "./portfolio-coin-item";
 
 export class PortfolioCoinData extends PortfolioCoinItem {
   growth: number;
+  val: number;
+  price: Price;
+  quantity: number;
 
   constructor() {
     super();

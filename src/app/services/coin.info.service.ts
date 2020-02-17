@@ -14,8 +14,6 @@ import { environment } from "src/environments/environment";
 import { Portfolio } from "../models/portfolio/portfolio";
 
 @Injectable({
-  // we declare that this service should be created
-  // by the root application injector.
   providedIn: "root"
 })
 export class CoinInfoService {

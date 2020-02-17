@@ -18,14 +18,30 @@ import { PortfolioSummary } from "../models/portfolio/portfolio-summary";
 import { CoinInfoService } from "./coin.info.service";
 import { Price } from "../models/price";
 
-@Injectable()
+@Injectable({
+  providedIn: "root"
+})
 export class PortfolioService {
+  private currenPortfolio: Portfolio;
+
   constructor(
     private http: HttpClient,
     public toastService: ToastService,
     @Inject(CoinInfoService) private coinInfoService: CoinInfoService,
     @Inject(SESSION_STORAGE) private sessionStorage: WebStorageService
   ) {}
+
+  selectPortfolio(portfolio: Portfolio) {
+    this.currenPortfolio = portfolio;
+  }
+
+  getCurrentPortfolio() {
+    return this.currenPortfolio;
+  }
+
+  getPortfolioById(id: string): Observable<any> {
+    return this.http.get(`${environment.baseUrl}:8085/get_portfolio/${id}`);
+  }
 
   refreshPortfolioCurrentValues() {}
 
@@ -57,7 +73,7 @@ export class PortfolioService {
               portfolio.startingCoinValues[coinData.id].quantity;
             currentVal +=
               portfolioCoinData.price[currency] * portfolioCoinData.quantity;
-            portfolio.currentCoinValues[currency] = portfolioCoinData;
+            portfolio.currentCoinValues[coinData.name] = portfolioCoinData;
           });
           summaryData.currentVal = currentVal;
           summaryData.startingVal = startingVal;
