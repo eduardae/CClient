@@ -73,7 +73,7 @@ export class PortfolioService {
               portfolio.startingCoinValues[coinData.id].quantity;
             currentVal +=
               portfolioCoinData.price[currency] * portfolioCoinData.quantity;
-            portfolio.currentCoinValues[coinData.name] = portfolioCoinData;
+            portfolio.currentCoinValues.set(coinData.name, portfolioCoinData);
           });
           summaryData.currentVal = currentVal;
           summaryData.startingVal = startingVal;
@@ -86,6 +86,18 @@ export class PortfolioService {
       );
     });
     return promise;
+  }
+
+  populateGrowthByCoin(portfolio: Portfolio, currency: string): Portfolio {
+    portfolio.currentCoinValues.forEach(
+      (coinData: PortfolioCoinData, key: string) => {
+        const currentPrice = coinData.price[currency];
+        const startingPrice =
+          portfolio.startingCoinValues[key.toLowerCase()].price[currency];
+        coinData.growth = (currentPrice - startingPrice) / startingPrice;
+      }
+    );
+    return portfolio;
   }
 
   getAccruedValue(portfolio: Portfolio, currency: string): number {

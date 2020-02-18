@@ -8,8 +8,11 @@
   height: 520px !important;
 }
 
-.indicators {
-  margin-top: 32px;
+.growth-indicator {
+  display: inline-block;
+  vertical-align: top;
+  margin-top: 16px;
+  margin-left: 4px;
 }
 
 @media (max-width: 1024px) {
@@ -17,10 +20,6 @@
     width: 100% !important;
     height: 328px !important;
     margin-top: 48px;
-  }
-
-  .indicators {
-    margin-top: 16px;
   }
 
   @media (max-height: 768px) {
@@ -31,9 +30,6 @@
 }
 
 @media (max-width: 768px) {
-  .indicators {
-    margin-top: 24px;
-  }
   label {
     width: 100%;
   }

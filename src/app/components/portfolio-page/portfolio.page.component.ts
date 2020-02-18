@@ -99,6 +99,10 @@ export class PortfolioPageComponent implements OnInit {
             .then(result => {
               this.portfolio.summary = result;
               this.initPortfolioData();
+              this.portfolio = this.portfolioService.populateGrowthByCoin(
+                this.portfolio,
+                this.currency.value
+              );
             });
         });
     } else {
@@ -109,13 +113,13 @@ export class PortfolioPageComponent implements OnInit {
   initPortfolioData() {
     const currentDataset = [];
     const startingDataset = [];
-    for (const [key, coinData] of Object.entries(
-      this.portfolio.currentCoinValues
-    )) {
-      this.currentDoughnutChartLabels.push(key);
-      const val = coinData.quantity * coinData.price[this.currency.value];
-      currentDataset.push(val);
-    }
+    this.portfolio.currentCoinValues.forEach(
+      (coinData: PortfolioCoinData, key: string) => {
+        this.currentDoughnutChartLabels.push(key);
+        const val = coinData.quantity * coinData.price[this.currency.value];
+        currentDataset.push(val);
+      }
+    );
     for (const [key, coinData] of Object.entries(
       this.portfolio.startingCoinValues
     )) {
