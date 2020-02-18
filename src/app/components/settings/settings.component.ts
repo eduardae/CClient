@@ -112,6 +112,7 @@ export class SettingsComponent implements OnInit {
     }
     this.portfolios.push(newPortfolio);
     this.portfolios = [].concat(this.portfolios);
+    this.updatePortfolioSummaries();
     this.cdr.detectChanges();
   };
 
@@ -119,13 +120,7 @@ export class SettingsComponent implements OnInit {
     this.userService.getPortfolios(this.user).subscribe(
       result => {
         this.portfolios = result;
-        for (let i = 0; i < this.portfolios.length; i++) {
-          this.portfolioService
-            .getSummary(this.portfolios[i], this.currency.value)
-            .then(result => {
-              this.portfolios[i].summary = result;
-            });
-        }
+        this.updatePortfolioSummaries();
       },
       err => {
         if (err.status !== 404) {
@@ -136,5 +131,15 @@ export class SettingsComponent implements OnInit {
         }
       }
     );
+  }
+
+  updatePortfolioSummaries() {
+    for (let i = 0; i < this.portfolios.length; i++) {
+      this.portfolioService
+        .getSummary(this.portfolios[i], this.currency.value)
+        .then(result => {
+          this.portfolios[i].summary = result;
+        });
+    }
   }
 }

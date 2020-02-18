@@ -31,7 +31,7 @@
                 *ngIf="portfolios && portfolios.length !== 0"
               >
                 <div
-                  class="col-12 col-sm-6 mb-4"
+                  class="col-12 col-md-6 mb-4"
                   *ngFor="let portfolio of portfolios; trackBy: portfolio?._id"
                   (click)="goToPortfolioPage(portfolio)"
                 >
@@ -66,7 +66,7 @@
               </div>
             </div>
           </div>
-          <div class="row mt-5">
+          <div class="row mt-5 mb-5">
             <div class="col">
               <div class="row">
                 <div class="col-12">
@@ -109,65 +109,67 @@
           </div>
         </div>
 
-        <div class="col-12 col-md-6 col-lg-3 mt-5 page-section">
-          <div class="row">
-            <div class="col-12">
-              <h5 class="font-weight-bold">User Info</h5>
+        <div class="col-12 col-md-6 col-lg-3 mt-5  page-section">
+          <div class="user-fields">
+            <div class="row">
+              <div class="col-12">
+                <h5 class="font-weight-bold">User Info</h5>
+              </div>
             </div>
-          </div>
-          <div class="row align-items-center mt-3">
-            <div class="col-12">
-              <h6 class="font-weight-bold">Username</h6>
-              <input
-                disabled
-                type="text"
-                class="form-control"
-                [(ngModel)]="user.username"
-                placeholder="Username"
-              />
+            <div class="row align-items-center mt-3">
+              <div class="col-12">
+                <h6 class="font-weight-bold">Username</h6>
+                <input
+                  disabled
+                  type="text"
+                  class="form-control"
+                  [(ngModel)]="user.username"
+                  placeholder="Username"
+                />
+              </div>
             </div>
-          </div>
-          <div class="row align-items-center mt-4">
-            <div class="col-12">
-              <h6 class="font-weight-bold">Name</h6>
-              <input
-                type="text"
-                class="form-control"
-                [(ngModel)]="user.name"
-                placeholder="Name"
-              />
+            <div class="row align-items-center mt-4">
+              <div class="col-12">
+                <h6 class="font-weight-bold">Name</h6>
+                <input
+                  type="text"
+                  class="form-control"
+                  [(ngModel)]="user.name"
+                  placeholder="Name"
+                />
+              </div>
             </div>
-          </div>
-          <div class="row align-items-center mt-4">
-            <div class="col-12">
-              <h6 class="font-weight-bold">Surname</h6>
-              <input
-                type="text"
-                class="form-control"
-                [(ngModel)]="user.surname"
-                placeholder="Surname"
-              />
+            <div class="row align-items-center mt-4">
+              <div class="col-12">
+                <h6 class="font-weight-bold">Surname</h6>
+                <input
+                  type="text"
+                  class="form-control"
+                  [(ngModel)]="user.surname"
+                  placeholder="Surname"
+                />
+              </div>
             </div>
-          </div>
-          <div class="row align-items-center mt-4">
-            <div class="col-12">
-              <h6 class="font-weight-bold">Email</h6>
-              <input
-                type="email"
-                class="form-control"
-                [(ngModel)]="user.email"
-                placeholder="email"
-              />
+            <div class="row align-items-center mt-4">
+              <div class="col-12">
+                <h6 class="font-weight-bold">Email</h6>
+                <input
+                  type="email"
+                  class="form-control"
+                  [(ngModel)]="user.email"
+                  placeholder="email"
+                />
+              </div>
             </div>
-          </div>
-          <div class="row justify-content-start mt-4">
-            <div class="col-12 col-lg-8 offset-lg-2">
-              <button
-                class="btn col btn-primary mt-4 font-weight-bold"
-                (click)="update()"
-              >
-                Update
-              </button>
+            <div class="row justify-content-start mt-4">
+              <div class="col-12 col-lg-8 offset-lg-2">
+                <button
+                  class="btn col btn-primary mt-4 font-weight-bold"
+                  (click)="update()"
+                >
+                  Update
+                </button>
+              </div>
             </div>
           </div>
         </div>

@@ -50,11 +50,19 @@
     color: #fff;
     font-weight: 500;
     margin: 4px 4px 12px 4px;
+
+    span {
+      word-break: break-all;
+    }
   }
 
   .portfolio-body {
     margin-bottom: 8px;
   }
+}
+
+.user-fields {
+  padding-left: 32px;
 }
 
 @media (max-width: 768px) {
@@ -64,6 +72,10 @@
     &.coin-bookmarks-section {
       text-align: center;
     }
+  }
+
+  .user-fields {
+    padding-left: 0px;
   }
 
   .link-section {
