@@ -31,7 +31,7 @@
                 *ngIf="portfolios && portfolios.length !== 0"
               >
                 <div
-                  class="col-12 col-sm-5 mb-4"
+                  class="col-12 col-sm-6 mb-4"
                   *ngFor="let portfolio of portfolios; trackBy: portfolio?._id"
                   (click)="goToPortfolioPage(portfolio)"
                 >

@@ -15,22 +15,15 @@ import { Portfolio } from "../models/portfolio/portfolio";
 
 @Injectable()
 export class UserInfoService {
-  // Observable string sources
-  private userLoggedSource = new Subject<User>();
-
-  // Observable string streams
-  userLogged$ = this.userLoggedSource.asObservable();
-
-  // Service message commands
-  loginEvent(user: User) {
-    this.userLoggedSource.next(user);
-  }
-
   constructor(
     private http: HttpClient,
     public toastService: ToastService,
     @Inject(SESSION_STORAGE) private sessionStorage: WebStorageService
   ) {}
+
+  refreshToken(user: User) {
+    return this.http.post(`${environment.baseUrl}:8082/get_token`, user);
+  }
 
   updateSettings(user: User) {
     this.http

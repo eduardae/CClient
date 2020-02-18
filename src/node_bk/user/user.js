@@ -69,7 +69,7 @@ app.post('/login', function (req, res) {
           crypto.scrypt(reqQuery.password, 'cm', 64, (err, derivedKey) => {
             if (err) throw err;
             if (docs[0].password_hash.toString('hex') === derivedKey.toString('hex')) {
-              var token = jwt.sign({ userID: docs[0]._id }, 'todo-app-super-shared-secret', { expiresIn: '2h' });
+              var token = jwt.sign({ userID: docs[0]._id }, 'todo-app-super-shared-secret', { expiresIn: '30m' });
               docs[0].token = token;
               res.json(docs[0]);
             } else {
@@ -100,8 +100,8 @@ app.post('/get_token', function (req, res) {
         res.status(500).end(dberr);
       } else {
         if (docs && docs.length != 0) {
-          var token = jwt.sign({ userID: docs[0]._id }, 'todo-app-super-shared-secret', { expiresIn: '2h' });
-          res.status(200).end(token);
+          var token = jwt.sign({ userID: docs[0]._id }, 'todo-app-super-shared-secret', { expiresIn: '30m' });
+          res.status(200).json(token);
         } else {
           res.status(404).end('User not found');
           client.close();

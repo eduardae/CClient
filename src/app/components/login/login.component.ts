@@ -20,6 +20,7 @@ import { User } from "src/app/models/user";
 import { UserInfoService } from "src/app/services/user.info.service";
 import { ToastService } from "../../services/toast-service";
 import { environment } from "../../../environments/environment";
+import { AuthService } from "src/app/services/auth.service";
 
 @Component({
   selector: "app-login",
@@ -34,7 +35,7 @@ export class LoginComponent implements OnInit {
     private http: Http,
     private router: Router,
     @Inject(SESSION_STORAGE) private storage: WebStorageService,
-    private userService: UserInfoService,
+    private authService: AuthService,
     public toastService: ToastService
   ) {
     this.user = new User();
@@ -53,7 +54,7 @@ export class LoginComponent implements OnInit {
         result => {
           const userFromDb = result.json();
           this.storage.set("currentUser", JSON.stringify({ user: userFromDb }));
-          this.userService.loginEvent(userFromDb);
+          this.authService.loginEvent(userFromDb);
           this.router.navigateByUrl("/settings");
         },
         err => {

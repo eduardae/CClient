@@ -12,6 +12,7 @@ import { Subscription } from "rxjs";
 import { ToastService } from "./services/toast-service";
 import { AppSettingsService } from "./services/app.settings.service";
 import { CurrencyInfo } from "./models/currency-info";
+import { AuthService } from "./services/auth.service";
 
 @Component({
   selector: "app-root",
@@ -29,7 +30,7 @@ export class AppComponent {
     private http: Http,
     private router: Router,
     @Inject(SESSION_STORAGE) private sessionStorage: WebStorageService,
-    private userService: UserInfoService,
+    private authService: AuthService,
     private appSettingsService: AppSettingsService,
     private toastService: ToastService
   ) {
@@ -52,7 +53,7 @@ export class AppComponent {
     if (this.sessionStorage.get("currentUser")) {
       this.user = JSON.parse(this.sessionStorage.get("currentUser")).user;
     }
-    this.subscription = userService.userLogged$.subscribe(user => {
+    this.subscription = authService.userLogged$.subscribe(user => {
       this.user = user;
       this.sessionStorage.set(
         "currentUser",

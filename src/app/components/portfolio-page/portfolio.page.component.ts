@@ -107,6 +107,10 @@ export class PortfolioPageComponent implements OnInit {
         });
     } else {
       this.initPortfolioData();
+      this.portfolio = this.portfolioService.populateGrowthByCoin(
+        this.portfolio,
+        this.currency.value
+      );
     }
   }
 

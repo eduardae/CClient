@@ -10,9 +10,9 @@
     "base": "npm-run-all --parallel crypto-info user ",
     "all": "npm-run-all --parallel crypto-info user news bookmarks portfolios",
     "no-market": "npm-run-all --parallel user news bookmarks",
-    "no-news": "npm-run-all --parallel crypto-info user bookmarks",
-    "no-user": "npm-run-all --parallel crypto-info news bookmarks",
-    "no-bookmarks": "npm-run-all --parallel crypto-info user news",
+    "no-news": "npm-run-all --parallel crypto-info user bookmarks portfolios",
+    "no-user": "npm-run-all --parallel crypto-info news bookmarks portfolios",
+    "no-bookmarks": "npm-run-all --parallel crypto-info user news portfolios",
     "no-portfolios": "npm-run-all --parallel crypto-info user news bookmarks"
   },
   "dependencies": {

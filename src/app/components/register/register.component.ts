@@ -13,6 +13,7 @@ import { Router } from "@angular/router";
 import { UserInfoService } from "../../services/user.info.service";
 import { ToastService } from "../../services/toast-service";
 import { environment } from "src/environments/environment";
+import { AuthService } from "src/app/services/auth.service";
 
 @Component({
   selector: "app-register",
@@ -29,7 +30,7 @@ export class RegisterComponent implements OnInit {
     private http: Http,
     private router: Router,
     @Inject(SESSION_STORAGE) private sessionStorage: WebStorageService,
-    private userService: UserInfoService,
+    private authService: AuthService,
     private toastService: ToastService
   ) {
     this.user = new User();
@@ -54,7 +55,7 @@ export class RegisterComponent implements OnInit {
             "currentUser",
             JSON.stringify({ user: this.user })
           );
-          this.userService.loginEvent(this.user);
+          this.authService.loginEvent(this.user);
           this.router.navigateByUrl("/");
         },
         err => {
