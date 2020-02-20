@@ -15,7 +15,7 @@ import { environment } from "src/environments/environment";
 })
 export class NewsComponent implements OnInit {
   @Input() articles: Article[];
-  @Input() listMode: boolean = false;
+  @Input() listMode: boolean = true;
   isUpdating: boolean;
   response: string;
   user: User;
