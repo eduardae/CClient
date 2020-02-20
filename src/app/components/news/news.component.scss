@@ -208,7 +208,7 @@
         height: 280px;
         padding-top: 16px;
         margin: auto;
-        margin-bottom: 32px;
+        margin-bottom: 48px;
 
         .article-title {
           height: 76px;
@@ -225,6 +225,33 @@
           background-size: contain;
           background-position: center;
         }
+      }
+    }
+    .news-list-item-container {
+      height: 460px;
+      width: 100%;
+      padding: 16px;
+
+      .article {
+        .article-buttons {
+          text-align: center;
+        }
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 360px) {
+  .news-list-item-container {
+    height: 424px;
+
+    .article {
+      .article-buttons {
+        text-align: center;
+      }
+
+      .img-container {
+        height: 152px;
       }
     }
   }
