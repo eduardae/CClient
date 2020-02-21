@@ -4,6 +4,7 @@ import { CoinsSummary } from "../../models/coins-summary";
 import { CoinInfo } from "../../models/coin-info";
 import { from } from "rxjs";
 import { User } from "../../models/user";
+import CryptoJS from "crypto-js";
 import {
   LOCAL_STORAGE,
   WebStorageService,
@@ -39,10 +40,13 @@ export class RegisterComponent implements OnInit {
   ngOnInit() {}
 
   register() {
+    let hashedPassword = CryptoJS.SHA256(this.user.password).toString(
+      CryptoJS.enc.Hex
+    );
     this.http
       .post(`${environment.baseUrl}:8082/register`, {
         username: this.user.username,
-        password: this.user.password,
+        password: hashedPassword,
         email: this.user.email
       })
       .subscribe(

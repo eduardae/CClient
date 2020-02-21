@@ -21,6 +21,7 @@ import { UserInfoService } from "src/app/services/user.info.service";
 import { ToastService } from "../../services/toast-service";
 import { environment } from "../../../environments/environment";
 import { AuthService } from "src/app/services/auth.service";
+import CryptoJS from "crypto-js";
 
 @Component({
   selector: "app-login",
@@ -45,10 +46,13 @@ export class LoginComponent implements OnInit {
   ngOnInit() {}
 
   login() {
+    let hashedPassword = CryptoJS.SHA256(this.user.password).toString(
+      CryptoJS.enc.Hex
+    );
     this.http
       .post(`${environment.baseUrl}:8082/login`, {
         username: this.user.username,
-        password: this.user.password
+        password: hashedPassword
       })
       .subscribe(
         result => {

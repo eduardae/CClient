@@ -31,7 +31,7 @@ app.post('/register', function (req, res) {
         } else {
           crypto.scrypt(reqQuery.password, 'cm', 64, (err, derivedKey) => {
             if (err) throw err;
-            reqQuery.password_hash = derivedKey;
+            reqQuery.password_hash = derivedKey.toString('hex');
             delete reqQuery.password;
             db.collection("users").insertOne(reqQuery, function (dberr, dbres) {
               if (dberr) {
