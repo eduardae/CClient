@@ -12,6 +12,22 @@
   margin-top: 32px;
 }
 
+.greed-and-fear {
+  display: block;
+  width: 80%;
+  margin: auto;
+
+  img {
+    width: 100%;
+    height: auto;
+  }
+}
+
+.crypto-index {
+  width: 100%;
+  min-height: 80%;
+}
+
 @media (max-width: 1024px) {
   #price-chart {
     width: 100% !important;
@@ -37,6 +53,10 @@
   label {
     width: 100%;
   }
+  .crypto-index {
+    min-height: 356px;
+    width: 90%;
+  }
 }
 
 @media (max-width: 425px) {
@@ -57,5 +77,10 @@
         width: 106px;
       }
     }
+  }
+
+  .crypto-index {
+    width: 100%;
+    min-height: 256px;
   }
 }

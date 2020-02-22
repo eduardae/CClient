@@ -78,10 +78,13 @@
                 <div class="col-12 mt-3 mb-3">
                   <div
                     *ngIf="
-                      user.bookmarked_coins &&
-                      user.bookmarked_coins.length !== 0
+                      user.bookmarked_coins
+                        ? user.bookmarked_coins.length === 0
+                        : true
                     "
-                  ></div>
+                  >
+                    <p>You have no coin bookmarks.</p>
+                  </div>
                   <span
                     class="followed-coin"
                     *ngFor="let coinId of user.bookmarked_coins"
