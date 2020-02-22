@@ -29,10 +29,12 @@ app.post('/register', function (req, res) {
           res.status(500).end('Username already in use');
           client.close();
         } else {
-          crypto.scrypt(reqQuery.password, 'cm', 64, (err, derivedKey) => {
+          let salt = crypto.randomBytes(64).toString('hex');
+          crypto.scrypt(reqQuery.password, salt, 64, (err, derivedKey) => {
             if (err) throw err;
             reqQuery.password_hash = derivedKey.toString('hex');
             delete reqQuery.password;
+            reqQuery.salt = salt;
             db.collection("users").insertOne(reqQuery, function (dberr, dbres) {
               if (dberr) {
                 res.status(500).send(dberr);
@@ -66,7 +68,7 @@ app.post('/login', function (req, res) {
         res.status(500).end(dberr);
       } else {
         if (docs && docs.length != 0) {
-          crypto.scrypt(reqQuery.password, 'cm', 64, (err, derivedKey) => {
+          crypto.scrypt(reqQuery.password, docs[0].salt, 64, (err, derivedKey) => {
             if (err) throw err;
             if (docs[0].password_hash.toString('hex') === derivedKey.toString('hex')) {
               var token = jwt.sign({ userID: docs[0]._id }, 'todo-app-super-shared-secret', { expiresIn: '30m' });
