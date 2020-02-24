@@ -95,16 +95,24 @@ export class PricesComponent implements OnInit {
       this.selectedCoin = this.coins[0];
       this.onCoinSelect(this.selectedCoin);
     });
-    let days2 = new SelectedDateOption("two days", 2);
-    let week = new SelectedDateOption("one week", 7);
-    let month = new SelectedDateOption("one month", 31);
-    let year = new SelectedDateOption("one year", 365);
+    let one_day = new SelectedDateOption("1 day", 2);
+    let three_days = new SelectedDateOption("3 days", 3);
+    let week = new SelectedDateOption("1 week", 7);
+    let two_weeks = new SelectedDateOption("2 weeks", 14);
+    let month = new SelectedDateOption("1 month", 31);
+    let three_months = new SelectedDateOption("3 months", 93);
+    let year = new SelectedDateOption("1 year", 365);
+    let all = new SelectedDateOption("Max", 0);
     this.timeFrameSelectOptions = [];
-    this.timeFrameSelectOptions.push(days2);
-    this.timeFrame = days2;
+    this.timeFrameSelectOptions.push(one_day);
+    this.timeFrame = one_day;
+    this.timeFrameSelectOptions.push(three_days);
     this.timeFrameSelectOptions.push(week);
+    this.timeFrameSelectOptions.push(two_weeks);
     this.timeFrameSelectOptions.push(month);
+    this.timeFrameSelectOptions.push(three_months);
     this.timeFrameSelectOptions.push(year);
+    this.timeFrameSelectOptions.push(all);
   }
 
   refreshInfo() {
@@ -232,11 +240,17 @@ export class PricesComponent implements OnInit {
   }
 
   getCoinMarketChart(coinName, currency, daysPar) {
+    let days;
+    if (daysPar === 0) {
+      days = "max";
+    } else {
+      days = daysPar;
+    }
     this.http
       .post(`${environment.baseUrl}:8081/coininfo/marketchart`, {
         coin_name: coinName,
         vs_currency: currency,
-        days: daysPar ? daysPar : 7
+        days: days
       })
       .subscribe(result => {
         const response = result.json();
