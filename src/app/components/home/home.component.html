@@ -56,6 +56,24 @@
   </div>
 
   <div class="row icons" *ngIf="contentLoaded">
+    <div class="col-6 col-sm-4 col-md-3" *ngFor="let coin of coinsList">
+      <div class="icon-container" [routerLink]="'/coinpage/' + coin.id">
+        <coin
+          [price]="coin.price"
+          [precision]="2"
+          [currency]="currency"
+          [name]="coin.name"
+          [iconId]="coin.id"
+          [nameWeight]="500"
+          [iconSizeMultiplier]="3"
+          [iconUrl]="coin.iconUrl"
+        ></coin>
+      </div>
+    </div>
+  </div>
+
+  <!--
+  <div class="row icons" *ngIf="contentLoaded">
     <div class="col-6 col-md-3">
       <div class="icon-container" [routerLink]="'/coinpage/bitcoin'">
         <coin
@@ -156,5 +174,5 @@
         ></coin>
       </div>
     </div>
-  </div>
+  </div>-->
 </div>

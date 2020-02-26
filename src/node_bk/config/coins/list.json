@@ -2,35 +2,35 @@
   "coins": [
     {
       "name": "Bitcoin",
-      "queryId": "bitcoin"
+      "id": "bitcoin"
     },
     {
       "name": "Ethereum",
-      "queryId": "ethereum"
+      "id": "ethereum"
     },
     {
       "name": "Litecoin",
-      "queryId": "litecoin"
+      "id": "litecoin"
     },
     {
       "name": "Ripple",
-      "queryId": "ripple"
+      "id": "ripple"
     },
     {
       "name": "Cardano",
-      "queryId": "cardano"
+      "id": "cardano"
     },
     {
       "name": "Chainlink",
-      "queryId": "chainlink"
+      "id": "chainlink"
     },
     {
       "name": "Tezos",
-      "queryId": "tezos"
+      "id": "tezos"
     },
     {
       "name": "Tether",
-      "queryId": "tether"
+      "id": "tether"
     }
   ]
 }

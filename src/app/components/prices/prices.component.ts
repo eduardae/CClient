@@ -122,7 +122,7 @@ export class PricesComponent implements OnInit {
   onCoinSelect(coin) {
     this.getCoinInfo(coin);
     this.getCoinMarketChart(
-      coin.queryId,
+      coin.id,
       this.currency.label,
       this.timeFrame ? this.timeFrame.days : null
     );
@@ -131,7 +131,7 @@ export class PricesComponent implements OnInit {
   onTimeFrameChange(timeFrame) {
     this.timeFrame = timeFrame;
     this.getCoinMarketChart(
-      this.selectedCoin.queryId,
+      this.selectedCoin.id,
       this.currency.label,
       timeFrame.days
     );
@@ -160,7 +160,7 @@ export class PricesComponent implements OnInit {
 
   getCoinInfo(coin) {
     this.http
-      .post(`${environment.baseUrl}:8081/coininfo`, { coin_name: coin.queryId })
+      .post(`${environment.baseUrl}:8081/coininfo`, { coin_name: coin.id })
       .subscribe(result => {
         const response = result.json();
         this.selectedCoin = coin;

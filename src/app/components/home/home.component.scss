@@ -91,7 +91,7 @@ body {
   padding: 16px;
   background-color: #f7f7ff;
   border: 0.5px solid;
-  width: 128px;
+  width: 172px;
   border-radius: 16px;
   box-shadow: 1px 1px #333;
   cursor: pointer;
@@ -138,6 +138,11 @@ body {
     img {
       height: 368px;
     }
+  }
+
+  .icon-container {
+    width: 152px;
+    padding: 12px;
   }
 }
 

@@ -1,6 +1,16 @@
 <div placement="bottom" ngbTooltip="{{ tooltipTxt }}">
   <div>
-    <div class="coin-icon" [ngClass]="iconId"></div>
+    <div
+      class="coin-icon"
+      [ngClass]="iconId"
+      *ngIf="iconUrl && iconUrl.length !== 0"
+      [ngStyle]="{ 'background-image': 'url(' + iconUrl + ')' }"
+    ></div>
+    <div
+      class="coin-icon"
+      [ngClass]="iconId"
+      *ngIf="iconUrl ? iconUrl.length === 0 : true"
+    ></div>
   </div>
   <span
     *ngIf="name"

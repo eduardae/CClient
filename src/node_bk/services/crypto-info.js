@@ -65,6 +65,22 @@ app.get('/coinslist', function (req, res) {
 
 });
 
+app.get('/coins/list', function (req, res) {
+  getCoinsList().then(function (data) {
+    res.json(data);
+  }, err => {
+    res.status(500).end();
+  });
+});
+
+app.get('/coins/markets', function (req, res) {
+  getCoinsMarkets(req.query.currency).then(function (data) {
+    res.json(data);
+  }, err => {
+    res.status(500).end();
+  });
+});
+
 app.all('/*', function (req, res, next) {
   res.header("Access-Control-Allow-Origin", "*");
   res.header("Access-Control-Allow-Headers", "X-Requested-With");
@@ -85,6 +101,16 @@ var getAllData = async function () {
 
 var getCoinData = async function (coin_name) {
   let data = await CoinGeckoClient.coins.fetch(coin_name, {});
+  return data;
+}
+
+var getCoinsList = async function () {
+  let data = await CoinGeckoClient.coins.list();
+  return data;
+}
+
+var getCoinsMarkets = async function (currency) {
+  let data = await CoinGeckoClient.coins.markets({ vs_currency: currency });
   return data;
 }
 

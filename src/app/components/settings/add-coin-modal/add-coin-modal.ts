@@ -50,7 +50,7 @@ import { environment } from "src/environments/environment";
                 [ngClass]="{ selected: coin.selected }"
                 (click)="toggleCoinSelection(coin)"
               >
-                <coin name="{{ coin.name }}" iconId="{{ coin.queryId }}"></coin>
+                <coin name="{{ coin.name }}" iconId="{{ coin.id }}"></coin>
               </span>
             </div>
           </div>
@@ -85,7 +85,7 @@ export class AddCoinModalContent implements OnInit {
     this.selectedCoins = [];
     for (let coinId of this.user.bookmarked_coins) {
       for (let coin of this.coins) {
-        if (coinId === coin.queryId) {
+        if (coinId === coin.id) {
           this.selectedCoins.push(coin);
           coin.selected = true;
         }
@@ -96,18 +96,18 @@ export class AddCoinModalContent implements OnInit {
   toggleCoinSelection(coin) {
     coin.selected = !coin.selected;
     let selectedCoin = _.findWhere(this.selectedCoins, {
-      queryId: coin.queryId
+      id: coin.id
     });
     if (!selectedCoin) {
       let coinToAdd = _.findWhere(this.coins, {
-        queryId: coin.queryId
+        id: coin.id
       });
       this.selectedCoins.push(coinToAdd);
     } else {
       this.selectedCoins = _.without(
         this.selectedCoins,
         _.findWhere(this.selectedCoins, {
-          queryId: coin.queryId
+          id: coin.id
         })
       );
     }
@@ -116,7 +116,7 @@ export class AddCoinModalContent implements OnInit {
   saveBookmarks() {
     let newBookmarks = [];
     for (let coin of this.selectedCoins) {
-      newBookmarks.push(coin.queryId);
+      newBookmarks.push(coin.id);
     }
     this.user.bookmarked_coins = newBookmarks;
     this.http

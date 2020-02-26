@@ -87,7 +87,7 @@ import { MarketData } from "src/app/models/historical-market-data";
                 *ngFor="let coin of selectedCoins"
               >
                 <span>
-                  <coin iconId="{{ coin.queryId }}"></coin>
+                  <coin iconId="{{ coin.id }}"></coin>
                 </span>
               </div>
             </div>
@@ -186,7 +186,7 @@ export class SelectCoinModalContent implements OnInit {
   currency: CurrencyInfo;
   portfolioCreationCallback: (Portfolio) => void;
 
-  formatter = (coin: CoinInfo) => coin.queryId;
+  formatter = (coin: CoinInfo) => coin.id;
 
   search = (text$: Observable<string>) =>
     text$.pipe(
@@ -196,7 +196,7 @@ export class SelectCoinModalContent implements OnInit {
         term.length < 2
           ? []
           : this.coins
-              .filter(v => v.queryId.indexOf(term.toLowerCase()) > -1)
+              .filter(v => v.id.indexOf(term.toLowerCase()) > -1)
               .slice(0, 10)
       )
     );
@@ -226,7 +226,7 @@ export class SelectCoinModalContent implements OnInit {
 
   coinSelected(coin: CoinInfo) {
     if (coin) {
-      this.coinInfoService.getCoinInfo(coin.queryId).subscribe(
+      this.coinInfoService.getCoinInfo(coin.id).subscribe(
         result => {
           const marketData = result.data.market_data;
           coin.price = marketData.current_price[this.currency.value];
@@ -240,7 +240,7 @@ export class SelectCoinModalContent implements OnInit {
 
   addCoin() {
     const purchase = new Purchase();
-    const coinId = this.currentlySelectedCoin.queryId;
+    const coinId = this.currentlySelectedCoin.id;
     purchase.quantity = this.coinQuantity;
     purchase.currency = this.currency.value;
     purchase.price = new Price();
@@ -250,7 +250,7 @@ export class SelectCoinModalContent implements OnInit {
   }
 
   updateQuantity(monetaryVal: number) {
-    if (this.currentlySelectedCoin && this.currentlySelectedCoin.queryId) {
+    if (this.currentlySelectedCoin && this.currentlySelectedCoin.id) {
       this.coinQuantity = this.monetaryValToQuantity(
         monetaryVal,
         this.currentlySelectedCoin
@@ -259,7 +259,7 @@ export class SelectCoinModalContent implements OnInit {
   }
 
   updateMonetaryVal(quantity: number) {
-    if (this.currentlySelectedCoin && this.currentlySelectedCoin.queryId) {
+    if (this.currentlySelectedCoin && this.currentlySelectedCoin.id) {
       this.purchaseVal = this.quantityToMonetaryVal(
         quantity,
         this.currentlySelectedCoin

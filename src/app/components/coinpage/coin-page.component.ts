@@ -83,7 +83,7 @@ export class CoinPageComponent implements OnInit {
 
       let coinIdPar = this.route.snapshot.params.coinId;
       result.forEach(element => {
-        if (element.queryId === coinIdPar) {
+        if (element.id === coinIdPar) {
           this.selectedCoin = element;
           this.onCoinSelect(this.selectedCoin);
           this.getNews(this.selectedCoin);
@@ -121,7 +121,7 @@ export class CoinPageComponent implements OnInit {
   onCoinSelect(coin) {
     this.getCoinInfo(coin);
     this.getCoinMarketChart(
-      coin.queryId,
+      coin.id,
       this.currency.label,
       this.timeFrame ? this.timeFrame.days : null
     );
@@ -130,7 +130,7 @@ export class CoinPageComponent implements OnInit {
   onTimeFrameChange(timeFrame) {
     this.timeFrame = timeFrame;
     this.getCoinMarketChart(
-      this.selectedCoin.queryId,
+      this.selectedCoin.id,
       this.currency.label,
       timeFrame.days
     );
@@ -146,7 +146,7 @@ export class CoinPageComponent implements OnInit {
 
   getNews(coin: CoinInfo) {
     this.http
-      .get(`${environment.baseUrl}:8083/bycoin/${coin.queryId}`)
+      .get(`${environment.baseUrl}:8083/bycoin/${coin.id}`)
       .subscribe(result => {
         const response = result.json();
         console.log(response);
@@ -162,7 +162,7 @@ export class CoinPageComponent implements OnInit {
 
   getCoinInfo(coin) {
     this.http
-      .post(`${environment.baseUrl}:8081/coininfo`, { coin_name: coin.queryId })
+      .post(`${environment.baseUrl}:8081/coininfo`, { coin_name: coin.id })
       .subscribe(result => {
         const response = result.json();
         this.selectedCoin = coin;

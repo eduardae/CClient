@@ -51,7 +51,7 @@ export class UserInfoService {
   updateCoins(selectedCoins: CoinInfo[], user: User) {
     let newBookmarks = [];
     for (let coin of selectedCoins) {
-      newBookmarks.push(coin.queryId);
+      newBookmarks.push(coin.id);
     }
     user.bookmarked_coins = newBookmarks;
     this.http

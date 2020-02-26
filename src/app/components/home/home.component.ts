@@ -8,6 +8,7 @@ import { CurrencyInfo } from "../../models/currency-info";
 import { AppSettingsService } from "src/app/services/app.settings.service";
 import { SESSION_STORAGE, WebStorageService } from "angular-webstorage-service";
 import { environment } from "../../../environments/environment";
+import { CoinInfoService } from "src/app/services/coin.info.service";
 
 @Component({
   selector: "app-home",
@@ -16,6 +17,7 @@ import { environment } from "../../../environments/environment";
 })
 export class HomeComponent implements OnInit {
   @Input() cryptoInfos: CoinsSummary;
+  coinsList: Array<CoinInfo> = new Array();
   isUpdating: boolean;
   contentLoaded: boolean;
   currency: CurrencyInfo;
@@ -25,7 +27,8 @@ export class HomeComponent implements OnInit {
   constructor(
     private http: Http,
     private appSettingsService: AppSettingsService,
-    @Inject(SESSION_STORAGE) private sessionStorage: WebStorageService
+    @Inject(SESSION_STORAGE) private sessionStorage: WebStorageService,
+    private coinInfoService: CoinInfoService
   ) {
     this.cryptoInfos = new CoinsSummary();
     this.contentLoaded = false;
@@ -43,7 +46,6 @@ export class HomeComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.getCryptoMarketInfo();
     if (this.sessionStorage.get("selectedCurrency")) {
       this.currency = JSON.parse(this.sessionStorage.get("selectedCurrency"))[
         "currency"
@@ -51,45 +53,34 @@ export class HomeComponent implements OnInit {
     } else {
       this.currency = { label: "EUR", value: "eur", symbol: "&euro;" };
     }
+    this.getCoinMarkets();
   }
 
   refreshInfo() {
     this.isUpdating = true;
-    this.getCryptoMarketInfo();
+    this.getCoinMarkets();
   }
 
-  getCryptoMarketInfo() {
-    this.http.get(`${environment.baseUrl}:8081`).subscribe(result => {
-      const response = result.json();
-      if (response.success) {
-        const extracted = response.data;
-        const btc = _.findWhere(extracted, { id: "bitcoin" });
-        const ether = _.findWhere(extracted, { id: "ethereum" });
-        const chainlink = _.findWhere(extracted, { id: "chainlink" });
-        const cardano = _.findWhere(extracted, { id: "cardano" });
-        const tezos = _.findWhere(extracted, { id: "tezos" });
-        const litecoin = _.findWhere(extracted, { id: "litecoin" });
-        const xrp = _.findWhere(extracted, { id: "ripple" });
-        const tether = _.findWhere(extracted, { id: "tether" });
-
-        this.cryptoInfos.btc = this.getCoinMarketInfo(btc);
-        this.cryptoInfos.ether = this.getCoinMarketInfo(ether);
-        this.cryptoInfos.chainlink = this.getCoinMarketInfo(chainlink);
-        this.cryptoInfos.cardano = this.getCoinMarketInfo(cardano);
-        this.cryptoInfos.tezos = this.getCoinMarketInfo(tezos);
-        this.cryptoInfos.litecoin = this.getCoinMarketInfo(litecoin);
-        this.cryptoInfos.xrp = this.getCoinMarketInfo(xrp);
-        this.cryptoInfos.tether = this.getCoinMarketInfo(tether);
+  getCoinMarkets() {
+    this.coinsList = [];
+    this.coinInfoService.getCoinMarkets(this.currency.value).subscribe(
+      result => {
+        for (let i = 0; i < 12; i++) {
+          const coinMarketData = result.data[i];
+          let coin = new CoinInfo();
+          coin.price = coinMarketData.current_price;
+          coin.name = coinMarketData.name;
+          coin.id = coinMarketData.id;
+          coin.iconUrl = coinMarketData.image;
+          this.coinsList.push(coin);
+        }
+        this.isUpdating = false;
+        this.contentLoaded = true;
+        console.log(result.data);
+      },
+      err => {
+        console.log(err);
       }
-      this.isUpdating = false;
-      this.contentLoaded = true;
-    });
-  }
-
-  getCoinMarketInfo(coin) {
-    const result = new CoinInfo();
-    result.price = coin.market_data.current_price[this.currency.value];
-    result.name = coin.id;
-    return result;
+    );
   }
 }

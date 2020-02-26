@@ -8,7 +8,8 @@ export class CoinInfo {
   ATH: number;
   marketCapRank: number;
   name: string;
-  queryId: string;
+  id: string;
+  iconUrl: string;
   liquidityScore: number;
   communityData: CommunityData;
   developmentData: DevelopmentData;
@@ -18,7 +19,7 @@ export class CoinInfo {
     this.price = 0;
     this.marketCap = 0;
     this.name = "";
-    this.queryId = "";
+    this.id = "";
     this.communityData = new CommunityData();
     this.developmentData = new DevelopmentData();
   }

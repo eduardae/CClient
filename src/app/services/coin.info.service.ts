@@ -28,12 +28,24 @@ export class CoinInfoService {
     });
   }
 
+  getCoinsList(): Observable<any> {
+    return this.http.get(`${environment.baseUrl}:8081/coins/list`);
+  }
+
+  getCoinMarkets(currency: string): Observable<any> {
+    return this.http.get(
+      `${environment.baseUrl}:8081/coins/markets?currency=${
+        currency ? currency : "EUR"
+      }`
+    );
+  }
+
   getMultipleCoinsInfo(coins: CoinInfo[]): Observable<any> {
     let calls = [];
     for (const coin of coins) {
       calls.push(
         this.http.post<CoinInfo>(`${environment.baseUrl}:8081/coininfo`, {
-          coin_name: coin.queryId
+          coin_name: coin.id
         })
       );
     }

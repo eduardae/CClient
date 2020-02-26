@@ -14,6 +14,7 @@ export class CoinComponent implements OnInit, OnChanges {
   @Input() name: string;
   @Input() tooltipTxt: string;
   @Input() iconId: string;
+  @Input() iconUrl: string;
   @Input() price: number;
   @Input() currency: CurrencyInfo;
   @Input() precision: number;
