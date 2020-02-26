@@ -25,6 +25,7 @@ import { AppSettingsService } from "src/app/services/app.settings.service";
 import { Subscription } from "rxjs";
 import { SESSION_STORAGE, WebStorageService } from "angular-webstorage-service";
 import { environment } from "src/environments/environment";
+import { CoinInfoService } from "src/app/services/coin.info.service";
 
 @Component({
   selector: "app-prices",
@@ -59,7 +60,8 @@ export class PricesComponent implements OnInit {
   constructor(
     private http: Http,
     private appSettingsService: AppSettingsService,
-    @Inject(SESSION_STORAGE) private sessionStorage: WebStorageService
+    @Inject(SESSION_STORAGE) private sessionStorage: WebStorageService,
+    private coinInfoService: CoinInfoService
   ) {
     this.currencyChangeSubscription = appSettingsService.currencyChange$.subscribe(
       currency => {
@@ -70,8 +72,8 @@ export class PricesComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.getCoinList().then(result => {
-      this.coins = result;
+    this.coinInfoService.getCoinsList().subscribe(result => {
+      this.coins = result.coins;
       if (this.sessionStorage.get("selectedCurrency")) {
         this.currency = JSON.parse(this.sessionStorage.get("selectedCurrency"))[
           "currency"
@@ -148,14 +150,6 @@ export class PricesComponent implements OnInit {
         );
       }, 20);
     }
-  }
-
-  async getCoinList(): Promise<CoinInfo[]> {
-    let result = await this.http
-      .get(`${environment.baseUrl}:8081/coinslist`)
-      .toPromise();
-    const response = result.json();
-    return response.coins;
   }
 
   getCoinInfo(coin) {

@@ -3,6 +3,10 @@
   height: 100%;
 }
 
+#coin-select {
+  max-width: 256px;
+}
+
 #price-chart {
   width: 90% !important;
   height: 520px !important;
@@ -25,7 +29,7 @@
 
 .crypto-index {
   width: 100%;
-  min-height: 80%;
+  min-height: 100%;
 }
 
 @media (max-width: 1024px) {
@@ -58,8 +62,8 @@
     width: 100%;
   }
   .crypto-index {
-    min-height: 356px;
-    width: 90%;
+    min-height: 320px;
+    width: 70%;
   }
 }
 

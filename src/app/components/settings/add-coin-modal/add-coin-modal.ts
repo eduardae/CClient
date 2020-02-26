@@ -83,11 +83,13 @@ export class AddCoinModalContent implements OnInit {
 
   ngOnInit() {
     this.selectedCoins = [];
-    for (let coinId of this.user.bookmarked_coins) {
-      for (let coin of this.coins) {
-        if (coinId === coin.id) {
-          this.selectedCoins.push(coin);
-          coin.selected = true;
+    if (this.user.bookmarked_coins && this.user.bookmarked_coins.length !== 0) {
+      for (let coinId of this.user.bookmarked_coins) {
+        for (let coin of this.coins) {
+          if (coinId === coin.id) {
+            this.selectedCoins.push(coin);
+            coin.selected = true;
+          }
         }
       }
     }

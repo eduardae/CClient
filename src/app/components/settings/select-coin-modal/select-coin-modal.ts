@@ -87,7 +87,7 @@ import { MarketData } from "src/app/models/historical-market-data";
                 *ngFor="let coin of selectedCoins"
               >
                 <span>
-                  <coin iconId="{{ coin.id }}"></coin>
+                  <coin iconId="{{ coin.id }}" [iconUrl]="coin.iconUrl"></coin>
                 </span>
               </div>
             </div>
@@ -195,9 +195,11 @@ export class SelectCoinModalContent implements OnInit {
       map(term =>
         term.length < 2
           ? []
-          : this.coins
+          : this.coins && this.coins.length !== 0
+          ? this.coins
               .filter(v => v.id.indexOf(term.toLowerCase()) > -1)
               .slice(0, 10)
+          : []
       )
     );
 
@@ -347,12 +349,13 @@ export class SelectCoinModal implements OnInit {
   constructor(
     private modalService: NgbModal,
     public toastService: ToastService,
+    private coinInfoService: CoinInfoService,
     private http: Http
   ) {}
 
   ngOnInit(): void {
-    this.getCoinList().then(result => {
-      this.coins = result;
+    this.coinInfoService.getCoinsList().subscribe(result => {
+      this.coins = result.data;
     });
   }
 
@@ -381,13 +384,5 @@ export class SelectCoinModal implements OnInit {
     } else {
       return `with: ${reason}`;
     }
-  }
-
-  async getCoinList(): Promise<CoinInfo[]> {
-    let result = await this.http
-      .get(`${environment.baseUrl}:8081/coinslist`)
-      .toPromise();
-    const response = result.json();
-    return response.coins;
   }
 }

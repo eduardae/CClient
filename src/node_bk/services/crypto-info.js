@@ -67,6 +67,7 @@ app.get('/coinslist', function (req, res) {
 
 app.get('/coins/list', function (req, res) {
   getCoinsList().then(function (data) {
+
     res.json(data);
   }, err => {
     res.status(500).end();
