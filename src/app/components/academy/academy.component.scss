@@ -10,6 +10,7 @@
   ul {
     list-style-type: none;
     padding-left: 0;
+    margin-bottom: 0;
   }
 
   .links-trigger {
@@ -19,8 +20,10 @@
 
   .links-container {
     border: 1px solid #22aed1;
+    border-top: 0;
+    border-bottom: 0;
     border-radius: 2px;
-    top: -2px;
+
     overflow-y: auto;
     height: 236px;
     -ms-overflow-style: hidden;
@@ -38,6 +41,30 @@
       margin-left: 4px;
       color: #22aed1;
       cursor: pointer;
+    }
+  }
+
+  .tp-spacer,
+  .bt-spacer {
+    height: 16px;
+    border-right: 1px solid #22aed1;
+    border-left: 1px solid #22aed1;
+  }
+
+  .tp-spacer {
+    border-top: 1px solid #22aed1;
+  }
+
+  .bt-spacer {
+    border-bottom: 1px solid #22aed1;
+  }
+
+  div[ng-reflect-collapsed*="true"] ~ .bt-spacer {
+    display: none;
+  }
+  button[aria-expanded*="true"] ~ div {
+    .tp-spacer {
+      display: none;
     }
   }
 }
