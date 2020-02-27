@@ -138,7 +138,21 @@
               <horizontal-loader></horizontal-loader>
             </div>
             <div class="mt-4">
-              <news [articles]="this.articles"></news>
+              <div id="view-mode-selector">
+                <div>
+                  <span
+                    class="fa fa-list"
+                    [ngClass]="{ active: listMode }"
+                    (click)="toggleListMode(true)"
+                  ></span>
+                  <span
+                    class="fa fa-th"
+                    [ngClass]="{ active: listMode }"
+                    (click)="toggleListMode(false)"
+                  ></span>
+                </div>
+              </div>
+              <news [articles]="this.articles" [listMode]="listMode"></news>
             </div>
           </ng-template>
         </ngb-tab>

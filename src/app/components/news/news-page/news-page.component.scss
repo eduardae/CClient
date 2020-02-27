@@ -3,20 +3,17 @@
   height: 100%;
 }
 
-#view-mode-selector {
-  margin-bottom: 32px;
-  display: inline-block;
-  font-size: 24px;
-
-  .fa {
+.filters-container {
+  display: block;
+  width: 100%;
+  margin: 0 auto 42px auto;
+  span {
+    display: inline-block;
     cursor: pointer;
-
-    &:hover {
-      color: #22aed1;
-    }
-  }
-
-  .fa-list {
-    margin-right: 16px;
+    background-color: #22aed1;
+    padding: 4px 8px;
+    margin: 8px;
+    color: #fff;
+    border-radius: 4px;
   }
 }

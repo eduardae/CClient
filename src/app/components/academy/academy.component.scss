@@ -32,15 +32,19 @@
       display: none;
     }
 
-    a {
-      color: #db162f;
-    }
+    li {
+      padding: 2px;
 
-    .fa-bookmark {
-      display: inline-block;
-      margin-left: 4px;
-      color: #22aed1;
-      cursor: pointer;
+      a {
+        color: #db162f;
+      }
+
+      .fa-bookmark {
+        display: inline-block;
+        margin-left: 4px;
+        color: #22aed1;
+        cursor: pointer;
+      }
     }
   }
 
@@ -65,6 +69,19 @@
   button[aria-expanded*="true"] ~ div {
     .tp-spacer {
       display: none;
+    }
+  }
+}
+
+@media (max-width: 425px) {
+  .links-trigger,
+  .links-container {
+    font-size: 18px;
+  }
+
+  .links-container {
+    li {
+      padding: 4px;
     }
   }
 }

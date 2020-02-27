@@ -18,11 +18,11 @@ export class AcademyComponent implements OnInit {
   response: string;
   user: User;
 
-  showTechnicalLinks: boolean = true;
-  showFinancialLinks: boolean = true;
+  showTechnicalLinks: boolean = false;
+  showFinancialLinks: boolean = false;
   showHowToGuides: boolean = false;
-  showProjectsLinks: boolean = true;
-  showBusinessSocialDev: boolean = true;
+  showProjectsLinks: boolean = false;
+  showBusinessSocialDev: boolean = false;
   showCourses: boolean = false;
 
   constructor(

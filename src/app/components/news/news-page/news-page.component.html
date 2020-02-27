@@ -15,6 +15,11 @@
         ></span>
       </div>
     </div>
+    <div class="filters-container">
+      <span (click)="filterNews(filter)" *ngFor="let filter of filters">
+        {{ filter }}
+      </span>
+    </div>
   </div>
 
   <news [listMode]="listMode" [articles]="this.articles"></news>

@@ -1,0 +1,17 @@
+#view-mode-selector {
+  margin-bottom: 32px;
+  display: inline-block;
+  font-size: 24px;
+
+  .fa {
+    cursor: pointer;
+
+    &:hover {
+      color: #22aed1;
+    }
+  }
+
+  .fa-list {
+    margin-right: 16px;
+  }
+}

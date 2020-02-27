@@ -53,6 +53,7 @@ export class CoinPageComponent implements OnInit {
   lineChartLegend = true;
   lineChartType = "line";
   showAdditionalInfo: boolean;
+  listMode: boolean = true;
   @ViewChild("scrollRef", { static: false }) scrollRef: ElementRef;
 
   @ViewChild(BaseChartDirective, { static: false }) chart: BaseChartDirective;
@@ -134,6 +135,10 @@ export class CoinPageComponent implements OnInit {
       this.currency.label,
       timeFrame.days
     );
+  }
+
+  toggleListMode(listMode: boolean) {
+    this.listMode = listMode;
   }
 
   async getCoinList(): Promise<CoinInfo[]> {

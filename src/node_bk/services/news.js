@@ -5,12 +5,18 @@ var moment = require('moment');
 var app = express();
 app.use(cors());
 const NewsAPI = require('newsapi');
-const newsapi = new NewsAPI('23d72701cd1f48c9b1d8b31c357da5eb');
 var CryptoNewsAPI = require('crypto-news-api').default;
+const ApiSingleton = new CryptoNewsAPI('75dd43125e51eefa036d1ce38fba8507')
 
 
 app.get('/', function (req, res) {
   getNews().then(function (data) {
+    res.json(data);
+  });
+})
+
+app.get('/byfilter', function (req, res) {
+  getNewsBySearch(req.query.filter).then(function (data) {
     res.json(data);
   });
 })
@@ -34,18 +40,23 @@ var server = app.listen(8083, function () {
   console.log("Example app listening at http://%s:%s", host, port);
 });
 
+var getNewsBySearch = async function (searchTerm) {
+  // Connect to the CryptoControl API
+  let articles = await ApiSingleton.getTopNewsByCategory();
+  let response = articles[searchTerm.toLowerCase()];
+  return response;
+}
+
 var getNews = async function () {
   // Connect to the CryptoControl API
-  const Api = new CryptoNewsAPI('75dd43125e51eefa036d1ce38fba8507');
-  let articles = await Api.getLatestNews();
+  let articles = await ApiSingleton.getLatestNews();
 
   return articles;
 }
 
 var getNewsByCoin = async function (coinName) {
   // Connect to the CryptoControl API
-  const Api = new CryptoNewsAPI('75dd43125e51eefa036d1ce38fba8507');
-  let articles = Api.getLatestNewsByCoin(coinName);
+  let articles = ApiSingleton.getLatestNewsByCoin(coinName);
   return articles;
 }
 /* USAGE EXAMPLES

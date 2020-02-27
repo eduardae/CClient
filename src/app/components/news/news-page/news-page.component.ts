@@ -14,6 +14,15 @@ export class NewsPageComponent implements OnInit {
   isUpdating: boolean;
   response: string;
   listMode: boolean = false;
+  filters: string[] = [
+    "Analysis",
+    "Blockchain",
+    "Exchanges",
+    "General",
+    "Government",
+    "ICO",
+    "Mining"
+  ];
 
   constructor(private http: Http) {}
 
@@ -24,6 +33,22 @@ export class NewsPageComponent implements OnInit {
   refreshInfo() {
     this.isUpdating = true;
     this.getNews();
+  }
+
+  filterNews(filter) {
+    this.http
+      .get(`${environment.baseUrl}:8083/byfilter?filter=${filter}`)
+      .subscribe(result => {
+        const response = result.json();
+        console.log(response);
+        this.articles = _.sortBy(response, article => {
+          return new Date(article.publishedAt);
+        }).reverse();
+        /*this.articles.forEach(element => {
+        element.title = element.title.substring(0, 100);
+      });*/
+        this.isUpdating = false;
+      });
   }
 
   getNews() {
