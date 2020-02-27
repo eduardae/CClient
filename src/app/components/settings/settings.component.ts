@@ -38,6 +38,9 @@ export class SettingsComponent implements OnInit {
   newsArticles: Link[];
   academyLinks: Link[];
   portfolios: Portfolio[];
+  visiblePortfolios: Portfolio[];
+  visiblePortfoliosStartIndex = 0;
+  visiblePortfoliosEndIndex = 2;
   currency: CurrencyInfo;
   currencyChangeSubscription: Subscription;
 
@@ -110,8 +113,12 @@ export class SettingsComponent implements OnInit {
     if (!this.portfolios) {
       this.portfolios = [];
     }
-    this.portfolios.push(newPortfolio);
-    this.portfolios = [].concat(this.portfolios);
+    this.portfolios.splice(0, 0, newPortfolio);
+    this.visiblePortfolios = this.portfolios.slice(
+      this.visiblePortfoliosStartIndex,
+      this.visiblePortfoliosEndIndex
+    );
+
     this.updatePortfolioSummaries();
     this.cdr.detectChanges();
   };
@@ -119,7 +126,14 @@ export class SettingsComponent implements OnInit {
   getPortfolios() {
     this.userService.getPortfolios(this.user).subscribe(
       result => {
-        this.portfolios = result;
+        //sort portfolios by most recent
+        this.portfolios = result.sort((a, b) => {
+          return a.startDate.toString() > b.startDate.toString() ? -1 : 1;
+        });
+        this.visiblePortfolios = this.portfolios.slice(
+          this.visiblePortfoliosStartIndex,
+          this.visiblePortfoliosEndIndex
+        );
         this.updatePortfolioSummaries();
       },
       err => {
@@ -132,6 +146,46 @@ export class SettingsComponent implements OnInit {
       }
     );
   }
+
+  shiftVisiblePortfoliosRigtht = function() {
+    if (this.visiblePortfoliosStartIndex + 2 >= this.portfolios.length - 1) {
+      this.visiblePortfoliosStartIndex = this.portfolios.length - 2;
+    } else {
+      this.visiblePortfoliosStartIndex += 2;
+    }
+    if (this.visiblePortfoliosEndIndex + 2 >= this.portfolios.length - 1) {
+      this.visiblePortfoliosEndIndex = this.portfolios.length - 1;
+    } else {
+      this.visiblePortfoliosEndIndex += 2;
+    }
+    this.visiblePortfolios = this.portfolios.slice(
+      this.visiblePortfoliosStartIndex,
+      this.visiblePortfoliosEndIndex
+    );
+  };
+
+  shiftVisiblePortfoliosLeft = function() {
+    if (
+      this.visiblePortfoliosEndIndex - this.visiblePortfoliosStartIndex ===
+      1
+    ) {
+      this.visiblePortfoliosEndIndex++;
+    }
+    if (this.visiblePortfoliosStartIndex - 2 >= 0) {
+      this.visiblePortfoliosStartIndex -= 2;
+    } else {
+      this.visiblePortfoliosStartIndex = 0;
+    }
+    if (this.visiblePortfoliosEndIndex - 2 >= 2) {
+      this.visiblePortfoliosEndIndex -= 2;
+    } else {
+      this.visiblePortfoliosEndIndex = 2;
+    }
+    this.visiblePortfolios = this.portfolios.slice(
+      this.visiblePortfoliosStartIndex,
+      this.visiblePortfoliosEndIndex
+    );
+  };
 
   updatePortfolioSummaries() {
     for (let i = 0; i < this.portfolios.length; i++) {

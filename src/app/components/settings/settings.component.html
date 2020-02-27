@@ -28,11 +28,14 @@
               </div>
               <div
                 class="row mt-3 portfolios"
-                *ngIf="portfolios && portfolios.length !== 0"
+                *ngIf="visiblePortfolios && visiblePortfolios.length !== 0"
               >
                 <div
                   class="col-12 col-md-6 mb-4"
-                  *ngFor="let portfolio of portfolios; trackBy: portfolio?._id"
+                  *ngFor="
+                    let portfolio of visiblePortfolios;
+                    trackBy: portfolio?._id
+                  "
                   (click)="goToPortfolioPage(portfolio)"
                 >
                   <div class="portfolio-list-item">
@@ -54,6 +57,22 @@
                       >
                     </div>
                   </div>
+                </div>
+              </div>
+              <div class="row mt-2 mb-5 navigator-arrows">
+                <div class="col-12 text-center">
+                  <span
+                    class="fa fa-arrow-circle-left mr-4"
+                    (click)="shiftVisiblePortfoliosLeft()"
+                    placement="left"
+                    ngbTooltip="View newer"
+                  ></span>
+                  <span
+                    class="fa fa-arrow-circle-right ml-4"
+                    (click)="shiftVisiblePortfoliosRigtht()"
+                    placement="right"
+                    ngbTooltip="View older"
+                  ></span>
                 </div>
               </div>
               <div class="row mt-3 mb-4">
