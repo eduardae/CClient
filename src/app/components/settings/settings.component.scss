@@ -17,7 +17,7 @@
     border: 1px solid #dee2e6;
     border-top: 0;
     padding: 16px;
-    height: 380px;
+    height: 232px;
     overflow-y: auto;
     -ms-overflow-style: none;
 
@@ -48,6 +48,10 @@
     border: 1px solid;
     background-color: #22aed1;
     color: #fff;
+    height: 36px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     font-weight: 500;
     margin: 4px 4px 12px 4px;
 
@@ -58,6 +62,10 @@
 
   .portfolio-body {
     margin-bottom: 8px;
+    height: 46px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
   }
 }
 

@@ -11,8 +11,23 @@
 .growth-indicator {
   display: inline-block;
   vertical-align: top;
-  margin-top: 16px;
+  margin-top: 21px;
   margin-left: 4px;
+}
+
+.coin-container {
+  display: block;
+  width: 196px;
+  margin: auto;
+  border: 1px solid;
+  border-radius: 8px;
+  padding: 12px 8px 0 12px;
+  margin-bottom: 16px;
+  box-shadow: 2px 2px 2px 2px #999999;
+
+  coin {
+    min-width: 96px;
+  }
 }
 
 @media (max-width: 1024px) {
@@ -32,6 +47,10 @@
 @media (max-width: 768px) {
   label {
     width: 100%;
+  }
+
+  .coins-growth-section {
+    margin-top: 48px;
   }
 }
 

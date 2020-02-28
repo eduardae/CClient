@@ -40,7 +40,7 @@ export class SettingsComponent implements OnInit {
   portfolios: Portfolio[];
   visiblePortfolios: Portfolio[];
   visiblePortfoliosStartIndex = 0;
-  visiblePortfoliosEndIndex = 2;
+  visiblePortfoliosEndIndex = 4;
   currency: CurrencyInfo;
   currencyChangeSubscription: Subscription;
 
@@ -148,15 +148,15 @@ export class SettingsComponent implements OnInit {
   }
 
   shiftVisiblePortfoliosRigtht = function() {
-    if (this.visiblePortfoliosStartIndex + 2 >= this.portfolios.length - 1) {
-      this.visiblePortfoliosStartIndex = this.portfolios.length - 2;
+    if (this.visiblePortfoliosStartIndex + 4 >= this.portfolios.length - 1) {
+      this.visiblePortfoliosStartIndex = this.portfolios.length - 4;
     } else {
-      this.visiblePortfoliosStartIndex += 2;
+      this.visiblePortfoliosStartIndex += 4;
     }
-    if (this.visiblePortfoliosEndIndex + 2 >= this.portfolios.length - 1) {
+    if (this.visiblePortfoliosEndIndex + 4 >= this.portfolios.length - 1) {
       this.visiblePortfoliosEndIndex = this.portfolios.length - 1;
     } else {
-      this.visiblePortfoliosEndIndex += 2;
+      this.visiblePortfoliosEndIndex += 4;
     }
     this.visiblePortfolios = this.portfolios.slice(
       this.visiblePortfoliosStartIndex,
@@ -171,15 +171,15 @@ export class SettingsComponent implements OnInit {
     ) {
       this.visiblePortfoliosEndIndex++;
     }
-    if (this.visiblePortfoliosStartIndex - 2 >= 0) {
-      this.visiblePortfoliosStartIndex -= 2;
+    if (this.visiblePortfoliosStartIndex - 4 >= 0) {
+      this.visiblePortfoliosStartIndex -= 4;
     } else {
       this.visiblePortfoliosStartIndex = 0;
     }
-    if (this.visiblePortfoliosEndIndex - 2 >= 2) {
-      this.visiblePortfoliosEndIndex -= 2;
+    if (this.visiblePortfoliosEndIndex - 4 >= 4) {
+      this.visiblePortfoliosEndIndex -= 4;
     } else {
-      this.visiblePortfoliosEndIndex = 2;
+      this.visiblePortfoliosEndIndex = 4;
     }
     this.visiblePortfolios = this.portfolios.slice(
       this.visiblePortfoliosStartIndex,

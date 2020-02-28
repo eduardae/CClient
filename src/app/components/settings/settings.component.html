@@ -8,195 +8,7 @@
         </div>
       </div>
       <div class="row">
-        <div
-          class="col-12 col-md-12 col-lg-4 page-section coin-bookmarks-section"
-        >
-          <div class="row mt-5">
-            <div class="col">
-              <div class="row">
-                <div class="col-12">
-                  <h5 class="font-weight-bold">Simulated Portfolios</h5>
-                </div>
-              </div>
-              <div
-                class="row mt-3"
-                [hidden]="portfolios && portfolios.length !== 0"
-              >
-                <div class="col-12">
-                  <p>You haven't created a portfolio yet.</p>
-                </div>
-              </div>
-              <div
-                class="row mt-3 portfolios"
-                *ngIf="visiblePortfolios && visiblePortfolios.length !== 0"
-              >
-                <div
-                  class="col-12 col-md-6 mb-4"
-                  *ngFor="
-                    let portfolio of visiblePortfolios;
-                    trackBy: portfolio?._id
-                  "
-                  (click)="goToPortfolioPage(portfolio)"
-                >
-                  <div class="portfolio-list-item">
-                    <div class="portfolio-header">
-                      <span *ngIf="portfolio.label">{{ portfolio.label }}</span>
-                      <span *ngIf="!portfolio.label">{{
-                        portfolio.startDate | date: "yyyy-MM-dd"
-                      }}</span>
-                    </div>
-                    <div class="portfolio-body" *ngIf="portfolio.summary">
-                      <span
-                        [ngClass]="{
-                          green: portfolio.summary.groupedGrowth >= 0,
-                          red: portfolio.summary.groupedGrowth < 0
-                        }"
-                        >{{
-                          portfolio.summary.groupedGrowth | percent: "1.3"
-                        }}</span
-                      >
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div class="row mt-2 mb-5 navigator-arrows">
-                <div class="col-12 text-center">
-                  <span
-                    class="fa fa-arrow-circle-left mr-4"
-                    (click)="shiftVisiblePortfoliosLeft()"
-                    placement="left"
-                    ngbTooltip="View newer"
-                  ></span>
-                  <span
-                    class="fa fa-arrow-circle-right ml-4"
-                    (click)="shiftVisiblePortfoliosRigtht()"
-                    placement="right"
-                    ngbTooltip="View older"
-                  ></span>
-                </div>
-              </div>
-              <div class="row mt-3 mb-4">
-                <div class="float-left col-12 col-xs-6">
-                  <select-coin-modal
-                    [user]="user"
-                    [portfolioCreationCallback]="portfolioCreateCb"
-                  ></select-coin-modal>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="row mt-5 mb-5">
-            <div class="col">
-              <div class="row">
-                <div class="col-12">
-                  <h5 class="font-weight-bold">Followed coins</h5>
-                </div>
-              </div>
-
-              <div class="row">
-                <div class="col-12 mt-3 mb-3">
-                  <div
-                    *ngIf="
-                      user.bookmarked_coins
-                        ? user.bookmarked_coins.length === 0
-                        : true
-                    "
-                  >
-                    <p>You have no coin bookmarks.</p>
-                  </div>
-                  <span
-                    class="followed-coin"
-                    *ngFor="let coinId of user.bookmarked_coins"
-                    [routerLink]="['/coinpage', coinId]"
-                  >
-                    <coin
-                      tooltipTxt="{{
-                        coinId[0].toUpperCase() +
-                          coinId.substring(1, coinId.length)
-                      }}"
-                      iconId="{{ coinId }}"
-                    ></coin>
-                  </span>
-                </div>
-
-                <div class="col-12 pt-3">
-                  <div class="row">
-                    <div class="float-left col-12 col-xs-6">
-                      <add-coin-modal [user]="user"></add-coin-modal>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div class="col-12 col-md-6 col-lg-3 mt-5  page-section">
-          <div class="user-fields">
-            <div class="row">
-              <div class="col-12">
-                <h5 class="font-weight-bold">User Info</h5>
-              </div>
-            </div>
-            <div class="row align-items-center mt-3">
-              <div class="col-12">
-                <h6 class="font-weight-bold">Username</h6>
-                <input
-                  disabled
-                  type="text"
-                  class="form-control"
-                  [(ngModel)]="user.username"
-                  placeholder="Username"
-                />
-              </div>
-            </div>
-            <div class="row align-items-center mt-4">
-              <div class="col-12">
-                <h6 class="font-weight-bold">Name</h6>
-                <input
-                  type="text"
-                  class="form-control"
-                  [(ngModel)]="user.name"
-                  placeholder="Name"
-                />
-              </div>
-            </div>
-            <div class="row align-items-center mt-4">
-              <div class="col-12">
-                <h6 class="font-weight-bold">Surname</h6>
-                <input
-                  type="text"
-                  class="form-control"
-                  [(ngModel)]="user.surname"
-                  placeholder="Surname"
-                />
-              </div>
-            </div>
-            <div class="row align-items-center mt-4">
-              <div class="col-12">
-                <h6 class="font-weight-bold">Email</h6>
-                <input
-                  type="email"
-                  class="form-control"
-                  [(ngModel)]="user.email"
-                  placeholder="email"
-                />
-              </div>
-            </div>
-            <div class="row justify-content-start mt-4">
-              <div class="col-12 col-lg-8 offset-lg-2">
-                <button
-                  class="btn col btn-primary mt-4 font-weight-bold"
-                  (click)="update()"
-                >
-                  Update
-                </button>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div class="col-12 col-md-6 col-lg-5 page-section">
+        <div class="col-12 col-lg-4 col-xl-4 page-section">
           <div class="row align-items-center mt-5">
             <div class="col">
               <div class="row">
@@ -310,6 +122,199 @@
                     </p>
                   </div>
                 </div>
+              </div>
+            </div>
+          </div>
+          <div class="row mt-3 mb-5">
+            <div class="col col-sm-10 offset-sm-1">
+              <div class="row">
+                <div class="col-12">
+                  <h5 class="font-weight-bold">Followed coins</h5>
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="col-12 mt-3 mb-3">
+                  <div
+                    *ngIf="
+                      user.bookmarked_coins
+                        ? user.bookmarked_coins.length === 0
+                        : true
+                    "
+                  >
+                    <p>You have no coin bookmarks.</p>
+                  </div>
+                  <span
+                    class="followed-coin"
+                    *ngFor="let coinId of user.bookmarked_coins"
+                    [routerLink]="['/coinpage', coinId]"
+                  >
+                    <coin
+                      tooltipTxt="{{
+                        coinId[0].toUpperCase() +
+                          coinId.substring(1, coinId.length)
+                      }}"
+                      iconId="{{ coinId }}"
+                    ></coin>
+                  </span>
+                </div>
+
+                <div class="col-12 pt-3">
+                  <div class="row">
+                    <div class="float-left col-12 col-xs-6">
+                      <add-coin-modal [user]="user"></add-coin-modal>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div
+          class="col-12 col-md-12 col-lg-5 col-xl-4 page-section coin-bookmarks-section"
+        >
+          <div class="row mt-5">
+            <div class="col">
+              <div class="row">
+                <div class="col-12">
+                  <h5 class="font-weight-bold">Simulated Portfolios</h5>
+                </div>
+              </div>
+              <div
+                class="row mt-3"
+                [hidden]="portfolios && portfolios.length !== 0"
+              >
+                <div class="col-12">
+                  <p>You haven't created a portfolio yet.</p>
+                </div>
+              </div>
+              <div
+                class="row mt-3 portfolios"
+                *ngIf="visiblePortfolios && visiblePortfolios.length !== 0"
+              >
+                <div
+                  class="col-12 col-md-6 mb-4"
+                  *ngFor="
+                    let portfolio of visiblePortfolios;
+                    trackBy: portfolio?._id
+                  "
+                  (click)="goToPortfolioPage(portfolio)"
+                >
+                  <div class="portfolio-list-item">
+                    <div class="portfolio-header">
+                      <span *ngIf="portfolio.label">{{ portfolio.label }}</span>
+                      <span *ngIf="!portfolio.label">{{
+                        portfolio.startDate | date: "yyyy-MM-dd"
+                      }}</span>
+                    </div>
+                    <div class="portfolio-body" *ngIf="portfolio.summary">
+                      <span
+                        [ngClass]="{
+                          green: portfolio.summary.groupedGrowth >= 0,
+                          red: portfolio.summary.groupedGrowth < 0
+                        }"
+                        >{{
+                          portfolio.summary.groupedGrowth | percent: "1.3"
+                        }}</span
+                      >
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div
+                class="row mt-2 mb-5 navigator-arrows"
+                *ngIf="portfolios && portfolios.length !== 0"
+              >
+                <div class="col-12 text-center">
+                  <span
+                    class="fa fa-arrow-circle-left mr-4"
+                    (click)="shiftVisiblePortfoliosLeft()"
+                    placement="left"
+                    ngbTooltip="View newer"
+                  ></span>
+                  <span
+                    class="fa fa-arrow-circle-right ml-4"
+                    (click)="shiftVisiblePortfoliosRigtht()"
+                    placement="right"
+                    ngbTooltip="View older"
+                  ></span>
+                </div>
+              </div>
+              <div class="row mt-3 mb-4">
+                <div class="float-left col-12 col-xs-6 offset-lg-2">
+                  <select-coin-modal
+                    [user]="user"
+                    [portfolioCreationCallback]="portfolioCreateCb"
+                  ></select-coin-modal>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div
+          class="col-12 col-md-10 offset-md-1 offset-lg-0 col-lg-3 col-xl-4 mt-5  page-section"
+        >
+          <div class="user-fields">
+            <div class="row">
+              <div class="col-12">
+                <h5 class="font-weight-bold">User Info</h5>
+              </div>
+            </div>
+            <div class="row align-items-center mt-3">
+              <div class="col-12">
+                <h6 class="font-weight-bold">Username</h6>
+                <input
+                  disabled
+                  type="text"
+                  class="form-control"
+                  [(ngModel)]="user.username"
+                  placeholder="Username"
+                />
+              </div>
+            </div>
+            <div class="row align-items-center mt-4">
+              <div class="col-12">
+                <h6 class="font-weight-bold">Name</h6>
+                <input
+                  type="text"
+                  class="form-control"
+                  [(ngModel)]="user.name"
+                  placeholder="Name"
+                />
+              </div>
+            </div>
+            <div class="row align-items-center mt-4">
+              <div class="col-12">
+                <h6 class="font-weight-bold">Surname</h6>
+                <input
+                  type="text"
+                  class="form-control"
+                  [(ngModel)]="user.surname"
+                  placeholder="Surname"
+                />
+              </div>
+            </div>
+            <div class="row align-items-center mt-4">
+              <div class="col-12">
+                <h6 class="font-weight-bold">Email</h6>
+                <input
+                  type="email"
+                  class="form-control"
+                  [(ngModel)]="user.email"
+                  placeholder="email"
+                />
+              </div>
+            </div>
+            <div class="row justify-content-start mt-4">
+              <div class="col-12 col-xl-8 offset-xl-2">
+                <button
+                  class="btn col btn-primary mt-4 font-weight-bold"
+                  (click)="update()"
+                >
+                  Update
+                </button>
               </div>
             </div>
           </div>
