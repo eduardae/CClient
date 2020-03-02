@@ -82,6 +82,15 @@ app.post('/get_portfolios_by_user', function (req, res) {
   });
 });
 
+app.delete('/delete_portfolio/:id', function (req, res) {
+  MongoClient.connect(url, function (connerr, client) {
+    if (connerr) res.status(500).end(connerr);
+    console.log("Connected to MongoDB!");
+    const db = client.db('local');
+    db.collection("portfolios").deleteOne({ _id: ObjectId(req.params.id) });
+    res.status(200).end();
+  });
+});
 
 app.all('/*', function (req, res, next) {
   res.header("Access-Control-Allow-Origin", "*");

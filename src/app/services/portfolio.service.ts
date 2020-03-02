@@ -43,6 +43,12 @@ export class PortfolioService {
     return this.http.get(`${environment.baseUrl}:8085/get_portfolio/${id}`);
   }
 
+  deletePortfolioById(id: string): Observable<any> {
+    return this.http.delete(
+      `${environment.baseUrl}:8085/delete_portfolio/${id}`
+    );
+  }
+
   refreshPortfolioCurrentValues() {}
 
   getSummary(

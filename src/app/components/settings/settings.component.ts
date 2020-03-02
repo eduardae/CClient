@@ -147,8 +147,28 @@ export class SettingsComponent implements OnInit {
     );
   }
 
+  deletePortfolio(event, portfolio: Portfolio) {
+    if (event) {
+      event.preventDefault();
+    }
+    this.portfolioService.deletePortfolioById(portfolio._id).subscribe(
+      result => {
+        this.toastService.show("Portfolio deleted correctly.", {
+          classname: "bg-success text-light",
+          delay: 3500
+        });
+      },
+      err => {
+        this.toastService.show("Error while deleting portfolio: " + err.body, {
+          classname: "bg-danger text-light",
+          delay: 3500
+        });
+      }
+    );
+  }
+
   shiftVisiblePortfoliosRigtht = function() {
-    if (this.visiblePortfoliosStartIndex + 4 >= this.portfolios.length - 1) {
+    if (this.visiblePortfoliosStartIndex + 4 >= this.portfolios.length - 3) {
       this.visiblePortfoliosStartIndex = this.portfolios.length - 4;
     } else {
       this.visiblePortfoliosStartIndex += 4;
@@ -177,7 +197,11 @@ export class SettingsComponent implements OnInit {
       this.visiblePortfoliosStartIndex = 0;
     }
     if (this.visiblePortfoliosEndIndex - 4 >= 4) {
-      this.visiblePortfoliosEndIndex -= 4;
+      if (this.visiblePortfoliosEndIndex === this.portfolios.length - 1) {
+        this.visiblePortfoliosEndIndex -= 3;
+      } else {
+        this.visiblePortfoliosEndIndex -= 4;
+      }
     } else {
       this.visiblePortfoliosEndIndex = 4;
     }
