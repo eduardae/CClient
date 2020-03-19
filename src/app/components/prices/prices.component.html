@@ -246,7 +246,21 @@
   </div>
 
   <div class="row pt-5" *ngIf="coins && coins.length !== 0">
-    <div class="col-12 col-sm-6 col-lg-4  pt-5">
+    <div class="col-12 col-sm-12 col-lg-4 pt-5">
+      <a
+        style="text-decoration: none;"
+        href="https://cryptoindex.com/"
+        target="_blank"
+      >
+        <h5 class="pb-2 purple">Crypto Index</h5>
+      </a>
+      <iframe
+        class="crypto-index"
+        src="https://cryptoindex.com/index-widget.html"
+        frameborder="0"
+      ></iframe>
+    </div>
+    <div class="col-12 col-sm-6 col-lg-4 pt-5">
       <div class="greed-and-fear">
         <a
           href="https://alternative.me/crypto/fear-and-greed-index/"
@@ -274,25 +288,23 @@
             missing out). Also, people often sell their coins in irrational
             reaction of seeing red numbers.This Fear And Greed Index is an
             attempt to
-            <b>save you from your own emotional overreations</b>
+            <b>save you from your own emotional overreations</b>. There are two
+            simple assumptions:
           </p>
+          <ul class="text-left">
+            <li>
+              <span class="bold red">Extreme fear</span> can be a sign that
+              investors are too worried. That could be a
+              <span class="bold green">buying opportunity</span>.
+            </li>
+            <li>
+              When Investors are getting
+              <span class="bold green">too greedy</span>, that means the market
+              is <span class="bold red">due for a correction</span>.
+            </li>
+          </ul>
         </div>
       </div>
-    </div>
-
-    <div class="col-12 col-sm-12 col-lg-4 pt-5">
-      <a
-        style="text-decoration: none;"
-        href="https://cryptoindex.com/"
-        target="_blank"
-      >
-        <h5 class="pb-2 purple">Crypto Index</h5>
-      </a>
-      <iframe
-        class="crypto-index"
-        src="https://cryptoindex.com/index-widget.html"
-        frameborder="0"
-      ></iframe>
     </div>
   </div>
 </div>

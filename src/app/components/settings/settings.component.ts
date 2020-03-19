@@ -6,7 +6,9 @@ import {
   ViewChild,
   EventEmitter,
   Output,
-  ChangeDetectorRef
+  ChangeDetectorRef,
+  ViewContainerRef,
+  ViewEncapsulation
 } from "@angular/core";
 import { Http, RequestOptions } from "@angular/http";
 import { CoinsSummary } from "../../models/coins-summary";
@@ -15,7 +17,7 @@ import { from, Subscription } from "rxjs";
 import { Router } from "@angular/router";
 import { User } from "../../models/user";
 import { WebStorageService, SESSION_STORAGE } from "angular-webstorage-service";
-import { NgbModal } from "@ng-bootstrap/ng-bootstrap";
+import { NgbModal, NgbModalRef } from "@ng-bootstrap/ng-bootstrap";
 import { UserInfoService } from "src/app/services/user.info.service";
 import { ToastService } from "../../services/toast-service";
 import { HttpClient } from "@angular/common/http";
@@ -27,6 +29,7 @@ import { PortfolioService } from "src/app/services/portfolio.service";
 import { CurrencyInfo } from "src/app/models/currency-info";
 import { AppSettingsService } from "src/app/services/app.settings.service";
 import { Route } from "@angular/compiler/src/core";
+import { DeleteConfirmationModal } from "../common/delete-confirmation-modal/delete-confirmation-modal";
 @Component({
   selector: "app-settings",
   templateUrl: "./settings.component.html",
@@ -43,6 +46,7 @@ export class SettingsComponent implements OnInit {
   visiblePortfoliosEndIndex = 4;
   currency: CurrencyInfo;
   currencyChangeSubscription: Subscription;
+  modal: NgbModalRef;
 
   // tslint:disable-next-line: max-line-length
   constructor(
@@ -51,6 +55,7 @@ export class SettingsComponent implements OnInit {
     public toastService: ToastService,
     private portfolioService: PortfolioService,
     private appSettingsService: AppSettingsService,
+    private modalService: NgbModal,
     public cdr: ChangeDetectorRef,
     private router: Router,
     private http: HttpClient
@@ -147,16 +152,19 @@ export class SettingsComponent implements OnInit {
     );
   }
 
-  deletePortfolio(event, portfolio: Portfolio) {
-    if (event) {
-      event.preventDefault();
-    }
-    this.portfolioService.deletePortfolioById(portfolio._id).subscribe(
+  deletePortfolio(portfolioId: string) {
+    this.portfolioService.deletePortfolioById(portfolioId).subscribe(
       result => {
         this.toastService.show("Portfolio deleted correctly.", {
           classname: "bg-success text-light",
           delay: 3500
         });
+        this.portfolios = this.portfolios.filter(p => p._id !== portfolioId);
+        this.visiblePortfolios = this.portfolios.slice(
+          this.visiblePortfoliosStartIndex,
+          this.visiblePortfoliosEndIndex
+        );
+        this.cdr.detectChanges();
       },
       err => {
         this.toastService.show("Error while deleting portfolio: " + err.body, {

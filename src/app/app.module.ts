@@ -36,6 +36,7 @@ import {
   SelectCoinModalContent
 } from "./components/settings/select-coin-modal/select-coin-modal";
 import { PortfolioPageComponent } from "./components/portfolio-page/portfolio.page.component";
+import { DeleteConfirmationModal } from "./components/common/delete-confirmation-modal/delete-confirmation-modal";
 
 const appRoutes: Routes = [
   { path: "", redirectTo: "home", pathMatch: "full" },
@@ -73,7 +74,8 @@ const appRoutes: Routes = [
     AddCoinModal,
     AddCoinModalContent,
     SelectCoinModal,
-    SelectCoinModalContent
+    SelectCoinModalContent,
+    DeleteConfirmationModal
   ],
   imports: [
     BrowserAnimationsModule,
@@ -91,7 +93,8 @@ const appRoutes: Routes = [
     AddCoinModalContent,
     SelectCoinModal,
     SelectCoinModalContent,
-    CoinComponent
+    CoinComponent,
+    DeleteConfirmationModal
   ],
   exports: [RouterModule],
   providers: [

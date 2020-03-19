@@ -1,0 +1,31 @@
+.delete-confirmation-modal {
+  .modal-dialog {
+    margin: 7rem auto auto auto;
+
+    .modal-header {
+      .modal-title {
+        display: block;
+        width: 100%;
+        text-align: center;
+        margin-left: 24px;
+      }
+
+      button {
+        outline: none;
+      }
+    }
+
+    .modal-body {
+      text-align: center;
+    }
+
+    .modal-footer {
+      #delete-confirmation-btn {
+        display: block;
+        padding: 4px 12px;
+        width: 30%;
+        margin: 12px auto;
+      }
+    }
+  }
+}

@@ -133,7 +133,7 @@
                 </div>
               </div>
 
-              <div class="row">
+              <div class="row pt-1">
                 <div class="col-12 mt-3 mb-3">
                   <div
                     *ngIf="
@@ -159,7 +159,7 @@
                   </span>
                 </div>
 
-                <div class="col-12 pt-3">
+                <div class="col-12 pt-4">
                   <div class="row">
                     <div class="float-left col-12 col-xs-6">
                       <add-coin-modal [user]="user"></add-coin-modal>
@@ -222,13 +222,11 @@
                       >
                     </div>
                     <div class="portfolio-footer">
-                      <button
-                        class="btn btn-default btn-danger"
-                        (click)="deletePortfolio($event, portfolio)"
-                      >
-                        <span>Delete</span>
-                        <span class="fa fa-times-circle"></span>
-                      </button>
+                      <delete-confirmation-modal
+                        class="pt-1"
+                        (deleteCallback)="deletePortfolio($event)"
+                        [to-delete-id]="portfolio._id"
+                      ></delete-confirmation-modal>
                     </div>
                   </div>
                 </div>
