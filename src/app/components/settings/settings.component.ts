@@ -176,47 +176,63 @@ export class SettingsComponent implements OnInit {
   }
 
   shiftVisiblePortfoliosRigtht = function() {
-    if (this.visiblePortfoliosStartIndex + 4 >= this.portfolios.length - 3) {
-      this.visiblePortfoliosStartIndex = this.portfolios.length - 4;
+    if (this.portfolios.length > 4) {
+      if (this.visiblePortfoliosStartIndex + 4 < this.portfolios.length) {
+        this.visiblePortfoliosStartIndex = this.visiblePortfoliosStartIndex += 4;
+        if (this.visiblePortfoliosEndIndex + 4 > this.portfolios.length - 1) {
+          this.visiblePortfoliosEndIndex = this.portfolios.length;
+        } else {
+          this.visiblePortfoliosEndIndex += 4;
+        }
+      }
     } else {
-      this.visiblePortfoliosStartIndex += 4;
+      this.visiblePortfoliosStartIndex = 0;
+      this.visiblePortfoliosEndIndex = 4;
     }
-    if (this.visiblePortfoliosEndIndex + 4 >= this.portfolios.length - 1) {
-      this.visiblePortfoliosEndIndex = this.portfolios.length - 1;
+
+    if (this.visiblePortfoliosStartIndex !== this.visiblePortfoliosEndIndex) {
+      this.visiblePortfolios = this.portfolios.slice(
+        this.visiblePortfoliosStartIndex,
+        this.visiblePortfoliosEndIndex
+      );
     } else {
-      this.visiblePortfoliosEndIndex += 4;
+      this.visiblePortfolios = [
+        this.portfolios[this.visiblePortfoliosStartIndex]
+      ];
     }
-    this.visiblePortfolios = this.portfolios.slice(
-      this.visiblePortfoliosStartIndex,
-      this.visiblePortfoliosEndIndex
-    );
   };
 
   shiftVisiblePortfoliosLeft = function() {
-    if (
-      this.visiblePortfoliosEndIndex - this.visiblePortfoliosStartIndex ===
-      1
-    ) {
-      this.visiblePortfoliosEndIndex++;
-    }
     if (this.visiblePortfoliosStartIndex - 4 >= 0) {
       this.visiblePortfoliosStartIndex -= 4;
     } else {
       this.visiblePortfoliosStartIndex = 0;
     }
-    if (this.visiblePortfoliosEndIndex - 4 >= 4) {
-      if (this.visiblePortfoliosEndIndex === this.portfolios.length - 1) {
-        this.visiblePortfoliosEndIndex -= 3;
+
+    if (this.visiblePortfoliosStartIndex !== 0) {
+      if (this.visiblePortfoliosEndIndex === this.portfolios.length) {
+        this.visiblePortfoliosEndIndex--;
       } else {
-        this.visiblePortfoliosEndIndex -= 4;
+        if (this.visiblePortfoliosEndIndex - 4 >= 4) {
+          this.visiblePortfoliosEndIndex -= 4;
+        } else {
+          this.visiblePortfoliosEndIndex = 4;
+        }
       }
     } else {
       this.visiblePortfoliosEndIndex = 4;
     }
-    this.visiblePortfolios = this.portfolios.slice(
-      this.visiblePortfoliosStartIndex,
-      this.visiblePortfoliosEndIndex
-    );
+
+    if (this.visiblePortfoliosStartIndex !== this.visiblePortfoliosEndIndex) {
+      this.visiblePortfolios = this.portfolios.slice(
+        this.visiblePortfoliosStartIndex,
+        this.visiblePortfoliosEndIndex
+      );
+    } else {
+      this.visiblePortfolios = [
+        this.portfolios[this.visiblePortfoliosStartIndex]
+      ];
+    }
   };
 
   updatePortfolioSummaries() {
