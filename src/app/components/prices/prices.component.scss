@@ -17,9 +17,13 @@
 }
 
 .greed-and-fear {
-  display: block;
-  width: 80%;
-  margin: auto;
+  display: inline-flex;
+  height: 100%;
+
+  > div {
+    width: 80%;
+    margin: auto;
+  }
 
   img {
     width: 100%;
@@ -44,7 +48,9 @@
   }
 
   .greed-and-fear {
-    width: 100%;
+    > div {
+      width: 100%;
+    }
   }
 
   @media (max-height: 768px) {

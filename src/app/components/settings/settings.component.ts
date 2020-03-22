@@ -190,16 +190,10 @@ export class SettingsComponent implements OnInit {
       this.visiblePortfoliosEndIndex = 4;
     }
 
-    if (this.visiblePortfoliosStartIndex !== this.visiblePortfoliosEndIndex) {
-      this.visiblePortfolios = this.portfolios.slice(
-        this.visiblePortfoliosStartIndex,
-        this.visiblePortfoliosEndIndex
-      );
-    } else {
-      this.visiblePortfolios = [
-        this.portfolios[this.visiblePortfoliosStartIndex]
-      ];
-    }
+    this.visiblePortfolios = this.portfolios.slice(
+      this.visiblePortfoliosStartIndex,
+      this.visiblePortfoliosEndIndex
+    );
   };
 
   shiftVisiblePortfoliosLeft = function() {
@@ -223,16 +217,10 @@ export class SettingsComponent implements OnInit {
       this.visiblePortfoliosEndIndex = 4;
     }
 
-    if (this.visiblePortfoliosStartIndex !== this.visiblePortfoliosEndIndex) {
-      this.visiblePortfolios = this.portfolios.slice(
-        this.visiblePortfoliosStartIndex,
-        this.visiblePortfoliosEndIndex
-      );
-    } else {
-      this.visiblePortfolios = [
-        this.portfolios[this.visiblePortfoliosStartIndex]
-      ];
-    }
+    this.visiblePortfolios = this.portfolios.slice(
+      this.visiblePortfoliosStartIndex,
+      this.visiblePortfoliosEndIndex
+    );
   };
 
   updatePortfolioSummaries() {

@@ -78,7 +78,10 @@
             *ngFor="let coin of portfolio.currentCoinValues | keyvalue"
           >
             <div class="col-12 text-center">
-              <div class="coin-container">
+              <div
+                class="coin-container"
+                [routerLink]="['/coinpage', coin.key.toLowerCase()]"
+              >
                 <coin
                   [iconId]="coin.key.toLowerCase()"
                   [name]="coin.key"
