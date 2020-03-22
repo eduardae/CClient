@@ -41,7 +41,7 @@ export class HomeComponent implements OnInit {
     this.carouselImages = [
       "assets/images/carousel/btc_ether.jpg",
       "assets/images/carousel/blockchain_flow.jpg",
-      "assets/images/carousel/bitcoin.jpg"
+      "assets/images/carousel/abstract_data.jpg"
     ];
   }
 

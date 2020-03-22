@@ -67,10 +67,6 @@
   label {
     width: 100%;
   }
-  .crypto-index {
-    min-height: 320px;
-    width: 70%;
-  }
 }
 
 @media (max-width: 425px) {
@@ -93,8 +89,9 @@
     }
   }
 
-  .crypto-index {
-    width: 100%;
-    min-height: 256px;
+  .greed-and-fear {
+    > div {
+      width: 80%;
+    }
   }
 }
