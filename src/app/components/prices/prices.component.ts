@@ -72,8 +72,8 @@ export class PricesComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.coinInfoService.getCoinsList().subscribe(result => {
-      this.coins = result.coins;
+    this.coinInfoService.getCustomCoinsList().subscribe(result => {
+      this.coins = result.data;
       if (this.sessionStorage.get("selectedCurrency")) {
         this.currency = JSON.parse(this.sessionStorage.get("selectedCurrency"))[
           "currency"

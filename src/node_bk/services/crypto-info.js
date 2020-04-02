@@ -50,7 +50,7 @@ app.post('/coininfo/history', function (req, res) {
   }
 });
 
-app.get('/coinslist', function (req, res) {
+app.get('/coinslist/custom', function (req, res) {
   let obj;
   //./src/node_bk/config/coins/list.json
   fs.readFile('../node_bk/config/coins/list.json', 'utf8', function (err, data) {
@@ -65,14 +65,13 @@ app.get('/coinslist', function (req, res) {
 
 });
 
-/*app.get('/coinslist', function (req, res) {
+app.get('/coinslist', function (req, res) {
   getCoinsList().then(function (data) {
-
     res.json(data);
   }, err => {
     res.status(500).end();
   });
-});*/
+});
 
 app.get('/coins/markets', function (req, res) {
   getCoinsMarkets(req.query.currency).then(function (data) {

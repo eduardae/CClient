@@ -1,5 +1,5 @@
 {
-  "coins": [
+  "data": [
     {
       "name": "Bitcoin",
       "id": "bitcoin"
@@ -27,6 +27,10 @@
     {
       "name": "Tezos",
       "id": "tezos"
+    },
+    {
+      "name": "Tether",
+      "id": "tether"
     },
     {
       "name": "Tether",

@@ -23,13 +23,14 @@ import { CommunityData } from "../../models/community-data";
 import { DevelopmentData } from "../../models/development-data";
 import { isBuffer } from "util";
 import { AppSettingsService } from "src/app/services/app.settings.service";
-import { Subscription } from "rxjs";
+import { Subscription, Observable } from "rxjs";
 import { SESSION_STORAGE, WebStorageService } from "angular-webstorage-service";
 import { environment } from "src/environments/environment";
 import { PortfolioService } from "src/app/services/portfolio.service";
 import { Portfolio } from "src/app/models/portfolio/portfolio";
 import { PortfolioCoinData } from "src/app/models/portfolio/portfolio-coin-data";
 import { HttpClient } from "@angular/common/http";
+import { CoinInfoService } from "src/app/services/coin.info.service";
 
 @Component({
   selector: "app-portfolio-page",
@@ -70,6 +71,7 @@ export class PortfolioPageComponent implements OnInit {
     private route: ActivatedRoute,
     private appSettingsService: AppSettingsService,
     private portfolioService: PortfolioService,
+    private coinInfoService: CoinInfoService,
     @Inject(SESSION_STORAGE) private sessionStorage: WebStorageService
   ) {
     this.currencyChangeSubscription = appSettingsService.currencyChange$.subscribe(
@@ -136,12 +138,8 @@ export class PortfolioPageComponent implements OnInit {
     this.currentDoughnutChartData = [currentDataset];
   }
 
-  async getCoinList(): Promise<CoinInfo[]> {
-    let result = await this.http
-      .get(`${environment.baseUrl}:8081/coinslist`)
-      .toPromise();
-    const response = result.json();
-    return response.coins;
+  getCoinList(): Observable<any> {
+    return this.coinInfoService.getCustomCoinsList();
   }
 
   initChartOpts() {

@@ -32,6 +32,10 @@ export class CoinInfoService {
     return this.http.get(`${environment.baseUrl}:8081/coinslist`);
   }
 
+  getCustomCoinsList(): Observable<any> {
+    return this.http.get(`${environment.baseUrl}:8081/coinslist/custom`);
+  }
+
   getAllCoinsList(): Observable<any> {
     return this.http.get(`${environment.baseUrl}:8081/coins/list`);
   }

@@ -1,7 +1,7 @@
 <div class="container-fluid text-center">
   <div>
     <h2 class="pt-5 pb-2">Latest news on crypto</h2>
-    <div id="view-mode-selector">
+    <div id="view-mode-selector" *ngIf="articles && articles.length !== 0">
       <div>
         <span
           class="fa fa-list"

@@ -17,6 +17,11 @@
 .add-coin-modal {
   .modal-dialog {
     margin: 96px auto auto auto;
+
+    .modal-body {
+      max-height: 340px;
+      overflow-y: auto;
+    }
   }
 
   .coin-container {

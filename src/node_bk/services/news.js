@@ -23,7 +23,15 @@ app.get('/byfilter', function (req, res) {
 
 app.get('/bycoin/:id', function (req, res) {
   getNewsByCoin(req.params.id).then(function (data) {
-    res.json(data);
+    if (data.status !== 404) {
+      res.json(data);
+    } else {
+      res.status(404);
+    }
+
+  }).catch(function (err) {
+    res.status(500);
+    res.send(err);
   });
 })
 

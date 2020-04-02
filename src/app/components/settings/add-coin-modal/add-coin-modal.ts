@@ -22,6 +22,8 @@ import { ToastService } from "../../../services/toast-service";
 import { SESSION_STORAGE, WebStorageService } from "angular-webstorage-service";
 import { UserInfoService } from "src/app/services/user.info.service";
 import { environment } from "src/environments/environment";
+import { CoinInfoService } from "src/app/services/coin.info.service";
+import { Observable } from "rxjs";
 
 @Component({
   selector: "add-coin-modal-content",
@@ -162,12 +164,13 @@ export class AddCoinModal implements OnInit {
   constructor(
     private modalService: NgbModal,
     public toastService: ToastService,
+    private coinInfoService: CoinInfoService,
     private http: Http
   ) {}
 
   ngOnInit(): void {
-    this.getCoinList().then(result => {
-      this.coins = result;
+    this.getCoinList().subscribe(result => {
+      this.coins = result.data;
     });
   }
 
@@ -197,11 +200,7 @@ export class AddCoinModal implements OnInit {
     }
   }
 
-  async getCoinList(): Promise<CoinInfo[]> {
-    let result = await this.http
-      .get(`${environment.baseUrl}:8081/coinslist`)
-      .toPromise();
-    const response = result.json();
-    return response.coins;
+  getCoinList(): Observable<any> {
+    return this.coinInfoService.getCustomCoinsList();
   }
 }

@@ -369,8 +369,8 @@ export class SelectCoinModal implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.coinInfoService.getCoinsList().subscribe(result => {
-      this.coins = result.coins;
+    this.coinInfoService.getCustomCoinsList().subscribe(result => {
+      this.coins = result.data;
     });
   }
 

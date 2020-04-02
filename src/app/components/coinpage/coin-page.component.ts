@@ -23,9 +23,10 @@ import { CommunityData } from "../../models/community-data";
 import { DevelopmentData } from "../../models/development-data";
 import { isBuffer } from "util";
 import { AppSettingsService } from "src/app/services/app.settings.service";
-import { Subscription } from "rxjs";
+import { Subscription, Observable } from "rxjs";
 import { SESSION_STORAGE, WebStorageService } from "angular-webstorage-service";
 import { environment } from "../../../environments/environment";
+import { CoinInfoService } from "src/app/services/coin.info.service";
 
 @Component({
   selector: "app-coin-page",
@@ -36,6 +37,7 @@ export class CoinPageComponent implements OnInit {
   selectedCoin: CoinInfo;
   historicalMarketData: MarketData;
   articles: Article[];
+  articlesLoaded: boolean;
   marketData: MarketData;
   isUpdating: boolean;
   response: string;
@@ -62,6 +64,7 @@ export class CoinPageComponent implements OnInit {
     private http: Http,
     private appSettingsService: AppSettingsService,
     private route: ActivatedRoute,
+    private coinInfoService: CoinInfoService,
     @Inject(SESSION_STORAGE) private sessionStorage: WebStorageService
   ) {
     this.currencyChangeSubscription = appSettingsService.currencyChange$.subscribe(
@@ -73,7 +76,8 @@ export class CoinPageComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.getCoinList().then(result => {
+    this.getCoinList().subscribe(result => {
+      let coins = result.data;
       if (this.sessionStorage.get("selectedCurrency")) {
         this.currency = JSON.parse(this.sessionStorage.get("selectedCurrency"))[
           "currency"
@@ -83,7 +87,7 @@ export class CoinPageComponent implements OnInit {
       }
 
       let coinIdPar = this.route.snapshot.params.coinId;
-      result.forEach(element => {
+      coins.forEach(element => {
         if (element.id === coinIdPar) {
           this.selectedCoin = element;
           this.onCoinSelect(this.selectedCoin);
@@ -141,28 +145,29 @@ export class CoinPageComponent implements OnInit {
     this.listMode = listMode;
   }
 
-  async getCoinList(): Promise<CoinInfo[]> {
-    let result = await this.http
-      .get(`${environment.baseUrl}:8081/coinslist`)
-      .toPromise();
-    const response = result.json();
-    return response.coins;
+  getCoinList(): Observable<any> {
+    return this.coinInfoService.getCoinsList();
   }
 
   getNews(coin: CoinInfo) {
-    this.http
-      .get(`${environment.baseUrl}:8083/bycoin/${coin.id}`)
-      .subscribe(result => {
+    this.http.get(`${environment.baseUrl}:8083/bycoin/${coin.id}`).subscribe(
+      result => {
         const response = result.json();
         console.log(response);
         this.articles = _.sortBy(response, article => {
           return new Date(article.publishedAt);
         }).reverse();
+        this.articlesLoaded = true;
         /*this.articles.forEach(element => {
         element.title = element.title.substring(0, 100);
       });*/
         this.isUpdating = false;
-      });
+      },
+      err => {
+        this.articlesLoaded = true;
+        this.articles = null;
+      }
+    );
   }
 
   getCoinInfo(coin) {

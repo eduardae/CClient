@@ -134,11 +134,14 @@
         </ngb-tab>
         <ngb-tab title="News Mentions">
           <ng-template ngbTabContent>
-            <div id="news-loader-container" *ngIf="!articles">
+            <div id="news-loader-container" *ngIf="!articlesLoaded">
               <horizontal-loader></horizontal-loader>
             </div>
             <div class="mt-4">
-              <div id="view-mode-selector">
+              <div
+                id="view-mode-selector"
+                *ngIf="articles && articles.length !== 0"
+              >
                 <div>
                   <span
                     class="fa fa-list"
@@ -152,6 +155,14 @@
                   ></span>
                 </div>
               </div>
+              <h5
+                class="warning-txt pt-5"
+                *ngIf="
+                  articlesLoaded && (articles ? articles.length === 0 : true)
+                "
+              >
+                No articles found.
+              </h5>
               <news [articles]="this.articles" [listMode]="listMode"></news>
             </div>
           </ng-template>
