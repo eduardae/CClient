@@ -328,6 +328,7 @@ export class SelectCoinModalContent implements OnInit {
               if (this.portfolioCreationCallback) {
                 this.portfolioCreationCallback(result);
               }
+              this.modal.close("success");
             },
             err => {
               this.toastService.show(err._body, {
