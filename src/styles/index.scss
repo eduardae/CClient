@@ -102,7 +102,7 @@ footer {
   a {
     color: #fff;
     &:hover {
-      color: #fff;
+      color: #22aed1;
       text-decoration: none;
     }
   }
@@ -137,6 +137,25 @@ footer {
   /* Remove the bottom border on the jumbotron for visual effect */
   .jumbotron {
     border-bottom: 0;
+  }
+}
+
+@media (max-width: 768px) {
+  .footer-txt {
+    font-size: 12px;
+  }
+
+  @media screen and (max-height: 420px) {
+    footer {
+      height: 50px;
+      padding-top: 0;
+    }
+  }
+}
+
+@media screen and (max-height: 420px) {
+  footer {
+    position: relative;
   }
 }
 

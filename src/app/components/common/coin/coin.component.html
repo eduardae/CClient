@@ -27,5 +27,15 @@
         [price]="price"
       ></price>
     </div>
+    <div class="col-sm-12" *ngIf="quantity">
+      <div>
+        <span class="bold">Quantity</span>
+      </div>
+      <div>
+        <span [ngStyle]="{ 'font-weight': nameWeight }">{{
+          quantity | number: "1.1-4"
+        }}</span>
+      </div>
+    </div>
   </div>
 </div>

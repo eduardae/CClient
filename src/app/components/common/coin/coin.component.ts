@@ -20,6 +20,7 @@ export class CoinComponent implements OnInit, OnChanges {
   @Input() precision: number;
   @Input() nameWeight: number;
   @Input() iconSizeMultiplier: number;
+  @Input() quantity: number;
   displayedPrice: string;
 
   constructor(private currencyPipe: CurrencyPipe) {}

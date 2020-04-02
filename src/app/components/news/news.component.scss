@@ -134,6 +134,10 @@
 
         .img-container {
           height: 260px;
+
+          .article-img {
+            max-height: 260px;
+          }
         }
 
         .article-buttons {

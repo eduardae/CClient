@@ -80,14 +80,17 @@ import { MarketData } from "src/app/models/historical-market-data";
             <hr />
             <div
               class="row text-center"
-              *ngIf="selectedCoins && selectedCoins.length !== 0"
+              *ngIf="portfolio.startingCoinValues.keys()"
             >
               <div
                 class="col-6 col-sm-3 col-md-2"
-                *ngFor="let coin of selectedCoins"
+                *ngFor="let coin of portfolio.startingCoinValues | keyvalue"
               >
                 <span>
-                  <coin iconId="{{ coin.id }}" [iconUrl]="coin.iconUrl"></coin>
+                  <coin
+                    iconId="{{ coin.key }}"
+                    [quantity]="coin.value.quantity"
+                  ></coin>
                 </span>
               </div>
             </div>
@@ -241,13 +244,24 @@ export class SelectCoinModalContent implements OnInit {
   }
 
   addCoin() {
-    const purchase = new Purchase();
     const coinId = this.currentlySelectedCoin.id;
-    purchase.quantity = this.coinQuantity;
-    purchase.currency = this.currency.value;
-    purchase.price = new Price();
-    purchase.price[this.currency.value] = this.currentlySelectedCoin.price;
-    this.portfolio.startingCoinValues[coinId] = purchase;
+
+    // I set the value as property because the map entries are ignored when sent to backend
+
+    if (this.portfolio.startingCoinValues.has(coinId)) {
+      this.portfolio.startingCoinValues.get(
+        coinId
+      ).quantity += this.coinQuantity;
+      this.portfolio.startingCoinValues[coinId].quantity += this.coinQuantity;
+    } else {
+      const purchase = new Purchase();
+      purchase.quantity = this.coinQuantity;
+      purchase.currency = this.currency.value;
+      purchase.price = new Price();
+      purchase.price[this.currency.value] = this.currentlySelectedCoin.price;
+      this.portfolio.startingCoinValues[coinId] = purchase;
+      this.portfolio.startingCoinValues.set(coinId, purchase);
+    }
     this.selectedCoins.push(this.currentlySelectedCoin);
   }
 
