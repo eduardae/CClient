@@ -76,8 +76,8 @@ export class CoinPageComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.getCoinList().subscribe(result => {
-      let coins = result.data;
+    this.getCoinList().then(result => {
+      let coins = result;
       if (this.sessionStorage.get("selectedCurrency")) {
         this.currency = JSON.parse(this.sessionStorage.get("selectedCurrency"))[
           "currency"
@@ -145,8 +145,12 @@ export class CoinPageComponent implements OnInit {
     this.listMode = listMode;
   }
 
-  getCoinList(): Observable<any> {
+  /*getCoinList(): Observable<any> {
     return this.coinInfoService.getCoinsList();
+  }*/
+
+  getCoinList(): Promise<any> {
+    return this.coinInfoService.getCachedCoinlistIfPresent();
   }
 
   getNews(coin: CoinInfo) {

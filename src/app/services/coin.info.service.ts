@@ -32,6 +32,20 @@ export class CoinInfoService {
     return this.http.get(`${environment.baseUrl}:8081/coinslist`);
   }
 
+  getCachedCoinlistIfPresent(): Promise<any> {
+    let promise = new Promise((resolve, reject) => {
+      if (sessionStorage.getItem("coinsList")) {
+        resolve(JSON.parse(this.sessionStorage.get("coinsList")));
+      } else {
+        this.getCoinsList().subscribe(result => {
+          this.sessionStorage.set("coinsList", JSON.stringify(result.data));
+          resolve(result.data);
+        });
+      }
+    });
+    return promise;
+  }
+
   getCustomCoinsList(): Observable<any> {
     return this.http.get(`${environment.baseUrl}:8081/coinslist/custom`);
   }
