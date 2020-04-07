@@ -13,7 +13,7 @@ import { CoinInfoService } from "src/app/services/coin.info.service";
 @Component({
   selector: "app-home",
   templateUrl: "./home.component.html",
-  styleUrls: ["./home.component.scss"]
+  styleUrls: ["./home.component.scss"],
 })
 export class HomeComponent implements OnInit {
   @Input() cryptoInfos: CoinsSummary;
@@ -33,7 +33,7 @@ export class HomeComponent implements OnInit {
     this.cryptoInfos = new CoinsSummary();
     this.contentLoaded = false;
     this.currencyChangeSubscription = appSettingsService.currencyChange$.subscribe(
-      currency => {
+      (currency) => {
         this.currency = currency;
         this.refreshInfo();
       }
@@ -41,7 +41,7 @@ export class HomeComponent implements OnInit {
     this.carouselImages = [
       "assets/images/carousel/btc_ether.jpg",
       "assets/images/carousel/blockchain_flow.jpg",
-      "assets/images/carousel/abstract_data.jpg"
+      "assets/images/carousel/abstract_data.jpg",
     ];
   }
 
@@ -64,7 +64,7 @@ export class HomeComponent implements OnInit {
   getCoinMarkets() {
     this.coinsList = [];
     this.coinInfoService.getCoinMarkets(this.currency.value).subscribe(
-      result => {
+      (result) => {
         for (let i = 0; i < 12; i++) {
           const coinMarketData = result.data[i];
           let coin = new CoinInfo();
@@ -76,9 +76,8 @@ export class HomeComponent implements OnInit {
         }
         this.isUpdating = false;
         this.contentLoaded = true;
-        console.log(result.data);
       },
-      err => {
+      (err) => {
         console.log(err);
       }
     );

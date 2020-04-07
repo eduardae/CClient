@@ -4,7 +4,7 @@ import {
   Input,
   ViewChild,
   ElementRef,
-  Inject
+  Inject,
 } from "@angular/core";
 import { Http } from "@angular/http";
 import { _ } from "underscore";
@@ -31,7 +31,7 @@ import { CoinInfoService } from "src/app/services/coin.info.service";
 @Component({
   selector: "app-coin-page",
   templateUrl: "./coin-page.component.html",
-  styleUrls: ["./coin-page.component.scss"]
+  styleUrls: ["./coin-page.component.scss"],
 })
 export class CoinPageComponent implements OnInit {
   selectedCoin: CoinInfo;
@@ -68,7 +68,7 @@ export class CoinPageComponent implements OnInit {
     @Inject(SESSION_STORAGE) private sessionStorage: WebStorageService
   ) {
     this.currencyChangeSubscription = appSettingsService.currencyChange$.subscribe(
-      currency => {
+      (currency) => {
         this.currency = currency;
         this.onCoinSelect(this.selectedCoin);
       }
@@ -76,7 +76,7 @@ export class CoinPageComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.getCoinList().then(result => {
+    this.getCoinList().then((result) => {
       let coins = result;
       if (this.sessionStorage.get("selectedCurrency")) {
         this.currency = JSON.parse(this.sessionStorage.get("selectedCurrency"))[
@@ -87,7 +87,7 @@ export class CoinPageComponent implements OnInit {
       }
 
       let coinIdPar = this.route.snapshot.params.coinId;
-      coins.forEach(element => {
+      coins.forEach((element) => {
         if (element.id === coinIdPar) {
           this.selectedCoin = element;
           this.onCoinSelect(this.selectedCoin);
@@ -102,21 +102,29 @@ export class CoinPageComponent implements OnInit {
       this.lineChartOptions = {
         responsive: true,
         legend: {
-          labels: { fontColor: "white" }
+          labels: { fontColor: "white" },
         },
-        maintainAspectRatio: false
+        maintainAspectRatio: false,
       };
     });
-    let days2 = new SelectedDateOption("two days", 2);
-    let week = new SelectedDateOption("one week", 7);
-    let month = new SelectedDateOption("one month", 31);
-    let year = new SelectedDateOption("one year", 365);
+    let one_day = new SelectedDateOption("1 day", 2);
+    let three_days = new SelectedDateOption("3 days", 3);
+    let week = new SelectedDateOption("1 week", 7);
+    let two_weeks = new SelectedDateOption("2 weeks", 14);
+    let month = new SelectedDateOption("1 month", 31);
+    let three_months = new SelectedDateOption("3 months", 93);
+    let year = new SelectedDateOption("1 year", 365);
+    let all = new SelectedDateOption("Max", 0);
     this.timeFrameSelectOptions = [];
-    this.timeFrameSelectOptions.push(days2);
-    this.timeFrame = days2;
+    this.timeFrameSelectOptions.push(one_day);
+    this.timeFrame = one_day;
+    this.timeFrameSelectOptions.push(three_days);
     this.timeFrameSelectOptions.push(week);
+    this.timeFrameSelectOptions.push(two_weeks);
     this.timeFrameSelectOptions.push(month);
+    this.timeFrameSelectOptions.push(three_months);
     this.timeFrameSelectOptions.push(year);
+    this.timeFrameSelectOptions.push(all);
   }
 
   refreshInfo() {
@@ -155,10 +163,10 @@ export class CoinPageComponent implements OnInit {
 
   getNews(coin: CoinInfo) {
     this.http.get(`${environment.baseUrl}:8083/bycoin/${coin.id}`).subscribe(
-      result => {
+      (result) => {
         const response = result.json();
         console.log(response);
-        this.articles = _.sortBy(response, article => {
+        this.articles = _.sortBy(response, (article) => {
           return new Date(article.publishedAt);
         }).reverse();
         this.articlesLoaded = true;
@@ -167,7 +175,7 @@ export class CoinPageComponent implements OnInit {
       });*/
         this.isUpdating = false;
       },
-      err => {
+      (err) => {
         this.articlesLoaded = true;
         this.articles = null;
       }
@@ -177,7 +185,7 @@ export class CoinPageComponent implements OnInit {
   getCoinInfo(coin) {
     this.http
       .post(`${environment.baseUrl}:8081/coininfo`, { coin_name: coin.id })
-      .subscribe(result => {
+      .subscribe((result) => {
         const response = result.json();
         this.selectedCoin = coin;
         this.selectedCoin.price =
@@ -230,9 +238,9 @@ export class CoinPageComponent implements OnInit {
     this.http
       .post(`${environment.baseUrl}:8081/coininfo/history`, {
         coin_name: coinName,
-        vs_currency: currency
+        vs_currency: currency,
       })
-      .subscribe(result => {
+      .subscribe((result) => {
         const response = result.json();
         if (response.data) {
           this.labels = [];
@@ -256,13 +264,19 @@ export class CoinPageComponent implements OnInit {
   }
 
   getCoinMarketChart(coinName, currency, daysPar) {
+    let days;
+    if (daysPar === 0) {
+      days = "max";
+    } else {
+      days = daysPar;
+    }
     this.http
       .post(`${environment.baseUrl}:8081/coininfo/marketchart`, {
         coin_name: coinName,
         vs_currency: currency,
-        days: daysPar ? daysPar : 7
+        days: days ? days : 7,
       })
-      .subscribe(result => {
+      .subscribe((result) => {
         const response = result.json();
         if (response.data) {
           this.labels = [];
@@ -293,9 +307,9 @@ export class CoinPageComponent implements OnInit {
       legend: {
         display: true,
         labels: {
-          text: "Price"
-        }
-      }
+          text: "Price",
+        },
+      },
     };
   }
 

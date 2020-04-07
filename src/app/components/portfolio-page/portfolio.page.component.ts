@@ -4,7 +4,7 @@ import {
   Input,
   ViewChild,
   ElementRef,
-  Inject
+  Inject,
 } from "@angular/core";
 import { Http } from "@angular/http";
 import { _ } from "underscore";
@@ -36,7 +36,7 @@ import { CoinInfoService } from "src/app/services/coin.info.service";
   selector: "app-portfolio-page",
   templateUrl: "./portfolio.page.component.html",
   styleUrls: ["./portfolio.page.component.scss"],
-  providers: []
+  providers: [],
 })
 export class PortfolioPageComponent implements OnInit {
   coins: CoinInfo[];
@@ -75,8 +75,9 @@ export class PortfolioPageComponent implements OnInit {
     @Inject(SESSION_STORAGE) private sessionStorage: WebStorageService
   ) {
     this.currencyChangeSubscription = appSettingsService.currencyChange$.subscribe(
-      currency => {
+      (currency) => {
         this.currency = currency;
+        this.reset();
       }
     );
   }
@@ -94,11 +95,11 @@ export class PortfolioPageComponent implements OnInit {
     if (!this.portfolio) {
       this.portfolioService
         .getPortfolioById(this.route.snapshot.paramMap.get("id"))
-        .subscribe(result => {
+        .subscribe((result) => {
           this.portfolio = result;
           this.portfolioService
             .getSummary(this.portfolio, this.currency.value)
-            .then(result => {
+            .then((result) => {
               this.portfolio.summary = result;
               this.initPortfolioData();
               this.portfolio = this.portfolioService.populateGrowthByCoin(
@@ -119,6 +120,8 @@ export class PortfolioPageComponent implements OnInit {
   initPortfolioData() {
     const currentDataset = [];
     const startingDataset = [];
+    this.startingDoughnutChartLabels.length = 0;
+    this.currentDoughnutChartLabels.length = 0;
     this.portfolio.currentCoinValues.forEach(
       (coinData: PortfolioCoinData, key: string) => {
         this.currentDoughnutChartLabels.push(key);
@@ -134,12 +137,26 @@ export class PortfolioPageComponent implements OnInit {
       startingDataset.push(val);
     }
 
-    this.startingDoughnutChartData = [startingDataset];
-    this.currentDoughnutChartData = [currentDataset];
+    this.startingDoughnutChartData[0] = startingDataset;
+    this.currentDoughnutChartData[0] = currentDataset;
   }
 
   getCoinList(): Observable<any> {
     return this.coinInfoService.getCustomCoinsList();
+  }
+
+  reset() {
+    this.portfolioService
+      .getSummary(this.portfolio, this.currency.value)
+      .then((result) => {
+        this.portfolio.summary = result;
+        this.initPortfolioData();
+        this.portfolio = this.portfolioService.populateGrowthByCoin(
+          this.portfolio,
+          this.currency.value
+        );
+        this.updateChart();
+      });
   }
 
   initChartOpts() {
@@ -150,9 +167,9 @@ export class PortfolioPageComponent implements OnInit {
       legend: {
         display: true,
         labels: {
-          text: "Price"
-        }
-      }
+          text: "Price",
+        },
+      },
     };
   }
 

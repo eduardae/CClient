@@ -7,13 +7,13 @@ import { environment } from "src/environments/environment";
 @Component({
   selector: "app-news",
   templateUrl: "./news-page.component.html",
-  styleUrls: ["./news-page.component.scss"]
+  styleUrls: ["./news-page.component.scss"],
 })
 export class NewsPageComponent implements OnInit {
   articles: Article[];
   isUpdating: boolean;
   response: string;
-  listMode: boolean = false;
+  listMode: boolean = true;
   filters: string[] = [
     "Analysis",
     "Blockchain",
@@ -21,7 +21,7 @@ export class NewsPageComponent implements OnInit {
     "General",
     "Government",
     "ICO",
-    "Mining"
+    "Mining",
   ];
 
   constructor(private http: Http) {}
@@ -38,10 +38,10 @@ export class NewsPageComponent implements OnInit {
   filterNews(filter) {
     this.http
       .get(`${environment.baseUrl}:8083/byfilter?filter=${filter}`)
-      .subscribe(result => {
+      .subscribe((result) => {
         const response = result.json();
         console.log(response);
-        this.articles = _.sortBy(response, article => {
+        this.articles = _.sortBy(response, (article) => {
           return new Date(article.publishedAt);
         }).reverse();
         /*this.articles.forEach(element => {
@@ -52,10 +52,10 @@ export class NewsPageComponent implements OnInit {
   }
 
   getNews() {
-    this.http.get(`${environment.baseUrl}:8083`).subscribe(result => {
+    this.http.get(`${environment.baseUrl}:8083`).subscribe((result) => {
       const response = result.json();
       console.log(response);
-      this.articles = _.sortBy(response, article => {
+      this.articles = _.sortBy(response, (article) => {
         return new Date(article.publishedAt);
       }).reverse();
       /*this.articles.forEach(element => {
@@ -66,7 +66,7 @@ export class NewsPageComponent implements OnInit {
   }
 
   updateArticleUrl(articleIn: Article) {
-    const art = _.find(this.articles, article => {
+    const art = _.find(this.articles, (article) => {
       return article === articleIn;
     });
     art.originalImageUrl = "./assets/images/newspaper.png";
