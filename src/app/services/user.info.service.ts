@@ -29,20 +29,20 @@ export class UserInfoService {
     this.http
       .post(`${environment.baseUrl}:8082/update/settings`, user)
       .subscribe(
-        result => {
+        (result) => {
           this.toastService.show("User info updated", {
             classname: "bg-success text-light",
-            delay: 2000
+            delay: 2000,
           });
           this.sessionStorage.set(
             "currentUser",
             JSON.stringify({ user: user })
           );
         },
-        err => {
+        (err) => {
           this.toastService.show(err._body, {
             classname: "bg-danger text-light",
-            delay: 3500
+            delay: 3500,
           });
         }
       );
@@ -57,20 +57,20 @@ export class UserInfoService {
     this.http
       .post(`${environment.baseUrl}:8084/user/update/coins`, user)
       .subscribe(
-        result => {
+        (result) => {
           this.toastService.show("User bookmarks successfully updated", {
             classname: "bg-success text-light",
-            delay: 2000
+            delay: 2000,
           });
           this.sessionStorage.set(
             "currentUser",
             JSON.stringify({ user: user })
           );
         },
-        err => {
+        (err) => {
           this.toastService.show(err._body, {
             classname: "bg-danger text-light",
-            delay: 3500
+            delay: 3500,
           });
         }
       );
@@ -85,7 +85,7 @@ export class UserInfoService {
       user.saved_links = [];
       user.saved_links.push(link);
     } else {
-      const alreadySavedLinks = _.filter(user.saved_links, function(value) {
+      const alreadySavedLinks = _.filter(user.saved_links, function (value) {
         if (value.url === link.url) {
           return value;
         }
@@ -96,27 +96,27 @@ export class UserInfoService {
         this.http
           .post(`${environment.baseUrl}:8084/user/update/links`, user)
           .subscribe(
-            result => {
+            (result) => {
               this.toastService.show("Saved links successfully updated", {
                 classname: "bg-success text-light",
-                delay: 2000
+                delay: 2000,
               });
               this.sessionStorage.set(
                 "currentUser",
                 JSON.stringify({ user: user })
               );
             },
-            err => {
+            (err) => {
               this.toastService.show(err._body, {
                 classname: "bg-danger text-light",
-                delay: 3500
+                delay: 3500,
               });
             }
           );
       } else {
         this.toastService.show("Link already bookmarked", {
           classname: "bg-warning text-light",
-          delay: 3500
+          delay: 3500,
         });
       }
     }
@@ -126,35 +126,43 @@ export class UserInfoService {
     this.http
       .post(`${environment.baseUrl}:8084/user/update/links`, user)
       .subscribe(
-        result => {
+        (result) => {
           this.sessionStorage.set(
             "currentUser",
             JSON.stringify({ user: user })
           );
         },
-        err => {
+        (err) => {
           this.toastService.show(err._body, {
             classname: "bg-danger text-light",
-            delay: 3500
+            delay: 3500,
           });
         }
       );
+  }
+
+  sendPasswordResetMail(user: User) {
+    this.http
+      .post(`${environment.baseUrl}:8086/user/password_reset_mail`, user)
+      .subscribe((result) => {
+        console.log(result);
+      });
   }
 
   addPortfolio(user: User, portfolio: Portfolio) {
     this.http
       .post(`${environment.baseUrl}:8085/create_portfolio`, user)
       .subscribe(
-        result => {
+        (result) => {
           this.toastService.show("Portfolio created correctly", {
             classname: "bg-danger text-light",
-            delay: 3500
+            delay: 3500,
           });
         },
-        err => {
+        (err) => {
           this.toastService.show(err._body, {
             classname: "bg-danger text-light",
-            delay: 3500
+            delay: 3500,
           });
         }
       );

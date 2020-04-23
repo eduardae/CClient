@@ -24,7 +24,7 @@ import { ToastsContainer } from "./components/common/toast/toasts-container.comp
 import { CoinComponent } from "./components/common/coin/coin.component";
 import {
   AddCoinModal,
-  AddCoinModalContent
+  AddCoinModalContent,
 } from "./components/settings/add-coin-modal/add-coin-modal";
 import { SettingsComponent } from "./components/settings/settings.component";
 import { HorizontalLoader } from "./components/common/horizontal-loader/horizontal-loader.component";
@@ -33,10 +33,14 @@ import { CoinPageComponent } from "./components/coinpage/coin-page.component";
 import { NewsPageComponent } from "./components/news/news-page/news-page.component";
 import {
   SelectCoinModal,
-  SelectCoinModalContent
+  SelectCoinModalContent,
 } from "./components/settings/select-coin-modal/select-coin-modal";
 import { PortfolioPageComponent } from "./components/portfolio-page/portfolio.page.component";
 import { DeleteConfirmationModal } from "./components/common/delete-confirmation-modal/delete-confirmation-modal";
+import {
+  ResetPasswordModalContent,
+  ResetPasswordModal,
+} from "./components/reset-password-modal/reset-password-modal.component";
 
 const appRoutes: Routes = [
   { path: "", redirectTo: "home", pathMatch: "full" },
@@ -49,7 +53,7 @@ const appRoutes: Routes = [
   { path: "coinpage/:coinId", component: CoinPageComponent },
   { path: "portfolio/:id", component: PortfolioPageComponent },
   { path: "academy", component: AcademyComponent },
-  { path: "terms", component: TermsComponent }
+  { path: "terms", component: TermsComponent },
 ];
 
 @NgModule({
@@ -75,7 +79,9 @@ const appRoutes: Routes = [
     AddCoinModalContent,
     SelectCoinModal,
     SelectCoinModalContent,
-    DeleteConfirmationModal
+    DeleteConfirmationModal,
+    ResetPasswordModal,
+    ResetPasswordModalContent,
   ],
   imports: [
     BrowserAnimationsModule,
@@ -86,7 +92,7 @@ const appRoutes: Routes = [
     HttpModule,
     ChartsModule,
     StorageServiceModule,
-    NgbModule
+    NgbModule,
   ],
   entryComponents: [
     AddCoinModal,
@@ -94,13 +100,15 @@ const appRoutes: Routes = [
     SelectCoinModal,
     SelectCoinModalContent,
     CoinComponent,
-    DeleteConfirmationModal
+    DeleteConfirmationModal,
+    ResetPasswordModal,
+    ResetPasswordModalContent,
   ],
   exports: [RouterModule],
   providers: [
     { provide: APP_BASE_HREF, useValue: "/" },
-    { provide: HTTP_INTERCEPTORS, useClass: JWTInterceptor, multi: true }
+    { provide: HTTP_INTERCEPTORS, useClass: JWTInterceptor, multi: true },
   ],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
 export class AppModule {}
