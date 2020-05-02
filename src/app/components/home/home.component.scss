@@ -134,6 +134,14 @@ body {
   }
 }
 
+@media (max-width: 1960px) {
+  #home-carousel {
+    img {
+      height: 632px;
+    }
+  }
+}
+
 @media (max-width: 1024px) {
   #home-carousel {
     img {

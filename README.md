@@ -1,14 +1,18 @@
-# Cclient
+# CMonitor
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 8.2.0.
+The project stack is MongoDB, NodeJs, Express, Angular8.
+
+It is somewhat similar to MEAN (https://github.com/linnovate/mean), I could have started from there, but I wanted to learn by structuring the project myself, instead of relying on something pre-prepaired. It's probable, for this reason, that MEAN is better structured than my project.
 
 ## Development server - Angular
+
+This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 8.2.0.
 
 Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
 
 ## Development server - NodeJS
 
-The node backend is under src/app/node_bk (the choice to put it there bmight be questionable, but I did so for my convenience).
+The node backend is under src/app/node_bk (the choice to put it there might be questionable, but I did so for my convenience).
 
 Run `npm run all` for the all the necessary backend server istances. Each service has its instance, with its port. (CORS settings need to be adapted to your urls manually, for now they're set to allowing all).
 
@@ -16,7 +20,7 @@ A different architecture might be developed, I'm a bit weak in Node, so suggesti
 
 ## MongoDB
 
-My local MongoDB version used in development is mongodb@3.5.0, you might try out if newer versions are compatible.
+My local MongoDB version used in development is mongodb@3.5.0, you might check out if newer versions are compatible.
 
 There's a db snapshot under src/assets/dbsnapshots, created with mongodump.
 
@@ -25,6 +29,8 @@ It can be restored with mongorestore --db database_name path_to_bson_file
 ## Build
 
 Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
+
+![Alt text](/src/assets/screenshots/homepage.PNG?raw=true)
 
 ## Tests
 
