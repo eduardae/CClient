@@ -1,5 +1,10 @@
 # CMonitor
 
+![Alt text](/src/assets/screenshots/homepage.PNG?raw=true)
+![Alt text](/src/assets/screenshots/news.PNG?raw=true)
+![Alt text](/src/assets/screenshots/prices.PNG?raw=true)
+![Alt text](/src/assets/screenshots/portfolio-page.PNG?raw=true)
+
 The project stack is MongoDB, NodeJs, Express, Angular8.
 
 It is somewhat similar to MEAN (https://github.com/linnovate/mean), I could have started from there, but I wanted to learn by structuring the project myself, instead of relying on something pre-prepaired. It's probable, for this reason, that MEAN is better structured than my project.
@@ -29,8 +34,6 @@ It can be restored with mongorestore --db database_name path_to_bson_file
 ## Build
 
 Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
-
-![Alt text](/src/assets/screenshots/homepage.PNG?raw=true)
 
 ## Tests
 
