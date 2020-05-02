@@ -8,23 +8,31 @@ Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app w
 
 ## Development server - NodeJS
 
-Run `npm run all` for the backend server.
+The node backend is under src/app/node_bk (the choice to put it there bmight be questionable, but I did so for my convenience).
+
+Run `npm run all` for the all the necessary backend server istances. Each service has its instance, with its port. (CORS settings need to be adapted to your urls manually, for now they're set to allowing all).
+
+A different architecture might be developed, I'm a bit weak in Node, so suggestions/improvements/contributions would be very much appreciated.
 
 ## MongoDB
 
-My local MongoDB version is mongodb@3.5.0
+My local MongoDB version used in development is mongodb@3.5.0, you might try out if newer versions are compatible.
 
-The only necessary collection is users.
+There's a db snapshot under src/assets/dbsnapshots, created with mongodump.
 
-In /src/assets/mockups there's a users.json mockup, a collection importable in mongodb
-
-## Code scaffolding
-
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+It can be restored with mongorestore --db database_name path_to_bson_file
 
 ## Build
 
 Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
+
+## Tests
+
+Here I must make amends, because I've given no attention to mantaining the test suite, I wanted to get the functionalities working.
+
+## Code scaffolding
+
+Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
 
 ## Running unit tests
 
