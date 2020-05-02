@@ -1,9 +1,13 @@
 # CMonitor
 
 ![Alt text](/src/assets/screenshots/homepage.PNG?raw=true)
+<br/>
 ![Alt text](/src/assets/screenshots/news.PNG?raw=true)
+<br/>
 ![Alt text](/src/assets/screenshots/prices.PNG?raw=true)
+<br/>
 ![Alt text](/src/assets/screenshots/portfolio-page.PNG?raw=true)
+<br/>
 
 The project stack is MongoDB, NodeJs, Express, Angular8.
 
