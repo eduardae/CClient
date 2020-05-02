@@ -7,6 +7,7 @@
     "user": "node ./user/user.js",
     "bookmarks": "node ./user/bookmarks.js",
     "portfolios": "node ./user/portfolios.js",
+    "password-reset": "node ./user/password-reset.js",
     "base": "npm-run-all --parallel crypto-info user ",
     "all": "npm-run-all --parallel crypto-info user news bookmarks portfolios password-reset",
     "no-market": "npm-run-all --parallel user news bookmarks",

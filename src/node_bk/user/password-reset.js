@@ -11,8 +11,9 @@ const expressJwt = require('express-jwt');
 const app = express();
 app.use(bodyParser.json());
 app.use(cors());
-app.use("/", expressJwt({ secret: 'todo-app-super-shared-secret' }));
+app.use("/", expressJwt({ secret: 'todo-app-super-shared-secret' }).unless({ path: ['/user/password_reset_mail'] }));
 
+/* TODO: retrieve from db config */
 var transporter = nodemailer.createTransport({
   service: 'gmail',
   auth: {
