@@ -197,15 +197,12 @@ export class SettingsComponent implements OnInit {
   };
 
   shiftVisiblePortfoliosLeft = function() {
-    if (this.visiblePortfoliosStartIndex - 4 >= 0) {
-      this.visiblePortfoliosStartIndex -= 4;
-    } else {
-      this.visiblePortfoliosStartIndex = 0;
-    }
 
-    if (this.visiblePortfoliosStartIndex !== 0) {
+
+    if (this.visiblePortfoliosStartIndex - 4 !== 0) {
       if (this.visiblePortfoliosEndIndex === this.portfolios.length) {
-        this.visiblePortfoliosEndIndex--;
+        this.visiblePortfoliosEndIndex -= this.visiblePortfoliosEndIndex - this.visiblePortfoliosStartIndex;
+
       } else {
         if (this.visiblePortfoliosEndIndex - 4 >= 4) {
           this.visiblePortfoliosEndIndex -= 4;
@@ -215,6 +212,12 @@ export class SettingsComponent implements OnInit {
       }
     } else {
       this.visiblePortfoliosEndIndex = 4;
+    }
+
+    if (this.visiblePortfoliosStartIndex - 4 >= 0) {
+      this.visiblePortfoliosStartIndex -= 4;
+    } else {
+      this.visiblePortfoliosStartIndex = 0;
     }
 
     this.visiblePortfolios = this.portfolios.slice(
