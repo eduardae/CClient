@@ -24,6 +24,7 @@ The project stack is MongoDB, NodeJs, Express, Angular8.
 
 It is somewhat similar to MEAN (https://github.com/linnovate/mean), I could have started from there, but I wanted to learn by structuring the project myself, instead of relying on something pre-prepaired. It's probable, for this reason, that MEAN is better structured than my project.
 
+*The project isn't currently being mantained, I'm just keeping up with the security updates, to later pick up the project and migrate it to a newer version of Angular.*
 
 
 ## Development server - Angular
