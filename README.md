@@ -16,7 +16,7 @@
 &nbsp;&nbsp;
 &nbsp;&nbsp;
 
-## ** This project is my first experience with NodeJs and Angular. It was made mainly for educational purposes. Bad practices are to be found here ** ##
+## ** This project is my first experience with NodeJs and Angular2+. It was made mainly for educational purposes. Bad practices are to be found here ** ##
 
 The news API, which was free, has been retired in favour of a paid version. Therefore, some errors are to be expected too.
 
