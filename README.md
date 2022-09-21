@@ -16,11 +16,15 @@
 &nbsp;&nbsp;
 &nbsp;&nbsp;
 
-# ** This project is my first experience with NodeJs and Angular. It was made mainly for educational purposes. Bad practices are to be found here ** #
+## ** This project is my first experience with NodeJs and Angular. It was made mainly for educational purposes. Bad practices are to be found here ** ##
+
+The news API, which was free, has been retired in favour of a paid version. Therefore, some errors are to be expected too.
 
 The project stack is MongoDB, NodeJs, Express, Angular8.
 
 It is somewhat similar to MEAN (https://github.com/linnovate/mean), I could have started from there, but I wanted to learn by structuring the project myself, instead of relying on something pre-prepaired. It's probable, for this reason, that MEAN is better structured than my project.
+
+
 
 ## Development server - Angular
 
