@@ -16,6 +16,8 @@
 &nbsp;&nbsp;
 &nbsp;&nbsp;
 
+# ** This project is my first experience with NodeJs and Angular. It was made mainly for educational purposes. Bad practices are to be found here ** #
+
 The project stack is MongoDB, NodeJs, Express, Angular8.
 
 It is somewhat similar to MEAN (https://github.com/linnovate/mean), I could have started from there, but I wanted to learn by structuring the project myself, instead of relying on something pre-prepaired. It's probable, for this reason, that MEAN is better structured than my project.
