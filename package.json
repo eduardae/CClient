@@ -30,7 +30,7 @@
     "d3": "^5.12.0",
     "install": "^0.13.0",
     "ng2-charts": "^2.3.0",
-    "npm": "^6.11.3",
+    "npm": "^6.14.17",
     "rxjs": "~6.4.0",
     "tslib": "^1.10.0",
     "underscore": "^1.9.1",
@@ -52,7 +52,7 @@
     "karma-coverage-istanbul-reporter": "~2.0.1",
     "karma-jasmine": "~2.0.1",
     "karma-jasmine-html-reporter": "^1.4.0",
-    "protractor": "~5.4.0",
+    "protractor": "~5.4.4",
     "ts-node": "~7.0.0",
     "tslint": "~5.15.0",
     "typescript": "~3.5.3"
