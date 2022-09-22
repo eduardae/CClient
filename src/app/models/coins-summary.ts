@@ -1,6 +1,7 @@
-import { OnInit } from '@angular/core';
+import { OnInit, Directive } from '@angular/core';
 import { CoinInfo } from './coin-info';
 
+@Directive()
 export class CoinsSummary implements OnInit {
   btc: CoinInfo;
   ether: CoinInfo;
