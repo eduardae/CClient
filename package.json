@@ -28,7 +28,7 @@
     "cryptocurrency-icons": "^0.16.1",
     "d3": "^5.12.0",
     "install": "^0.13.0",
-    "ng2-charts": "^2.3.0",
+    "ng2-charts": "^2.4.0",
     "npm": "^8.19.2",
     "rxjs": "~6.6.7",
     "tslib": "^1.14.1",
