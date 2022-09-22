@@ -1,5 +1,5 @@
 import { Component, OnInit, Input, Inject } from "@angular/core";
-import { Http } from "@angular/http";
+import { HttpClient } from "@angular/common/http";
 import { _ } from "underscore";
 import { Article } from "../../models/article";
 import { SESSION_STORAGE, WebStorageService } from "angular-webstorage-service";
@@ -26,7 +26,7 @@ export class AcademyComponent implements OnInit {
   showCourses: boolean = false;
 
   constructor(
-    private http: Http,
+    private http: HttpClient,
     @Inject(SESSION_STORAGE) private storage: WebStorageService,
     private userService: UserInfoService
   ) {}

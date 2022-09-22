@@ -1,6 +1,6 @@
 import { Component, Inject } from "@angular/core";
 import { Router } from "@angular/router";
-import { Http } from "@angular/http";
+import { HttpClient } from "@angular/common/http";
 import { User } from "./models/user";
 import {
   LOCAL_STORAGE,
@@ -27,7 +27,7 @@ export class AppComponent {
   supportedCurrencies: CurrencyInfo[] = [];
   subscription: Subscription;
   constructor(
-    private http: Http,
+    private http: HttpClient,
     private router: Router,
     @Inject(SESSION_STORAGE) private sessionStorage: WebStorageService,
     private authService: AuthService,

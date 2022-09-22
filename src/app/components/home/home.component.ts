@@ -1,5 +1,5 @@
 import { Component, OnInit, Input, Inject } from "@angular/core";
-import { Http } from "@angular/http";
+import { HttpClient } from "@angular/common/http";
 import { CoinsSummary } from "../../models/coins-summary";
 import { CoinInfo } from "../../models/coin-info";
 import { from, Subscription } from "rxjs";
@@ -25,7 +25,7 @@ export class HomeComponent implements OnInit {
   carouselImages: string[];
 
   constructor(
-    private http: Http,
+    private http: HttpClient,
     private appSettingsService: AppSettingsService,
     @Inject(SESSION_STORAGE) private sessionStorage: WebStorageService,
     private coinInfoService: CoinInfoService

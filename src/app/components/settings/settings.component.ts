@@ -10,7 +10,6 @@ import {
   ViewContainerRef,
   ViewEncapsulation
 } from "@angular/core";
-import { Http, RequestOptions } from "@angular/http";
 import { CoinsSummary } from "../../models/coins-summary";
 import { CoinInfo } from "../../models/coin-info";
 import { from, Subscription } from "rxjs";

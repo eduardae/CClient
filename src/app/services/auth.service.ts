@@ -1,10 +1,9 @@
 import { Injectable, Inject } from "@angular/core";
 import { Subject, Observable } from "rxjs";
 import { User } from "../models/user";
-import { Http } from "@angular/http";
+import { HttpClient } from "@angular/common/http";
 import { ToastService } from "./toast-service";
 import { SESSION_STORAGE, WebStorageService } from "angular-webstorage-service";
-import { HttpClient } from "@angular/common/http";
 import { CoinInfo } from "../models/coin-info";
 import { Article } from "../models/article";
 import { Link } from "../models/Link";

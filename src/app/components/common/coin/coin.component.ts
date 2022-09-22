@@ -1,5 +1,5 @@
 import { Component, Input, OnInit, OnChanges } from "@angular/core";
-import { Http } from "@angular/http";
+import { HttpClient } from "@angular/common/http";
 import { from } from "rxjs";
 import { CurrencyPipe } from "@angular/common";
 import { CurrencyInfo } from "src/app/models/currency-info";

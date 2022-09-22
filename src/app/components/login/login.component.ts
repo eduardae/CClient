@@ -7,7 +7,7 @@ import {
   EventEmitter,
   Output
 } from "@angular/core";
-import { Http, RequestOptions } from "@angular/http";
+import { HttpClient } from "@angular/common/http";
 import { from } from "rxjs";
 import { Router } from "@angular/router";
 import {
@@ -33,7 +33,7 @@ export class LoginComponent implements OnInit {
 
   // tslint:disable-next-line: max-line-length
   constructor(
-    private http: Http,
+    private http: HttpClient,
     private router: Router,
     @Inject(SESSION_STORAGE) private storage: WebStorageService,
     private authService: AuthService,
@@ -55,7 +55,7 @@ export class LoginComponent implements OnInit {
         password: hashedPassword
       })
       .subscribe(
-        result => {
+        (result: any) => {
           const userFromDb = result.json();
           this.storage.set("currentUser", JSON.stringify({ user: userFromDb }));
           this.authService.loginEvent(userFromDb);

@@ -8,7 +8,7 @@ import {
   OnInit,
   Inject
 } from "@angular/core";
-import { Http } from "@angular/http";
+import { HttpClient } from "@angular/common/http";
 import {
   NgbActiveModal,
   NgbModal,
@@ -77,7 +77,7 @@ export class AddCoinModalContent implements OnInit {
 
   constructor(
     public modal: NgbActiveModal,
-    private http: Http,
+    private http: HttpClient,
     public toastService: ToastService,
     private userService: UserInfoService,
     @Inject(SESSION_STORAGE) private sessionStorage: WebStorageService
@@ -165,7 +165,7 @@ export class AddCoinModal implements OnInit {
     private modalService: NgbModal,
     public toastService: ToastService,
     private coinInfoService: CoinInfoService,
-    private http: Http
+    private http: HttpClient
   ) {}
 
   ngOnInit(): void {

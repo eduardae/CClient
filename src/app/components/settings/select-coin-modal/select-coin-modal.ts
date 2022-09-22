@@ -8,7 +8,6 @@ import {
   OnInit,
   Inject
 } from "@angular/core";
-import { Http } from "@angular/http";
 import {
   NgbActiveModal,
   NgbModal,
@@ -365,7 +364,7 @@ export class SelectCoinModal implements OnInit {
     private modalService: NgbModal,
     public toastService: ToastService,
     private coinInfoService: CoinInfoService,
-    private http: Http
+    private http: HttpClient
   ) {}
 
   ngOnInit(): void {

@@ -1,5 +1,5 @@
 import { Component, OnInit, Input, Inject } from "@angular/core";
-import { Http } from "@angular/http";
+import { HttpClient } from "@angular/common/http";
 import { CoinsSummary } from "../../models/coins-summary";
 import { CoinInfo } from "../../models/coin-info";
 import { from } from "rxjs";
@@ -28,7 +28,7 @@ export class RegisterComponent implements OnInit {
 
   // tslint:disable-next-line: max-line-length
   constructor(
-    private http: Http,
+    private http: HttpClient,
     private router: Router,
     @Inject(SESSION_STORAGE) private sessionStorage: WebStorageService,
     private authService: AuthService,

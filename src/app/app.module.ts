@@ -2,7 +2,6 @@ import { BrowserModule } from "@angular/platform-browser";
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 import { NgModule } from "@angular/core";
 import { HttpClientModule, HTTP_INTERCEPTORS } from "@angular/common/http";
-import { HttpModule } from "@angular/http";
 import { RouterModule, Routes } from "@angular/router";
 import { FormsModule } from "@angular/forms";
 import { StorageServiceModule } from "angular-webstorage-service";
@@ -10,7 +9,6 @@ import { ChartsModule } from "ng2-charts";
 import { AppComponent } from "./app.component";
 import { HomeComponent } from "./components/home/home.component";
 import { RegisterComponent } from "./components/register/register.component";
-import { Http } from "@angular/http";
 import { APP_BASE_HREF } from "@angular/common";
 import { NgbModule } from "@ng-bootstrap/ng-bootstrap";
 import { LoginComponent } from "./components/login/login.component";
@@ -89,7 +87,6 @@ const appRoutes: Routes = [
     HttpClientModule,
     RouterModule.forRoot(appRoutes),
     FormsModule,
-    HttpModule,
     ChartsModule,
     StorageServiceModule,
     NgbModule,

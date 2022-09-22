@@ -6,7 +6,6 @@ import {
   ElementRef,
   Inject,
 } from "@angular/core";
-import { Http } from "@angular/http";
 import { _ } from "underscore";
 import { ActivatedRoute } from "@angular/router";
 import { Moment } from "moment";
@@ -67,7 +66,7 @@ export class PortfolioPageComponent implements OnInit {
   @ViewChild(BaseChartDirective, { static: false }) chart: BaseChartDirective;
 
   constructor(
-    private http: Http,
+    private http: HttpClient,
     private route: ActivatedRoute,
     private appSettingsService: AppSettingsService,
     private portfolioService: PortfolioService,

@@ -6,7 +6,7 @@ import {
   ElementRef,
   Inject,
 } from "@angular/core";
-import { Http } from "@angular/http";
+import { HttpClient } from "@angular/common/http";
 import { _ } from "underscore";
 import { Moment } from "moment";
 import { Article } from "../../models/article";
@@ -61,7 +61,7 @@ export class CoinPageComponent implements OnInit {
   @ViewChild(BaseChartDirective, { static: false }) chart: BaseChartDirective;
 
   constructor(
-    private http: Http,
+    private http: HttpClient,
     private appSettingsService: AppSettingsService,
     private route: ActivatedRoute,
     private coinInfoService: CoinInfoService,
@@ -163,7 +163,7 @@ export class CoinPageComponent implements OnInit {
 
   getNews(coin: CoinInfo) {
     this.http.get(`${environment.baseUrl}:8083/bycoin/${coin.id}`).subscribe(
-      (result) => {
+      (result: any) => {
         const response = result.json();
         console.log(response);
         this.articles = _.sortBy(response, (article) => {
@@ -185,7 +185,7 @@ export class CoinPageComponent implements OnInit {
   getCoinInfo(coin) {
     this.http
       .post(`${environment.baseUrl}:8081/coininfo`, { coin_name: coin.id })
-      .subscribe((result) => {
+      .subscribe((result: any) => {
         const response = result.json();
         this.selectedCoin = coin;
         this.selectedCoin.price =
@@ -240,7 +240,7 @@ export class CoinPageComponent implements OnInit {
         coin_name: coinName,
         vs_currency: currency,
       })
-      .subscribe((result) => {
+      .subscribe((result: any) => {
         const response = result.json();
         if (response.data) {
           this.labels = [];
@@ -276,7 +276,7 @@ export class CoinPageComponent implements OnInit {
         vs_currency: currency,
         days: days ? days : 7,
       })
-      .subscribe((result) => {
+      .subscribe((result: any) => {
         const response = result.json();
         if (response.data) {
           this.labels = [];

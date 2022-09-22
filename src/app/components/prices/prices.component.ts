@@ -6,7 +6,7 @@ import {
   ElementRef,
   Inject
 } from "@angular/core";
-import { Http } from "@angular/http";
+import { HttpClient } from "@angular/common/http";
 import { _ } from "underscore";
 import { Moment } from "moment";
 import { Article } from "../../models/article";
@@ -58,7 +58,7 @@ export class PricesComponent implements OnInit {
   @ViewChild(BaseChartDirective, { static: false }) chart: BaseChartDirective;
 
   constructor(
-    private http: Http,
+    private http: HttpClient,
     private appSettingsService: AppSettingsService,
     @Inject(SESSION_STORAGE) private sessionStorage: WebStorageService,
     private coinInfoService: CoinInfoService
@@ -155,7 +155,7 @@ export class PricesComponent implements OnInit {
   getCoinInfo(coin) {
     this.http
       .post(`${environment.baseUrl}:8081/coininfo`, { coin_name: coin.id })
-      .subscribe(result => {
+      .subscribe((result: any) => {
         const response = result.json();
         this.selectedCoin = coin;
         this.selectedCoin.price =
@@ -210,7 +210,7 @@ export class PricesComponent implements OnInit {
         coin_name: coinName,
         vs_currency: currency
       })
-      .subscribe(result => {
+      .subscribe((result: any) => {
         const response = result.json();
         if (response.data) {
           this.labels = [];
@@ -246,7 +246,7 @@ export class PricesComponent implements OnInit {
         vs_currency: currency,
         days: days
       })
-      .subscribe(result => {
+      .subscribe((result: any) => {
         const response = result.json();
         if (response.data) {
           this.labels = [];

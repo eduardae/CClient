@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from "@angular/core";
-import { Http } from "@angular/http";
+import { HttpClient } from "@angular/common/http";
 import { _ } from "underscore";
 import { Article } from "../../../models/article";
 import { environment } from "src/environments/environment";
@@ -24,7 +24,7 @@ export class NewsPageComponent implements OnInit {
     "Mining",
   ];
 
-  constructor(private http: Http) {}
+  constructor(private http: HttpClient) {}
 
   ngOnInit() {
     this.getNews();
@@ -38,7 +38,7 @@ export class NewsPageComponent implements OnInit {
   filterNews(filter) {
     this.http
       .get(`${environment.baseUrl}:8083/byfilter?filter=${filter}`)
-      .subscribe((result) => {
+      .subscribe((result: any) => {
         const response = result.json();
         console.log(response);
         this.articles = _.sortBy(response, (article) => {
@@ -52,7 +52,7 @@ export class NewsPageComponent implements OnInit {
   }
 
   getNews() {
-    this.http.get(`${environment.baseUrl}:8083`).subscribe((result) => {
+    this.http.get(`${environment.baseUrl}:8083`).subscribe((result: any) => {
       const response = result.json();
       console.log(response);
       this.articles = _.sortBy(response, (article) => {

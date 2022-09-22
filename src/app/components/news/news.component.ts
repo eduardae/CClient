@@ -1,5 +1,5 @@
 import { Component, OnInit, Input, Inject } from "@angular/core";
-import { Http } from "@angular/http";
+import { HttpClient } from "@angular/common/http";
 import { _ } from "underscore";
 import { Article } from "../../models/article";
 import { User } from "src/app/models/user";
@@ -21,7 +21,7 @@ export class NewsComponent implements OnInit {
   user: User;
 
   constructor(
-    private http: Http,
+    private http: HttpClient,
     @Inject(SESSION_STORAGE) private storage: WebStorageService,
     private userService: UserInfoService
   ) {}
@@ -38,7 +38,7 @@ export class NewsComponent implements OnInit {
   }
 
   getNews() {
-    this.http.get(`${environment.baseUrl}:8083`).subscribe(result => {
+    this.http.get(`${environment.baseUrl}:8083`).subscribe((result: any) => {
       const response = result.json();
       console.log(response);
       this.articles = _.sortBy(response, article => {
