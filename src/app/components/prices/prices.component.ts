@@ -23,7 +23,7 @@ import { DevelopmentData } from "../../models/development-data";
 import { isBuffer } from "util";
 import { AppSettingsService } from "src/app/services/app.settings.service";
 import { Subscription } from "rxjs";
-import { SESSION_STORAGE, WebStorageService } from "angular-webstorage-service";
+import { SESSION_STORAGE, StorageService } from "ngx-webstorage-service";
 import { environment } from "src/environments/environment";
 import { CoinInfoService } from "src/app/services/coin.info.service";
 
@@ -60,7 +60,7 @@ export class PricesComponent implements OnInit {
   constructor(
     private http: HttpClient,
     private appSettingsService: AppSettingsService,
-    @Inject(SESSION_STORAGE) private sessionStorage: WebStorageService,
+    @Inject(SESSION_STORAGE) private sessionStorage: StorageService,
     private coinInfoService: CoinInfoService
   ) {
     this.currencyChangeSubscription = appSettingsService.currencyChange$.subscribe(

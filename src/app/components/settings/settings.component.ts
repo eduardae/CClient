@@ -15,12 +15,12 @@ import { CoinInfo } from "../../models/coin-info";
 import { from, Subscription } from "rxjs";
 import { Router } from "@angular/router";
 import { User } from "../../models/user";
-import { WebStorageService, SESSION_STORAGE } from "angular-webstorage-service";
+import { StorageService, SESSION_STORAGE } from "ngx-webstorage-service";
 import { NgbModal, NgbModalRef } from "@ng-bootstrap/ng-bootstrap";
 import { UserInfoService } from "src/app/services/user.info.service";
 import { ToastService } from "../../services/toast-service";
 import { HttpClient } from "@angular/common/http";
-import { Link } from "src/app/models/Link";
+import { Link } from "src/app/models/link";
 import { LinkSection } from "src/app/models/link-section";
 import { _ } from "underscore";
 import { Portfolio } from "src/app/models/portfolio/portfolio";
@@ -49,7 +49,7 @@ export class SettingsComponent implements OnInit {
 
   // tslint:disable-next-line: max-line-length
   constructor(
-    @Inject(SESSION_STORAGE) private storage: WebStorageService,
+    @Inject(SESSION_STORAGE) private storage: StorageService,
     private userService: UserInfoService,
     public toastService: ToastService,
     private portfolioService: PortfolioService,

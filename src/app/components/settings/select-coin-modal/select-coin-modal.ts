@@ -18,7 +18,7 @@ import { CoinInfo } from "src/app/models/coin-info";
 import { _ } from "underscore";
 import { User } from "src/app/models/user";
 import { ToastService } from "../../../services/toast-service";
-import { SESSION_STORAGE, WebStorageService } from "angular-webstorage-service";
+import { SESSION_STORAGE, StorageService } from "ngx-webstorage-service";
 import { UserInfoService } from "src/app/services/user.info.service";
 import { environment } from "src/environments/environment";
 import { Portfolio } from "src/app/models/portfolio/portfolio";
@@ -212,7 +212,7 @@ export class SelectCoinModalContent implements OnInit {
     private userService: UserInfoService,
     private coinInfoService: CoinInfoService,
     private appSettingsService: AppSettingsService,
-    @Inject(SESSION_STORAGE) private sessionStorage: WebStorageService
+    @Inject(SESSION_STORAGE) private sessionStorage: StorageService
   ) {
     this.currency = this.appSettingsService.getCurrency();
   }

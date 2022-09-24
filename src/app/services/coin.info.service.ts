@@ -2,11 +2,11 @@ import { Injectable, Inject } from "@angular/core";
 import { Subject, Observable, forkJoin } from "rxjs";
 import { User } from "../models/user";
 import { ToastService } from "./toast-service";
-import { SESSION_STORAGE, WebStorageService } from "angular-webstorage-service";
+import { SESSION_STORAGE, StorageService } from "ngx-webstorage-service";
 import { HttpClient } from "@angular/common/http";
 import { CoinInfo } from "../models/coin-info";
 import { Article } from "../models/article";
-import { Link } from "../models/Link";
+import { Link } from "../models/link";
 import { LinkSection } from "../models/link-section";
 import { _ } from "underscore";
 import { environment } from "src/environments/environment";
@@ -18,7 +18,7 @@ import { Portfolio } from "../models/portfolio/portfolio";
 export class CoinInfoService {
   constructor(
     private http: HttpClient,
-    @Inject(SESSION_STORAGE) private sessionStorage: WebStorageService
+    @Inject(SESSION_STORAGE) private sessionStorage: StorageService
   ) {}
 
   getCoinInfo(coinId: string): Observable<any> {

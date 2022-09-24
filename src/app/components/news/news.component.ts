@@ -3,7 +3,7 @@ import { HttpClient } from "@angular/common/http";
 import { _ } from "underscore";
 import { Article } from "../../models/article";
 import { User } from "src/app/models/user";
-import { SESSION_STORAGE, WebStorageService } from "angular-webstorage-service";
+import { SESSION_STORAGE, StorageService } from "ngx-webstorage-service";
 import { UserInfoService } from "src/app/services/user.info.service";
 import { LinkSection } from "src/app/models/link-section";
 import { environment } from "src/environments/environment";
@@ -22,7 +22,7 @@ export class NewsComponent implements OnInit {
 
   constructor(
     private http: HttpClient,
-    @Inject(SESSION_STORAGE) private storage: WebStorageService,
+    @Inject(SESSION_STORAGE) private storage: StorageService,
     private userService: UserInfoService
   ) {}
 

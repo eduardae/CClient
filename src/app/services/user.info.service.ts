@@ -2,22 +2,22 @@ import { Injectable, Inject } from "@angular/core";
 import { Subject, Observable } from "rxjs";
 import { User } from "../models/user";
 import { ToastService } from "./toast-service";
-import { SESSION_STORAGE, WebStorageService } from "angular-webstorage-service";
+import { SESSION_STORAGE, StorageService } from "ngx-webstorage-service";
 import { HttpClient } from "@angular/common/http";
 import { CoinInfo } from "../models/coin-info";
 import { Article } from "../models/article";
-import { Link } from "../models/Link";
 import { LinkSection } from "../models/link-section";
 import { _ } from "underscore";
 import { environment } from "src/environments/environment";
 import { Portfolio } from "../models/portfolio/portfolio";
+import { Link } from "../models/link";
 
 @Injectable()
 export class UserInfoService {
   constructor(
     private http: HttpClient,
     public toastService: ToastService,
-    @Inject(SESSION_STORAGE) private sessionStorage: WebStorageService
+    @Inject(SESSION_STORAGE) private sessionStorage: StorageService
   ) {}
 
   refreshToken(user: User) {

@@ -4,7 +4,7 @@ import { NgModule } from "@angular/core";
 import { HttpClientModule, HTTP_INTERCEPTORS } from "@angular/common/http";
 import { RouterModule, Routes } from "@angular/router";
 import { FormsModule } from "@angular/forms";
-import { StorageServiceModule } from "angular-webstorage-service";
+import { StorageServiceModule } from "ngx-webstorage-service";
 import { ChartsModule } from "ng2-charts";
 import { AppComponent } from "./app.component";
 import { HomeComponent } from "./components/home/home.component";

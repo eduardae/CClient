@@ -23,7 +23,7 @@ import { DevelopmentData } from "../../models/development-data";
 import { isBuffer } from "util";
 import { AppSettingsService } from "src/app/services/app.settings.service";
 import { Subscription, Observable } from "rxjs";
-import { SESSION_STORAGE, WebStorageService } from "angular-webstorage-service";
+import { SESSION_STORAGE, StorageService } from "ngx-webstorage-service";
 import { environment } from "src/environments/environment";
 import { PortfolioService } from "src/app/services/portfolio.service";
 import { Portfolio } from "src/app/models/portfolio/portfolio";
@@ -71,7 +71,7 @@ export class PortfolioPageComponent implements OnInit {
     private appSettingsService: AppSettingsService,
     private portfolioService: PortfolioService,
     private coinInfoService: CoinInfoService,
-    @Inject(SESSION_STORAGE) private sessionStorage: WebStorageService
+    @Inject(SESSION_STORAGE) private sessionStorage: StorageService
   ) {
     this.currencyChangeSubscription = appSettingsService.currencyChange$.subscribe(
       (currency) => {

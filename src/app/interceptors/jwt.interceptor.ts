@@ -7,7 +7,7 @@ import {
   HttpErrorResponse
 } from "@angular/common/http";
 import { Observable, throwError, BehaviorSubject } from "rxjs";
-import { SESSION_STORAGE, WebStorageService } from "angular-webstorage-service";
+import { SESSION_STORAGE, StorageService } from "ngx-webstorage-service";
 import { User } from "../models/user";
 import { catchError, switchMap, filter, take } from "rxjs/operators";
 import { UserInfoService } from "../services/user.info.service";
@@ -18,7 +18,7 @@ export class JWTInterceptor implements HttpInterceptor {
   private user: User;
 
   constructor(
-    @Inject(SESSION_STORAGE) private storage: WebStorageService,
+    @Inject(SESSION_STORAGE) private storage: StorageService,
     private authService: AuthService
   ) {}
 

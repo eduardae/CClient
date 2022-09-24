@@ -6,7 +6,7 @@ import { from, Subscription } from "rxjs";
 import { _ } from "underscore";
 import { CurrencyInfo } from "../../models/currency-info";
 import { AppSettingsService } from "src/app/services/app.settings.service";
-import { SESSION_STORAGE, WebStorageService } from "angular-webstorage-service";
+import { SESSION_STORAGE, StorageService } from "ngx-webstorage-service";
 import { environment } from "../../../environments/environment";
 import { CoinInfoService } from "src/app/services/coin.info.service";
 
@@ -27,7 +27,7 @@ export class HomeComponent implements OnInit {
   constructor(
     private http: HttpClient,
     private appSettingsService: AppSettingsService,
-    @Inject(SESSION_STORAGE) private sessionStorage: WebStorageService,
+    @Inject(SESSION_STORAGE) private sessionStorage: StorageService,
     private coinInfoService: CoinInfoService
   ) {
     this.cryptoInfos = new CoinsSummary();

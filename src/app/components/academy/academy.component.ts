@@ -2,7 +2,7 @@ import { Component, OnInit, Input, Inject } from "@angular/core";
 import { HttpClient } from "@angular/common/http";
 import { _ } from "underscore";
 import { Article } from "../../models/article";
-import { SESSION_STORAGE, WebStorageService } from "angular-webstorage-service";
+import { SESSION_STORAGE, StorageService } from "ngx-webstorage-service";
 import { User } from "src/app/models/user";
 import { UserInfoService } from "src/app/services/user.info.service";
 import { LinkSection } from "src/app/models/link-section";
@@ -27,7 +27,7 @@ export class AcademyComponent implements OnInit {
 
   constructor(
     private http: HttpClient,
-    @Inject(SESSION_STORAGE) private storage: WebStorageService,
+    @Inject(SESSION_STORAGE) private storage: StorageService,
     private userService: UserInfoService
   ) {}
 

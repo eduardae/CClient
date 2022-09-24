@@ -1,14 +1,14 @@
 import { Injectable, Inject } from "@angular/core";
 import { Subject } from "rxjs";
 import { CurrencyInfo } from "../models/currency-info";
-import { WebStorageService, SESSION_STORAGE } from "angular-webstorage-service";
+import { StorageService, SESSION_STORAGE } from "ngx-webstorage-service";
 
 @Injectable()
 export class AppSettingsService {
   currency: CurrencyInfo;
 
   constructor(
-    @Inject(SESSION_STORAGE) private sessionStorage: WebStorageService
+    @Inject(SESSION_STORAGE) private sessionStorage: StorageService
   ) {
     if (this.sessionStorage.get("selectedCurrency")) {
       this.currency = JSON.parse(this.sessionStorage.get("selectedCurrency"))[

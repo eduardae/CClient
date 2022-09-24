@@ -4,9 +4,9 @@ import { HttpClient } from "@angular/common/http";
 import { User } from "./models/user";
 import {
   LOCAL_STORAGE,
-  WebStorageService,
+  StorageService,
   SESSION_STORAGE
-} from "angular-webstorage-service";
+} from "ngx-webstorage-service";
 import { UserInfoService } from "./services/user.info.service";
 import { Subscription } from "rxjs";
 import { ToastService } from "./services/toast-service";
@@ -29,7 +29,7 @@ export class AppComponent {
   constructor(
     private http: HttpClient,
     private router: Router,
-    @Inject(SESSION_STORAGE) private sessionStorage: WebStorageService,
+    @Inject(SESSION_STORAGE) private sessionStorage: StorageService,
     private authService: AuthService,
     private appSettingsService: AppSettingsService,
     private toastService: ToastService

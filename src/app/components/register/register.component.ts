@@ -7,9 +7,9 @@ import { User } from "../../models/user";
 import CryptoJS from "crypto-js";
 import {
   LOCAL_STORAGE,
-  WebStorageService,
+  StorageService,
   SESSION_STORAGE
-} from "angular-webstorage-service";
+} from "ngx-webstorage-service";
 import { Router } from "@angular/router";
 import { UserInfoService } from "../../services/user.info.service";
 import { ToastService } from "../../services/toast-service";
@@ -30,7 +30,7 @@ export class RegisterComponent implements OnInit {
   constructor(
     private http: HttpClient,
     private router: Router,
-    @Inject(SESSION_STORAGE) private sessionStorage: WebStorageService,
+    @Inject(SESSION_STORAGE) private sessionStorage: StorageService,
     private authService: AuthService,
     private toastService: ToastService
   ) {

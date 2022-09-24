@@ -12,9 +12,9 @@ import { from } from "rxjs";
 import { Router } from "@angular/router";
 import {
   LOCAL_STORAGE,
-  WebStorageService,
+  StorageService,
   SESSION_STORAGE
-} from "angular-webstorage-service";
+} from "ngx-webstorage-service";
 import { ElementRef, Renderer2 } from "@angular/core";
 import { User } from "src/app/models/user";
 import { UserInfoService } from "src/app/services/user.info.service";
@@ -35,7 +35,7 @@ export class LoginComponent implements OnInit {
   constructor(
     private http: HttpClient,
     private router: Router,
-    @Inject(SESSION_STORAGE) private storage: WebStorageService,
+    @Inject(SESSION_STORAGE) private storage: StorageService,
     private authService: AuthService,
     public toastService: ToastService
   ) {
