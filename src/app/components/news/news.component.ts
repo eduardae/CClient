@@ -39,7 +39,7 @@ export class NewsComponent implements OnInit {
 
   getNews() {
     this.http.get(`${environment.baseUrl}:8083`).subscribe((result: any) => {
-      const response = result.json();
+      const response = result.data;
       console.log(response);
       this.articles = _.sortBy(response, article => {
         return new Date(article.publishedAt);

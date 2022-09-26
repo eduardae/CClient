@@ -1,3 +1,4 @@
+// TODO: load from config file
 const url = "mongodb://admin:admin@localhost:27017";
 // A Client to MongoDB
 const MongoClient = require('mongodb').MongoClient;

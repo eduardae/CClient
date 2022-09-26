@@ -156,51 +156,51 @@ export class PricesComponent implements OnInit {
     this.http
       .post(`${environment.baseUrl}:8081/coininfo`, { coin_name: coin.id })
       .subscribe((result: any) => {
-        const response = result.json();
+        const response = result.data;
         this.selectedCoin = coin;
         this.selectedCoin.price =
-          response.data.market_data.current_price[this.currency.value];
+          response.market_data.current_price[this.currency.value];
         this.selectedCoin.marketCap =
-          response.data.market_data.market_cap[this.currency.value];
+          response.market_data.market_cap[this.currency.value];
         this.selectedCoin.ATH =
-          response.data.market_data.ath[this.currency.value];
+          response.market_data.ath[this.currency.value];
         this.selectedCoin.marketCapRank =
-          response.data.market_data.market_cap_rank;
+          response.market_data.market_cap_rank;
         this.selectedCoin.volume24H =
-          response.data.market_data.total_volume[this.currency.value];
-        this.selectedCoin.liquidityScore = response.data.liquidity_score;
+          response.market_data.total_volume[this.currency.value];
+        this.selectedCoin.liquidityScore = response.liquidity_score;
 
         // community data
         if (!this.selectedCoin.communityData) {
           this.selectedCoin.communityData = new CommunityData();
         }
         this.selectedCoin.communityData.communityScore =
-          response.data.community_score;
+          response.community_score;
         this.selectedCoin.communityData.publicInterestScore =
-          response.data.public_interest_score;
+          response.public_interest_score;
         this.selectedCoin.communityData.facebookLikes =
-          response.data.community_data.facebook_likes;
+          response.community_data.facebook_likes;
         this.selectedCoin.communityData.redditSubscribers =
-          response.data.community_data.reddit_subscribers;
+          response.community_data.reddit_subscribers;
         this.selectedCoin.communityData.twitterFollowers =
-          response.data.community_data.twitter_followers;
+          response.community_data.twitter_followers;
         this.selectedCoin.communityData.sentimentVotesUpPercentage =
-          response.data.sentiment_votes_up_percentage;
+          response.sentiment_votes_up_percentage;
         this.selectedCoin.communityData.sentimentVotesDownPercentage =
-          response.data.sentiment_votes_down_percentage;
+          response.sentiment_votes_down_percentage;
 
         // development data
         if (!this.selectedCoin.developmentData) {
           this.selectedCoin.developmentData = new DevelopmentData();
         }
         this.selectedCoin.developmentData.developerScore =
-          response.data.developer_score;
+          response.developer_score;
         this.selectedCoin.developmentData.stars =
-          response.data.developer_data.stars;
+          response.developer_data.stars;
         this.selectedCoin.developmentData.pullRequestContributors =
-          response.data.developer_data.pull_request_contributors;
+          response.developer_data.pull_request_contributors;
         this.selectedCoin.developmentData.lastFourWeeksCommits =
-          response.data.developer_data.commit_count_4_weeks;
+          response.developer_data.commit_count_4_weeks;
       });
   }
 
@@ -211,19 +211,19 @@ export class PricesComponent implements OnInit {
         vs_currency: currency
       })
       .subscribe((result: any) => {
-        const response = result.json();
-        if (response.data) {
+        const response = result.data;
+        if (response) {
           this.labels = [];
           this.prices = [];
           this.historicalMarketData.prices = [];
-          for (let i = 0; i < response.data.prices.length; i++) {
+          for (let i = 0; i < response.prices.length; i++) {
             this.historicalMarketData.prices[i] = new Tick();
             this.historicalMarketData.prices[i].utcTimestamp =
-              response.data.prices[i][0];
-            const date = moment.utc(response.data.prices[i][0]).toDate();
+              response.prices[i][0];
+            const date = moment.utc(response.prices[i][0]).toDate();
             this.historicalMarketData.prices[i].date_repr = date;
             this.labels.push(moment(date).format("DD-MM-YYYY hh:mm"));
-            const price = response.data.prices[i][1];
+            const price = response.prices[i][1];
             this.historicalMarketData.prices[i].price = price;
             this.prices.push(price);
           }
@@ -247,18 +247,18 @@ export class PricesComponent implements OnInit {
         days: days
       })
       .subscribe((result: any) => {
-        const response = result.json();
-        if (response.data) {
+        const response = result.data;
+        if (response) {
           this.labels = [];
           this.prices = [];
           this.marketData.prices = [];
-          for (let i = 0; i < response.data.prices.length; i += 2) {
+          for (let i = 0; i < response.prices.length; i += 2) {
             this.marketData.prices[i] = new Tick();
-            this.marketData.prices[i].utcTimestamp = response.data.prices[i][0];
-            const date = moment.utc(response.data.prices[i][0]).toDate();
+            this.marketData.prices[i].utcTimestamp = response.prices[i][0];
+            const date = moment.utc(response.prices[i][0]).toDate();
             this.marketData.prices[i].date_repr = date;
             this.labels.push(moment(date).format("DD-MM-YYYY h:mm"));
-            const price = response.data.prices[i][1];
+            const price = response.prices[i][1];
             this.marketData.prices[i].price = price;
             this.prices.push(price);
           }

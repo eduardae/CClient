@@ -12,7 +12,8 @@ const cors = require('cors');
 const app = express();
 app.use(bodyParser.json());
 app.use(cors());
-app.use("/", expressJwt({ secret: 'todo-app-super-shared-secret' }));
+// TODO: retrieve secret from db or dynamically loaded config file
+app.use("/", expressJwt({ secret: 'todo-app-super-shared-secret', algorithms: ["HS256"] }));
 
 app.post('/create_portfolio', function (req, res) {
   // Make a connection to MongoDB Service

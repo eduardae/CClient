@@ -56,7 +56,7 @@ export class LoginComponent implements OnInit {
       })
       .subscribe(
         (result: any) => {
-          const userFromDb = result.json();
+          const userFromDb = result.data;
           this.storage.set("currentUser", JSON.stringify({ user: userFromDb }));
           this.authService.loginEvent(userFromDb);
           this.router.navigateByUrl("/settings");

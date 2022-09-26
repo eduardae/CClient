@@ -11,7 +11,7 @@ const cors = require('cors');
 const app = express();
 app.use(bodyParser.json());
 app.use(cors());
-app.use("/", expressJwt({ secret: 'todo-app-super-shared-secret' }).unless({ path: ['/register', '/login', '/get_token'] }));
+app.use("/", expressJwt({ secret: 'todo-app-super-shared-secret' , algorithms: ["HS256"] }).unless({ path: ['/register', '/login', '/get_token'] }));
 
 app.post('/register', function (req, res) {
   // Make a connection to MongoDB Service
